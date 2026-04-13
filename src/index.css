@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #155DFC;
+  --color-brand-secondary: #f0f7ff;
+  --color-brand-accent: #9810FA;
+  --color-brand-dark: #350557;
+  --font-sans: "Inter", "system-ui", "Segoe UI", "Roboto", "sans-serif";
+  --font-mono: "ui-monospace", "Consolas", "monospace";
+}
+
+:root {
+  --text: #4b5563;
+  --text-h: #111827;
+  --bg: #ffffff;
+  --card-bg: #ffffff;
+  --border: #f1f5f9;
+  --code-bg: #f5f3ff;
+  --accent: #6d28d9;
+  --accent-bg: rgba(109, 40, 217, 0.05);
+  --accent-border: rgba(109, 40, 217, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  --text: #94a3b8;
+  --text-h: #f8fafc;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --border: #334155;
+  --code-bg: rgba(109, 40, 217, 0.1);
+  --accent: #a855f7;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Card utility */
+.card-border {
+  border: 1px solid #f3f4f6;
+}
+
+.card-hover:hover {
+  border-color: #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom buttons */
+.btn-primary {
+  @apply bg-gradient-to-r from-brand-primary to-brand-accent text-white px-8 py-4 rounded-md font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-md font-bold hover:bg-white/10 transition-all backdrop-blur-sm active:scale-95;
+}
+
+.btn-outline {
+  @apply bg-white border border-slate-200 text-slate-900 px-8 py-4 rounded-md font-bold hover:bg-slate-50 transition-all active:scale-95;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
