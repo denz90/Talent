@@ -85,76 +85,74 @@ const NotebookLMDay3 = ({ onNext }) => {
           </div>
         </div>
 
-        {/* Features Table */}
-        <div className="rounded-2xl border-2 border-dashed border-blue-200 p-8">
-          <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-500 pb-4 border-b-2 border-dashed border-blue-200">Discover the tools that will transform your notebook workflows.</p>
-          </div>
+        {/* Key Features */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+          <p className="text-slate-500">Discover powerful tools for transforming research into teaching materials.</p>
+        </div>
 
-          <div className="rounded-xl border-2 border-dashed border-blue-200 bg-white overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="bg-rose-50 border-b border-slate-100">
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <UploadCloud size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Source Upload</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Drag & drop PDF, Docs, or website links</td>
-                  <td className="px-6 py-5 text-sm">Build a bounded knowledge base for specific units.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <MessageSquare size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Chat / Q&A</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Ask questions strictly within the bounds of those documents</td>
-                  <td className="px-6 py-5 text-sm">Quickly extract exact facts without hallucination.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <FileText size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Study Guide Generator</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Use the "Notebook guide" button to auto-create FAQs</td>
-                  <td className="px-6 py-5 text-sm">Instantly turn a full textbook chapter into a study aid.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Link size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Source Citations</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Click the citations to jump to the exact source text</td>
-                  <td className="px-6 py-5 text-sm">Verify AI accuracy and limit hallucinations.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Headphones size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Audio Overview</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">1-click generation of two AI "hosts" discussing topics</td>
-                  <td className="px-6 py-5 text-sm">Provide multimodal learning aids for auditory learners.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="bg-purple-50 border-b border-slate-100">
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Educators</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-slate-600">
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <UploadCloud size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Source Upload</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Drag & drop PDFs/Docs → AI analyzes content</td>
+                <td className="px-6 py-5 text-sm">Build a curated knowledge base for any subject.</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>AI Q&A</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Type questions about your sources → Get answers</td>
+                <td className="px-6 py-5 text-sm">Quickly extract key facts without re-reading.</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <FileText size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Quiz Generator</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Click "Generate Quiz" → Customize question types</td>
+                <td className="px-6 py-5 text-sm">Turn lectures into self-paced assessments.</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Headphones size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Lesson Outlines</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Ask: "Create a lesson plan about [topic]"</td>
+                <td className="px-6 py-5 text-sm">Structure curriculum with linked sources.</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Link size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Cite Sources</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Hover over AI answers → View original excerpts</td>
+                <td className="px-6 py-5 text-sm">Teach critical sourcing and avoid plagiarism.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* Getting Started Guide */}

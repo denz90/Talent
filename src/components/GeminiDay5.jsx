@@ -82,86 +82,79 @@ const GeminiDay5 = ({ onNext }) => {
           </div>
         </div>
 
-        {/* Features Table */}
-        <div className="rounded-2xl border-2 border-dashed border-blue-200 p-8">
-          <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-500 pb-4 border-b-2 border-dashed border-blue-200">Powerful tools for creating engaging video lessons and multimedia content.</p>
-          </div>
-
-          <div className="rounded-xl border-2 border-dashed border-blue-200 bg-white overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="bg-rose-50 border-b border-slate-100">
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <BookOpen size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Research Assistant</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Ask Gemini: "Explain photosynthesis for 5th graders"</td>
-                  <td className="px-6 py-5 text-sm">Quickly generates age-appropriate explanations.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <FileText size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Lesson Script Generator</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Prompt: "Create a 2-min lesson video script about fractions"</td>
-                  <td className="px-6 py-5 text-sm">Provides ready-to-use scripts for video lessons.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Layers size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Visual & Video Suggestions</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Ask Gemini: "Suggest 3 visuals for a solar system video"</td>
-                  <td className="px-6 py-5 text-sm">Supports multimedia integration for lessons.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <MessageSquare size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Interactive Prompt Creator</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Generate quiz questions or discussion prompts</td>
-                  <td className="px-6 py-5 text-sm">Makes lessons interactive and engaging.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Globe size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Multilingual Content</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Ask: "Translate lesson to Spanish"</td>
-                  <td className="px-6 py-5 text-sm">Supports ESL and multilingual classrooms.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Settings size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Collaboration Links</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Share Gemini-generated content with colleagues or students</td>
-                  <td className="px-6 py-5 text-sm">Streamlines team planning and peer learning.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        {/* Key Features */}
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-blue-300 bg-white overflow-hidden shadow-sm">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="bg-blue-50 border-b border-slate-100">
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-slate-600">
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <BookOpen size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Research Assistant</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Ask Gemini: "Explain photosynthesis for 5th graders"</td>
+                <td className="px-6 py-5 text-sm">Quickly generates age-appropriate explanations</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <FileText size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Lesson Script Generator</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Prompt: "Create a 2-min lesson video script about fractions"</td>
+                <td className="px-6 py-5 text-sm">Provides ready-to-use scripts for video lessons</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Layers size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Visual & Video Suggestions</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Ask Gemini: "Suggest 3 visuals for a solar system video"</td>
+                <td className="px-6 py-5 text-sm">Supports multimedia integration for lessons</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Interactive Prompt Creator</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Generate quiz questions or discussion prompts</td>
+                <td className="px-6 py-5 text-sm">Makes lessons interactive and engaging</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Globe size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Multilingual Content</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Ask: "Translate lesson to Spanish"</td>
+                <td className="px-6 py-5 text-sm">Supports ESL and multilingual classrooms</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Settings size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Collaboration Links</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Share Gemini-generated content with colleagues or students</td>
+                <td className="px-6 py-5 text-sm">Streamlines team planning and peer learning</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* Getting Started Guide */}

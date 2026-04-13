@@ -81,66 +81,64 @@ const DiffitDay4 = ({ onNext }) => {
           </div>
         </div>
 
-        {/* Features Table */}
-        <div className="rounded-2xl border-2 border-dashed border-blue-200 p-8">
-          <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-500 pb-4 border-b-2 border-dashed border-blue-200">Discover the tools that will transform your reading lessons.</p>
-          </div>
+        {/* Key Features */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+          <p className="text-slate-500">Master the tools that make differentiation effortless.</p>
+        </div>
 
-          <div className="rounded-xl border-2 border-dashed border-blue-200 bg-white overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="bg-rose-50 border-b border-slate-100">
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Layers size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Text Leveler</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Input topic or text → Select target reading level → Generate.</td>
-                  <td className="px-6 py-5 text-sm">Instantly readable text for struggling learners.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Globe size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Translation</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Click "Translate" → Select language → Click "Update".</td>
-                  <td className="px-6 py-5 text-sm">Empowers ELL students to access main ideas in L1.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <ListChecks size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Activity Generation</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Under generated text, go to "Activities" → Pick vocabulary words.</td>
-                  <td className="px-6 py-5 text-sm">Provides instant scaffolded assignments.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <FileOutput size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Export Options</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Click Export → Choose "Google Forms", "Docs", or "Slides".</td>
-                  <td className="px-6 py-5 text-sm">Creates a ready-to-assign class activity.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="bg-orange-50 border-b border-slate-100">
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-slate-600">
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Layers size={16} className="text-amber-500 flex-shrink-0" />
+                    <span>Text Leveler</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Paste any text → Select target grade level (K-12) → Generate adapted version</td>
+                <td className="px-6 py-5 text-sm">Instantly creates accessible materials for all learners</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Globe size={16} className="text-amber-500 flex-shrink-0" />
+                    <span>Translation</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Click "Translate" → Choose language (e.g., Spanish) → Download bilingual copy</td>
+                <td className="px-6 py-5 text-sm">Engages multilingual families and ELL students</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <ListChecks size={16} className="text-amber-500 flex-shrink-0" />
+                    <span>Question Generator</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Upload text → Auto-generate MCQs, short answers, discussion prompts</td>
+                <td className="px-6 py-5 text-sm">Saves time creating assessments</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <FileOutput size={16} className="text-amber-500 flex-shrink-0" />
+                    <span>Export Options</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Download as PDF, Google Doc, or assign directly to LMS (Google Classroom)</td>
+                <td className="px-6 py-5 text-sm">Seamless integration into existing workflows</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* Getting Started Guide */}

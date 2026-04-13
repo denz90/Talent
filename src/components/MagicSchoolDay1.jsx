@@ -83,65 +83,75 @@ const MagicSchoolDay1 = ({ onNext }) => {
           </div>
         </div>
 
-        {/* Features Table */}
-        <div className="rounded-2xl border-2 border-dashed border-blue-200 p-8">
-          <div className="text-center mb-4">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-500 pb-4 border-b-2 border-dashed border-blue-200">Discover the tools that will transform your classroom workflow.</p>
+        {/* Key Features - Card Grid */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+          <p className="text-slate-500">Discover the tools that will transform your classroom workflow.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Lesson Plan Generator */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
+              <FileText size={20} />
+            </div>
+            <h3 className="font-bold text-slate-900 mb-3">Lesson Plan Generator</h3>
+            <div className="mb-3">
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
+              <p className="text-sm text-slate-600">Select grade/subject → Input topic → Choose standards → Generate draft.</p>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
+              <p className="text-sm font-medium text-indigo-600">Instantly creates ready-to-edit lesson plans.</p>
+            </div>
           </div>
 
-          <div className="rounded-xl border-2 border-dashed border-blue-200 bg-white overflow-hidden">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="bg-rose-50 border-b border-slate-100">
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <FileText size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Lesson Plan Generator</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Select grade/subject → Input topic → Add any standards → Generate draft.</td>
-                  <td className="px-6 py-5 text-sm">Instant, reliable, ready-to-use lesson plans.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Layers size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Differentiation Tool</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Upload existing text → Set target grade-level → Generate leveled text.</td>
-                  <td className="px-6 py-5 text-sm">Auto-scaffold assignments for inclusive classrooms.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <CheckSquare size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Rubric Builder</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Input assignment type (e.g., essay, project) → Add standards → Generate.</td>
-                  <td className="px-6 py-5 text-sm">Create transparent grading criteria in 10 seconds.</td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-5 font-bold text-slate-900">
-                    <div className="flex items-start gap-2">
-                      <Lightbulb size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
-                      <span>Behavior Intervention</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5">Describe student behavior → Get list of evidenced-based strategies.</td>
-                  <td className="px-6 py-5 text-sm">Supports PBIS and MTSS frameworks easily.</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Differentiation Tool */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
+              <Layers size={20} />
+            </div>
+            <h3 className="font-bold text-slate-900 mb-3">Differentiation Tool</h3>
+            <div className="mb-3">
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
+              <p className="text-sm text-slate-600">Upload student roster → Set proficiency levels → Generate tiered activities.</p>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
+              <p className="text-sm font-medium text-indigo-600">Auto-scaffolds assignments for inclusive classrooms.</p>
+            </div>
+          </div>
+
+          {/* Rubric Builder */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
+              <CheckSquare size={20} />
+            </div>
+            <h3 className="font-bold text-slate-900 mb-3">Rubric Builder</h3>
+            <div className="mb-3">
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
+              <p className="text-sm text-slate-600">Choose assessment type (e.g., project, essay) → Customize criteria → Download.</p>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
+              <p className="text-sm font-medium text-indigo-600">Creates transparent grading tools in &lt;1 minute.</p>
+            </div>
+          </div>
+
+          {/* Behavior Intervention Suggestor */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
+              <Lightbulb size={20} />
+            </div>
+            <h3 className="font-bold text-slate-900 mb-3">Behavior Intervention Suggestor</h3>
+            <div className="mb-3">
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
+              <p className="text-sm text-slate-600">Describe student behavior → Get AI-recommended strategies.</p>
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
+              <p className="text-sm font-medium text-indigo-600">Supports PBIS and SEL implementation.</p>
+            </div>
           </div>
         </div>
 
