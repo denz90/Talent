@@ -13,7 +13,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 
-const GeminiDay5 = () => {
+const GeminiDay5 = ({ onNext }) => {
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -308,7 +308,10 @@ const GeminiDay5 = () => {
         </div>
 
         {/* Next Button */}
-        <button className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden">
+        <button 
+          onClick={onNext}
+          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
+        >
           <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors"></div>
           <div className="relative z-10 flex flex-col items-center">
             <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">Day 5: TEST YOUR KNOWLEDGE</h3>

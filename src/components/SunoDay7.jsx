@@ -17,7 +17,7 @@ import {
   ClipboardList
 } from 'lucide-react';
 
-const SonuDay7 = () => {
+const SunoDay7 = ({ onNext }) => {
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -34,13 +34,13 @@ const SonuDay7 = () => {
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
               <Sparkles size={14} className="text-purple-300" />
-              Day 6 • Interactive Learning
+              Day 7 • Creative Arts & Multimedia
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              Sonu AI Challenge
+              Suno AI Challenge
             </h1>
             <p className="text-lg text-white/80 max-w-xl font-medium">
-              Turn your static lessons into interactive, real-time learning journeys.
+              Compose original lesson soundtracks and educational songs in seconds.
             </p>
           </div>
         </div>
@@ -50,7 +50,7 @@ const SonuDay7 = () => {
           <div>
             <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is Suno?</h2>
             <p className="text-slate-600 mb-8 leading-relaxed">
-Suno is an AI-powered music generation tool that creates original, royalty-free music for videos, presentations, and educational content. It allows users to generate custom tracks based on mood, genre, and length—without needing musical expertise.
+Suno is an AI-powered music generation tool that creates original, royalty-free music and songs for your classroom. Whether you need a catchy rhyme to help students memorize facts or a lo-fi background track for study sessions, Suno turns your prompts into professional-grade audio.
             </p>
 
             <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
@@ -103,29 +103,24 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-600">
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon.png" alt="Icon" />Interactive Quiz Overlay</td>
-                  <td className="px-6 py-4">Upload video → Click "Add Quiz" → Set MCQs, T/F, or open-ended prompts</td>
-                  <td className="px-6 py-4 text-xs">Assess comprehension without leaving the video</td>
+                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon.png" alt="Icon" />AI Lyrics Builder</td>
+                  <td className="px-6 py-4">Input topic (e.g., "The Solar System") → Auto-generate rhyming verses</td>
+                  <td className="px-6 py-4 text-xs">Help students memorize complex info through song</td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon-2.png" alt="Icon-2" /> Polls & Reflection Prompts</td>
-                  <td className="px-6 py-4">Insert discussion questions at key timestamps</td>
-                  <td className="px-6 py-4 text-xs">Promote active participation during lessons</td>
+                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon-2.png" alt="Icon-2" /> Style & Genre Customization</td>
+                  <td className="px-6 py-4">Choose from "90s Hip Hop", "Classical", or "Upbeat Pop"</td>
+                  <td className="px-6 py-4 text-xs">Match the energy of the track to your classroom vibe</td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon copy 3.png" alt="Icon copy3" /> AI Voiceover & Narration</td>
-                  <td className="px-6 py-4">Auto-generate or record narration → Adjust tone/speed</td>
-                  <td className="px-6 py-4 text-xs">Support diverse learning styles & multilingual classes</td>
+                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon copy 3.png" alt="Icon copy3" /> Custom Lyrics Mode</td>
+                  <td className="px-6 py-4">Paste your own lesson content or poems → Suno provides the vocals</td>
+                  <td className="px-6 py-4 text-xs">Personalize songs for specific unit goals</td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon copy 4.png" alt="Icon copy4" /> Video Enhancement Suggestions</td>
-                  <td className="px-6 py-4">Grok AI recommends visual edits, transitions, and scene pacing</td>
-                  <td className="px-6 py-4 text-xs">Makes videos more engaging and professional-looking</td>
-                </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon copy 2.png" alt="Icon copy 2" /> Analytics Dashboard</td>
-                  <td className="px-6 py-4">View participation, quiz results, and rewatch trends</td>
-                  <td className="px-6 py-4 text-xs">Identify struggling students instantly</td>
+                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><img src="/Icon copy 4.png" alt="Icon copy4" /> Instrumental Backgrounds</td>
+                  <td className="px-6 py-4">Toggle "Instrumental" → Describe atmosphere → Download</td>
+                  <td className="px-6 py-4 text-xs">Perfect for podcasts, transitions, or independent work time</td>
                 </tr>
               </tbody>
             </table>
@@ -137,7 +132,7 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
           <div className="md:col-span-12">
             <h2 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Step-by-Step Getting Started Guide</h2>
             <p className="text-slate-500 mb-8 leading-relaxed">
-              Transform your videos into interactive learning experiences in five simple steps.
+              Create your first educational track in just five simple steps.
             </p>
           </div>
 
@@ -154,8 +149,8 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">1</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-1">Sign Up</h3>
-                <p className="text-sm text-slate-600">Go to <strong className="text-purple-600">GrokAI.com</strong> → Click "Educator Sign Up" → Verify email.</p>
+                <h3 className="font-bold text-slate-900 mb-1">Access Suno</h3>
+                <p className="text-sm text-slate-600">Go to <strong className="text-purple-600">Suno.com</strong> → Sign in with Google or Discord.</p>
               </div>
             </div>
 
@@ -163,9 +158,8 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">2</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Upload Videos</h3>
-                <p className="text-sm text-slate-600 mb-2">Import a video from Lovart AI, YouTube, or your device.</p>
-                <p className="text-sm text-slate-600 mb-2">Review AI-suggested storyboard improvements.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Toggle "Custom Mode"</h3>
+                <p className="text-sm text-slate-600 mb-2">Switch on the "Custom Mode" toggle to gain full control over lyrics and style.</p>
               </div>
             </div>
 
@@ -173,9 +167,8 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">3</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Add Interactivity</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "Add Quiz" → Insert multiple-choice, T/F, or open-ended questions at key timestamps.</p>
-                <p className="text-sm text-slate-600 mb-2">Add polls or reflection prompts to spark discussion.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Draft Lyrics</h3>
+                <p className="text-sm text-slate-600 mb-2">Input your lesson topic or paste existing poem/text. Use the "Generate Lyrics" button for AI assistance.</p>
               </div>
             </div>
 
@@ -183,9 +176,8 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">4</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Customize Narration</h3>
-                <p className="text-sm text-slate-600 mb-2">Record your own voice or let AI generate narration.</p>
-                <p className="text-sm text-slate-600 mb-2">Adjust pace, tone, or language for ESL or differentiated instruction.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Pick a Style</h3>
+                <p className="text-sm text-slate-600 mb-2">Enter genre keywords (e.g., "Acoustic Folk", "80s Synth Pop"). Click "Create".</p>
               </div>
             </div>
 
@@ -193,9 +185,8 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">5</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Monitor & Share</h3>
-                <p className="text-sm text-slate-600 mb-2">Use the Analytics tab to track student engagement and quiz performance.</p>
-                <p className="text-sm text-slate-600 mb-2">Export as interactive MP4 or share via LMS link.</p>
+                <h3 className="font-bold text-slate-900 mb-2">Export & Integrate</h3>
+                <p className="text-sm text-slate-600">Download the track as MP3 or WAV. Add it to your Canva presentation, video project, or as a classroom timer.</p>
               </div>
             </div>
           </div>
@@ -210,7 +201,7 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
           </div>
 
           <h2 className="text-3xl font-bold mb-10 leading-tight relative z-10">
-            "Enhance a Lovert AI Lesson<br className="hidden md:block" /> Video with Interactivity and<br className="hidden md:block" />analytics using Grok AI."
+            "Produce an original 2-minute <br className="hidden md:block" />educational song summarizing <br className="hidden md:block" />your week's learning using Suno."
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10 mb-8">
@@ -336,13 +327,16 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
         </div>
 
         {/* Next Button */}
-        <button className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden">
-          <div className="absolute inset-0 bg-purple-50/0 group-hover:bg-purple-50/50 transition-colors"></div>
+        <button 
+          onClick={() => alert("Congratulations! You have completed the 7-Day AI EdChallenge!")}
+          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 shadow-lg hover:shadow-xl transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden text-white border-none"
+        >
+          <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors"></div>
           <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-purple-600 transition-colors mb-1">Day 6: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 7</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-purple-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
+            <h3 className="text-lg font-bold mb-1">CLAIM YOUR COMPLETION CERTIFICATE</h3>
+            <p className="text-sm text-white/80">You have mastered 7 days of cutting-edge AI for Education</p>
+            <div className="mt-4 w-10 h-10 rounded-full bg-white/20 group-hover:bg-white/30 text-white border border-white/30 flex items-center justify-center transition-all">
+              <Trophy size={20} />
             </div>
           </div>
         </button>
@@ -352,4 +346,4 @@ Suno is an AI-powered music generation tool that creates original, royalty-free 
   );
 };
 
-export default SonuDay7;
+export default SunoDay7;

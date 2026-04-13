@@ -6,7 +6,7 @@ import NotebookLMDay3 from './NotebookLMDay3';
 import DiffitDay4 from './DiffitDay4';
 import GeminiDay5 from './GeminiDay5';
 import GrokDay6 from './GrokDay6';
-import SonuDay7 from './SonuDay7';
+import SunoDay7 from './SunoDay7';
 
 
 const LearningPage = ({ course }) => {
@@ -27,10 +27,17 @@ const LearningPage = ({ course }) => {
             <h1 className="text-xl font-bold tracking-tight text-slate-900">{title}</h1>
           </div>
           
-          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
-            <div className="h-full bg-emerald-500 rounded-full" style={{ width: '20%' }}></div>
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Your Progress</span>
+            <span className="text-xs font-bold text-blue-600">{progress}%</span>
           </div>
-          <p className="text-xs font-medium text-slate-500">20% Completed</p>
+          <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-blue-600 rounded-full transition-all duration-500" 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+          <p className="text-xs font-medium text-slate-500">{progress}% Completed</p>
         </div>
 
         {/* Sidebar Middle: Modules */}
@@ -123,17 +130,22 @@ const LearningPage = ({ course }) => {
                   <p className={`text-xs ${activeDay === 6 ? 'text-purple-600/80' : 'text-slate-400'}`}>20 min read</p>
                 </div>
               </div>
+              
               {/* Day 7 */}
-              <div 
-                onClick={() => setActiveDay(7)}
-                className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 7 ? 'bg-purple-50/50' : 'hover:bg-slate-50'}`}
-              >
-                <PlayCircle size={20} className={activeDay === 7 ? "text-purple-600 mt-0.5" : "text-slate-400 mt-0.5"} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 7 ? 'text-slate-900' : 'text-slate-600'}`}>Day 7: Sonu AI</h3>
-                  <p className={`text-xs ${activeDay === 7 ? 'text-purple-600/80' : 'text-slate-400'}`}>20 min read</p>
-                </div>
+              <div className="mt-8 mb-4">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Module 4: Final Mastery</span>
               </div>
+              
+              <button 
+                onClick={() => setActiveDay(7)}
+                className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${activeDay === 7 ? 'bg-blue-50 text-blue-700 shadow-sm' : 'text-slate-600 hover:bg-slate-50'}`}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${activeDay === 7 ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'}`}>7</div>
+                  <span className="text-sm font-medium">Day 7: Suno AI</span>
+                </div>
+                {activeDay > 7 && <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600"><CheckCircle2 size={12} /></div>}
+              </button>
             </div>
           </div>
 
@@ -165,13 +177,20 @@ const LearningPage = ({ course }) => {
         
         {/* Content goes here */}
         <div className="flex-1 overflow-hidden">
-           {activeDay === 1 && <MagicSchoolDay1 />}
-           {activeDay === 2 && <EduaideDay2 />}
-           {activeDay === 3 && <NotebookLMDay3 />}
-           {activeDay === 4 && <DiffitDay4 />}
-           {activeDay === 5 && <GeminiDay5 />}
-           {activeDay === 6 && <GrokDay6 />}
-           {activeDay === 7 && <SonuDay7 />}
+           {
+             (() => {
+               switch (activeDay) {
+                 case 1: return <MagicSchoolDay1 onNext={handleNextDay} />;
+                 case 2: return <EduaideDay2 onNext={handleNextDay} />;
+                 case 3: return <NotebookLMDay3 onNext={handleNextDay} />;
+                 case 4: return <DiffitDay4 onNext={handleNextDay} />;
+                 case 5: return <GeminiDay5 onNext={handleNextDay} />;
+                 case 6: return <GrokDay6 onNext={handleNextDay} />;
+                 case 7: return <SunoDay7 onNext={handleNextDay} />;
+                 default: return <MagicSchoolDay1 onNext={handleNextDay} />;
+               }
+             })()
+           }
         </div>
       </main>
     </div>
