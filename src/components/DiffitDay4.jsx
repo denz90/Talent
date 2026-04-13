@@ -82,39 +82,61 @@ const DiffitDay4 = ({ onNext }) => {
         </div>
 
         {/* Features Table */}
-        <div className="bg-slate-50/50 rounded-3xl p-10 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500 mb-10">Discover the tools that will transform your reading lessons.</p>
+        <div className="rounded-2xl p-8">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+            <p className="text-slate-500 pb-4">Discover the tools that will transform your reading lessons.</p>
+          </div>
 
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm w-full">
-            <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+          <div className="rounded-xl bg-white overflow-hidden">
+            <table className="w-full text-left text-sm">
               <thead>
-                <tr className="bg-orange-50 text-orange-900 border-b border-slate-200">
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Result/Application</th>
+                <tr className="bg-rose-50 border-b border-slate-100">
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Layers size={16} className="text-amber-500" /> Text Leveler</td>
-                  <td className="px-6 py-4">Input topic or text → Select target reading level → Generate.</td>
-                  <td className="px-6 py-4 text-xs">Instantly readable text for struggling learners.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Layers size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Text Leveler</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Input topic or text → Select target reading level → Generate.</td>
+                  <td className="px-6 py-5 text-sm">Instantly readable text for struggling learners.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Globe size={16} className="text-amber-500" /> Translation</td>
-                  <td className="px-6 py-4">Click "Translate" → Select language → Click "Update".</td>
-                  <td className="px-6 py-4 text-xs">Empowers ELL students to access main ideas in L1.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Globe size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Translation</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Click "Translate" → Select language → Click "Update".</td>
+                  <td className="px-6 py-5 text-sm">Empowers ELL students to access main ideas in L1.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><ListChecks size={16} className="text-amber-500" /> Activity Generation</td>
-                  <td className="px-6 py-4">Under generated text, go to "Activities" → Pick vocabulary words.</td>
-                  <td className="px-6 py-4 text-xs">Provides instant scaffolded assignments.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <ListChecks size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Activity Generation</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Under generated text, go to "Activities" → Pick vocabulary words.</td>
+                  <td className="px-6 py-5 text-sm">Provides instant scaffolded assignments.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><FileOutput size={16} className="text-amber-500" /> Export Options</td>
-                  <td className="px-6 py-4">Click Export → Choose "Google Forms", "Docs", or "Slides".</td>
-                  <td className="px-6 py-4 text-xs">Creates a ready-to-assign class activity.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <FileOutput size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Export Options</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Click Export → Choose "Google Forms", "Docs", or "Slides".</td>
+                  <td className="px-6 py-5 text-sm">Creates a ready-to-assign class activity.</td>
                 </tr>
               </tbody>
             </table>

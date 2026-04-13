@@ -86,44 +86,71 @@ const NotebookLMDay3 = ({ onNext }) => {
         </div>
 
         {/* Features Table */}
-        <div className="bg-slate-50/50 rounded-3xl p-10 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500 mb-10">Discover the tools that will transform your notebook workflows.</p>
-          
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm w-full">
-            <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+        <div className="rounded-2xl p-8">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+            <p className="text-slate-500 pb-4">Discover the tools that will transform your notebook workflows.</p>
+          </div>
+
+          <div className="rounded-xl bg-white overflow-hidden">
+            <table className="w-full text-left text-sm">
               <thead>
-                <tr className="bg-purple-50 text-purple-900 border-b border-slate-200">
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Result/Application</th>
+                <tr className="bg-rose-50 border-b border-slate-100">
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><UploadCloud size={16} className="text-purple-500"/> Source Upload</td>
-                  <td className="px-6 py-4">Drag & drop PDF, Docs, or website links</td>
-                  <td className="px-6 py-4 text-xs">Build a bounded knowledge base for specific units.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <UploadCloud size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Source Upload</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Drag & drop PDF, Docs, or website links</td>
+                  <td className="px-6 py-5 text-sm">Build a bounded knowledge base for specific units.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><MessageSquare size={16} className="text-purple-500"/> Chat/Q&A</td>
-                  <td className="px-6 py-4">Ask questions strictly within the bounds of those documents</td>
-                  <td className="px-6 py-4 text-xs">Quickly extract exact facts without hallucination.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <MessageSquare size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Chat / Q&A</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Ask questions strictly within the bounds of those documents</td>
+                  <td className="px-6 py-5 text-sm">Quickly extract exact facts without hallucination.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><FileText size={16} className="text-purple-500"/> Study Guide Generator</td>
-                  <td className="px-6 py-4">Use the "Notebook guide" button to auto-create FAQs</td>
-                  <td className="px-6 py-4 text-xs">Instantly turn a full textbook chapter into a study aid.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <FileText size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Study Guide Generator</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Use the "Notebook guide" button to auto-create FAQs</td>
+                  <td className="px-6 py-5 text-sm">Instantly turn a full textbook chapter into a study aid.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Link size={16} className="text-purple-500"/> Source Citations</td>
-                  <td className="px-6 py-4">Click the citations to jump to the exact source text</td>
-                  <td className="px-6 py-4 text-xs">Verify AI accuracy and limit hallucinations.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Link size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Source Citations</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Click the citations to jump to the exact source text</td>
+                  <td className="px-6 py-5 text-sm">Verify AI accuracy and limit hallucinations.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Headphones size={16} className="text-purple-500"/> Audio Overview</td>
-                  <td className="px-6 py-4">1-click generation of two AI "hosts" discussing topics</td>
-                  <td className="px-6 py-4 text-xs">Provide multimodal learning aids for auditory learners.</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Headphones size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Audio Overview</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">1-click generation of two AI "hosts" discussing topics</td>
+                  <td className="px-6 py-5 text-sm">Provide multimodal learning aids for auditory learners.</td>
                 </tr>
               </tbody>
             </table>

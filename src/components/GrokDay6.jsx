@@ -88,49 +88,81 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
         </div>
 
         {/* Features Table */}
-        <div className="bg-slate-50/50 rounded-3xl p-10 text-center">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500 mb-10">Turn static videos into interactive learning experiences with powerful AI tools.</p>
+        <div className="rounded-2xl p-8">
+          <div className="text-center mb-4">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
+            <p className="text-slate-500 pb-4">Turn static videos into interactive learning experiences with powerful AI tools.</p>
+          </div>
 
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm w-full relative z-20">
-            <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+          <div className="rounded-xl bg-white overflow-hidden">
+            <table className="w-full text-left text-sm">
               <thead>
-                <tr className="bg-purple-50 text-purple-900 border-b border-slate-200">
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Feature</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-2/4">How to Use</th>
-                  <th className="px-6 py-4 font-bold text-xs uppercase tracking-wider w-1/4">Benefit for Teachers</th>
+                <tr className="bg-rose-50 border-b border-slate-100">
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
+                  <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-600">
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Globe size={16} className="text-purple-500" />Interactive Quiz Overlay</td>
-                  <td className="px-6 py-4">Upload video → Click "Add Quiz" → Set MCQs, T/F, or open-ended prompts</td>
-                  <td className="px-6 py-4 text-xs">Assess comprehension without leaving the video</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Globe size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Interactive Quiz Overlay</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Upload video → Click "Add Quiz" → Set MCQs, T/F, or open-ended prompts</td>
+                  <td className="px-6 py-5 text-sm">Assess comprehension without leaving the video.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><MessageSquare size={16} className="text-purple-500" /> Polls & Reflection Prompts</td>
-                  <td className="px-6 py-4">Insert discussion questions at key timestamps</td>
-                  <td className="px-6 py-4 text-xs">Promote active participation during lessons</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <MessageSquare size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Polls & Reflection Prompts</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Insert discussion questions at key timestamps</td>
+                  <td className="px-6 py-5 text-sm">Promote active participation during lessons.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Smile size={16} className="text-purple-500" /> AI Voiceover & Narration</td>
-                  <td className="px-6 py-4">Auto-generate or record narration → Adjust tone/speed</td>
-                  <td className="px-6 py-4 text-xs">Support diverse learning styles & multilingual classes</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Smile size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>AI Voiceover & Narration</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Auto-generate or record narration → Adjust tone/speed</td>
+                  <td className="px-6 py-5 text-sm">Support diverse learning styles & multilingual classes.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Search size={16} className="text-purple-500" /> Video Enhancement Suggestions</td>
-                  <td className="px-6 py-4">Grok AI recommends visual edits, transitions, and scene pacing</td>
-                  <td className="px-6 py-4 text-xs">Makes videos more engaging and professional-looking</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Search size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Video Enhancement Suggestions</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Grok AI recommends visual edits, transitions, and scene pacing</td>
+                  <td className="px-6 py-5 text-sm">Makes videos more engaging and professional-looking.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><PenTool size={16} className="text-purple-500" /> Analytics Dashboard</td>
-                  <td className="px-6 py-4">View participation, quiz results, and rewatch trends</td>
-                  <td className="px-6 py-4 text-xs">Identify struggling students instantly</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <PenTool size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Analytics Dashboard</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">View participation, quiz results, and rewatch trends</td>
+                  <td className="px-6 py-5 text-sm">Identify struggling students instantly.</td>
                 </tr>
-                <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-900 flex items-center gap-2"><Lightbulb size={16} className="text-purple-500" />Collaboration</td>
-                  <td className="px-6 py-4">Share videos with colleagues for co-editing or peer review</td>
-                  <td className="px-6 py-4 text-xs">Streamlines teamwork on lesson creation</td>
+                <tr>
+                  <td className="px-6 py-5 font-bold text-slate-900">
+                    <div className="flex items-start gap-2">
+                      <Lightbulb size={16} className="text-[#bc1044] mt-0.5 flex-shrink-0" />
+                      <span>Collaboration</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-5">Share videos with colleagues for co-editing or peer review</td>
+                  <td className="px-6 py-5 text-sm">Streamlines teamwork on lesson creation.</td>
                 </tr>
               </tbody>
             </table>
