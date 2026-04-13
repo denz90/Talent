@@ -66,7 +66,7 @@ const TOOLS_DATA = {
   }
 };
 const App = () => {
-  const [view, setView] = useState('path_selection');
+  const [view, setView] = useState('home');
   const [activeCourse, setActiveCourse] = useState(null);
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
