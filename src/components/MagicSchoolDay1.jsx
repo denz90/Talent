@@ -84,13 +84,13 @@ const MagicSchoolDay1 = ({ onNext }) => {
         </div>
 
         {/* Features Table */}
-        <div className="rounded-2xl p-8">
+        <div className="rounded-2xl border-2 border-dashed border-blue-200 p-8">
           <div className="text-center mb-4">
             <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-500 pb-4">Discover the tools that will transform your classroom workflow.</p>
+            <p className="text-slate-500 pb-4 border-b-2 border-dashed border-blue-200">Discover the tools that will transform your classroom workflow.</p>
           </div>
 
-          <div className="rounded-xl bg-white overflow-hidden">
+          <div className="rounded-xl border-2 border-dashed border-blue-200 bg-white overflow-hidden">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr className="bg-rose-50 border-b border-slate-100">
