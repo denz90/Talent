@@ -7,13 +7,14 @@ import DiffitDay4 from './DiffitDay4';
 import GeminiDay5 from './GeminiDay5';
 import GrokDay6 from './GrokDay6';
 import SunoDay7 from './SunoDay7';
+import BriskDay8 from './BriskDay8';
 
 const LearningPage = ({ course }) => {
   const [activeDay, setActiveDay] = useState(1);
-  const progress = Math.round((activeDay / 7) * 100);
+  const progress = Math.round((activeDay / 8) * 100);
 
   const handleNextDay = () => {
-    if (activeDay < 7) {
+    if (activeDay < 8) {
       setActiveDay(prev => prev + 1);
       window.scrollTo(0, 0);
     }
@@ -27,7 +28,8 @@ const LearningPage = ({ course }) => {
     activeDay <= 2 ? 'MODULE 1: PLANNING' :
     activeDay <= 4 ? 'MODULE 2: ASSESSMENT' :
     activeDay <= 6 ? 'MODULE 3: CREATION' :
-    'MODULE 4: FINAL MASTERY';
+    activeDay <= 8 ? 'MODULE 4: FINAL MASTERY' :
+    'MODULE 5: FINAL MASTERY';
 
   return (
     <div className="min-h-screen bg-white font-sans flex text-slate-900">
@@ -135,6 +137,14 @@ const LearningPage = ({ course }) => {
                   <p className={`text-xs ${activeDay === 7 ? 'text-blue-600/80' : 'text-slate-400'}`}>20 min read</p>
                 </div>
               </div>
+              
+              <div onClick={() => setActiveDay(8)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 8 ? 'bg-blue-50/50' : 'hover:bg-slate-50'}`}>
+                <PlayCircle size={20} className={activeDay === 8 ? 'text-blue-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
+                <div>
+                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 8 ? 'text-slate-900' : 'text-slate-600'}`}>Day 8: Brisk Teaching AI</h3>
+                  <p className={`text-xs ${activeDay === 8 ? 'text-blue-600/80' : 'text-slate-400'}`}>20 min read</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -172,6 +182,7 @@ const LearningPage = ({ course }) => {
           {activeDay === 5 && <GeminiDay5 onNext={handleNextDay} />}
           {activeDay === 6 && <GrokDay6 onNext={handleNextDay} />}
           {activeDay === 7 && <SunoDay7 onNext={handleNextDay} />}
+          {activeDay === 8 && <BriskDay8 onNext={handleNextDay} />}
         </div>
 
       </main>
