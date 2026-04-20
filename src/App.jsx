@@ -232,8 +232,17 @@ if (view === 'login') {
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
             <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-8 tracking-tight">
-              Learn AI Tools That <br /> Power Tomorrow
+              {currentUser ? (
+                <>
+                  Welcome back, <br /> {currentUser.username}!
+                </>
+              ) : (
+                <>
+                  Learn AI Tools That <br /> Power Tomorrow
+                </>
+              )}
             </h1>
+            
             <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
               Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
               Master UX Pilot, Midjourney, UX Pilot, and 50+ AI tools.
