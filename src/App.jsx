@@ -21,6 +21,7 @@ import {
 
 import SignupPage from './components/SignupPage';
 import LoginPage from './components/LoginPage';
+import OTPVerificationPage from './components/OTPVerificationPage';
 import DashboardPage from './components/DashboardPage';
 import ProfileSettingsPage from './components/ProfileSettingsPage';
 import BeginnerPage from './components/BeginnerPage';
@@ -68,6 +69,7 @@ const TOOLS_DATA = {
 const App = () => {
   const [view, setView] = useState('home');
   const [activeCourse, setActiveCourse] = useState(null);
+  const [registeredEmail, setRegisteredEmail] = useState('');
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
@@ -135,9 +137,29 @@ const App = () => {
   }
 
   if (view === 'signup') {
-    return <SignupPage onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} onLoginClick={() => setView('login')} />;
+    return (
+      <SignupPage 
+        onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} 
+        onLoginClick={() => setView('login')} 
+        onRequireOTP={(email) => {           // new prop
+          setRegisteredEmail(email);         // Save email
+          setView('otp');                    // Switch to the OTP screen
+        }}
+      />
+    );
   }
 
+  if (view === 'otp') {
+    return (
+      <OTPVerificationPage 
+        email={registeredEmail}
+        onBack={() => setView('signup')}
+        onSuccess={() => setView('login')}
+      />
+    );
+  }
+
+  //dashboard is fake so like.... gotta change this later   
   if (view === 'login') {
     return <LoginPage onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} onSignupClick={() => setView('signup')} />;
   }
