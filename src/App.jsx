@@ -21,6 +21,7 @@ import {
 
 import SignupPage from './components/SignupPage';
 import LoginPage from './components/LoginPage';
+//Possible added thsi 
 import OTPVerificationPage from './components/OTPVerificationPage';
 import DashboardPage from './components/DashboardPage';
 import ProfileSettingsPage from './components/ProfileSettingsPage';
@@ -70,6 +71,7 @@ const App = () => {
   const [view, setView] = useState('home');
   const [activeCourse, setActiveCourse] = useState(null);
   const [registeredEmail, setRegisteredEmail] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
@@ -159,20 +161,19 @@ const App = () => {
     );
   }
 
-  //dashboard is fake so like.... gotta change this later   
-  if (view === 'login') {
-    return <LoginPage onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} onSignupClick={() => setView('signup')} />;
-  }
-
-  if (view === 'beginner') {
-    return (
-      <BeginnerPage
-        onBack={() => setView('home')}
-        onLogoClick={() => setView('home')}
-        onNavClick={handleNavClick}
-      />
-    );
-  }
+  //dashboard is fake so like.... gotta change this later (done)    
+if (view === 'login') {
+  return (
+    <LoginPage 
+      onBack={() => setView('home')} 
+      onSignupClick={() => setView('signup')} 
+      onLoginSuccess={(profileData) => {
+        setCurrentUser(profileData); // Save the user details!
+        setView('home');             // Send them straight to the courses
+      }}
+    />
+  );
+}
 
   if (currentTool) {
     return (
