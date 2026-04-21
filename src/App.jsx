@@ -72,6 +72,37 @@ const App = () => {
   const [activeCourse, setActiveCourse] = useState(null);
   const [registeredEmail, setRegisteredEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+
+  // Auto-Login: Check for token when the app loads
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('hawkman_token');
+      if (token) {
+        try {
+          const response = await fetch('http://localhost:8000/api/auth/me', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          
+          if (response.ok) {
+            const userData = await response.json();
+            setCurrentUser(userData); // Memory restored!
+          } else {
+            // Token is expired or fake, kick it out
+            localStorage.removeItem('hawkman_token'); 
+            setCurrentUser(null);
+          }
+        } catch (err) {
+          console.error("Failed to fetch profile on load", err);
+        }
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
@@ -184,6 +215,8 @@ if (view === 'login') {
     );
   }
 
+  
+
   if (view === 'learning_page' && activeCourse) {
     return (
       <LearningPage
@@ -194,10 +227,20 @@ if (view === 'login') {
     );
   }
 
+  // BOUNCER CHECK 1: The Learning Dashboard
   if (view === 'path_selection') {
+    if (!currentUser) {
+      alert("You need to sign in to view courses!");
+      setView('login');
+      return null; 
+    }
     return (
       <PathSelectionPage
-        onLogout={() => setView('login')}
+        onLogout={() => {
+          localStorage.removeItem('hawkman_token');
+          setCurrentUser(null);
+          setView('login');
+        }}
         onSelectPath={(course) => {
           setActiveCourse(course);
           setView('learning_page');
@@ -206,9 +249,34 @@ if (view === 'login') {
     );
   }
 
+  // BOUNCER CHECK 2: The Actual Courses
+  if (view === 'learning_page' && activeCourse) {
+    if (!currentUser) {
+      setView('login');
+      return null;
+    }
+    return (
+      <LearningPage course={activeCourse} onBack={() => setView('path_selection')} />
+    );
+  }
+
+  if (view === 'beginner') {
+    if (!currentUser) {
+      setView('login');
+      return null;
+    }
+    return <BeginnerPage onBack={() => setView('home')} />;
+  }
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       <Navbar
+        currentUser={currentUser}   //Display username in the navbar when logged in
+        onLogout={() => {           // Clear the VIP pass and user data on logout 
+          localStorage.removeItem('hawkman_token');
+          setCurrentUser(null);
+          setView('home');
+        }}
         onSignup={() => setView('signup')}
         onLogin={() => setView('login')}
         onLogoClick={() => setView('home')}
