@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '@iconify/react';
 
 const Footer = () => {
   return (
@@ -17,7 +18,7 @@ const Footer = () => {
             <p className="text-[14px] text-white/60 mb-6 max-w-xs leading-relaxed">
               Empowering global learners with cutting-edge courses, interactive tools, and industry-leading resources.
             </p>
-<<<<<<< HEAD
+
             {/* Mock Social Icons */}
             <div className="flex space-x-4">
               <div className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 cursor-pointer transition-colors flex items-center justify-center text-white/50 text-xs" title="Twitter">𝕏</div>
@@ -79,8 +80,8 @@ const Footer = () => {
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
             <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
-=======
-          </p>
+          </div>
+          
           <div className="flex gap-4 mt-12">
             <a href="https://www.facebook.com/profile.php?id=61580819033887" className="text-white hover:text-white/70 transition-colors">
               <Icon icon="mdi:facebook" width="24" height="24" />
@@ -97,10 +98,8 @@ const Footer = () => {
             <a href="https://www.tiktok.com/@talentoasis_official?_r=1&_t=ZS-95ssDuHSG9g" className='text-white hover:text-white/70 transition-colors'>
               <Icon icon="ri:tiktok-fill" width="24" height="24"/>
             </a>
->>>>>>> 570d770 (Footer update)
           </div>
         </div>
-
       </div>
     </footer>
   );
