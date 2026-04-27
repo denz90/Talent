@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   Play,
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const SunoDay7 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -49,43 +50,54 @@ const SunoDay7 = ({ onNext }) => {
               Suno is an AI-powered music generation tool that creates original, royalty-free music and songs for your classroom. Whether you need a catchy rhyme to help students memorize facts or a lo-fi background track for study sessions, Suno turns your prompts into professional-grade audio.
             </p>
 
-            <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2 text-xl">
-               Why Educators Need It:
-            </h3>
-            <ul className="space-y-5">
-              <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Play size={12} className="text-rose-600 fill-rose-600" />
-                </div>
-                <p className="text-slate-600 leading-snug">
-                   <strong>Engages Students:</strong> Music enhances retention and makes complex lessons more dynamic.
-                </p>
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Play size={12} className="text-rose-600 fill-rose-600" />
-                </div>
-                <p className="text-slate-600 leading-snug">
-                   <strong>Saves Time & Money:</strong> No more searching for expensive royalty-free tracks for your presentations.
-                </p>
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Play size={12} className="text-rose-600 fill-rose-600" />
-                </div>
-                <p className="text-slate-600 leading-snug">
-                   <strong>Unlimited Customization:</strong> Tailor music exactly to your lesson mood, from upbeat to calming.
-                </p>
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-1">
-                  <Play size={12} className="text-rose-600 fill-rose-600" />
-                </div>
-                <p className="text-slate-600 leading-snug">
-                   <strong>Podcast Support:</strong> Effortlessly create transitions and intro music for student podcast projects.
-                </p>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-rose-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Play size={18} className="text-rose-600 fill-rose-600" />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Engages Students</strong>
+                    <span className="text-slate-600 text-sm">Music enhances retention and makes complex lessons more dynamic and memorable.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Play size={18} className="text-rose-600 fill-rose-600" />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Saves Time & Money</strong>
+                    <span className="text-slate-600 text-sm">No more searching for expensive royalty-free tracks for presentations or videos.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Play size={18} className="text-rose-600 fill-rose-600" />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Unlimited Customization</strong>
+                    <span className="text-slate-600 text-sm">Tailor music exactly to your lesson mood, from upbeat energy to calming study vibes.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Play size={18} className="text-rose-600 fill-rose-600" />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Podcast Support</strong>
+                    <span className="text-slate-600 text-sm">Effortlessly create transitions and intro music for student podcast and video projects.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="relative h-[400px] flex items-center justify-center">
@@ -95,65 +107,75 @@ const SunoDay7 = ({ onNext }) => {
         </div>
 
         {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-rose-300 bg-white overflow-hidden shadow-sm -mt-8">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="bg-rose-50 border-b border-slate-100">
-                <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Feature</th>
-                <th className="px-6 py-4 font-bold text-[#bc1044] w-2/4">How to Use</th>
-                <th className="px-6 py-4 font-bold text-[#bc1044] w-1/4">Benefit for Educators</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-600">
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Music size={16} className="text-[#bc1044] flex-shrink-0" />
+                    <Music size={16} className="text-rose-500 flex-shrink-0" />
                     <span>Genre Selection</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Choose from ambient, cinematic, pop, etc.</td>
-                <td className="px-6 py-5 text-sm">Matches music to lesson tone (e.g., suspense for storytelling)</td>
+                <td className="px-6 py-5">Choose from ambient, cinematic, pop, or custom styles</td>
+                <td className="px-6 py-5 text-sm">Matches music to lesson tone perfectly</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Settings size={16} className="text-[#bc1044] flex-shrink-0" />
+                    <Settings size={16} className="text-rose-500 flex-shrink-0" />
                     <span>Mood Adjuster</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Slide to adjust energy (calm → energetic)</td>
-                <td className="px-6 py-5 text-sm">Sets the right classroom atmosphere</td>
+                <td className="px-6 py-5">Slide to adjust energy levels from calm to energetic</td>
+                <td className="px-6 py-5 text-sm">Sets the right atmosphere for classroom focus</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Volume2 size={16} className="text-[#bc1044] flex-shrink-0" />
+                    <Volume2 size={16} className="text-rose-500 flex-shrink-0" />
                     <span>Length Control</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Set track duration (10 sec to 5 min)</td>
-                <td className="px-6 py-5 text-sm">Fits music to video/activity length</td>
+                <td className="px-6 py-5">Set track duration from 10 seconds to 5 minutes</td>
+                <td className="px-6 py-5 text-sm">Fits music to your specific video or activity length</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Mic2 size={16} className="text-[#bc1044] flex-shrink-0" />
+                    <Mic2 size={16} className="text-rose-500 flex-shrink-0" />
                     <span>BPM Customizer</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Modify beats per minute (slow/fast)</td>
-                <td className="px-6 py-5 text-sm">Aligns with pacing (e.g., slow for reflection)</td>
+                <td className="px-6 py-5">Modify beats per minute to match lesson pacing</td>
+                <td className="px-6 py-5 text-sm">Aligns music speed with instructional flow</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <ListMusic size={16} className="text-[#bc1044] flex-shrink-0" />
-                    <span>Download Options</span>
+                    <ListMusic size={16} className="text-rose-500 flex-shrink-0" />
+                    <span>Export Options</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Export as MP3/WAV (no watermark)</td>
-                <td className="px-6 py-5 text-sm">Safe for student projects and presentations</td>
+                <td className="px-6 py-5">Export as MP3/WAV with no watermarks</td>
+                <td className="px-6 py-5 text-sm">Safe for student projects and school presentations</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Headphones size={16} className="text-rose-500 flex-shrink-0" />
+                    <span>Instruments Only</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Toggle vocal removal for instrumental background music</td>
+                <td className="px-6 py-5 text-sm">Ensures music doesn't distract from core instruction</td>
               </tr>
             </tbody>
           </table>

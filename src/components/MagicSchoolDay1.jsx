@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Sparkles, 
   Users, 
@@ -10,16 +10,27 @@ import {
   ArrowRight,
   Trophy,
   Target,
-  ChevronRight
+  ChevronRight,
+  Award,
+  BookOpen,
+  Shield,
+  MessageSquare
 } from 'lucide-react';
 
 const MagicSchoolDay1 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
+
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
         
         {/* Header Hero */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-900 to-purple-800 text-white p-12 shadow-xl">
+          {/*Background Image*/}
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: "url('/Gemini_Generated_Image_q76fulq76fulq76f 1.svg')" }}
+          ></div>
           {/* Subtle background decoration */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-primary/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
@@ -43,117 +54,188 @@ const MagicSchoolDay1 = ({ onNext }) => {
           <div>
             <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is MagicSchool AI?</h2>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              MagicSchool AI is an advanced AI platform designed specifically for educators. It automates lesson planning, generates differentiated instructional materials, and creates assessments aligned to standards—all while saving teachers <strong>10+ hours weekly</strong>.
+              MagicSchool AI is an advanced AI platform designed specifically for educators. It automates lesson planning, generates differentiated instructional materials, and creates assessments aligned to standards—all while saving teachers <strong><span className="font-bold text-indigo-700">10+ hours weekly</span></strong>.
             </p>
-            
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Users className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <strong className="text-slate-900">Personalized Learning:</strong> <span className="text-slate-600">Generates leveled content for diverse student needs.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <strong className="text-slate-900">Time-Saver:</strong> <span className="text-slate-600">Cuts lesson planning time by 75% with targeted AI workflows.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <FileText className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <strong className="text-slate-900">Standards-Aligned:</strong> <span className="text-slate-600">Supports CCSS, NGSS, and TEKS with 1-click adaptations.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Layers className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <strong className="text-slate-900">Multimodal Outputs:</strong> <span className="text-slate-600">Creates worksheets, slides, rubrics, and exit tickets.</span>
-                </div>
-              </li>
-            </ul>
+            <p>
+              Click the button below to learn more about why educators need MagicSchool AI.
+            </p>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-indigo-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Users className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Personalized Learning</strong>
+                    <span className="text-slate-600 text-sm">Generates leveled content for diverse student needs.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Clock className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Time-Saver</strong>
+                    <span className="text-slate-600 text-sm">Cuts lesson planning time by 75% with targeted AI workflows.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <FileText className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Standards-Aligned</strong>
+                    <span className="text-slate-600 text-sm">Supports CCSS, NGSS, and TEKS with 1-click adaptations.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Layers className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Multimodal Outputs</strong>
+                    <span className="text-slate-600 text-sm">Creates worksheets, slides, rubrics, and exit tickets.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
           
-          <div className="bg-slate-50 rounded-2xl h-80 border border-slate-100 flex items-center justify-center p-8 overflow-hidden relative">
-             <div className="absolute inset-0 opacity-10 flex flex-wrap gap-4 items-center justify-center p-4">
-                <Layers size={80} /> <CheckSquare size={100} /> <Lightbulb size={60} />
-             </div>
-             <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000" alt="Educator Working" className="w-full h-full object-cover rounded-xl shadow-lg relative z-10" />
+          <div className=" flex items-center justify-center p-8 overflow-hidden relative">
+             <img src="/Magic trick-amico 1.svg" alt="Educator Working"/>
           </div>
         </div>
 
-        {/* Key Features - Card Grid */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500">Discover the tools that will transform your classroom workflow.</p>
+        {/* Key Features Section */}
+        <div className="space-y-10 -mt-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">Key Features & How to Use Them</h2>
+            <p className="text-slate-600 text-lg">Discover the tools that will transform your classroom workflow.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Lesson Plan Generator */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                <BookOpen size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Lesson Plan Generator</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Select grade/subject → Input topic → Choose standards → Generate draft.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Instantly creates ready-to-edit lesson plans.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Rubric Builder */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                <Award size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Rubric Builder</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Choose assessment type → Customize criteria → Download.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Creates transparent grading tools in &lt;1 minute.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* IEP Suggestion Tool */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                <Shield size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">IEP Suggestion Tool</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Input student strengths/needs → Generate draft goals.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Supports specialized instruction planning.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Choice Board Generator */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
+                <Layers size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Choice Board Generator</h3>
+              
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Input topic → Select format → Generate activity grid.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Empowers student agency and choice.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Differentiation Tool */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6 mx-auto">
+                <CheckSquare size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Differentiation Tool</h3>
+              <div className="space-y-6 text-left">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Paste text → Select grade levels → Generate versions.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Makes complex texts accessible to all.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Email Responder */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
+              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6 mx-auto">
+                <MessageSquare size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Email Responder</h3>
+              <div className="space-y-6 text-left">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Paste parent email → Set tone → Generate response.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-indigo-600 font-medium text-sm">Professional communication in seconds.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Lesson Plan Generator */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <FileText size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Lesson Plan Generator</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Select grade/subject → Input topic → Choose standards → Generate draft.</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Instantly creates ready-to-edit lesson plans.</p>
-            </div>
-          </div>
-
-          {/* Differentiation Tool */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <Layers size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Differentiation Tool</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Upload student roster → Set proficiency levels → Generate tiered activities.</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Auto-scaffolds assignments for inclusive classrooms.</p>
-            </div>
-          </div>
-
-          {/* Rubric Builder */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <CheckSquare size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Rubric Builder</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Choose assessment type (e.g., project, essay) → Customize criteria → Download.</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Creates transparent grading tools in &lt;1 minute.</p>
-            </div>
-          </div>
-
-          {/* Behavior Intervention Suggestor */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <Lightbulb size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Behavior Intervention Suggestor</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Describe student behavior → Get AI-recommended strategies.</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Supports PBIS and SEL implementation.</p>
-            </div>
-          </div>
-        </div>
 
         {/* Getting Started Guide */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
@@ -162,14 +244,12 @@ const MagicSchoolDay1 = ({ onNext }) => {
             <p className="text-slate-500 mb-8 leading-relaxed">
               Follow these simple steps to generate your first lesson and differentiate content for your class.
             </p>
-            <div className="bg-slate-100 rounded-2xl aspect-[4/3] relative overflow-hidden">
-               <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=1000" alt="Workspace" className="w-full h-full object-cover" />
-               <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent"></div>
+            <div className=" relative overflow-hidden">
+               <img src="/Sign up-amico 1.png" alt="Workspace" className="w-full h-full object-cover" />
             </div>
           </div>
-          
-          <div className="md:col-span-7 space-y-8 relative">
-            <div className="absolute left-[15px] top-4 bottom-4 w-px bg-slate-200 z-0 hidden md:block"></div>
+
+          <div className="md:col-span-7 space-y-8 ">
             
             {/* Step 1 */}
             <div className="flex gap-4 relative z-10">
@@ -269,8 +349,8 @@ const MagicSchoolDay1 = ({ onNext }) => {
 
         {/* Pro Tips & Assessment */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-           <div className="flex items-center justify-center bg-purple-50 rounded-2xl p-8">
-              <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&q=80&w=800" alt="Notebook" className="w-full max-w-[250px] mix-blend-multiply opacity-80" />
+           <div className="flex items-center justify-center">
+              <img src="/Notebook-bro-2 1.svg" alt="Notebook"/>
            </div>
 
            <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100">

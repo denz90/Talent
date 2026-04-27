@@ -37,7 +37,7 @@ const TOOLS_DATA = {
     useFor: ["Lesson planning and brainstorming", "Drafting student feedback", "Generating creative writing prompts"],
     prompt: "Act as a pedagogical expert and help me design a 45-minute lesson plan on renewable energy for 8th graders. Include a hook, a hands-on activity, and an exit ticket.",
     quote: "How could this accelerate your lesson planning process?",
-    image: "https://images.unsplash.com/photo-1673187115862-d61e68b1d289?auto=format&fit=crop&q=80&w=2000"
+    image: "/Artificial intelligence-cuate.svg"
   },
   claude_ai: {
     title: "Claude: Reading, Summarizing & Refinement",
@@ -223,6 +223,7 @@ if (view === 'login') {
         course={activeCourse}
         onBack={() => setView('path_selection')}
         onLogout={() => setView('login')}
+        onProfileSettings={() => setView('profile_settings')}
       />
     );
   }
@@ -359,7 +360,7 @@ if (view === 'login') {
         </section>
 
         {/* Learning Paths */}
-        <section id="courses" className="py-32 bg-slate-50/50">
+        <section id="courses" className="py-32 bg-gray-100">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <div className="mb-20">
               <h2 className="text-4xl font-bold mb-5 tracking-tight text-brand-dark">Choose Your Learning Path</h2>

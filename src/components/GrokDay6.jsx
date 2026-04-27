@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   CheckCircle2,
@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 
 const GrokDay6 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -53,33 +54,54 @@ const GrokDay6 = ({ onNext }) => {
 Grok AI is an AI-driven video enhancement platform designed for educators. It allows teachers to take existing lesson videos (from Lovart AI or other sources) and add interactive elements, quizzes, prompts, and adaptive narration to make lessons more engaging and personalized.
             </p>
 
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <Zap className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Transform Passive Videos into Active Lessons:</strong> Embed questions, polls, and prompts.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <MessageSquare className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Save Time on Editing:</strong> AI suggests improvements, transitions, and interactive overlays.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Smile className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Track Student Engagement:</strong> Monitor who answered questions, paused, or rewatched sections.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <Lightbulb className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Accessible Learning:</strong>Supports captions, translations, and audio customization for ESL learners.</span>
-                </div>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-violet-50 hover:bg-violet-100 text-violet-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-violet-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Zap className="text-violet-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Active Learning</strong>
+                    <span className="text-slate-600 text-sm">Transform passive videos into active lessons by embedding questions, polls, and prompts.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MessageSquare className="text-violet-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Rapid Video Editing</strong>
+                    <span className="text-slate-600 text-sm">AI suggests improvements, transitions, and interactive overlays to save editing time.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Smile className="text-violet-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Engagement Tracking</strong>
+                    <span className="text-slate-600 text-sm">Monitor student progress, quiz performance, and rewatch trends in real-time.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Lightbulb className="text-violet-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Differentiated Instruction</strong>
+                    <span className="text-slate-600 text-sm">Supports captions, translations, and audio customization for diverse learners.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="bg-white-100 rounded-2xl h-80 border border-purple-100">
@@ -88,15 +110,10 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
         </div>
 
         {/* Key Features */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500">Turn static videos into interactive learning experiences with powerful AI tools.</p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-violet-300 bg-white overflow-hidden shadow-sm -mt-8">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="bg-purple-50 border-b border-slate-100">
+              <tr className="bg-violet-50 border-b border-slate-100">
                 <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
                 <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
                 <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
@@ -106,62 +123,62 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Globe size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Interactive Quiz Overlay</span>
+                    <Zap size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>Interactive Overlays</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Upload video → Click "Add Quiz" → Set MCQs, T/F, or open-ended prompts</td>
-                <td className="px-6 py-5 text-sm">Assess comprehension without leaving the video</td>
+                <td className="px-6 py-5">Click "Add Quiz" at any timestamp to insert questions or polls</td>
+                <td className="px-6 py-5 text-sm">Turns passive watching into active participation</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <MessageSquare size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Polls & Reflection Prompts</span>
+                    <MessageSquare size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>AI Feedback System</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Insert discussion questions at key timestamps</td>
-                <td className="px-6 py-5 text-sm">Promote active participation during lessons</td>
+                <td className="px-6 py-5">Enable real-time feedback for student answers within the video</td>
+                <td className="px-6 py-5 text-sm">Immediate clarification of misconceptions for students</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Smile size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>AI Voiceover & Narration</span>
+                    <Search size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>Engagement Analytics</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Auto-generate or record narration → Adjust tone/speed</td>
-                <td className="px-6 py-5 text-sm">Support diverse learning styles & multilingual classes</td>
+                <td className="px-6 py-5">View dashboard for completion rates and quiz scores</td>
+                <td className="px-6 py-5 text-sm">Data-driven insights to guide future instruction</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Search size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Video Enhancement Suggestions</span>
+                    <PenTool size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>Custom Narration</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Grok AI recommends visual edits, transitions, and scene pacing</td>
-                <td className="px-6 py-5 text-sm">Makes videos more engaging and professional-looking</td>
+                <td className="px-6 py-5">Record voiceovers or use AI voices to explain key concepts</td>
+                <td className="px-6 py-5 text-sm">Personalizes the learning experience for every student</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <PenTool size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Analytics Dashboard</span>
+                    <Layers size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>Chaptering & Nav</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">View participation, quiz results, and rewatch trends</td>
-                <td className="px-6 py-5 text-sm">Identify struggling students instantly</td>
+                <td className="px-6 py-5">Auto-generate chapters for long lesson videos</td>
+                <td className="px-6 py-5 text-sm">Allows students to easily revisit specific topics</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Lightbulb size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Collaboration</span>
+                    <Globe size={16} className="text-violet-500 flex-shrink-0" />
+                    <span>Auto-Captions</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Share videos with colleagues for co-editing or peer review</td>
-                <td className="px-6 py-5 text-sm">Streamlines teamwork on lesson creation</td>
+                <td className="px-6 py-5">Generate and edit captions for accessibility in any language</td>
+                <td className="px-6 py-5 text-sm">Ensures all students can follow along effectively</td>
               </tr>
             </tbody>
           </table>
@@ -378,7 +395,7 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
           <div className="absolute inset-0 bg-purple-50/0 group-hover:bg-purple-50/50 transition-colors"></div>
           <div className="relative z-10 flex flex-col items-center">
             <h3 className="text-lg font-bold text-slate-900 group-hover:text-purple-600 transition-colors mb-1">Day 6: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 7</p>
+            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 6</p>
             <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-purple-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
               <ChevronRight size={20} />
             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   CheckCircle2,
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const DiffitDay4 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -47,33 +48,54 @@ const DiffitDay4 = ({ onNext }) => {
               Diffit is an AI-powered tool that allows teachers to get leveled texts, vocabulary, reading questions, and activities for any topic and any grade in seconds. It bridges the gap between readable content and grade-level curriculum.
             </p>
 
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-amber-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>2 reading levels in 1 click:</strong> Gets both grade level and decodable text.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-amber-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Aligned with IEPs:</strong> Allows for rapid alignment to language & reading levels.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-amber-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Creates full activity sets:</strong> Not just a text, it generates DOK reading questions and vocabulary.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-amber-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Supports ELL Students:</strong> Can translate the text to multiple languages.</span>
-                </div>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-orange-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-orange-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Instant Differentiation</strong>
+                    <span className="text-slate-600 text-sm">2 reading levels in 1 click: Gets both grade level and decodable text.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-orange-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">IEP Alignment</strong>
+                    <span className="text-slate-600 text-sm">Allows for rapid alignment to language & reading levels for personalized education.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-orange-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Full Activity Sets</strong>
+                    <span className="text-slate-600 text-sm">Generates DOK reading questions and vocabulary lists along with the text.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-orange-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">ELL Support</strong>
+                    <span className="text-slate-600 text-sm">Provides multi-language translations to support multilingual learners.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="bg-orange-50 rounded-2xl h-80 border border-orange-100 flex items-center justify-center p-8 overflow-hidden relative">
@@ -82,12 +104,7 @@ const DiffitDay4 = ({ onNext }) => {
         </div>
 
         {/* Key Features */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500">Master the tools that make differentiation effortless.</p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-orange-300 bg-white overflow-hidden shadow-sm -mt-8">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="bg-orange-50 border-b border-slate-100">
@@ -100,42 +117,62 @@ const DiffitDay4 = ({ onNext }) => {
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Layers size={16} className="text-amber-500 flex-shrink-0" />
-                    <span>Text Leveler</span>
+                    <Layers size={16} className="text-orange-500 flex-shrink-0" />
+                    <span>Differentiated Resources</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Paste any text → Select target grade level (K-12) → Generate adapted version</td>
-                <td className="px-6 py-5 text-sm">Instantly creates accessible materials for all learners</td>
+                <td className="px-6 py-5">Paste URL or text → AI generates leveled versions</td>
+                <td className="px-6 py-5 text-sm">Instant support for diverse learning needs</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <Globe size={16} className="text-amber-500 flex-shrink-0" />
-                    <span>Translation</span>
+                    <Sparkles size={16} className="text-orange-500 flex-shrink-0" />
+                    <span>Source Variety</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Click "Translate" → Choose language (e.g., Spanish) → Download bilingual copy</td>
-                <td className="px-6 py-5 text-sm">Engages multilingual families and ELL students</td>
+                <td className="px-6 py-5">Input any topic or specific text from the web</td>
+                <td className="px-6 py-5 text-sm">Access to an unlimited range of instructional materials</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <ListChecks size={16} className="text-amber-500 flex-shrink-0" />
-                    <span>Question Generator</span>
+                    <HelpCircle size={16} className="text-orange-500 flex-shrink-0" />
+                    <span>Citation & Sourcing</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Upload text → Auto-generate MCQs, short answers, discussion prompts</td>
-                <td className="px-6 py-5 text-sm">Saves time creating assessments</td>
+                <td className="px-6 py-5">Hover over AI output to see original source verification</td>
+                <td className="px-6 py-5 text-sm">Ensures factual accuracy and academic integrity</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <FileOutput size={16} className="text-amber-500 flex-shrink-0" />
+                    <FileOutput size={16} className="text-orange-500 flex-shrink-0" />
                     <span>Export Options</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Download as PDF, Google Doc, or assign directly to LMS (Google Classroom)</td>
-                <td className="px-6 py-5 text-sm">Seamless integration into existing workflows</td>
+                <td className="px-6 py-5">Download as Google Docs, Forms, or Slides in one click</td>
+                <td className="px-6 py-5 text-sm">Ready-to-use materials for any classroom format</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Target size={16} className="text-orange-500 flex-shrink-0" />
+                    <span>Reading Level Adjuster</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Use the grade level slider to simplify or enrich text</td>
+                <td className="px-6 py-5 text-sm">Precise scaffolding for individual student growth</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Globe size={16} className="text-orange-500 flex-shrink-0" />
+                    <span>Multilingual Support</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Translate generated resources into over 50 languages</td>
+                <td className="px-6 py-5 text-sm">Engages ELL students and multilingual families</td>
               </tr>
             </tbody>
           </table>

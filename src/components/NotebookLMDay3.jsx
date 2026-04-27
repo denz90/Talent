@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Sparkles, 
   CheckCircle2, 
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const NotebookLMDay3 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -51,33 +52,54 @@ const NotebookLMDay3 = ({ onNext }) => {
               NotebookLM is an experimental, AI-powered ultimate study application designed by Google that helps users summarize, simplify, and learn from uploaded documents. Built around your unique curriculum, it acts as a personalized assistant tutor that grounds its output strictly in the content you upload.
             </p>
             
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Knowledge Retrieval:</strong> Instantly find specific key ideas across large document sets.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Interactive Study Guides:</strong> Autogenerate FAQs, glossaries, and outlines from your source text.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Critical Engagement:</strong> Create discussion questions tailored to your specific class level.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-purple-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Audio Summaries:</strong> Convert text formats to engaging conversational "podcasts".</span>
-                </div>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-purple-50 hover:bg-purple-100 text-purple-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-purple-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-purple-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Knowledge Retrieval</strong>
+                    <span className="text-slate-600 text-sm">Instantly find specific key ideas across large document sets.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-purple-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Interactive Study Guides</strong>
+                    <span className="text-slate-600 text-sm">Autogenerate FAQs, glossaries, and outlines from your source text.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-purple-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Critical Engagement</strong>
+                    <span className="text-slate-600 text-sm">Create discussion questions tailored to your specific class level.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-purple-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Audio Summaries</strong>
+                    <span className="text-slate-600 text-sm">Convert text formats to engaging conversational "podcasts".</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
           
           <div className="bg-purple-50 rounded-2xl h-80 border border-purple-100 flex items-center justify-center p-8 overflow-hidden relative">
@@ -86,18 +108,13 @@ const NotebookLMDay3 = ({ onNext }) => {
         </div>
 
         {/* Key Features */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500">Discover powerful tools for transforming research into teaching materials.</p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-purple-300 bg-white overflow-hidden shadow-sm -mt-8">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="bg-purple-50 border-b border-slate-100">
                 <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
                 <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Educators</th>
+                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-600">
@@ -108,48 +125,58 @@ const NotebookLMDay3 = ({ onNext }) => {
                     <span>Source Upload</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Drag & drop PDFs/Docs → AI analyzes content</td>
-                <td className="px-6 py-5 text-sm">Build a curated knowledge base for any subject.</td>
+                <td className="px-6 py-5">Drag & drop PDFs, Docs, or text files directly into the UI</td>
+                <td className="px-6 py-5 text-sm">Build a knowledge base grounded only in your curriculum</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <MessageSquare size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>AI Q&A</span>
+                    <Sparkles size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>AI Summary</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Type questions about your sources → Get answers</td>
-                <td className="px-6 py-5 text-sm">Quickly extract key facts without re-reading.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <FileText size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Quiz Generator</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Click "Generate Quiz" → Customize question types</td>
-                <td className="px-6 py-5 text-sm">Turn lectures into self-paced assessments.</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Headphones size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Lesson Outlines</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Ask: "Create a lesson plan about [topic]"</td>
-                <td className="px-6 py-5 text-sm">Structure curriculum with linked sources.</td>
+                <td className="px-6 py-5">Automatic generation of a "source guide" upon upload</td>
+                <td className="px-6 py-5 text-sm">Instantly get a bird's-eye view of complex topics</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
                     <Link size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Cite Sources</span>
+                    <span>Citation Engine</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Hover over AI answers → View original excerpts</td>
-                <td className="px-6 py-5 text-sm">Teach critical sourcing and avoid plagiarism.</td>
+                <td className="px-6 py-5">Hover over AI answers to see direct excerpts from your files</td>
+                <td className="px-6 py-5 text-sm">Ensures accuracy and prevents AI "hallucinations"</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <MessageSquare size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Notebook Interaction</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Chat with your documents to find specific facts or ideas</td>
+                <td className="px-6 py-5 text-sm">Extract precisely what you need for lesson planning</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Collaborative Features</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Share entire notebooks with co-teachers or students</td>
+                <td className="px-6 py-5 text-sm">Streamline unit planning across departments</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Headphones size={16} className="text-purple-500 flex-shrink-0" />
+                    <span>Voice-to-Note</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Dictate ideas and have AI summarize them into study guides</td>
+                <td className="px-6 py-5 text-sm">Hands-free brainstorming for busy educators</td>
               </tr>
             </tbody>
           </table>

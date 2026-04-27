@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
-import { PlayCircle } from 'lucide-react';
+import { 
+  PlayCircle, 
+  ArrowRight, 
+  Sparkles, 
+  BookOpen, 
+  Target, 
+  Trophy, 
+  Clock,
+  User,
+  Settings,
+  LogOut,
+  ChevronDown
+} from 'lucide-react';
+import { PATHS_CONTENT } from '../data/PathContent';
 import MagicSchoolDay1 from './MagicSchoolDay1';
 import EduaideDay2 from './EduaideDay2';
 import NotebookLMDay3 from './NotebookLMDay3';
@@ -8,28 +21,105 @@ import GeminiDay5 from './GeminiDay5';
 import GrokDay6 from './GrokDay6';
 import SunoDay7 from './SunoDay7';
 import BriskDay8 from './BriskDay8';
+import SnorklDay9 from './SnorklDay9';
 
-const LearningPage = ({ course }) => {
+const GenericDayContent = ({ day, courseTitle, onNext }) => {
+  return (
+    <div className="w-full h-full overflow-y-auto bg-white/50">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+        
+        {/* Header Hero */}
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white p-12 shadow-xl">
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
+              <Sparkles size={14} className="text-yellow-300" />
+              Day {day.id} • {courseTitle}
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
+              {day.title}
+            </h1>
+            <p className="text-lg text-white/80 max-w-xl font-medium">
+              Mastering the next generation of AI tools for your profession.
+            </p>
+          </div>
+        </div>
+
+        {/* Placeholder Content */}
+        <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm text-center space-y-6">
+          <div className="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto text-slate-400">
+            <Clock size={40} />
+          </div>
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Detailed Module Coming Soon</h2>
+            <p className="text-slate-500 max-w-md mx-auto">
+              We are currently refining the deep-dive content for <strong>{day.title}</strong>. 
+              In the meantime, start exploring the tool directly to gain a head start!
+            </p>
+          </div>
+          <div className="pt-4">
+             <button 
+              onClick={onNext}
+              className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all"
+            >
+              Mark as Read & Continue <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
+
+        {/* Structure Example */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-blue-50 p-8 rounded-2xl border border-blue-100">
+            <h3 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
+              <Target size={20} /> Learning Objectives
+            </h3>
+            <ul className="space-y-3 text-blue-800/80 text-sm">
+              <li>• Understand core functionalities of {day.title}</li>
+              <li>• Integrate {day.title} into your daily workflow</li>
+              <li>• Optimize your output with advanced prompt techniques</li>
+            </ul>
+          </div>
+          <div className="bg-amber-50 p-8 rounded-2xl border border-amber-100">
+            <h3 className="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2">
+              <Trophy size={20} /> Professional Impact
+            </h3>
+            <ul className="space-y-3 text-amber-800/80 text-sm">
+              <li>• Reduce manual task time by up to 50%</li>
+              <li>• Enhance creativity and technical precision</li>
+              <li>• Stay ahead in the rapidly evolving AI landscape</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+const LearningPage = ({ course, onBack, onLogout, onProfileSettings }) => {
   const [activeDay, setActiveDay] = useState(1);
-  const progress = Math.round((activeDay / 8) * 100);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  
+  if (!course) return null;
+
+  // Find content for the current path, fallback to Educators if not found
+  const pathContent = PATHS_CONTENT[course.title] || PATHS_CONTENT['AI for Educators'];
+  const { icon: Icon, color, modules } = pathContent;
+  
+  // Flat list of days for progress and navigation
+  const allDays = modules.flatMap(m => m.days);
+  const currentDayData = allDays.find(d => d.id === activeDay);
+  
+  const progress = Math.round((activeDay / allDays.length) * 100);
 
   const handleNextDay = () => {
-    if (activeDay < 8) {
+    if (activeDay < allDays.length) {
       setActiveDay(prev => prev + 1);
       window.scrollTo(0, 0);
     }
   };
 
-  if (!course) return null;
-
-  const { title, icon: Icon, color } = course;
-
-  const moduleLabel =
-    activeDay <= 2 ? 'MODULE 1: PLANNING' :
-    activeDay <= 4 ? 'MODULE 2: ASSESSMENT' :
-    activeDay <= 6 ? 'MODULE 3: CREATION' :
-    activeDay <= 8 ? 'MODULE 4: FINAL MASTERY' :
-    'MODULE 5: FINAL MASTERY';
+  const currentModule = modules.find(m => m.days.some(d => d.id === activeDay));
+  const moduleLabel = currentModule ? currentModule.title.toUpperCase() : '';
 
   return (
     <div className="min-h-screen bg-white font-sans flex text-slate-900">
@@ -39,9 +129,19 @@ const LearningPage = ({ course }) => {
 
         {/* Header: Course Title & Progress */}
         <div className="p-6 border-b border-slate-100">
+          <button 
+            onClick={onBack}
+            className="flex items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mb-6 group"
+          >
+            <div className="w-8 h-8 rounded-lg border border-slate-200 flex items-center justify-center group-hover:bg-slate-50 transition-colors">
+              <ArrowRight size={16} className="rotate-180" />
+            </div>
+            <span className="text-sm font-bold uppercase tracking-widest">Back to Paths</span>
+          </button>
+
           <div className="flex items-center gap-3 mb-6">
             <Icon size={24} style={{ color }} strokeWidth={2.5} />
-            <h1 className="text-xl font-bold tracking-tight text-slate-900">{title}</h1>
+            <h1 className="text-xl font-bold tracking-tight text-slate-900">{course.title}</h1>
           </div>
 
           <div className="flex justify-between items-center mb-2">
@@ -59,108 +159,26 @@ const LearningPage = ({ course }) => {
 
         {/* Middle: Modules (scrollable) */}
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
-
-          {/* Module 1 */}
-          <div>
-            <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Module 1: Planning</h2>
-            <div className="space-y-1">
-              <div onClick={() => setActiveDay(1)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 1 ? 'bg-blue-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 1 ? 'text-brand-primary mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 1 ? 'text-slate-900' : 'text-slate-600'}`}>Day 1: MagicSchool AI</h3>
-                  <p className={`text-xs ${activeDay === 1 ? 'text-brand-primary/80' : 'text-slate-400'}`}>15 min read</p>
-                </div>
-              </div>
-
-              <div onClick={() => setActiveDay(2)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 2 ? 'bg-emerald-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 2 ? 'text-emerald-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 2 ? 'text-slate-900' : 'text-slate-600'}`}>Day 2: Eduaide.AI</h3>
-                  <p className={`text-xs ${activeDay === 2 ? 'text-emerald-600/80' : 'text-slate-400'}`}>10 min read</p>
-                </div>
+          {modules.map((module) => (
+            <div key={module.id}>
+              <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">{module.title}</h2>
+              <div className="space-y-1">
+                {module.days.map((day) => (
+                  <div 
+                    key={day.id}
+                    onClick={() => setActiveDay(day.id)} 
+                    className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === day.id ? `${day.bg}` : 'hover:bg-slate-50'}`}
+                  >
+                    <PlayCircle size={20} className={activeDay === day.id ? `${day.color} mt-0.5` : 'text-slate-400 mt-0.5'} />
+                    <div>
+                      <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? 'text-slate-900' : 'text-slate-600'}`}>{day.title}</h3>
+                      <p className={`text-xs ${activeDay === day.id ? `${day.color}/80` : 'text-slate-400'}`}>{day.duration}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-
-          {/* Module 2 */}
-          <div>
-            <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Module 2: Assessment</h2>
-            <div className="space-y-1">
-              <div onClick={() => setActiveDay(3)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 3 ? 'bg-purple-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 3 ? 'text-purple-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 3 ? 'text-slate-900' : 'text-slate-600'}`}>Day 3: NotebookLM</h3>
-                  <p className={`text-xs ${activeDay === 3 ? 'text-purple-600/80' : 'text-slate-400'}`}>20 min read</p>
-                </div>
-              </div>
-
-              <div onClick={() => setActiveDay(4)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 4 ? 'bg-orange-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 4 ? 'text-orange-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 4 ? 'text-slate-900' : 'text-slate-600'}`}>Day 4: Diffit</h3>
-                  <p className={`text-xs ${activeDay === 4 ? 'text-orange-600/80' : 'text-slate-400'}`}>25 min read</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Module 3 */}
-          <div>
-            <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Module 3: Creation</h2>
-            <div className="space-y-1">
-              <div onClick={() => setActiveDay(5)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 5 ? 'bg-blue-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 5 ? 'text-blue-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 5 ? 'text-slate-900' : 'text-slate-600'}`}>Day 5: Google Gemini</h3>
-                  <p className={`text-xs ${activeDay === 5 ? 'text-blue-600/80' : 'text-slate-400'}`}>30 min read</p>
-                </div>
-              </div>
-
-              <div onClick={() => setActiveDay(6)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 6 ? 'bg-purple-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 6 ? 'text-purple-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 6 ? 'text-slate-900' : 'text-slate-600'}`}>Day 6: Grok AI</h3>
-                  <p className={`text-xs ${activeDay === 6 ? 'text-purple-600/80' : 'text-slate-400'}`}>20 min read</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Module 4 */}
-          <div>
-            <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Module 4: Final Mastery</h2>
-            <div className="space-y-1">
-              <div onClick={() => setActiveDay(7)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 7 ? 'bg-blue-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 7 ? 'text-blue-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 7 ? 'text-slate-900' : 'text-slate-600'}`}>Day 7: Suno AI</h3>
-                  <p className={`text-xs ${activeDay === 7 ? 'text-blue-600/80' : 'text-slate-400'}`}>20 min read</p>
-                </div>
-              </div>
-              
-              <div onClick={() => setActiveDay(8)} className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === 8 ? 'bg-blue-50/50' : 'hover:bg-slate-50'}`}>
-                <PlayCircle size={20} className={activeDay === 8 ? 'text-blue-600 mt-0.5' : 'text-slate-400 mt-0.5'} />
-                <div>
-                  <h3 className={`text-sm font-bold mb-0.5 ${activeDay === 8 ? 'text-slate-900' : 'text-slate-600'}`}>Day 8: Brisk Teaching AI</h3>
-                  <p className={`text-xs ${activeDay === 8 ? 'text-blue-600/80' : 'text-slate-400'}`}>20 min read</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom: User Profile */}
-        <div className="p-4 border-t border-slate-100">
-          <div className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-brand-primary font-bold text-sm">
-              TE
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-900 leading-tight">Teacher Educator</p>
-              <p className="text-xs text-slate-500">Pro Member</p>
-            </div>
-          </div>
+          ))}
         </div>
 
       </aside>
@@ -169,20 +187,94 @@ const LearningPage = ({ course }) => {
       <main className="flex-1 bg-slate-50 relative flex flex-col h-screen overflow-hidden">
 
         {/* Breadcrumb bar */}
-        <div className="w-full flex-shrink-0 border-b border-slate-200 bg-white h-16 flex items-center px-8 z-10 shadow-sm">
+        <div className="w-full flex-shrink-0 border-b border-slate-200 bg-white h-16 flex items-center justify-between px-8 z-10 shadow-sm">
           <span className="text-sm font-bold text-slate-400">{moduleLabel}</span>
+          
+          <div className="relative">
+            <div 
+              onClick={() => setShowProfileMenu(!showProfileMenu)}
+              className="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-1.5 rounded-2xl transition-all border border-transparent hover:border-slate-100"
+            >
+              <div className="text-right hidden sm:block">
+                <p className="text-sm font-bold text-slate-900 leading-tight">Pro Learner</p>
+                <p className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Active Member</p>
+              </div>
+              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-100 shadow-sm">
+                TE
+              </div>
+              <ChevronDown size={14} className={`text-slate-400 transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
+            </div>
+
+            {/* Dropdown Menu */}
+            {showProfileMenu && (
+              <>
+                <div 
+                  className="fixed inset-0 z-20" 
+                  onClick={() => setShowProfileMenu(false)}
+                ></div>
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-30 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="px-4 py-3 border-b border-slate-50 mb-1">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Account</p>
+                  </div>
+                  
+                  <button 
+                    onClick={() => {
+                      onProfileSettings();
+                      setShowProfileMenu(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
+                    <User size={18} className="text-slate-400" />
+                    My Profile
+                  </button>
+                  
+                  <button 
+                    onClick={() => {
+                      onProfileSettings();
+                      setShowProfileMenu(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                  >
+                    <Settings size={18} className="text-slate-400" />
+                    Settings
+                  </button>
+                  
+                  <div className="h-px bg-slate-50 my-1 mx-2"></div>
+                  
+                  <button 
+                    onClick={onLogout}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Day content */}
         <div className="flex-1 overflow-hidden">
-          {activeDay === 1 && <MagicSchoolDay1 onNext={handleNextDay} />}
-          {activeDay === 2 && <EduaideDay2 onNext={handleNextDay} />}
-          {activeDay === 3 && <NotebookLMDay3 onNext={handleNextDay} />}
-          {activeDay === 4 && <DiffitDay4 onNext={handleNextDay} />}
-          {activeDay === 5 && <GeminiDay5 onNext={handleNextDay} />}
-          {activeDay === 6 && <GrokDay6 onNext={handleNextDay} />}
-          {activeDay === 7 && <SunoDay7 onNext={handleNextDay} />}
-          {activeDay === 8 && <BriskDay8 onNext={handleNextDay} />}
+          {course.title === 'AI for Educators' ? (
+            <>
+              {activeDay === 1 && <MagicSchoolDay1 onNext={handleNextDay} />}
+              {activeDay === 2 && <EduaideDay2 onNext={handleNextDay} />}
+              {activeDay === 3 && <NotebookLMDay3 onNext={handleNextDay} />}
+              {activeDay === 4 && <DiffitDay4 onNext={handleNextDay} />}
+              {activeDay === 5 && <GeminiDay5 onNext={handleNextDay} />}
+              {activeDay === 6 && <GrokDay6 onNext={handleNextDay} />}
+              {activeDay === 7 && <SunoDay7 onNext={handleNextDay} />}
+              {activeDay === 8 && <BriskDay8 onNext={handleNextDay} />}
+              {activeDay === 9 && <SnorklDay9 onNext={handleNextDay} />}
+            </>
+          ) : (
+            <GenericDayContent 
+              day={currentDayData} 
+              courseTitle={course.title} 
+              onNext={handleNextDay} 
+            />
+          )}
         </div>
 
       </main>

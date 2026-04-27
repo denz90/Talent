@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   CheckCircle2,
@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 
 const EduaideDay2 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
+
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -42,6 +44,7 @@ const EduaideDay2 = ({ onNext }) => {
           </div>
         </div>
 
+
         {/* What is Eduaide.AI */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
@@ -50,129 +53,179 @@ const EduaideDay2 = ({ onNext }) => {
               Eduaide.AI is a versatile AI platform that helps educators create lesson plans, assessments, assignments, and interactive activities. It provides an all-in-one workspace that reduces administrative burden while maintaining pedagogical quality.
             </p>
 
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Saves 10+ hours a week</strong> on lesson planning and resource creation.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Generates differentiated materials</strong> for diverse learners.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Offers 100+ templates</strong> for rubrics, letters, and more.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-emerald-500 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Easy to use</strong> and integrates seamlessly into workflows.</span>
-                </div>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-emerald-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Massive Time-Saver</strong>
+                    <span className="text-slate-600 text-sm">Saves 10+ hours a week on lesson planning and resource creation.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Differentiation at Scale</strong>
+                    <span className="text-slate-600 text-sm">Generates differentiated materials for diverse learners instantly.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Extensive Library</strong>
+                    <span className="text-slate-600 text-sm">Offers 100+ templates for rubrics, letters, and curriculum materials.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-emerald-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Seamless Workflow</strong>
+                    <span className="text-slate-600 text-sm">Easy to use and integrates directly into your existing classroom routines.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="bg-slate-50 rounded-2xl h-80 border border-slate-100 flex items-center justify-center p-8 overflow-hidden relative">
             <img src="/Container.png" alt="Classroom" className="w-full h-full object-cover rounded-xl shadow-lg relative z-10 opacity-100" />
           </div>
         </div>
+        
+        {/* Key Features Section */}
+        <div className="space-y-12 -mt-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">Key Features & How to Use Them</h2>
+            <p className="text-slate-600 text-lg">Explore the core tools for rapid resource generation.</p>
+          </div>
 
-        {/* Key Features - Card Grid */}
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 mb-2 tracking-tight">Key Features & How to Use Them</h2>
-          <p className="text-slate-500">Explore the core tools for rapid resource generation.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Lesson Plan Generator */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <FileDown size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-emerald-500/30 underline-offset-8">Lesson Plan Generator</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Input topic/standard → Select grade level → Generate draft.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Creates standards-aligned plans in &lt;1 minute.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Worksheet Builder */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <Puzzle size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Worksheet Builder</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Choose template → Customize content → Download PDF.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Instantly printable student activities.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Assessment Creator */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <Award size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Assessment Creator</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Set question types → AI generates with answer key.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Auto-gradable quizzes with Bloom's taxonomy.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Feedback Bot */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <MessageSquare size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Feedback Bot</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Paste student work → Get rubric-aligned suggestions.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Provides personalized, actionable feedback.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Translation Tool */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <Globe size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Translation Tool</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Upload resource → Select target language → Convert.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Supports ESL/ELL learners effortlessly.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Curricular Alignment */}
+            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-6">
+                <Target size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Curricular Alignment</h3>
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
+                  <p className="text-slate-600 leading-relaxed text-sm">Map existing units to new standards or state requirements.</p>
+                </div>
+                <div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
+                  <p className="text-emerald-600 font-medium text-sm">Ensures full coverage of required learning goals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {/* Lesson Plan Generator */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <FileDown size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Lesson Plan Generator</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Input topic/standard → Select grade level → Generate draft</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Creates standards-aligned plans in &lt;1 minute</p>
-            </div>
-          </div>
-
-          {/* Worksheet Builder */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <Puzzle size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Worksheet Builder</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Choose template (e.g., "Vocabulary Matching") → Customize → Download PDF</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Instantly printable student activities</p>
-            </div>
-          </div>
-
-          {/* Assessment Creator */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <Award size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Assessment Creator</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Set question types (MCQ, short answer) → AI generates with answer key</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Auto-gradable quizzes with Bloom's taxonomy levels</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {/* Feedback Bot */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <MessageSquare size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Feedback Bot</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Paste student work → Get rubric-aligned suggestions</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Provides personalized, actionable feedback</p>
-            </div>
-          </div>
-
-          {/* Translation Tool */}
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-4">
-              <Globe size={20} />
-            </div>
-            <h3 className="font-bold text-slate-900 mb-3">Translation Tool</h3>
-            <div className="mb-3">
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">How to use</span>
-              <p className="text-sm text-slate-600">Upload resource → Select target language → Convert</p>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest block mb-1">Benefit</span>
-              <p className="text-sm font-medium text-indigo-600">Supports ESL/ELL learners effortlessly</p>
-            </div>
-          </div>
-        </div>
 
         {/* Getting Started Guide */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
@@ -275,9 +328,9 @@ const EduaideDay2 = ({ onNext }) => {
             </div>
 
             <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-yellow-400/50 group-hover:border-yellow-300 group-hover:text-yellow-100">★</div>
+              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-green-400/50 group-hover:border-green-300 group-hover:text-green-100">4</div>
               <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1 text-yellow-300">Bonus</h4>
+                <h4 className="font-bold mb-1">Bonus</h4>
                 <p className="text-emerald-100 text-sm mb-3">Translate one resource into another language using the Translation tool.</p>
               </div>
             </div>

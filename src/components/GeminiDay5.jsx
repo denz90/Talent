@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Sparkles,
   CheckCircle2,
@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 
 const GeminiDay5 = ({ onNext }) => {
+  const [isWhyOpen, setIsWhyOpen] = useState(false);
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -47,33 +48,54 @@ const GeminiDay5 = ({ onNext }) => {
               Google Gemini is an AI-powered assistant that helps educators research, generate, and structure lesson content quickly. It can turn text prompts into scripts, suggest visuals, and even provide ideas for video lessons or interactive activities, making it ideal for engaging classrooms.
             </p>
 
-            <h3 className="font-bold text-slate-900 mb-4">Why Educators Need It:</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-blue-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Engaging Lessons Fast:</strong> Turn concepts into scripts, slides, or storyboards for videos.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-blue-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Saves Time:</strong> Automates lesson ideation, discussion prompts, and content research.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-blue-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Accessible Learning:</strong> Supports multilingual explanations and student-friendly summaries.</span>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="text-blue-600 mt-1 flex-shrink-0" size={20} />
-                <div>
-                  <span className="text-slate-600"><strong>Promotes Critical Thinking:</strong> Generates discussion questions, opposing viewpoints, and interactive exercises.</span>
-                </div>
-              </li>
-            </ul>
+            <button 
+              onClick={() => setIsWhyOpen(!isWhyOpen)}
+              className="inline-flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-blue-100 group"
+            >
+              Why Educators Need It
+              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+            </button>
+
+            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              <ul className="space-y-4 pb-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-blue-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Engaging Lessons Fast</strong>
+                    <span className="text-slate-600 text-sm">Turn concepts into scripts, slides, or storyboards for interactive videos.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-blue-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Significant Time Savings</strong>
+                    <span className="text-slate-600 text-sm">Automates lesson ideation, discussion prompts, and complex content research.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-blue-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Accessible Learning</strong>
+                    <span className="text-slate-600 text-sm">Supports multilingual explanations and creates student-friendly summaries.</span>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="text-blue-600" size={18} />
+                  </div>
+                  <div>
+                    <strong className="text-slate-900 block">Critical Thinking</strong>
+                    <span className="text-slate-600 text-sm">Generates diverse discussion questions and interactive exercises.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="bg-blue-50 rounded-2xl h-80 border border-blue-100 flex items-center justify-center p-8 overflow-hidden relative">
@@ -83,7 +105,7 @@ const GeminiDay5 = ({ onNext }) => {
         </div>
 
         {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-blue-300 bg-white overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-blue-300 bg-white overflow-hidden shadow-sm -mt-8">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="bg-blue-50 border-b border-slate-100">
@@ -96,62 +118,62 @@ const GeminiDay5 = ({ onNext }) => {
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
-                    <BookOpen size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Research Assistant</span>
+                    <MessageSquare size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Multimodal Interaction</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Ask Gemini: "Explain photosynthesis for 5th graders"</td>
-                <td className="px-6 py-5 text-sm">Quickly generates age-appropriate explanations</td>
+                <td className="px-6 py-5">Upload images, text, or code → Ask Gemini to analyze or explain</td>
+                <td className="px-6 py-5 text-sm">Analyze student work or complex visuals instantly</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <BookOpen size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Lesson Ideation</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Prompt: "Generate 5 creative ways to teach [Topic]"</td>
+                <td className="px-6 py-5 text-sm">Fresh, engaging ideas for any subject area</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
                     <FileText size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Lesson Script Generator</span>
+                    <span>Content Structuring</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Prompt: "Create a 2-min lesson video script about fractions"</td>
-                <td className="px-6 py-5 text-sm">Provides ready-to-use scripts for video lessons</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Layers size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Visual & Video Suggestions</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Ask Gemini: "Suggest 3 visuals for a solar system video"</td>
-                <td className="px-6 py-5 text-sm">Supports multimedia integration for lessons</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Interactive Prompt Creator</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Generate quiz questions or discussion prompts</td>
-                <td className="px-6 py-5 text-sm">Makes lessons interactive and engaging</td>
+                <td className="px-6 py-5">Input raw notes → "Turn this into a structured lesson plan"</td>
+                <td className="px-6 py-5 text-sm">Saves hours on manual document organization</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
                     <Globe size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Multilingual Content</span>
+                    <span>Real-time Translation</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Ask: "Translate lesson to Spanish"</td>
-                <td className="px-6 py-5 text-sm">Supports ESL and multilingual classrooms</td>
+                <td className="px-6 py-5">Paste text → "Translate this into [Language] for parents"</td>
+                <td className="px-6 py-5 text-sm">Seamless communication with multilingual families</td>
+              </tr>
+              <tr>
+                <td className="px-6 py-5 font-bold text-slate-900">
+                  <div className="flex items-center gap-2">
+                    <Target size={16} className="text-blue-500 flex-shrink-0" />
+                    <span>Quiz Generation</span>
+                  </div>
+                </td>
+                <td className="px-6 py-5">Input content → "Create a 10-question MCQ quiz on this"</td>
+                <td className="px-6 py-5 text-sm">Immediate assessment creation for any lesson</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
                   <div className="flex items-center gap-2">
                     <Settings size={16} className="text-blue-500 flex-shrink-0" />
-                    <span>Collaboration Links</span>
+                    <span>Adaptive Feedback</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">Share Gemini-generated content with colleagues or students</td>
-                <td className="px-6 py-5 text-sm">Streamlines team planning and peer learning</td>
+                <td className="px-6 py-5">Input student answer → "Provide constructive feedback"</td>
+                <td className="px-6 py-5 text-sm">Personalized support for every student at scale</td>
               </tr>
             </tbody>
           </table>
@@ -291,7 +313,7 @@ const GeminiDay5 = ({ onNext }) => {
 
           <div className="bg-blue-50 border border-blue-100 rounded-2xl p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
              <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg"><Layers size={20} /></div>
+              <div className="p-2 bg-blue-100 text-blue-600 rounded-lg"><Layers size={20} /></div>
               <h3 className="font-bold text-slate-900">Interactive Elements</h3>
             </div>
             <img src="/Image (Script writing).png" alt="workspace" className="w-full h-full object-cover"/>
@@ -340,7 +362,7 @@ const GeminiDay5 = ({ onNext }) => {
           <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors"></div>
           <div className="relative z-10 flex flex-col items-center">
             <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">Day 5: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 6</p>
+            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 5</p>
             <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-blue-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
               <ChevronRight size={20} />
             </div>
