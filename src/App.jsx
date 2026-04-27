@@ -21,13 +21,16 @@ import {
 
 import SignupPage from './components/SignupPage';
 import LoginPage from './components/LoginPage';
-//Possible added thsi 
+//Possible added this  
 import OTPVerificationPage from './components/OTPVerificationPage';
 import DashboardPage from './components/DashboardPage';
 import ProfileSettingsPage from './components/ProfileSettingsPage';
 import BeginnerPage from './components/BeginnerPage';
 import PathSelectionPage from './components/PathSelectionPage';
 import LearningPage from './components/LearningPage';
+
+// importing the API base URL from config
+import { API_BASE_URL } from './config'; 
 
 const TOOLS_DATA = {
   chatgpt: {
@@ -79,7 +82,7 @@ const App = () => {
       const token = localStorage.getItem('hawkman_token');
       if (token) {
         try {
-          const response = await fetch('http://localhost:8000/api/auth/me', {
+          const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }

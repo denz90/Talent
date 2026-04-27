@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
+//importing the API base URL from config
+import { API_BASE_URL } from '../config';
+
 // Notice we changed onBack('dashboard') to a new prop: onLoginSuccess
 const LoginPage = ({ onBack, onSignupClick, onLoginSuccess }) => {
   const [formData, setFormData] = useState({
@@ -24,7 +27,7 @@ const LoginPage = ({ onBack, onSignupClick, onLoginSuccess }) => {
 
     try {
       // 1. Get the Token
-      const loginResponse = await fetch('http://localhost:8000/api/auth/login', {
+      const loginResponse = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -41,7 +44,7 @@ const LoginPage = ({ onBack, onSignupClick, onLoginSuccess }) => {
       localStorage.setItem('hawkman_token', token);
 
       // 2. Fetch the User Profile so we know who just logged in
-      const profileResponse = await fetch('http://localhost:8000/api/auth/me', {
+      const profileResponse = await fetch(`${API_BASE_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

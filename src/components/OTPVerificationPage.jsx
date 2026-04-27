@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
+//importing the API base URL from config
+import { API_BASE_URL } from '../config';
+
 const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
   const [otpCode, setOtpCode] = useState('');
   const [error, setError] = useState('');
@@ -12,7 +15,7 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/auth/verify-otp', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

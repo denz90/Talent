@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
+//importing the API base URL from config
+import { API_BASE_URL } from '../config';
+
 // Added onRequireOTP prop so the parent component knows to switch to the OTP screen
 const SignupPage = ({ onBack, onLoginClick, onRequireOTP }) => {
   // 1. Setup state for form data
@@ -37,7 +40,7 @@ const SignupPage = ({ onBack, onLoginClick, onRequireOTP }) => {
 
     try {
       // Point this to your FastAPI backend URL (adjust if hosted elsewhere)
-      const response = await fetch('http://localhost:8000/api/auth/register', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
