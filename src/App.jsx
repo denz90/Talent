@@ -30,7 +30,7 @@ import PathSelectionPage from './components/PathSelectionPage';
 import LearningPage from './components/LearningPage';
 
 // importing the API base URL from config
-import { API_BASE_URL } from './config'; 
+import { API_BASE_URL } from './config.js'; 
 
 const TOOLS_DATA = {
   chatgpt: {
