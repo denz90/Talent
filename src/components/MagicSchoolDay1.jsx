@@ -17,8 +17,71 @@ import {
   MessageSquare
 } from 'lucide-react';
 
+const quizData = [
+  {
+    id: 1,
+    question: "What is the primary benefit of the MagicSchool AI 'Choice Board Generator'?",
+    options: [
+      "It creates ready-to-edit lesson plans instantly.",
+      "It writes professional emails to parents in seconds.",
+      "It empowers student agency and choice.",
+      "It creates transparent grading tools in under a minute."
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 2,
+    question: "According to the Getting Started Guide, what should you click to add an extension activity for Gifted Students?",
+    options: [
+      "Generate Base Lesson",
+      "Adapt for diversity",
+      "Share Library",
+      "IEP Suggestion Tool"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 3,
+    question: "How much time does the platform claim it can save teachers on a weekly basis?",
+    options: [
+      "5+ hours",
+      "10+ hours",
+      "15+ hours",
+      "20+ hours"
+    ],
+    correctAnswer: 1
+  }
+];
+
 const MagicSchoolDay1 = ({ onNext }) => {
   const [isWhyOpen, setIsWhyOpen] = useState(false);
+
+  // NEW STATE VARIABLES
+  const [answers, setAnswers] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasPassed, setHasPassed] = useState(false);
+
+  // NEW HANDLER FUNCTION
+  const handleSelectAnswer = (questionId, optionIndex) => {
+    if (!isSubmitted) {
+      setAnswers(prev => ({ ...prev, [questionId]: optionIndex }));
+    }
+  };
+
+  const handleSubmitQuiz = () => {
+    setIsSubmitted(true);
+    const score = quizData.reduce((acc, q) => {
+      return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
+    }, 0);
+
+    if (score === quizData.length) {
+      setHasPassed(true);
+      // delay 1s so they can see their success before firing the unlock
+      setTimeout(() => {
+        onNext();
+      }, 1500);
+    }
+  };
 
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
@@ -381,20 +444,90 @@ const MagicSchoolDay1 = ({ onNext }) => {
            </div>
         </div>
 
-        {/* Next Button */}
-        <button 
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">Day 1: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 1</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-blue-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
-            </div>
+{/* Knowledge Check Quiz */}
+        <div className="bg-white rounded-3xl p-8 md:p-10 border border-slate-200 shadow-sm relative overflow-hidden">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Day 1: TEST YOUR KNOWLEDGE</h3>
+            <p className="text-slate-500">Pass this quick check to unlock the next module.</p>
           </div>
-        </button>
+
+          <div className="space-y-8">
+            {quizData.map((q, index) => (
+              <div key={q.id} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                <p className="font-bold text-slate-800 mb-4">
+                  {index + 1}. {q.question}
+                </p>
+                <div className="space-y-3">
+                  {q.options.map((opt, optIdx) => {
+                    const isSelected = answers[q.id] === optIdx;
+                    const isCorrect = q.correctAnswer === optIdx;
+                    
+                    // Determine styling based on submission state
+                    let buttonClass = "w-full text-left p-4 rounded-xl border transition-all duration-200 ";
+                    
+                    if (!isSubmitted) {
+                      buttonClass += isSelected 
+                        ? "bg-indigo-50 border-indigo-500 text-indigo-700 font-medium" 
+                        : "bg-white border-slate-200 hover:border-indigo-300 hover:bg-slate-50 text-slate-600";
+                    } else {
+                      if (isCorrect) {
+                        buttonClass += "bg-emerald-50 border-emerald-500 text-emerald-700 font-bold";
+                      } else if (isSelected && !isCorrect) {
+                        buttonClass += "bg-red-50 border-red-500 text-red-700 line-through opacity-70";
+                      } else {
+                        buttonClass += "bg-white border-slate-200 text-slate-400 opacity-50";
+                      }
+                    }
+
+                    return (
+                      <button
+                        key={optIdx}
+                        disabled={isSubmitted}
+                        onClick={() => handleSelectAnswer(q.id, optIdx)}
+                        className={buttonClass}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-col items-center">
+            {!isSubmitted ? (
+              <button
+                onClick={handleSubmitQuiz}
+                disabled={Object.keys(answers).length !== quizData.length}
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-4 px-10 rounded-full transition-colors w-full md:w-auto shadow-md"
+              >
+                Submit Answers
+              </button>
+            ) : hasPassed ? (
+              <div className="flex flex-col items-center animate-bounce mt-4">
+                <div className="bg-emerald-100 text-emerald-700 px-6 py-3 rounded-full font-bold flex items-center gap-2 mb-4">
+                  <CheckSquare size={20} /> Module Passed! Unlocking next day...
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center w-full">
+                <div className="bg-red-50 text-red-600 px-6 py-3 rounded-xl font-bold mb-4 border border-red-100 w-full text-center">
+                  You didn't quite get them all. Review the material and try again.
+                </div>
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setAnswers({});
+                  }}
+                  className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-8 rounded-full transition-colors"
+                >
+                  Retry Quiz
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
 
       </div>
     </div>
