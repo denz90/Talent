@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Add useEffect to import
 import { 
   PlayCircle, 
   ArrowRight, 
@@ -10,7 +10,8 @@ import {
   User,
   Settings,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  Lock  // Add Lock icon import
 } from 'lucide-react';
 import { PATHS_CONTENT } from '../data/PathContent';
 import MagicSchoolDay1 from './MagicSchoolDay1';
@@ -23,7 +24,16 @@ import SunoDay7 from './SunoDay7';
 import BriskDay8 from './BriskDay8';
 import SnorklDay9 from './SnorklDay9';
 
-const GenericDayContent = ({ day, courseTitle, onNext }) => {
+
+const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const handleComplete = () => {
+    setIsCompleted(true);
+    if (onComplete) onComplete();
+    if (onNext) onNext();
+  };
+
   return (
     <div className="w-full h-full overflow-y-auto bg-white/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
@@ -58,10 +68,16 @@ const GenericDayContent = ({ day, courseTitle, onNext }) => {
           </div>
           <div className="pt-4">
              <button 
-              onClick={onNext}
-              className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all"
+              onClick={handleComplete}
+              disabled={isCompleted}
+              className={`inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all ${
+                isCompleted 
+                  ? 'bg-green-600 text-white cursor-default' 
+                  : 'bg-slate-900 text-white hover:bg-slate-800'
+              }`}
             >
-              Mark as Read & Continue <ArrowRight size={18} />
+              {isCompleted ? '✓ Completed' : 'Mark as Read & Continue'} 
+              {!isCompleted && <ArrowRight size={18} />}
             </button>
           </div>
         </div>
@@ -98,7 +114,23 @@ const GenericDayContent = ({ day, courseTitle, onNext }) => {
 const LearningPage = ({ course, onBack, onLogout, onProfileSettings }) => {
   const [activeDay, setActiveDay] = useState(1);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  
+  const [unlockedLevel, setUnlockedLevel] = useState(1);
+
+  // Load saved progress on mount
+  useEffect(() => {
+    const savedLevel = localStorage.getItem(`unlocked_level_${course?.id || 'default'}`);
+    if (savedLevel) {
+      setUnlockedLevel(parseInt(savedLevel, 10));
+    }
+  }, [course?.id]);
+
+  // Save unlocked level whenever it changes
+  useEffect(() => {
+    if (course?.id) {
+      localStorage.setItem(`unlocked_level_${course.id}`, unlockedLevel.toString());
+    }
+  }, [unlockedLevel, course?.id]);
+
   if (!course) return null;
 
   // Find content for the current path, fallback to Educators if not found
@@ -108,12 +140,30 @@ const LearningPage = ({ course, onBack, onLogout, onProfileSettings }) => {
   // Flat list of days for progress and navigation
   const allDays = modules.flatMap(m => m.days);
   const currentDayData = allDays.find(d => d.id === activeDay);
-  
-  const progress = Math.round((activeDay / allDays.length) * 100);
+
+  // Calculate progress (completed days = unlockedLevel - 1)
+  const completedDays = Math.min(unlockedLevel - 1, allDays.length);
+  const progress = Math.round((completedDays / allDays.length) * 100);
+
+  // Handle day completion and unlocking next day
+  const handleDayComplete = () => {
+    if (activeDay === unlockedLevel && activeDay < allDays.length) {
+      // Unlock the next day
+      setUnlockedLevel(prev => prev + 1);
+    }
+  };
 
   const handleNextDay = () => {
     if (activeDay < allDays.length) {
       setActiveDay(prev => prev + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handleDaySelect = (dayId) => {
+    // Only allow navigation to unlocked days
+    if (dayId <= unlockedLevel) {
+      setActiveDay(dayId);
       window.scrollTo(0, 0);
     }
   };
@@ -154,28 +204,61 @@ const LearningPage = ({ course, onBack, onLogout, onProfileSettings }) => {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-xs font-medium text-slate-500 mt-1">{progress}% Completed</p>
+          <p className="text-xs font-medium text-slate-500 mt-1">
+            {completedDays} of {allDays.length} days completed
+          </p>
         </div>
 
         {/* Middle: Modules (scrollable) */}
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           {modules.map((module) => (
             <div key={module.id}>
-              <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">{module.title}</h2>
+              <h2 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">
+                {module.title}
+              </h2>
+              
               <div className="space-y-1">
-                {module.days.map((day) => (
-                  <div 
-                    key={day.id}
-                    onClick={() => setActiveDay(day.id)} 
-                    className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === day.id ? `${day.bg}` : 'hover:bg-slate-50'}`}
-                  >
-                    <PlayCircle size={20} className={activeDay === day.id ? `${day.color} mt-0.5` : 'text-slate-400 mt-0.5'} />
-                    <div>
-                      <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? 'text-slate-900' : 'text-slate-600'}`}>{day.title}</h3>
-                      <p className={`text-xs ${activeDay === day.id ? `${day.color}/80` : 'text-slate-400'}`}>{day.duration}</p>
+                {module.days.map((day) => {
+                  const isLocked = day.id > unlockedLevel;
+                  const isCompleted = day.id < unlockedLevel;
+
+                  return (
+                    <div 
+                      key={day.id}
+                      onClick={() => handleDaySelect(day.id)}
+                      className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
+                        isLocked 
+                          ? 'opacity-50 cursor-not-allowed grayscale' 
+                          : `cursor-pointer ${activeDay === day.id ? day.bg : 'hover:bg-slate-50'}`
+                      }`}
+                    >
+                      {/* Icon based on status */}
+                      {isLocked ? (
+                        <Lock size={18} className="text-slate-400 mt-1" />
+                      ) : isCompleted ? (
+                        <Trophy size={18} className="text-green-500 mt-1" />
+                      ) : (
+                        <PlayCircle size={20} className={activeDay === day.id ? `${day.color} mt-0.5` : 'text-slate-400 mt-0.5'} />
+                      )}
+                      
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? 'text-slate-900' : 'text-slate-600'}`}>
+                            {day.title}
+                          </h3>
+                          {isCompleted && (
+                            <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                              Completed
+                            </span>
+                          )}
+                        </div>
+                        <p className={`text-xs ${activeDay === day.id ? `${day.color}/80` : 'text-slate-400'}`}>
+                          {isLocked ? `🔒 Unlock after Day ${unlockedLevel}` : day.duration}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -258,21 +341,22 @@ const LearningPage = ({ course, onBack, onLogout, onProfileSettings }) => {
         <div className="flex-1 overflow-hidden">
           {course.title === 'AI for Educators' ? (
             <>
-              {activeDay === 1 && <MagicSchoolDay1 onNext={handleNextDay} />}
-              {activeDay === 2 && <EduaideDay2 onNext={handleNextDay} />}
-              {activeDay === 3 && <NotebookLMDay3 onNext={handleNextDay} />}
-              {activeDay === 4 && <DiffitDay4 onNext={handleNextDay} />}
-              {activeDay === 5 && <GeminiDay5 onNext={handleNextDay} />}
-              {activeDay === 6 && <GrokDay6 onNext={handleNextDay} />}
-              {activeDay === 7 && <SunoDay7 onNext={handleNextDay} />}
-              {activeDay === 8 && <BriskDay8 onNext={handleNextDay} />}
-              {activeDay === 9 && <SnorklDay9 onNext={handleNextDay} />}
+              {activeDay === 1 && <MagicSchoolDay1 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 2 && <EduaideDay2 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 3 && <NotebookLMDay3 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 4 && <DiffitDay4 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 5 && <GeminiDay5 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 6 && <GrokDay6 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 7 && <SunoDay7 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 8 && <BriskDay8 onNext={handleNextDay} onComplete={handleDayComplete} />}
+              {activeDay === 9 && <SnorklDay9 onNext={handleNextDay} onComplete={handleDayComplete} />}
             </>
           ) : (
             <GenericDayContent 
               day={currentDayData} 
               courseTitle={course.title} 
-              onNext={handleNextDay} 
+              onNext={handleNextDay}
+              onComplete={handleDayComplete}
             />
           )}
         </div>

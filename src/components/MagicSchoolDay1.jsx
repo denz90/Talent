@@ -535,3 +535,5 @@ const MagicSchoolDay1 = ({ onNext }) => {
 };
 
 export default MagicSchoolDay1;
+
+
