@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Add useEffect to import
+import React, { useState, useEffect } from 'react';
 import { 
   PlayCircle, 
   ArrowRight, 
@@ -10,7 +10,12 @@ import {
   User,
   Settings,
   LogOut,
-  ChevronDown
+  ChevronDown,
+  Lock,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Flame,
+  Medal
 } from 'lucide-react';
 import { PATHS_CONTENT } from '../data/PathContent';
 import MagicSchoolDay1 from './MagicSchoolDay1';
@@ -42,7 +47,6 @@ import TurnitinDay26 from './TurnitinDay26';
 import EdthenaDay27 from './EdthenaDay27';
 import LoopDay28 from './LoopDay28';
 import QuizSystem from './QuizSystem';
-
 
 const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -133,7 +137,31 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
 const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings }) => {
   const [activeDay, setActiveDay] = useState(1);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [completedDays, setCompletedDays] = useState([0]);
+  const [unlockedLevel, setUnlockedLevel] = useState(1);
+
+  // Load saved progress on mount
+  useEffect(() => {
+    const savedLevel = localStorage.getItem(`unlocked_level_${course?.id || 'default'}`);
+    if (savedLevel) {
+      setUnlockedLevel(parseInt(savedLevel, 10));
+    }
+    const savedCompleted = localStorage.getItem(`completed_days_${course?.id || 'default'}`);
+    if (savedCompleted) {
+      setCompletedDays(JSON.parse(savedCompleted));
+    }
+  }, [course?.id]);
+
+  // Save progress whenever it changes
+  useEffect(() => {
+    if (course?.id) {
+      localStorage.setItem(`unlocked_level_${course.id}`, unlockedLevel.toString());
+      localStorage.setItem(`completed_days_${course.id}`, JSON.stringify(completedDays));
+    }
+  }, [unlockedLevel, completedDays, course?.id]);
+
   if (!course) return null;
 
   // Find content for the current path, account for level
@@ -144,35 +172,33 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   // Flat list of days for progress and navigation
   const allDays = modules.flatMap(m => m.days);
   const currentDayData = allDays.find(d => d.id === activeDay);
+  const isDarkModeDay = [15, 16, 17, 18].includes(activeDay);
   
-  const progress = Math.round((activeDay / allDays.length) * 100);
+  const progress = Math.round((completedDays.filter(d => d > 0).length / allDays.length) * 100);
 
   const handleNextDay = () => {
     if (currentDayData?.quizData) {
       setShowQuiz(true);
       window.scrollTo(0, 0);
     } else {
+      handleDayComplete();
       goToNextDay();
     }
   };
 
-  const goToNextDay = () => {
-    // Mark current day as completed
+  const handleDayComplete = () => {
     if (!completedDays.includes(activeDay)) {
       setCompletedDays(prev => [...prev, activeDay]);
     }
-
-    if (activeDay < allDays.length) {
-      setActiveDay(prev => prev + 1);
-      setShowQuiz(false);
-      window.scrollTo(0, 0);
+    if (activeDay === unlockedLevel && activeDay < allDays.length) {
+      setUnlockedLevel(prev => prev + 1);
     }
   };
 
-  const handleDaySelect = (dayId) => {
-    // Only allow navigation to unlocked days
-    if (dayId <= unlockedLevel) {
-      setActiveDay(dayId);
+  const goToNextDay = () => {
+    if (activeDay < allDays.length) {
+      setActiveDay(prev => prev + 1);
+      setShowQuiz(false);
       window.scrollTo(0, 0);
     }
   };
@@ -213,7 +239,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-xs font-medium text-slate-500 mt-1">{progress}% Completed</p>
+          <p className={`text-xs font-medium mt-1 ${isDarkModeDay ? 'text-purple-400' : 'text-slate-500'}`}>{progress}% Completed</p>
         </div>
 
         {/* Middle: Modules (scrollable) */}
@@ -225,16 +251,43 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
               </h2>
               
               <div className="space-y-1">
-                {module.days.map((day) => (
-                  <div 
-                    key={day.id}
-                    onClick={() => setActiveDay(day.id)} 
-                    className={`flex items-start gap-3 p-3 rounded-xl cursor-pointer transition-colors ${activeDay === day.id ? `${day.bg}` : 'hover:bg-slate-50'}`}
-                  >
-                    <PlayCircle size={20} className={activeDay === day.id ? `${day.color} mt-0.5` : 'text-slate-400 mt-0.5'} />
-                    <div>
-                      <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? 'text-slate-900' : 'text-slate-600'}`}>{day.title}</h3>
-                      <p className={`text-xs ${activeDay === day.id ? `${day.color}/80` : 'text-slate-400'}`}>{day.duration}</p>
+                {module.days.map((day) => {
+                  const isLocked = day.id > unlockedLevel;
+                  const isCompleted = completedDays.includes(day.id);
+                  return (
+                    <div 
+                      key={day.id}
+                      onClick={() => {
+                        if (!isLocked) {
+                          setActiveDay(day.id);
+                          setShowQuiz(false);
+                        }
+                      }} 
+                      className={`flex items-start gap-3 p-3 rounded-xl transition-all ${
+                        isLocked ? 'opacity-50 cursor-not-allowed grayscale' : 'cursor-pointer'
+                      } ${
+                        activeDay === day.id 
+                          ? (isDarkModeDay ? 'bg-pink-600/20 ring-1 ring-pink-500/50' : `${day.bg}`) 
+                          : (isDarkModeDay ? 'hover:bg-white/5' : 'hover:bg-slate-50')
+                      }`}
+                    >
+                      <div className="relative">
+                        {isLocked ? (
+                          <Lock size={18} className="text-slate-400 mt-1" />
+                        ) : isCompleted ? (
+                          <Trophy size={18} className="text-emerald-500 mt-1" />
+                        ) : (
+                          <PlayCircle size={20} className={activeDay === day.id ? (isDarkModeDay ? 'text-pink-400 mt-0.5' : `${day.color} mt-0.5`) : 'text-slate-400 mt-0.5'} />
+                        )}
+                      </div>
+                      <div>
+                        <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? (isDarkModeDay ? 'text-white' : 'text-slate-900') : (isDarkModeDay ? 'text-purple-200' : 'text-slate-600')}`}>
+                          {day.title}
+                        </h3>
+                        <p className={`text-xs ${activeDay === day.id ? (isDarkModeDay ? 'text-pink-300' : `${day.color}/80`) : 'text-slate-400'}`}>
+                          {isLocked ? 'Locked' : day.duration}
+                        </p>
+                      </div>
                     </div>
                   );
                 })}
@@ -296,7 +349,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                           <Trophy size={14} className="text-yellow-500" />
                           <span className={`text-xs font-bold ${isDarkModeDay ? 'text-purple-100' : 'text-slate-700'}`}>Completed</span>
                         </div>
-                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-pink-400' : 'text-blue-600'}`}>{activeDay}/{allDays.length}</span>
+                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-pink-400' : 'text-blue-600'}`}>{completedDays.filter(d => d > 0).length}/{allDays.length}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -361,7 +414,10 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
             <QuizSystem 
               dayTitle={currentDayData.title}
               quizData={currentDayData.quizData}
-              onPass={goToNextDay}
+              onPass={() => {
+                handleDayComplete();
+                goToNextDay();
+              }}
               onBack={() => setShowQuiz(false)}
               isDarkMode={isDarkModeDay}
             />
@@ -376,6 +432,25 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
               {activeDay === 7 && <SunoDay7 onNext={handleNextDay} />}
               {activeDay === 8 && <BriskDay8 onNext={handleNextDay} />}
               {activeDay === 9 && <SnorklDay9 onNext={handleNextDay} />}
+              {activeDay === 10 && <EssayGraderDay10 onNext={handleNextDay} />}
+              {activeDay === 11 && <QuizizzDay11 onNext={handleNextDay} />}
+              {activeDay === 12 && <KhanmigoDay12 onNext={handleNextDay} />}
+              {activeDay === 13 && <FlintDay13 onNext={handleNextDay} />}
+              {activeDay === 14 && <SchoolAIDay14 onNext={handleNextDay} />}
+              {activeDay === 15 && <KahootDay15 onNext={handleNextDay} />}
+              {activeDay === 16 && <ScribbleDiffusionDay16 onNext={handleNextDay} />}
+              {activeDay === 17 && <ParlayDay17 onNext={handleNextDay} />}
+              {activeDay === 18 && <ReadAlongDay18 onNext={handleNextDay} />}
+              {activeDay === 19 && <CuripodDay19 onNext={handleNextDay} />}
+              {activeDay === 20 && <LabsterDay20 onNext={handleNextDay} />}
+              {activeDay === 21 && <Lumen5Day21 onNext={handleNextDay} />}
+              {activeDay === 22 && <TeacherMaticDay22 onNext={handleNextDay} />}
+              {activeDay === 23 && <FetchyDay23 onNext={handleNextDay} />}
+              {activeDay === 24 && <EllieDay24 onNext={handleNextDay} />}
+              {activeDay === 25 && <GradescopeDay25 onNext={handleNextDay} />}
+              {activeDay === 26 && <TurnitinDay26 onNext={handleNextDay} />}
+              {activeDay === 27 && <EdthenaDay27 onNext={handleNextDay} />}
+              {activeDay === 28 && <LoopDay28 onNext={() => console.log('Challenge Completed!')} />}
             </>
           ) : (
             <GenericDayContent 
@@ -393,3 +468,5 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 };
 
 export default LearningPage;
+
+
