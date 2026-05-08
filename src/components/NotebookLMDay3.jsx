@@ -146,7 +146,7 @@ const NotebookLMDay3 = ({ onNext }) => {
                   </div>
                 </td>
                 <td className="px-6 py-5">Hover over AI answers to see direct excerpts from your files</td>
-                <td className="px-6 py-5 text-sm">Ensures accuracy and prevents AI "hallucinations"</td>
+                <td className="px-6 py-5 text-sm">Teach critical sourcing and avoid plagiarism</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
@@ -245,8 +245,10 @@ const NotebookLMDay3 = ({ onNext }) => {
             <div className="flex gap-4 relative z-10">
               <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">5</div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Create a Lesson Hook</h3>
-                <p className="text-sm text-slate-600 mb-2">Hit the "Deep Dive" Audio Overview button to generate an engaging "podcast".</p>
+                <p className="text-sm text-slate-600 mb-2">Create a Lesson Hook.</p>
+                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1 mb-2">
+                  <p>Type: <em>"Suggest 3 engaging discussion starters about [topic] for 12-year-olds."</em></p>
+                </div>
                 <p className="text-sm text-slate-600">Share the link with your specific class.</p>
               </div>
             </div>
@@ -277,8 +279,8 @@ const NotebookLMDay3 = ({ onNext }) => {
             <div className="flex gap-4 group cursor-pointer">
               <div className="w-6 h-6 rounded-full bg-purple-500/30 border border-purple-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-indigo-400/50 group-hover:border-indigo-300 group-hover:text-indigo-100">2</div>
               <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Generate a Study Guide</h4>
-                <p className="text-purple-100 text-sm">Use the "Notebook guide" button to instantly generate FAQs, study questions, and a glossary.</p>
+                <h4 className="font-bold mb-1">Generate a Quiz</h4>
+                <p className="text-purple-100 text-sm">Use the "Notebook guide" button to generate a 3-question quiz (mix true/false + short answer).</p>
               </div>
             </div>
 
@@ -318,7 +320,7 @@ const NotebookLMDay3 = ({ onNext }) => {
              <ul className="space-y-4 mb-8">
                <li className="flex items-start gap-3">
                  <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Source Limits:</strong> Keep notebooks tightly scoped per unit (e.g. "Biology Unit 1").</p>
+                  <p className="text-sm text-slate-700"><strong>Tag Sources:</strong> Label uploads by topic (e.g., Biology – Cell Structure) for easy retrieval.</p>
                </li>
                <li className="flex items-start gap-3">
                  <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>

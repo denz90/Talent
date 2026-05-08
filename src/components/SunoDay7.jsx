@@ -255,7 +255,7 @@ const SunoDay7 = ({ onNext }) => {
                  <div className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">1</div>
                  <h4 className="font-bold text-lg">Choose a Theme</h4>
               </div>
-              <p className="text-white/80 text-sm leading-relaxed">Select a topic (e.g., medieval history, ocean waves) or paste your own script.</p>
+              <p className="text-white/80 text-sm leading-relaxed">Select a theme (e.g., Ancient Egypt) or paste your own script. Set genre (e.g., Cinematic for history).</p>
             </div>
 
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors">
@@ -363,7 +363,7 @@ const SunoDay7 = ({ onNext }) => {
             </li>
             <li className="flex items-start gap-4">
               <div className="w-2 h-2 rounded-full bg-amber-500 mt-2.5 flex-shrink-0"></div>
-              <p className="text-slate-700"><strong>Check With Students:</strong> Let students prompt the AI to create a study track for the upcoming unit—engagement will soar!</p>
+              <p className="text-slate-700"><strong>Student Co-Creation:</strong> Let kids pick genres for group projects—engagement will soar!</p>
             </li>
             <li className="flex items-start gap-4">
               <div className="w-2 h-2 rounded-full bg-amber-500 mt-2.5 flex-shrink-0"></div>
@@ -380,7 +380,7 @@ const SunoDay7 = ({ onNext }) => {
 
         {/* Final Button */}
         <button 
-          onClick={() => alert("Congratulations on completing the 7 Day AI EdChallenge!")}
+          onClick={onNext}
           className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all rounded-2xl p-8 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-rose-50/0 group-hover:bg-rose-50/50 transition-colors"></div>

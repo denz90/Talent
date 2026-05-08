@@ -91,7 +91,7 @@ const GeminiDay5 = ({ onNext }) => {
                   </div>
                   <div>
                     <strong className="text-slate-900 block">Critical Thinking</strong>
-                    <span className="text-slate-600 text-sm">Generates diverse discussion questions and interactive exercises.</span>
+                    <span className="text-slate-600 text-sm">Generates discussion questions, opposing viewpoints, and interactive exercises.</span>
                   </div>
                 </li>
               </ul>
@@ -211,7 +211,7 @@ const GeminiDay5 = ({ onNext }) => {
               <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">2</div>
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">Research Lesson Content</h3>
-                <p className="text-sm text-slate-600 mb-2">Type a query: <em><span className="text-blue-600">"Explain the water cycle to 4th graders."</span></em></p>
+                <p className="text-sm text-slate-600 mb-2">Type a query: <em><span className="text-blue-600">"Explain photosynthesis for 5th graders."</span></em></p>
                 <p className="text-sm text-slate-600 mb-2">Review the simplified explanation and key points.</p>
               </div>
             </div>

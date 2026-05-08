@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 
-const Footer = () => {
+const Footer = ({ onNavigate }) => {
   return (
     <footer className="bg-brand-dark pt-20 pb-8 px-6 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
@@ -65,10 +65,10 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white/50 mb-6 uppercase tracking-widest text-[11px]">Resources</h4>
             <ul className="space-y-4 text-[14px] font-medium text-white/80">
-              <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API Documentation</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">System Status</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('help_center'); }} className="hover:text-white transition-colors">Help Center</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('api_docs'); }} className="hover:text-white transition-colors">API Documentation</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('system_status'); }} className="hover:text-white transition-colors">System Status</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('blog'); }} className="hover:text-white transition-colors">Blog</button></li>
             </ul>
           </div>
 

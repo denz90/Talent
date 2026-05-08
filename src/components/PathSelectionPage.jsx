@@ -38,7 +38,7 @@ const ProfessionCard = ({ title, description, icon: Icon, color, onClick }) => {
   );
 };
 
-const PathSelectionPage = ({ onLogout, onSelectPath }) => {
+const PathSelectionPage = ({ onLogout, onSelectPath, level }) => {
   const paths = [
     {
       title: 'AI for Educators',
@@ -70,29 +70,29 @@ const PathSelectionPage = ({ onLogout, onSelectPath }) => {
     <div className="min-h-screen bg-[#f8fafc] font-sans flex flex-col">
       {/* Header */}
       <header className="h-20 bg-white border-b border-slate-100 px-6 md:px-10 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-[#155DFC] rounded-xl flex items-center justify-center text-white shadow-sm">
-            <Brain size={24} strokeWidth={2} />
-          </div>
-          <div className="flex flex-col justify-center">
+        <div className="flex items-center gap-280">
+          <button 
+            onClick={onLogout}
+            className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+          >
+            <LogOut size={16} />
+            Back
+          </button>
+          
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#155DFC] rounded-xl flex items-center justify-center text-white shadow-sm">
+              <Brain size={24} strokeWidth={2} />
+            </div>
             <span className="text-lg font-bold text-slate-900 leading-tight tracking-tight">AI Academy</span>
           </div>
         </div>
-        
-        <button 
-          onClick={onLogout}
-          className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
-        >
-          <LogOut size={16} />
-          Back
-        </button>
       </header>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center pt-16 pb-20 px-6">
         <div className="text-center mb-12">
           <h1 className="text-[32px] md:text-[40px] font-bold text-slate-900 mb-4 tracking-tight">
-            Choose Your Learning Path
+            Choose Your {level} Learning Path
           </h1>
           <p className="text-lg text-slate-500">
             Select a course tailored to your profession and start learning AI
@@ -105,7 +105,7 @@ const PathSelectionPage = ({ onLogout, onSelectPath }) => {
             <ProfessionCard 
               key={index} 
               {...path} 
-              onClick={() => onSelectPath(path)} 
+              onClick={() => onSelectPath({ ...path, level })} 
             />
           ))}
         </div>

@@ -45,7 +45,7 @@ const DiffitDay4 = ({ onNext }) => {
           <div>
             <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is Diffit?</h2>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              Diffit is an AI-powered tool that allows teachers to get leveled texts, vocabulary, reading questions, and activities for any topic and any grade in seconds. It bridges the gap between readable content and grade-level curriculum.
+              Diffit is an AI-powered tool that adjusts vocabulary, sentence structure, and complexity while preserving the core content for any topic and any grade in seconds. It bridges the gap between readable content and grade-level curriculum.
             </p>
 
             <button 
@@ -73,7 +73,7 @@ const DiffitDay4 = ({ onNext }) => {
                   </div>
                   <div>
                     <strong className="text-slate-900 block">IEP Alignment</strong>
-                    <span className="text-slate-600 text-sm">Allows for rapid alignment to language & reading levels for personalized education.</span>
+                    <span className="text-slate-600 text-sm">Helps create inclusive, differentiated materials for students with specific learning needs.</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
@@ -237,7 +237,7 @@ const DiffitDay4 = ({ onNext }) => {
               <div>
                 <h3 className="font-bold text-slate-900 mb-2">Translate (Optional)</h3>
                 <p className="text-sm text-slate-600 mb-2">Under the "Readings" block click "Translate".</p>
-                <p className="text-sm text-slate-600">Select your target language and click "Update".</p>
+                <p className="text-sm text-slate-600">Select your target language and download the bilingual version or print for parents.</p>
               </div>
             </div>
 
@@ -338,6 +338,10 @@ const DiffitDay4 = ({ onNext }) => {
             <li className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
               <p className="text-sm text-slate-700"><strong>Audio (Read-Aloud):</strong> Diffit's export forms usually support read-aloud tools.</p>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
+              <p className="text-sm text-slate-700"><strong>Scaffold Essays:</strong> Generate simplified versions of primary sources for struggling writers.</p>
             </li>
             <li className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>

@@ -227,7 +227,7 @@ const EduaideDay2 = ({ onNext }) => {
                 </div>
                 <div>
                   <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-emerald-600 font-medium text-sm">Auto-gradable quizzes with Bloom's taxonomy.</p>
+                  <p className="text-emerald-600 font-medium text-sm">Auto-gradable quizzes with Bloom's taxonomy (e.g., Medium = Apply/Analyze).</p>
                 </div>
               </div>
             </div>
@@ -417,7 +417,7 @@ const EduaideDay2 = ({ onNext }) => {
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                <p className="text-sm text-slate-700"><strong>Save Templates:</strong> Save generated templates to your workspace for reuse.</p>
+                <p className="text-sm text-slate-700"><strong>Add to My Library:</strong> Click "Add to My Library" to save and reuse optimized materials as templates.</p>
               </li>
               <li className="flex items-start gap-3">
                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>

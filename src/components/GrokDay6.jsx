@@ -147,8 +147,8 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
                     <span>Engagement Analytics</span>
                   </div>
                 </td>
-                <td className="px-6 py-5">View dashboard for completion rates and quiz scores</td>
-                <td className="px-6 py-5 text-sm">Data-driven insights to guide future instruction</td>
+                <td className="px-6 py-5">View Analytics Dashboard for participation, quiz results, and rewatch trends</td>
+                <td className="px-6 py-5 text-sm">Identify struggling students instantly and guide future instruction</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">
@@ -158,7 +158,7 @@ Grok AI is an AI-driven video enhancement platform designed for educators. It al
                   </div>
                 </td>
                 <td className="px-6 py-5">Record voiceovers or use AI voices to explain key concepts</td>
-                <td className="px-6 py-5 text-sm">Personalizes the learning experience for every student</td>
+                <td className="px-6 py-5 text-sm">Supports diverse learning styles and multilingual classes through language adjustment</td>
               </tr>
               <tr>
                 <td className="px-6 py-5 font-bold text-slate-900">

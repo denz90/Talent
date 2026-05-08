@@ -28,7 +28,10 @@ import ProfileSettingsPage from './components/ProfileSettingsPage';
 import BeginnerPage from './components/BeginnerPage';
 import PathSelectionPage from './components/PathSelectionPage';
 import LearningPage from './components/LearningPage';
-
+import HelpCenterPage from './components/HelpCenterPage';
+import ApiDocsPage from './components/ApiDocsPage';
+import SystemStatusPage from './components/SystemStatusPage';
+import BlogPage from './components/BlogPage';
 // importing the API base URL from config
 import { API_BASE_URL } from './config.js'; 
 
@@ -73,6 +76,7 @@ const TOOLS_DATA = {
 const App = () => {
   const [view, setView] = useState('home');
   const [activeCourse, setActiveCourse] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState('Intermediate');
   const [registeredEmail, setRegisteredEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -220,18 +224,6 @@ if (view === 'login') {
 
   
 
-  if (view === 'learning_page' && activeCourse) {
-    return (
-      <LearningPage
-        course={activeCourse}
-        onBack={() => setView('path_selection')}
-        onLogout={() => setView('login')}
-        onProfileSettings={() => setView('profile_settings')}
-      />
-    );
-  }
-
-  // BOUNCER CHECK 1: The Learning Dashboard
   if (view === 'path_selection') {
     if (!currentUser) {
       alert("You need to sign in to view courses!");
@@ -240,6 +232,7 @@ if (view === 'login') {
     }
     return (
       <PathSelectionPage
+        level={selectedLevel}
         onLogout={() => {
           localStorage.removeItem('hawkman_token');
           setCurrentUser(null);
@@ -253,14 +246,23 @@ if (view === 'login') {
     );
   }
 
-  // BOUNCER CHECK 2: The Actual Courses
   if (view === 'learning_page' && activeCourse) {
     if (!currentUser) {
       setView('login');
       return null;
     }
     return (
-      <LearningPage course={activeCourse} onBack={() => setView('path_selection')} />
+      <LearningPage
+        currentUser={currentUser}
+        course={activeCourse}
+        onBack={() => setView('path_selection')}
+        onLogout={() => {
+          localStorage.removeItem('hawkman_token');
+          setCurrentUser(null);
+          setView('login');
+        }}
+        onProfileSettings={() => setView('profile_settings')}
+      />
     );
   }
 
@@ -270,6 +272,22 @@ if (view === 'login') {
       return null;
     }
     return <BeginnerPage onBack={() => setView('home')} />;
+  }
+
+  if (view === 'help_center') {
+    return <HelpCenterPage onBack={() => setView('home')} />;
+  }
+
+  if (view === 'api_docs') {
+    return <ApiDocsPage onBack={() => setView('home')} />;
+  }
+
+  if (view === 'system_status') {
+    return <SystemStatusPage onBack={() => setView('home')} />;
+  }
+
+  if (view === 'blog') {
+    return <BlogPage onBack={() => setView('home')} />;
   }
 
   return (
@@ -391,7 +409,10 @@ if (view === 'login') {
                 ]}
                 popular
                 dark
-                onClick={() => setView('path_selection')}
+                onClick={() => {
+                  setSelectedLevel('Intermediate');
+                  setView('path_selection');
+                }}
               />
               <LearningPathCard
                 icon={Trophy}
@@ -403,7 +424,10 @@ if (view === 'login') {
                   "Enterprise Workflows",
                   "AI Strategy"
                 ]}
-                onClick={() => setView('path_selection')}
+                onClick={() => {
+                  setSelectedLevel('Advanced');
+                  setView('path_selection');
+                }}
               />
             </div>
           </div>
@@ -437,7 +461,7 @@ if (view === 'login') {
         </section>
       </main>
 
-      <Footer />
+      <Footer onNavigate={setView} />
     </div>
   );
 };
