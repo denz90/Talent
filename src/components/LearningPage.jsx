@@ -17,6 +17,7 @@ import {
   Flame,
   Medal
 } from 'lucide-react';
+import { API_BASE_URL } from '../config.js';
 import { PATHS_CONTENT } from '../data/PathContent';
 import MagicSchoolDay1 from './MagicSchoolDay1';
 import EduaideDay2 from './EduaideDay2';
@@ -137,30 +138,52 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
 const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings }) => {
   const [activeDay, setActiveDay] = useState(1);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   const [completedDays, setCompletedDays] = useState([0]);
   const [unlockedLevel, setUnlockedLevel] = useState(1);
+  const [streakCount, setStreakCount] = useState(0);
 
   // Load saved progress on mount
   useEffect(() => {
-    const savedLevel = localStorage.getItem(`unlocked_level_${course?.id || 'default'}`);
-    if (savedLevel) {
-      setUnlockedLevel(parseInt(savedLevel, 10));
-    }
-    const savedCompleted = localStorage.getItem(`completed_days_${course?.id || 'default'}`);
-    if (savedCompleted) {
-      setCompletedDays(JSON.parse(savedCompleted));
-    }
-  }, [course?.id]);
+    const fetchProgress = async () => {
+      const token = localStorage.getItem('hawkman_token');
+      if (!token || !course?.id) {
+        fallbackToLocal();
+        return;
+      }
+      
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/progress/${course.id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          // Ensure 0 is always in completedDays so day 0 (if any) works
+          setCompletedDays(data.completed_days?.length ? [0, ...data.completed_days] : [0]);
+          setUnlockedLevel(data.unlocked_level || 1);
+          setStreakCount(data.streak_count || 0);
+        } else {
+          fallbackToLocal();
+        }
+      } catch (err) {
+        console.error("Failed to fetch progress:", err);
+        fallbackToLocal();
+      }
+    };
 
-  // Save progress whenever it changes
-  useEffect(() => {
-    if (course?.id) {
-      localStorage.setItem(`unlocked_level_${course.id}`, unlockedLevel.toString());
-      localStorage.setItem(`completed_days_${course.id}`, JSON.stringify(completedDays));
-    }
-  }, [unlockedLevel, completedDays, course?.id]);
+    const fallbackToLocal = () => {
+      const savedLevel = localStorage.getItem(`unlocked_level_${course?.id || 'default'}`);
+      if (savedLevel) setUnlockedLevel(parseInt(savedLevel, 10));
+      const savedCompleted = localStorage.getItem(`completed_days_${course?.id || 'default'}`);
+      if (savedCompleted) setCompletedDays(JSON.parse(savedCompleted));
+    };
+
+    fetchProgress();
+  }, [course?.id]);
 
   if (!course) return null;
 
@@ -186,12 +209,47 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
     }
   };
 
-  const handleDayComplete = () => {
+  const handleDayComplete = async () => {
+    let newCompleted = [...completedDays];
+    let newUnlockedLevel = unlockedLevel;
+
     if (!completedDays.includes(activeDay)) {
-      setCompletedDays(prev => [...prev, activeDay]);
+      newCompleted = [...completedDays, activeDay];
+      setCompletedDays(newCompleted);
     }
     if (activeDay === unlockedLevel && activeDay < allDays.length) {
-      setUnlockedLevel(prev => prev + 1);
+      newUnlockedLevel = unlockedLevel + 1;
+      setUnlockedLevel(newUnlockedLevel);
+    }
+
+    // Backup to local storage
+    if (course?.id) {
+      localStorage.setItem(`unlocked_level_${course.id}`, newUnlockedLevel.toString());
+      localStorage.setItem(`completed_days_${course.id}`, JSON.stringify(newCompleted));
+    }
+
+    // Sync with API
+    const token = localStorage.getItem('hawkman_token');
+    if (token && course?.id) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/progress/${course.id}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ completed_day: activeDay })
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setStreakCount(data.streak_count);
+          setUnlockedLevel(data.unlocked_level);
+          setCompletedDays(data.completed_days?.length ? [0, ...data.completed_days] : [0]);
+        }
+      } catch (err) {
+        console.error("Failed to sync progress:", err);
+      }
     }
   };
 
@@ -205,6 +263,23 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
   const currentModule = modules.find(m => m.days.some(d => d.id === activeDay));
   const moduleLabel = currentModule ? currentModule.title.toUpperCase() : '';
+
+  if (showQuiz) {
+    return (
+      <div className="w-full h-screen">
+        <QuizSystem 
+          dayTitle={currentDayData.title}
+          quizData={currentDayData.quizData}
+          onPass={() => {
+            handleDayComplete();
+            goToNextDay();
+          }}
+          onBack={() => setShowQuiz(false)}
+          isDarkMode={isDarkModeDay}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen font-sans flex transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-white text-slate-900'}`}>
@@ -259,8 +334,8 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                       key={day.id}
                       onClick={() => {
                         if (!isLocked) {
-                          setActiveDay(day.id);
-                          setShowQuiz(false);
+                        setActiveDay(day.id);
+                        setShowQuiz(false);
                         }
                       }} 
                       className={`flex items-start gap-3 p-3 rounded-xl transition-all ${
@@ -356,7 +431,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                           <Flame size={14} className="text-orange-500" />
                           <span className={`text-xs font-bold ${isDarkModeDay ? 'text-purple-100' : 'text-slate-700'}`}>Day Streak</span>
                         </div>
-                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-orange-400' : 'text-orange-600'}`}>7</span>
+                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-orange-400' : 'text-orange-600'}`}>{streakCount}</span>
                       </div>
                     </div>
                   </div>
@@ -410,18 +485,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
         {/* Day content */}
         <div className="flex-1 overflow-hidden">
-          {showQuiz ? (
-            <QuizSystem 
-              dayTitle={currentDayData.title}
-              quizData={currentDayData.quizData}
-              onPass={() => {
-                handleDayComplete();
-                goToNextDay();
-              }}
-              onBack={() => setShowQuiz(false)}
-              isDarkMode={isDarkModeDay}
-            />
-          ) : (course.title === 'AI for Educators' && course.level !== 'Advanced') ? (
+          {(course.title === 'AI for Educators' && course.level !== 'Advanced') ? (
             <>
               {activeDay === 1 && <MagicSchoolDay1 onNext={handleNextDay} />}
               {activeDay === 2 && <EduaideDay2 onNext={handleNextDay} />}
