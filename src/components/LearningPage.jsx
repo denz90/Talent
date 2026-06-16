@@ -59,13 +59,13 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
+    <div className="w-full h-full overflow-y-auto bg-site-bg/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
         
         {/* Header Hero */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white p-12 shadow-xl">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
+            <div className="inline-flex items-center gap-2 bg-site-bg/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
               <Sparkles size={14} className="text-yellow-300" />
               Day {day.id} • {courseTitle}
             </div>
@@ -79,13 +79,13 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
         </div>
 
         {/* Placeholder Content */}
-        <div className="bg-white p-10 rounded-3xl border border-slate-100 shadow-sm text-center space-y-6">
-          <div className="w-20 h-20 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto text-slate-400">
+        <div className="bg-site-bg p-10 rounded-3xl border border-site-accent shadow-sm text-center space-y-6">
+          <div className="w-20 h-20 bg-site-bg rounded-2xl flex items-center justify-center mx-auto text-slate-400">
             <Clock size={40} />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">Detailed Module Coming Soon</h2>
-            <p className="text-slate-500 max-w-md mx-auto">
+            <h2 className="text-2xl font-bold text-site-text mb-2">Detailed Module Coming Soon</h2>
+            <p className="text-site-text/80 max-w-md mx-auto">
               We are currently refining the deep-dive content for <strong>{day.title}</strong>. 
               In the meantime, start exploring the tool directly to gain a head start!
             </p>
@@ -97,7 +97,7 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
               className={`inline-flex items-center gap-2 px-8 py-3 rounded-xl font-bold transition-all ${
                 isCompleted 
                   ? 'bg-green-600 text-white cursor-default' 
-                  : 'bg-slate-900 text-white hover:bg-slate-800'
+                  : 'bg-site-primary text-white hover:bg-slate-800'
               }`}
             >
               {isCompleted ? '✓ Completed' : 'Mark as Read & Continue'} 
@@ -195,7 +195,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   // Flat list of days for progress and navigation
   const allDays = modules.flatMap(m => m.days);
   const currentDayData = allDays.find(d => d.id === activeDay);
-  const isDarkModeDay = [15, 16, 17, 18].includes(activeDay);
+  const isDarkModeDay = false;
   
   const progress = Math.round((completedDays.filter(d => d > 0).length / allDays.length) * 100);
 
@@ -282,18 +282,18 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   }
 
   return (
-    <div className={`min-h-screen font-sans flex transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-white text-slate-900'}`}>
+    <div className={`min-h-screen font-sans flex transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
 
       {/* ── Sidebar ── */}
-      <aside className={`${isSidebarCollapsed ? 'w-0 border-none' : 'w-[320px]'} ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-white border-slate-200'} border-r flex flex-col h-screen flex-shrink-0 transition-all duration-500 overflow-hidden relative z-20`}>
+      <aside className={`${isSidebarCollapsed ? 'w-0 border-none' : 'w-[320px]'} ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'} border-r flex flex-col h-screen flex-shrink-0 transition-all duration-500 overflow-hidden relative z-20`}>
 
         {/* Header: Course Title & Progress */}
-        <div className="p-6 border-b border-slate-100">
+        <div className="p-6 border-b border-site-accent">
           <button 
             onClick={onBack}
-            className={`flex items-center gap-2 transition-colors mb-6 group ${isDarkModeDay ? 'text-purple-300 hover:text-white' : 'text-slate-400 hover:text-slate-600'}`}
+            className={`flex items-center gap-2 transition-colors mb-6 group ${isDarkModeDay ? 'text-purple-300 hover:text-white' : 'text-slate-400 hover:text-site-text/80'}`}
           >
-            <div className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-colors ${isDarkModeDay ? 'border-purple-700 group-hover:bg-purple-800/50' : 'border-slate-200 group-hover:bg-slate-50'}`}>
+            <div className={`w-8 h-8 rounded-lg border flex items-center justify-center transition-colors ${isDarkModeDay ? 'border-purple-700 group-hover:bg-purple-800/50' : 'border-site-accent group-hover:bg-site-bg'}`}>
               <ArrowRight size={16} className="rotate-180" />
             </div>
             <span className="text-sm font-bold uppercase tracking-widest">Back to Paths</span>
@@ -301,20 +301,20 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
           <div className="flex items-center gap-3 mb-6">
             <Icon size={24} style={{ color: isDarkModeDay ? '#e61e7d' : color }} strokeWidth={2.5} />
-            <h1 className={`text-xl font-bold tracking-tight ${isDarkModeDay ? 'text-white' : 'text-slate-900'}`}>{course.title}</h1>
+            <h1 className={`text-xl font-bold tracking-tight ${isDarkModeDay ? 'text-white' : 'text-site-text'}`}>{course.title}</h1>
           </div>
 
           <div className="flex justify-between items-center mb-2">
             <span className={`text-xs font-bold uppercase tracking-widest ${isDarkModeDay ? 'text-purple-400' : 'text-slate-400'}`}>Your Progress</span>
-            <span className={`text-xs font-bold ${isDarkModeDay ? 'text-pink-400' : 'text-blue-600'}`}>{progress}%</span>
+            <span className={`text-xs font-bold ${isDarkModeDay ? 'text-pink-400' : 'text-site-primary'}`}>{progress}%</span>
           </div>
           <div className={`h-2 rounded-full overflow-hidden ${isDarkModeDay ? 'bg-purple-900/50' : 'bg-slate-100'}`}>
             <div
-              className={`h-full rounded-full transition-all duration-500 ${isDarkModeDay ? 'bg-pink-500 shadow-[0_0_10px_rgba(230,30,125,0.5)]' : 'bg-blue-600'}`}
+              className={`h-full rounded-full transition-all duration-500 ${isDarkModeDay ? 'bg-pink-500 shadow-[0_0_10px_rgba(230,30,125,0.5)]' : 'bg-site-primary'}`}
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className={`text-xs font-medium mt-1 ${isDarkModeDay ? 'text-purple-400' : 'text-slate-500'}`}>{progress}% Completed</p>
+          <p className={`text-xs font-medium mt-1 ${isDarkModeDay ? 'text-purple-400' : 'text-site-text/80'}`}>{progress}% Completed</p>
         </div>
 
         {/* Middle: Modules (scrollable) */}
@@ -327,7 +327,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
               
               <div className="space-y-1">
                 {module.days.map((day) => {
-                  const isLocked = day.id > unlockedLevel;
+                  const isLocked = false;
                   const isCompleted = completedDays.includes(day.id);
                   return (
                     <div 
@@ -343,7 +343,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                       } ${
                         activeDay === day.id 
                           ? (isDarkModeDay ? 'bg-pink-600/20 ring-1 ring-pink-500/50' : `${day.bg}`) 
-                          : (isDarkModeDay ? 'hover:bg-white/5' : 'hover:bg-slate-50')
+                          : (isDarkModeDay ? 'hover:bg-site-bg/5' : 'hover:bg-site-bg')
                       }`}
                     >
                       <div className="relative">
@@ -356,7 +356,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                         )}
                       </div>
                       <div>
-                        <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? (isDarkModeDay ? 'text-white' : 'text-slate-900') : (isDarkModeDay ? 'text-purple-200' : 'text-slate-600')}`}>
+                        <h3 className={`text-sm font-bold mb-0.5 ${activeDay === day.id ? (isDarkModeDay ? 'text-white' : 'text-site-text') : (isDarkModeDay ? 'text-purple-200' : 'text-site-text/80')}`}>
                           {day.title}
                         </h3>
                         <p className={`text-xs ${activeDay === day.id ? (isDarkModeDay ? 'text-pink-300' : `${day.color}/80`) : 'text-slate-400'}`}>
@@ -374,14 +374,14 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
       </aside>
 
       {/* ── Main Content ── */}
-      <main className="flex-1 bg-slate-50 relative flex flex-col h-screen overflow-hidden">
+      <main className="flex-1 bg-site-bg relative flex flex-col h-screen overflow-hidden">
 
         {/* Breadcrumb bar */}
-        <div className={`w-full flex-shrink-0 border-b h-16 flex items-center justify-between px-8 z-10 shadow-sm transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] border-purple-900/50' : 'bg-white border-slate-200'}`}>
+        <div className={`w-full flex-shrink-0 border-b h-16 flex items-center justify-between px-8 z-10 shadow-sm transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] border-purple-900/50' : 'bg-site-bg border-site-accent'}`}>
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-              className={`p-2 rounded-lg transition-colors border ${isDarkModeDay ? 'bg-purple-800/20 border-purple-700 text-purple-200 hover:text-white' : 'bg-slate-50 border-slate-100 text-slate-500 hover:text-slate-900'}`}
+              className={`p-2 rounded-lg transition-colors border ${isDarkModeDay ? 'bg-purple-800/20 border-purple-700 text-purple-200 hover:text-white' : 'bg-site-bg border-site-accent text-site-text/80 hover:text-site-text'}`}
               title={isSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
               {isSidebarCollapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}
@@ -392,17 +392,17 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
           <div className="relative">
             <div 
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className={`flex items-center gap-3 cursor-pointer p-1.5 rounded-2xl transition-all border ${isDarkModeDay ? 'hover:bg-white/5 border-transparent' : 'hover:bg-slate-50 border-transparent hover:border-slate-100'}`}
+              className={`flex items-center gap-3 cursor-pointer p-1.5 rounded-2xl transition-all border ${isDarkModeDay ? 'hover:bg-site-bg/5 border-transparent' : 'hover:bg-site-bg border-transparent hover:border-site-accent'}`}
             >
               <div className="text-right hidden sm:block">
-                <p className={`text-sm font-bold leading-tight ${isDarkModeDay ? 'text-white' : 'text-slate-900'}`}>
+                <p className={`text-sm font-bold leading-tight ${isDarkModeDay ? 'text-white' : 'text-site-text'}`}>
                   {currentUser?.username || 'Pro Learner'}
                 </p>
-                <p className={`text-[10px] font-bold uppercase tracking-wider ${isDarkModeDay ? 'text-pink-400' : 'text-blue-600'}`}>
+                <p className={`text-[10px] font-bold uppercase tracking-wider ${isDarkModeDay ? 'text-pink-400' : 'text-site-primary'}`}>
                   {currentUser?.role || 'Active Member'}
                 </p>
               </div>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm border shadow-sm ${isDarkModeDay ? 'bg-purple-800/40 text-pink-400 border-purple-700' : 'bg-blue-50 text-blue-600 border-blue-100'}`}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm border shadow-sm ${isDarkModeDay ? 'bg-purple-800/40 text-pink-400 border-purple-700' : 'bg-blue-50 text-site-primary border-blue-100'}`}>
                 {currentUser?.username ? currentUser.username.substring(0, 2).toUpperCase() : 'TE'}
               </div>
               <ChevronDown size={14} className={`text-slate-400 transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
@@ -415,7 +415,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                   className="fixed inset-0 z-20" 
                   onClick={() => setShowProfileMenu(false)}
                 ></div>
-                <div className={`absolute right-0 mt-2 w-56 rounded-2xl shadow-xl border py-2 z-30 animate-in fade-in slide-in-from-top-2 duration-200 ${isDarkModeDay ? 'bg-[#240042] border-purple-700' : 'bg-white border-slate-100'}`}>
+                <div className={`absolute right-0 mt-2 w-56 rounded-2xl shadow-xl border py-2 z-30 animate-in fade-in slide-in-from-top-2 duration-200 ${isDarkModeDay ? 'bg-[#240042] border-purple-700' : 'bg-site-bg border-site-accent'}`}>
                   <div className={`px-4 py-3 border-b mb-1 ${isDarkModeDay ? 'border-purple-800' : 'border-slate-50'}`}>
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">My Progress</p>
                     <div className="space-y-2">
@@ -424,7 +424,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                           <Trophy size={14} className="text-yellow-500" />
                           <span className={`text-xs font-bold ${isDarkModeDay ? 'text-purple-100' : 'text-slate-700'}`}>Completed</span>
                         </div>
-                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-pink-400' : 'text-blue-600'}`}>{completedDays.filter(d => d > 0).length}/{allDays.length}</span>
+                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-pink-400' : 'text-site-primary'}`}>{completedDays.filter(d => d > 0).length}/{allDays.length}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -442,7 +442,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                         onProfileSettings();
                         setShowProfileMenu(false);
                       }}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-50'}`}
+                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
                     >
                       <User size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
                       My Profile
@@ -450,7 +450,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                     
                     <button 
                       onClick={() => setShowProfileMenu(false)}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-50'}`}
+                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
                     >
                       <Medal size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
                       Achievements
@@ -461,7 +461,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                         onProfileSettings();
                         setShowProfileMenu(false);
                       }}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-white/5' : 'text-slate-700 hover:bg-slate-50'}`}
+                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
                     >
                       <Settings size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
                       Settings

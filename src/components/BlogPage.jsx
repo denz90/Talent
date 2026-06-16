@@ -30,7 +30,7 @@ const BlogPage = ({ onBack }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pb-24">
+    <div className="min-h-screen bg-site-bg font-sans pb-24">
       {/* Blog Header */}
       <div className="bg-brand-dark pt-20 pb-20 px-6">
         <div className="max-w-5xl mx-auto text-center">
@@ -48,7 +48,7 @@ const BlogPage = ({ onBack }) => {
 
       <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-10">
         {/* Featured Post */}
-        <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 flex flex-col lg:flex-row mb-16">
+        <div className="bg-site-bg rounded-3xl overflow-hidden shadow-xl border border-site-accent flex flex-col lg:flex-row mb-16">
           <div className="lg:w-1/2 h-64 lg:h-auto relative">
             <img src={posts[0].image} alt={posts[0].title} className="w-full h-full object-cover" />
             <div className="absolute top-6 left-6 bg-brand-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
@@ -56,14 +56,14 @@ const BlogPage = ({ onBack }) => {
             </div>
           </div>
           <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
-            <div className="flex items-center space-x-4 text-sm text-slate-500 mb-4 font-medium">
+            <div className="flex items-center space-x-4 text-sm text-site-text/80 mb-4 font-medium">
               <span className="flex items-center"><Calendar className="w-4 h-4 mr-1" /> {posts[0].date}</span>
               <span className="flex items-center"><User className="w-4 h-4 mr-1" /> {posts[0].author}</span>
             </div>
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-dark mb-4 leading-tight">
               {posts[0].title}
             </h2>
-            <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+            <p className="text-site-text/80 text-lg mb-8 leading-relaxed">
               {posts[0].excerpt}
             </p>
             <button className="flex items-center text-brand-primary font-bold hover:text-brand-dark transition-colors group self-start">
@@ -75,21 +75,21 @@ const BlogPage = ({ onBack }) => {
         {/* Recent Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.slice(1).map((post, idx) => (
-            <div key={idx} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-slate-100 transition-all flex flex-col">
+            <div key={idx} className="bg-site-bg rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-site-accent transition-all flex flex-col">
               <div className="h-48 relative">
                 <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-brand-dark text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                <div className="absolute top-4 left-4 bg-site-bg/90 backdrop-blur text-brand-dark text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                   {post.category}
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <div className="flex items-center space-x-4 text-xs text-slate-500 mb-3 font-medium">
+                <div className="flex items-center space-x-4 text-xs text-site-text/80 mb-3 font-medium">
                   <span className="flex items-center"><Calendar className="w-3 h-3 mr-1" /> {post.date}</span>
                 </div>
                 <h3 className="text-xl font-bold text-brand-dark mb-3 leading-snug">
                   {post.title}
                 </h3>
-                <p className="text-slate-600 text-sm mb-6 flex-grow">
+                <p className="text-site-text/80 text-sm mb-6 flex-grow">
                   {post.excerpt}
                 </p>
                 <button className="flex items-center text-brand-primary font-bold hover:text-brand-dark transition-colors text-sm group">

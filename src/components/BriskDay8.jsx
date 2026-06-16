@@ -1,377 +1,420 @@
 import React, { useState } from 'react';
 import {
-  Sparkles,
-  CheckCircle2,
   BookOpen,
-  FileText,
-  Layers,
-  MessageSquare,
-  Globe,
-  Settings,
-  Target,
-  Trophy,
+  CheckCircle2,
   ChevronRight,
-  GraduationCap
+  Clock,
+  FileText,
+  Globe,
+  Lightbulb,
+  MessageSquare,
+  Settings,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  Zap,
 } from 'lucide-react';
 
 const BriskDay8 = ({ onNext }) => {
-  const [isWhyOpen, setIsWhyOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'challenge', label: 'Challenge' }
+  ];
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
-
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
+        
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-teal-800 to-emerald-700 text-white p-12 shadow-xl min-h-[300px] flex flex-col justify-end">
-          <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
-
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-blue-300" />
-              Day 8 • Productivity Module
+        <div className="bg-site-primary-400 rounded-3xl p-10 ">
+        <div className="text-center space-y-6 pt-8">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              Brisk AI Challenge
-            </h1>
-            <p className="text-lg text-white/80 max-w-xl font-medium">
-              Create Engaging Video Lessons & Personalized Content with AI
-            </p>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Brisk AI Challenge</h1>
+          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+            Create Engaging Video Lessons &amp; Personalized Content with AI
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-site-text">
+              <Clock size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Saves Hours</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <Sparkles size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">AI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <TrendingUp size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Boosts Results</span>
+            </div>
           </div>
         </div>
+        </div>
 
-        {/* What is Brisk Teaching? */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is Brisk Teaching?</h2>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-             Brisk Teaching is a free AI-powered Chrome extension designed for educators to streamline grading, generate personalized feedback, and create differentiated lesson materials in seconds. It integrates directly with Google Docs, Classroom, and Canvas.
-            </p>
-
-            <button 
-              onClick={() => setIsWhyOpen(!isWhyOpen)}
-              className="inline-flex items-center gap-2 bg-teal-50 hover:bg-teal-100 text-teal-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-teal-100 group"
+        {/* Tab Navigation */}
+        <div className="bg-site-button backdrop-blur-md p-1.5 rounded-2xl flex gap-2 border border-site-accent max-w-2xl mx-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
+                activeTab === tab.id 
+                ? 'bg-site-bg text-site-text shadow-lg scale-[1.02]' 
+                : 'text-site-text/80 hover:bg-site-bg'
+              }`}
             >
-              Why Educators Need It
-              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+              {tab.label}
             </button>
+          ))}
+        </div>
 
-            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <ul className="space-y-4 pb-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-teal-600" size={18} />
+        {/* Tab Content */}
+        <div className="min-h-[500px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl font-bold mb-6">What is Brisk?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  Brisk Teaching is a free AI-powered Chrome extension designed for educators to streamline grading, generate personalized feedback, and create differentiated lesson materials in seconds. It integrates directly with Google Docs, Classroom, and Canvas.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Sparkles size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Massive Time Savings:</span>
+                      Save 5+ hours per week on grading and feedback directly in Google Docs.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Zap size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Instant Differentiation:</span>
+                      Generate leveled resources to simplify or enrich text for diverse learners.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <TrendingUp size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Academic Integrity:</span>
+                      Detect AI-written student work with high accuracy and transparency.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Lightbulb size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">One-Click Assessments:</span>
+                      Create standards-aligned quizzes instantly from any web article or document.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'features' && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-600/40 flex items-center justify-center text-site-text">
+                    <MessageSquare size={24} />
                   </div>
                   <div>
-                    <strong className="text-slate-900 block">Massive Time Savings</strong>
-                    <span className="text-slate-600 text-sm">Save 5+ hours per week on grading and feedback directly in Google Docs.</span>
+                    <h3 className="text-xl font-bold mb-4">One-Click Feedback</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Highlight text in Google Doc → Click "Feedback"</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Saves hours on repetitive manual grading</p>
+                      </div>
+                    </div>
                   </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-teal-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Instant Differentiation</strong>
-                    <span className="text-slate-600 text-sm">Generate leveled resources to simplify or enrich text for diverse learners.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-teal-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Academic Integrity</strong>
-                    <span className="text-slate-600 text-sm">Detect AI-written student work with high accuracy and transparency.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-teal-600" size={18} />
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                    <BookOpen size={24} />
                   </div>
                   <div>
-                    <strong className="text-slate-900 block">One-Click Assessments</strong>
-                    <span className="text-slate-600 text-sm">Create standards-aligned quizzes instantly from any web article or document.</span>
+                    <h3 className="text-xl font-bold mb-4">Differentiated Resources</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Click Brisk icon on any web article → "Simplify"</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Instantly adapts content for all reading levels</p>
+                      </div>
+                    </div>
                   </div>
-                </li>
-              </ul>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-green-600/40 flex items-center justify-center text-site-text">
+                    <FileText size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Lesson Planning</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Prompt Brisk to generate full lesson plans from scratch</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">High-quality curriculum maps in seconds</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-600/40 flex items-center justify-center text-site-text">
+                    <Globe size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Multi-Language Support</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Translate feedback or materials into 20+ languages</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Engages ELL students and international families</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-600/40 flex items-center justify-center text-site-text">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Assessment Creator</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Generate quizzes or rubrics from any source material</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Immediate, standards-aligned student evaluation</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-600/40 flex items-center justify-center text-site-text">
+                    <Settings size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">AI Detection Tool</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Run essays through Brisk to check for AI authorship</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Protects academic integrity with transparency</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                {[
+          {
+                    "step": 1,
+                    "title": "Install",
+                    "content": "Go to the Chrome Web Store. Search \"Brisk Teaching\" \u2192 Click \"Add to Chrome\""
+          },
+          {
+                    "step": 2,
+                    "title": "Integrate with Google Docs",
+                    "content": "Open a student's Google Doc Click the Brisk icon (top-right) \u2192 Sign in with Google"
+          },
+          {
+                    "step": 3,
+                    "title": "Generate Feedback",
+                    "content": "Highlight a paragraph of student writing Click \"Feedback\" \u2192 Choose \"Constructive\" or \"Praise\" Edit the AI-generated comment \u2192 Click \"Insert\""
+          },
+          {
+                    "step": 4,
+                    "title": "Create a Quiz",
+                    "content": "Open a news article (e.g., NASA.gov) Click Brisk icon \u2192 \"Generate Quiz\" Select 3 multiple-choice + 2 short-answer questions \u2192 Export to Google Forms"
+          },
+          {
+                    "step": 5,
+                    "title": "Detect AI Writing",
+                    "content": "Upload a student essay (PDF/Doc) Click \"AI Detection\" \u2192 Review highlighted potential AI sections"
+          }
+].map((step) => (
+                  <div key={step.step} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'challenge' && (
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-[#2e0052]">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-site-text">Practical Challenge Task</h2>
+                    <p className="text-site-text/70">"Use Brisk to grade 3 student essays and create a leveled reading assignment."</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-400/20 px-4 py-2 rounded-lg inline-flex items-center gap-2 text-site-text text-sm font-bold">
+                  <Clock size={16} />
+                  Time Goal: Under 15 minutes
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <h3 className="text-xl font-bold">Give AI Feedback</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Upload an essay to Google Docs → Highlight 2 sections → Generate "Constructive" feedback. Screenshot your edited feedback comments.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <h3 className="text-xl font-bold">Detect AI Usage</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Run Brisk's AI detector on a sample essay → Note the % likelihood. Share how you'd address a student with 80%+ AI detection.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <h3 className="text-xl font-bold">Differentiate Content</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Paste a science article into Brisk → Click "Simplify" to Grade 6 level. Compare original vs. simplified versions in a 2-column table.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <h3 className="text-xl font-bold">Build a Quiz</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Generate a 5-question quiz from the simplified article → Export to Google Classroom. Share the quiz link with #BriskChallenge.</p>
+                </div>
+              </div>
+
+              <div className="pt-10 space-y-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <Lightbulb className="text-yellow-400" size={32} /> Pro Tips for Mastery
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-pink-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Lightbulb size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">🎯 Prompt Specifically:</span>
+                      Include grade, topic, and format for best results.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-site-primary-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Zap size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">🎬 Combine With Video Tools:</span>
+                      Use scripts in Lovart AI or Lumen5 for fully animated lessons.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-yellow-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <TrendingUp size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">👥 Student Engagement:</span>
+                      nclude discussion questions or polls directly in scripts for interactivity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          )}
+        </div>
+
+        {/* Bottom CTA Card */}
+        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+          <div className="absolute opacity-20"></div>
+          
+          <div className="flex justify-center relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+              <Trophy size={32} />
             </div>
           </div>
-
-          <div className="bg-white rounded-2xl h-100 border border-white flex items-center justify-center p-8 overflow-hidden relative">
-            <img src="/Teacher student-rafiki-2 1.png" alt="workspace" className="w-full h-full object-cover"/>
+          
+          <div className="space-y-4 relative z-10">
+            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+              Brisk AI Challenge
+            </h2>
+            <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
+          </div>
+          
+          <div className="relative z-10">
+            <button 
+              onClick={onNext}
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            >
+              Start Your Challenge
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
         </div>
 
-        {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-teal-300 bg-white overflow-hidden shadow-sm -mt-8">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="bg-teal-50 border-b border-slate-100">
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-600">
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>One-Click Feedback</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Highlight text in Google Doc → Click "Feedback"</td>
-                <td className="px-6 py-5 text-sm">Saves hours on repetitive manual grading</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <BookOpen size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>Differentiated Resources</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Click Brisk icon on any web article → "Simplify"</td>
-                <td className="px-6 py-5 text-sm">Instantly adapts content for all reading levels</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <FileText size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>Lesson Planning</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Prompt Brisk to generate full lesson plans from scratch</td>
-                <td className="px-6 py-5 text-sm">High-quality curriculum maps in seconds</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Globe size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>Multi-Language Support</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Translate feedback or materials into 20+ languages</td>
-                <td className="px-6 py-5 text-sm">Engages ELL students and international families</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Target size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>Assessment Creator</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Generate quizzes or rubrics from any source material</td>
-                <td className="px-6 py-5 text-sm">Immediate, standards-aligned student evaluation</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Settings size={16} className="text-teal-500 flex-shrink-0" />
-                    <span>AI Detection Tool</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Run essays through Brisk to check for AI authorship</td>
-                <td className="px-6 py-5 text-sm">Protects academic integrity with transparency</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Getting Started Guide */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Step-by-Step Getting Started Guide</h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Create your first interactive lesson using Gemini's structured approach.
-            </p>
-          </div>
-
-          <div className="md:col-span-5 -mt-6">
-            <div className="bg-slate-50 rounded-2xl aspect-square relative overflow-hidden flex items-center justify-center p-4">
-              <img src="/Teacher student-cuate.svg" alt="Workspace" className="w-full h-full object-contain mix-blend-multiply opacity-90" />
-            </div>
-          </div>
-
-          <div className="md:col-span-7 space-y-8 relative -mt-6">
-            <div className="absolute left-[15px] top-4 bottom-4 w-px bg-slate-200 z-0 hidden md:block"></div>
-
-            {/* Step 1 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">1</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-1">Install</h3>
-                <p className="text-sm text-slate-600">Go to the <a href="https://chrome.com" target="_blank" rel="noopener noreferrer" className="text-blue-600">Chrome Web Store</a>. Search "Brisk Teaching" → Click <span className="font-bold">"Add to Chrome"</span></p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">2</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Integrate with Google Docs</h3>
-                <p className="text-sm text-slate-600 mb-2">Open a student's Google Doc</p>
-                <p className="text-sm text-slate-600 mb-2">Click the <span className="font-bold">Brisk icon</span> (top-right) → Sign in with Google</p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">3</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Generate Feedback</h3>
-                <p className="text-sm text-slate-600 mb-2">Highlight a paragraph of student writing</p>
-                <p className="text-sm text-slate-600 mb-2">Click <span className="font-bold">"Feedback"</span> → Choose "Constructive" or "Praise"</p>
-                <p className="text-sm text-slate-600 mb-2">Edit the AI-generated comment → Click <span className="font-bold">"Insert"</span></p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">4</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Create a Quiz</h3>
-                <p className="text-sm text-slate-600 mb-2">Open a news article (e.g., NASA.gov)</p>
-                <p className="text-sm text-slate-600 mb-2">Click Brisk icon → <span className="font-bold">"Generate Quiz"</span></p>
-                <p className="text-sm text-slate-600 mb-2">Select 3 multiple-choice + 2 short-answer questions → Export to Google Forms</p>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">5</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Detect AI Writing</h3>
-                <p className="text-sm text-slate-600 mb-2">Upload a student essay (PDF/Doc)</p>
-                <p className="text-sm text-slate-600 mb-2">Click <span className="font-bold">"AI Detection"</span> → Review highlighted potential AI sections</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Practical Challenge */}
-        <div className="bg-gradient-to-br from-teal-900 via-teal-800 to-emerald-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-
-          <div className="flex items-center gap-2 text-emerald-400 mb-4 text-xs font-bold uppercase tracking-widest relative z-10">
-            <Target size={14} /> PRACTICAL CHALLENGE TASK
-          </div>
-
-          <h2 className="text-3xl font-bold mb-10 leading-tight relative z-10">
-            "Use Brisk to grade 3 <br className="hidden md:block" />student essays and create<br className="hidden md:block" /> a leveled reading<br className="hidden md:block" /> assignment."
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10 mb-8">
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-emerald-400/50 group-hover:border-emerald-300 group-hover:text-emerald-100">1</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Give AI Feedback</h4>
-                <p className="text-emerald-100 text-sm">Upload an essay to Google Docs → Highlight 2 sections → Generate "Constructive" feedback. Screenshot your edited feedback comments.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-emerald-400/50 group-hover:border-emerald-300 group-hover:text-emerald-100">2</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Detect AI Usage</h4>
-                <p className="text-emerald-100 text-sm">Run Brisk's AI detector on a sample essay → Note the % likelihood. Share how you'd address a student with 80%+ AI detection.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-emerald-400/50 group-hover:border-emerald-300 group-hover:text-emerald-100">3</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Differentiate Content</h4>
-                <p className="text-emerald-100 text-sm">Paste a science article into Brisk → Click "Simplify" to Grade 6 level. Compare original vs. simplified versions in a 2-column table.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-emerald-500/30 border border-emerald-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-emerald-400/50 group-hover:border-emerald-300 group-hover:text-emerald-100">4</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Build a Quiz</h4>
-                <p className="text-emerald-100 text-sm">Generate a 5-question quiz from the simplified article → Export to Google Classroom. Share the quiz link with #BriskChallenge.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tip Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><GraduationCap size={20} /></div>
-              <h3 className="font-bold text-slate-900">Diifination in Action</h3>
-            </div>
-            <img src="/Image (Differentiated classroom materials).svg" alt="workspace" className="w-full h-full object-cover"/>
-            <div className="bg-white rounded-lg p-3 border border-sky-100 text-xs text-sky-800">
-            <p className="text-blue-800 text-sm font-bold">Opening (0:00-0:15)</p>
-            <p className="text-sm text-slate-800 leading-relaxed max-w-xs mb-4 font-inter italic">
-              "Today we're exploring photosynthesis - the amazing process plants use to make their own food!"
-            </p>
-              💡 Visual: Animated plant with sunlight rays
-          </div>
-          </div>
-
-          <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
-             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-emerald-100 text-emerald-600 rounded-lg"><Layers size={20} /></div>
-              <h3 className="font-bold text-slate-900">Interactive Elements</h3>
-            </div>
-            <img src="/Image (AI technology in education).svg" alt="workspace" className="w-full h-full object-cover"/>
-            <p className="text-sm text-slate-600 leading-relaxed max-w-xs mb-4">
-              Using markdown allows for easy formatting and pacing for engaging video lessons.
-            </p>
-             <div className="bg-white rounded-lg p-3 border border-blue-100 text-xs text-blue-800 font-medium italic">
-              Use bold text for emphasis and section headers for clear organization.
-            </div>
-          </div>
-        </div>
-
-        {/* Pro Tips & Assessment */}
-        <div className="bg-yellow-50 rounded-2xl p-8 border border-yellow-100 max-w-3xl mx-auto">
-          <div className="flex items-center gap-2 text-yellow-600 font-bold mb-6">
-            <Trophy size={18} /> Pro Tips for Mastery
-          </div>
-
-          <ul className="space-y-4 mb-8">
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>🎯 Prompt Specifically:</strong> Include grade, topic, and format for best results.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>🎬 Combine With Video Tools:</strong> Use scripts in Lovart AI or Lumen5 for fully animated lessons.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>👥 Student Engagement: </strong>nclude discussion questions or polls directly in scripts for interactivity.</p>
-            </li>
-          </ul>
-
-          <div className="bg-white p-4 rounded-xl text-center border border-yellow-200">
-            <p className="text-xs text-yellow-800 font-medium italic">
-              "Brisk Teaching turns manual grading into a fast, personalized, and efficient process. Share your feedback scripts with #BriskFeedback!"
-            </p>
-          </div>
-        </div>
-
-        {/* Next Button */}
-        <button 
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-teal-50/0 group-hover:bg-teal-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors mb-1">Day 8: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 8</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-teal-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
-            </div>
-          </div>
-        </button>
+        <p className="text-center text-site-text/60 text-sm pb-10">
+          Next Up: Day 9 – Continue your AI education journey
+        </p>
 
       </div>
     </div>

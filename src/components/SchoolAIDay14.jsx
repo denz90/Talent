@@ -1,389 +1,382 @@
 import React, { useState } from 'react';
 import {
-  Sparkles,
-  CheckCircle2,
-  FileText,
-  MessageSquare,
-  Target,
-  Trophy,
-  ChevronRight,
-  Brain,
-  Zap,
-  Users,
   BarChart2,
-  Layers,
-  PlayCircle,
-  Settings,
-  BookOpen,
-  GraduationCap,
-  Layout,
-  Shapes
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  Lightbulb,
+  Shapes,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  Users,
+  Zap,
 } from 'lucide-react';
 
 const SchoolAIDay14 = ({ onNext }) => {
-  const [isWhyOpen, setIsWhyOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'challenge', label: 'Challenge' }
+  ];
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
-
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
+        
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-orange-500 to-amber-600 text-white p-12 shadow-xl min-h-[300px] flex flex-col justify-end">
-          <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-
-          <div className="absolute -right-0 transform -rotate-15 top-5 opacity-16 font-bold text-9xl tracking-tighter whitespace-nowrap select-none">
-            SchoolAI
-          </div>
-
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
-
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-orange-200" />
-              Day 14 • Interactive Learning Module
+        <div className="bg-site-primary-400 rounded-3xl p-10 ">
+        <div className="text-center space-y-6 pt-8">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              SchoolAI Spaces Challenge
-            </h1>
-            <p className="text-lg text-white/80 max-w-xl font-medium">
-              Create, personalize, and host interactive learning environments.
-            </p>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">SchoolAI Spaces Challenge</h1>
+          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+            Create, personalize, and host interactive learning environments.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-site-text">
+              <Clock size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Saves Hours</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <Sparkles size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">AI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <TrendingUp size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Boosts Results</span>
+            </div>
           </div>
         </div>
+        </div>
 
-        {/* What is SchoolAI Spaces? */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is SchoolAI Spaces?</h2>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-              SchoolAI Spaces allow teachers to design and host interactive, customizable learning environments called "Spaces". These spaces can include AI-driven characters, simulations, assessments, and collaborative tools to create a deeply personalized and immersive student experience.
-            </p>
-
+        {/* Tab Navigation */}
+        <div className="bg-site-button backdrop-blur-md p-1.5 rounded-2xl flex gap-2 border border-site-accent max-w-2xl mx-auto">
+          {tabs.map((tab) => (
             <button
-              onClick={() => setIsWhyOpen(!isWhyOpen)}
-              className="inline-flex items-center gap-2 bg-orange-50 hover:bg-orange-100 text-orange-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-orange-100 group"
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
+                activeTab === tab.id 
+                ? 'bg-site-bg text-site-text shadow-lg scale-[1.02]' 
+                : 'text-site-text/80 hover:bg-site-bg'
+              }`}
             >
-              Why Educators Need It
-              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+              {tab.label}
             </button>
+          ))}
+        </div>
 
-            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <ul className="space-y-4 pb-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Users className="text-orange-600" size={18} />
+        {/* Tab Content */}
+        <div className="min-h-[500px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl font-bold mb-6">What is SchoolAI Spaces?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  SchoolAI Spaces allow teachers to design and host interactive, customizable learning environments called "Spaces". These spaces can include AI-driven characters, simulations, assessments, and collaborative tools to create a deeply personalized and immersive student experience.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Sparkles size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">AI Characters:</span>
+                      Bring history, science, or literature to life by letting students interact with AI-driven personas.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Zap size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Custom Spaces:</span>
+                      Design tailored learning environments with specific tools and activities for any lesson.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <TrendingUp size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Real-time Engagement:</span>
+                      Monitor student progress and interaction live as they explore the space.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Lightbulb size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Embedded Assessment:</span>
+                      Integrate quizzes, polls, and checks for understanding directly into the learning experience.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'features' && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-600/40 flex items-center justify-center text-site-text">
+                    <Users size={24} />
                   </div>
                   <div>
-                    <strong className="text-slate-900 block">AI Characters</strong>
-                    <span className="text-slate-600 text-sm">Bring history, science, or literature to life by letting students interact with AI-driven personas.</span>
+                    <h3 className="text-xl font-bold mb-4">AI Characters</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Add AI-driven characters to your space → Students can interview or debate them to deepen their understanding</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Makes abstract concepts concrete and engaging</p>
+                      </div>
+                    </div>
                   </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Shapes className="text-orange-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Custom Spaces</strong>
-                    <span className="text-slate-600 text-sm">Design tailored learning environments with specific tools and activities for any lesson.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Zap className="text-orange-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Real-time Engagement</strong>
-                    <span className="text-slate-600 text-sm">Monitor student progress and interaction live as they explore the space.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <BarChart2 className="text-orange-600" size={18} />
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                    <Shapes size={24} />
                   </div>
                   <div>
-                    <strong className="text-slate-900 block">Embedded Assessment</strong>
-                    <span className="text-slate-600 text-sm">Integrate quizzes, polls, and checks for understanding directly into the learning experience.</span>
+                    <h3 className="text-xl font-bold mb-4">Custom Spaces</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Select from a library of tools and activities → Drag and drop to design your own interactive lesson environment</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Tailored environments for every unique lesson</p>
+                      </div>
+                    </div>
                   </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Image placeholder */}
-          <div className="bg-white rounded-2xl h-80 border border-slate-100 flex items-center justify-center p-8 overflow-hidden relative shadow-sm">
-            <div className="w-full h-full flex items-center justify-center text-slate-300">
-              <div className="text-center space-y-3">
-                <Layout size={48} className="mx-auto text-orange-200" />
-                <p className="text-sm text-slate-300 font-medium">Image coming soon</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-orange-300 bg-white overflow-hidden shadow-sm -mt-8">
-          <div className="px-6 py-4 bg-orange-50 border-b border-slate-100">
-            <p className="text-sm font-bold text-slate-700">Key Features & How to Use Them</p>
-            <p className="text-xs text-slate-500 mt-0.5">Use these features to make the most of the platform</p>
-          </div>
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="bg-orange-50 border-b border-slate-100">
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">Description / How to Use</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Classroom Effectiveness</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-600">
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Users size={16} className="text-orange-500 flex-shrink-0" />
-                    <span>AI Characters</span>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-green-600/40 flex items-center justify-center text-site-text">
+                    <Zap size={24} />
                   </div>
-                </td>
-                <td className="px-6 py-5">Add AI-driven characters to your space → Students can interview or debate them to deepen their understanding</td>
-                <td className="px-6 py-5 text-sm">Makes abstract concepts concrete and engaging</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Shapes size={16} className="text-orange-500 flex-shrink-0" />
-                    <span>Custom Spaces</span>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Collaborative Tools</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Enable real-time collaboration → Students can work together on projects or activities within the same space</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Promotes teamwork and peer learning</p>
+                      </div>
+                    </div>
                   </div>
-                </td>
-                <td className="px-6 py-5">Select from a library of tools and activities → Drag and drop to design your own interactive lesson environment</td>
-                <td className="px-6 py-5 text-sm">Tailored environments for every unique lesson</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Zap size={16} className="text-orange-500 flex-shrink-0" />
-                    <span>Collaborative Tools</span>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-600/40 flex items-center justify-center text-site-text">
+                    <BarChart2 size={24} />
                   </div>
-                </td>
-                <td className="px-6 py-5">Enable real-time collaboration → Students can work together on projects or activities within the same space</td>
-                <td className="px-6 py-5 text-sm">Promotes teamwork and peer learning</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <BarChart2 size={16} className="text-orange-500 flex-shrink-0" />
-                    <span>Embedded Assessment</span>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Embedded Assessment</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Add quizzes and polls directly to the space → View instant student performance data as they complete activities</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Formative assessment integrated into the learning flow</p>
+                      </div>
+                    </div>
                   </div>
-                </td>
-                <td className="px-6 py-5">Add quizzes and polls directly to the space → View instant student performance data as they complete activities</td>
-                <td className="px-6 py-5 text-sm">Formative assessment integrated into the learning flow</td>
-              </tr>
-            </tbody>
-          </table>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6 text-site-accent">
+                {[
+          {
+                    "step": 1,
+                    "title": "Sign Up",
+                    "content": "Go to the SchoolAI website. Click \"Sign Up Free\" and select your teacher profile."
+          },
+          {
+                    "step": 2,
+                    "title": "Choose a Template",
+                    "content": "Click \"+ New Space\" \u2192 Browse the template library for a starting point (e.g., \"Ecosystems\" or \"Historical Debate\"). Select \"Start from Scratch\" if you want to build a completely custom experience."
+          },
+          {
+                    "step": 3,
+                    "title": "Add Activities",
+                    "content": "Click \"Add Tool\" \u2192 Choose from AI characters, quizzes, polls, simulations, and more. Configure each activity with your specific lesson objectives and instructions."
+          },
+          {
+                    "step": 4,
+                    "title": "Invite Students",
+                    "content": "Click \"Launch Space\" \u2192 Share the space link or join code with your students. Monitor the live dashboard as students enter and interact with the space."
+          },
+          {
+                    "step": 5,
+                    "title": "Review Student Work",
+                    "content": "Open the \"Student Insights\" tab \u2192 View engagement metrics, quiz scores, and AI character interaction logs."
+          }
+].map((step) => (
+                  <div key={step.step} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'challenge' && (
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-[#2e0052]">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-site-text">Practical Challenge Task</h2>
+                    <p className="text-site-text/70">"Design a Space for a 20-minute interactive lesson on ecosystems."</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-400/20 px-4 py-2 rounded-lg inline-flex items-center gap-2 text-site-text text-sm font-bold">
+                  <Clock size={16} />
+                  Time Goal: Under 15 minutes
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <h3 className="text-xl font-bold">Create the Space</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Select the "Ecosystems" template and add an AI character representing a local environmentalist or a forest animal.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <h3 className="text-xl font-bold">Add Interactive Elements</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Embed a short quiz on food chains and a poll about local ecosystem threats within the space.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <h3 className="text-xl font-bold">Review the Dashboard</h3>
+                  </div>
+                  <p className="text-sm text-site-text">After launching the space with students, check the dashboard to see which activities had the highest engagement.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <h3 className="text-xl font-bold">Reflect and Iterate</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Identify one activity that was less successful and brainstorm one AI-driven change to improve student participation.</p>
+                </div>
+              </div>
+
+              <div className="pt-10 space-y-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <Lightbulb className="text-yellow-400" size={32} /> Pro Tips for Mastery
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-pink-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Lightbulb size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">🛡️ Safeguard Interactions:</span>
+                      Set clear instructions for AI characters to ensure student conversations stay on-topic and productive.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-site-primary-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Zap size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">🔄 Adaptive Feedback:</span>
+                      Enable AI-driven hints and feedback on assessments to provide students with granular support.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-yellow-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <TrendingUp size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">🤝 Collaborative Design:</span>
+                      Share your space with colleagues to collaborate on lesson design and share best practices.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          )}
         </div>
 
-        {/* Getting Started Guide */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Step-by-Step Getting Started Guide</h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Using the following SchoolAI's structured approach to get started.
-            </p>
-          </div>
-
-          {/* Image placeholder */}
-          <div className="md:col-span-5 -mt-6">
-            <div className="bg-slate-50 rounded-2xl aspect-square relative overflow-hidden flex items-center justify-center p-4">
-              <div className="text-center space-y-3">
-                <FileText size={48} className="mx-auto text-orange-200" />
-                <p className="text-sm text-slate-300 font-medium">Image coming soon</p>
-              </div>
+        {/* Bottom CTA Card */}
+        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+          <div className="absolute opacity-20"></div>
+          
+          <div className="flex justify-center relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+              <Trophy size={32} />
             </div>
           </div>
-
-          <div className="md:col-span-7 space-y-8 relative -mt-6">
-            <div className="absolute left-[15px] top-4 bottom-4 w-px bg-slate-200 z-0 hidden md:block"></div>
-
-            {/* Step 1 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">1</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-1">Sign Up</h3>
-                <p className="text-sm text-slate-600">Go to the <a href="https://schoolai.com" target="_blank" rel="noopener noreferrer" className="text-blue-600">SchoolAI website</a>. Click "Sign Up Free" and select your teacher profile.</p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">2</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Choose a Template</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "+ New Space" → Browse the template library for a starting point (e.g., "Ecosystems" or "Historical Debate").</p>
-                <p className="text-sm text-slate-600 mb-2">Select "Start from Scratch" if you want to build a completely custom experience.</p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">3</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Add Activities</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "Add Tool" → Choose from AI characters, quizzes, polls, simulations, and more.</p>
-                <p className="text-sm text-slate-600 mb-2">Configure each activity with your specific lesson objectives and instructions.</p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">4</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Invite Students</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "Launch Space" → Share the space link or join code with your students.</p>
-                <p className="text-sm text-slate-600 mb-2">Monitor the live dashboard as students enter and interact with the space.</p>
-              </div>
-            </div>
-
-            {/* Step 5 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-blue-200">5</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Review Student Work</h3>
-                <p className="text-sm text-slate-600 mb-2">Open the "Student Insights" tab → View engagement metrics, quiz scores, and AI character interaction logs.</p>
-              </div>
-            </div>
+          
+          <div className="space-y-4 relative z-10">
+            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+              SchoolAI Spaces Challenge
+            </h2>
+            <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
           </div>
-        </div>
-
-        {/* Practical Challenge */}
-        <div className="bg-gradient-to-br from-orange-900 via-amber-800 to-yellow-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-
-          <div className="flex items-center gap-2 text-orange-400 mb-4 text-xs font-bold uppercase tracking-widest relative z-10">
-            <Target size={14} /> PRACTICAL CHALLENGE TASK
-          </div>
-
-          <h2 className="text-3xl font-bold mb-10 leading-tight relative z-10">
-            "Design a Space for a 20-<br className="hidden md:block" />minute interactive lesson on <br className="hidden md:block" /> ecosystems."
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10 mb-8">
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-orange-500/30 border border-orange-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-orange-400/50 group-hover:border-orange-300 group-hover:text-orange-100">1</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Create the Space</h4>
-                <p className="text-orange-100 text-sm">Select the "Ecosystems" template and add an AI character representing a local environmentalist or a forest animal.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-orange-500/30 border border-orange-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-orange-400/50 group-hover:border-orange-300 group-hover:text-orange-100">2</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Add Interactive Elements</h4>
-                <p className="text-orange-100 text-sm">Embed a short quiz on food chains and a poll about local ecosystem threats within the space.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-orange-500/30 border border-orange-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-orange-400/50 group-hover:border-orange-300 group-hover:text-orange-100">3</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Review the Dashboard</h4>
-                <p className="text-orange-100 text-sm">After launching the space with students, check the dashboard to see which activities had the highest engagement.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-orange-500/30 border border-orange-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-orange-400/50 group-hover:border-orange-300 group-hover:text-orange-100">4</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Reflect and Iterate</h4>
-                <p className="text-orange-100 text-sm">Identify one activity that was less successful and brainstorm one AI-driven change to improve student participation.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tip Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          <div className="bg-orange-50 border border-orange-100 rounded-2xl p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-orange-100 text-orange-600 rounded-lg"><Users size={20} /></div>
-              <h3 className="font-bold text-slate-900">Immersive Interactions</h3>
-            </div>
-            {/* Image placeholder */}
-            <div className="w-full h-40 bg-orange-100/50 rounded-xl flex items-center justify-center mb-4">
-              <div className="text-center space-y-2">
-                <FileText size={32} className="mx-auto text-orange-300" />
-                <p className="text-xs text-orange-300 font-medium">Image coming soon</p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg p-3 border border-orange-100 text-xs text-orange-800">
-              <p className="text-orange-800 text-sm font-bold">AI Chatbot Power</p>
-              <p className="text-sm text-slate-800 leading-relaxed max-w-xs mb-4 font-inter italic">
-                AI characters can bring any historical or scientific concept to life.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-orange-50 border border-orange-100 rounded-2xl p-8 flex flex-col justify-center shadow-sm relative overflow-hidden">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 bg-orange-100 text-orange-600 rounded-lg"><Zap size={20} /></div>
-              <h3 className="font-bold text-slate-900">AI Design Prowess</h3>
-            </div>
-            {/* Image placeholder */}
-            <div className="w-full h-40 bg-orange-100/50 rounded-xl flex items-center justify-center mb-4">
-              <div className="text-center space-y-2">
-                <FileText size={32} className="mx-auto text-orange-300" />
-                <p className="text-xs text-orange-300 font-medium">Image coming soon</p>
-              </div>
-            </div>
-            <p className="text-sm text-slate-600 leading-relaxed max-w-xs mb-4">
-              Co-create high-quality learning environments in minutes using the template library.
-            </p>
-            <div className="bg-white rounded-lg p-3 border border-orange-100 text-xs text-orange-800 font-medium italic">
-              Use the live dashboard to make data-informed instructional decisions in real-time.
-            </div>
-          </div>
-        </div>
-
-        {/* Pro Tips & Assessment */}
-        <div className="bg-yellow-50 rounded-2xl p-8 border border-yellow-100 max-w-3xl mx-auto">
-          <div className="flex items-center gap-2 text-yellow-600 font-bold mb-6">
-            <Trophy size={18} /> Pro Tips for Mastery
-          </div>
-
-          <ul className="space-y-4 mb-8">
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>🛡️ Safeguard Interactions:</strong> Set clear instructions for AI characters to ensure student conversations stay on-topic and productive.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>🔄 Adaptive Feedback:</strong> Enable AI-driven hints and feedback on assessments to provide students with granular support.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500 mt-2 flex-shrink-0"></div>
-              <p className="text-sm text-slate-700"><strong>🤝 Collaborative Design:</strong> Share your space with colleagues to collaborate on lesson design and share best practices.</p>
-            </li>
-          </ul>
-
-          <div className="bg-white p-4 rounded-xl text-center border border-yellow-200">
-            <p className="text-xs text-yellow-800 font-medium italic">
-              "SchoolAI Spaces transforms your classroom into an interactive learning playground where every student can explore and excel."
-            </p>
+          
+          <div className="relative z-10">
+            <button 
+              onClick={onNext}
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            >
+              Start Your Challenge
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            </button>
           </div>
         </div>
 
-        {/* Next Button */}
-        <button
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-blue-50/0 group-hover:bg-blue-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-1">Day 14: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Student must complete quiz to unlock day 15</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-blue-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
-            </div>
-          </div>
-        </button>
+        <p className="text-center text-site-text/60 text-sm pb-10">
+          Next Up: Day 15 – Continue your AI education journey
+        </p>
 
       </div>
     </div>

@@ -7,7 +7,7 @@ const ToolDetailPage = ({ tool, onBack }) => {
   const { title, whatItIs, useFor, prompt, quote, image, icon: Icon } = tool;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-site-bg">
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Left Content */}
         <div className="w-full lg:w-3/5 p-8 lg:p-24 flex flex-col justify-center">
@@ -26,11 +26,11 @@ const ToolDetailPage = ({ tool, onBack }) => {
           <div className="space-y-12 max-w-2xl">
             {/* What It Is */}
             <section>
-              <div className="w-12 h-12 bg-slate-50 rounded-sm flex items-center justify-center mb-6 border border-slate-100">
+              <div className="w-12 h-12 bg-site-bg rounded-sm flex items-center justify-center mb-6 border border-site-accent">
                 <Icon className="w-6 h-6 text-brand-primary" />
               </div>
-              <h2 className="text-xl font-bold text-slate-900 mb-4">What It Is</h2>
-              <p className="text-slate-600 leading-relaxed font-medium">
+              <h2 className="text-xl font-bold text-site-text mb-4">What It Is</h2>
+              <p className="text-site-text/80 leading-relaxed font-medium">
                 {whatItIs}
               </p>
             </section>
@@ -46,10 +46,10 @@ const ToolDetailPage = ({ tool, onBack }) => {
 
             {/* What Educators Use It For */}
             <section>
-              <h2 className="text-xl font-bold text-slate-900 mb-6">What Educators Use It For</h2>
+              <h2 className="text-xl font-bold text-site-text mb-6">What Educators Use It For</h2>
               <ul className="space-y-4">
                 {useFor.map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-slate-600 font-bold text-sm">
+                  <li key={idx} className="flex items-center gap-3 text-site-text/80 font-bold text-sm">
                     <div className="w-1.5 h-1.5 bg-brand-primary rounded-full"></div>
                     {item}
                   </li>
@@ -58,9 +58,9 @@ const ToolDetailPage = ({ tool, onBack }) => {
             </section>
 
             {/* Prompt Section */}
-            <section className="bg-slate-50 p-8 rounded-sm border-l-4 border-brand-primary">
-              <h2 className="text-xl font-bold text-slate-900 mb-4">Prompt</h2>
-              <p className="text-slate-600 bg-white p-6 rounded border border-slate-100 italic leading-relaxed font-medium mb-6">
+            <section className="bg-site-bg p-8 rounded-sm border-l-4 border-brand-primary">
+              <h2 className="text-xl font-bold text-site-text mb-4">Prompt</h2>
+              <p className="text-site-text/80 bg-site-bg p-6 rounded border border-site-accent italic leading-relaxed font-medium mb-6">
                 "{prompt}"
               </p>
               <div className="flex items-center gap-3 text-brand-primary font-bold text-sm italic">

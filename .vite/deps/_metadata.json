@@ -1,0 +1,43 @@
+{
+  "hash": "4ca32cc3",
+  "configHash": "3026dd11",
+  "lockfileHash": "da311043",
+  "browserHash": "0e29d99a",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "a756831e",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "39f8177c",
+      "needsInterop": true
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "0192484b",
+      "needsInterop": false
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "63408d13",
+      "needsInterop": false
+    },
+    "@iconify/react": {
+      "src": "../../node_modules/@iconify/react/dist/iconify.js",
+      "file": "@iconify_react.js",
+      "fileHash": "6a0cef28",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-M6DG7WIV": {
+      "file": "chunk-M6DG7WIV.js"
+    }
+  }
+}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   HelpCircle,
@@ -14,16 +13,15 @@ import {
   FileText
 } from 'lucide-react';
 
-// eslint-disable-next-line no-unused-vars
 const SidebarItem = ({ icon: Icon, label, href, active = false }) => (
   <a
     href={href}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium group ${active
-      ? 'bg-gradient-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20'
-      : 'text-slate-500 hover:bg-white hover:text-brand-primary hover:shadow-sm'
+      ? 'bg-gradient-to-r from-site-grad-from to-site-grad-to text-site-text shadow-lg shadow-brand-primary/20'
+      : 'text-site-text/80 hover:bg-site-bg hover:text-site-accent hover:shadow-sm'
       }`}
   >
-    <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-white/20' : 'bg-slate-50 group-hover:bg-brand-secondary'}`}>
+    <div className={`p-2 rounded-lg transition-colors ${active ? 'bg-site-bg/20' : 'bg-site-bg group-hover:bg-site-accent'}`}>
       <Icon className="w-4 h-4" />
     </div>
     <span className="flex-1">{label}</span>
@@ -47,16 +45,16 @@ const BeginnerSidebar = ({ activeSection }) => {
 
   return (
     <aside className="w-72 hidden lg:flex flex-col gap-6 sticky top-28 pr-4 custom-scrollbar">
-      <div className="bg-white rounded-[24px] border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="bg-site-bg rounded-[24px] border border-site-accent overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`w-full flex items-center justify-between p-5 transition-colors group ${isOpen ? 'bg-slate-50/50' : 'hover:bg-slate-50'}`}
+          className={`w-full flex items-center justify-between p-5 transition-colors group ${isOpen ? 'bg-site-bg/50' : 'hover:bg-site-bg'}`}
         >
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-xl transition-colors ${isOpen ? 'bg-gradient-to-br from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20' : 'bg-brand-secondary text-brand-primary'}`}>
               <PenTool className="w-4 h-4" />
             </div>
-            <span className="font-bold text-slate-900 tracking-tight">Prompt Engineering</span>
+            <span className="font-bold text-site-text tracking-tight">Prompt Engineering</span>
           </div>
           <motion.div
             animate={{ rotate: isOpen ? 0 : -90 }}
@@ -94,12 +92,12 @@ const BeginnerSidebar = ({ activeSection }) => {
       </div>
 
       <div className="mt-auto p-6 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent text-white relative overflow-hidden group">
-        <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+        <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-site-bg/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
         <h4 className="font-bold mb-2 relative z-10">Need Help?</h4>
         <p className="text-xs text-white/80 mb-4 relative z-10 leading-relaxed">
           Stuck on a module? Ask our AI Tutor for instant clarification.
         </p>
-        <button className="w-full py-2 bg-white text-brand-primary rounded-lg text-xs font-bold hover:bg-slate-50 transition-colors relative z-10">
+        <button className="w-full py-2 bg-site-bg text-brand-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
           Open AI Tutor
         </button>
       </div>

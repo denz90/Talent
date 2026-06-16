@@ -1,399 +1,423 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  Users, 
-  Clock, 
-  FileText, 
-  Layers, 
-  CheckSquare, 
-  Lightbulb,
-  ArrowRight,
-  Trophy,
-  Target,
-  ChevronRight,
+import {
   Award,
   BookOpen,
+  BookCheck,
+  CheckCircle2,
+  CheckSquare2,
+  ChevronRight,
+  Clock,
+  FileText,
+  GraduationCap,
+  Layers,
+  Lightbulb,
+  MessageSquare,
   Shield,
-  MessageSquare
+  Sparkles,
+  Target,
+  Timer,
+  TrendingUp,
+  Trophy,
+  Zap,
 } from 'lucide-react';
 
 const MagicSchoolDay1 = ({ onNext }) => {
-  const [isWhyOpen, setIsWhyOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'challenge', label: 'Challenge' }
+  ];
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-900 to-purple-800 text-white p-12 shadow-xl">
-          {/*Background Image*/}
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20"
-            style={{ backgroundImage: "url('/Gemini_Generated_Image_q76fulq76fulq76f 1.svg')" }}
-          ></div>
-          {/* Subtle background decoration */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-primary/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
+        <div className="bg-site-primary-400 rounded-3xl p-10 ">
+        <div className="text-center space-y-6 pt-8">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
+            </div>
+          </div>
+          
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">MagicSchool AI Challenge</h1>
+          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+            Revolutionize Lesson Planning with AI-Powered Pedagogy
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-site-text">
+              <Clock size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Saves Hours</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <Sparkles size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">AI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <TrendingUp size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Boosts Results</span>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        {/* Tab Navigation */}
+        <div className="bg-site-button backdrop-blur-md p-1.5 rounded-2xl flex gap-2 border border-site-accent max-w-2xl mx-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
+                activeTab === tab.id 
+                ? 'bg-site-bg text-site-text shadow-lg scale-[1.02]' 
+                : 'text-site-text/80 hover:bg-site-bg'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="min-h-[500px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl text-site-text font-bold mb-6">What is MagicSchool?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  MagicSchool AI is an advanced AI platform designed specifically for educators. It automates lesson planning, generates differentiated instructional materials, and creates assessments aligned to standards—all while saving teachers 10+ hours weekly.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <GraduationCap size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Personalized Learning:</span>
+                      Generates leveled content for diverse student needs.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Timer size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Time-Saver:</span>
+                      Cuts lesson planning time by 75% with targeted AI workflows.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <BookCheck size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Standards-Aligned:</span>
+                      Supports CCSS, NGSS, and TEKS with 1-click adaptations.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <FileText size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Multimodal Outputs:</span>
+                      Creates worksheets, slides, rubrics, and exit tickets.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'features' && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-600/40 flex items-center justify-center text-site-text">
+                    <BookOpen size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Lesson Plan Generator</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Select grade/subject → Input topic → Choose standards → Generate draft.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Instantly creates ready-to-edit lesson plans.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-yellow-500/40 flex items-center justify-center text-site-text">
+                    <Award size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Rubric Builder</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Choose assessment type → Customize criteria → Download.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Creates transparent grading tools in 1 minute.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-green-600/40 flex items-center justify-center text-site-text">
+                    <Shield size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">IEP Suggestion Tool</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Input student strengths/needs → Generate draft goals.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Supports specialized instruction planning.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-600/40 flex items-center justify-center text-site-text">
+                    <Layers size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Choice Board Generator</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Input topic → Select format → Generate activity grid.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Empowers student agency and choice.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-600/40 flex items-center justify-center text-site-text">
+                    <CheckSquare2 size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Differentiation Tool</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Paste text → Select grade levels → Generate versions.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Makes complex texts accessible to all.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-600/40 flex items-center justify-center text-site-text">
+                    <MessageSquare size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Email Responder</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Paste parent email → Set tone → Generate response.</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Professional communication in seconds.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                {[
+          {
+                    "step": 1,
+                    "title": "Sign Up",
+                    "content": "Go to MagicSchool.ai \u2192 Click \"Sign Free\" (no credit card required)."
+          },
+          {
+                    "step": 2,
+                    "title": "Create Your First Lesson",
+                    "content": "Click \"Lesson Plan Generator\". Grade Level: e.g., 5th grade Subject: e.g., Science Topic: e.g., \"Water Cycle\" Standard: e.g., NGSS-5-ESS2-1 \u2192 Click \"Generate\""
+          },
+          {
+                    "step": 3,
+                    "title": "Differentiate Content",
+                    "content": "Open the generated lesson \u2192 Click \"Adapt for diversity\" \u2192 Select: English Learners: \"Add visual vocabulary words.\" Gifted Students: \"Extension activity\" \u2192 Click \"Apply changes\"."
+          },
+          {
+                    "step": 4,
+                    "title": "Export & Share",
+                    "content": "Click \"Export\" \u2192 Choose format (Google Docs, PDF) \u2192 Share with your PLC via link."
+          }
+].map((step) => (
+                  <div key={step.step} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-purple-100/80">{step.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'challenge' && (
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-[#2e0052]">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-site-text">Practical Challenge Task</h2>
+                    <p className="text-site-text/70">"Design a differentiated science lesson with AI-generated supports."</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-400/20 px-4 py-2 rounded-lg inline-flex items-center gap-2 text-site-text text-sm font-bold">
+                  <Clock size={16} />
+                  Time Goal: Under 15 minutes
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <h3 className="text-xl font-bold">Generate Base Lesson</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Use the "Lesson Plan Generator" to outline a 45-minute lesson covering Next Generation Science Standards (NGSS) objectives and agenda.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <h3 className="text-xl font-bold">Create an Exit Ticket</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Use the "Quiz Generator" to make a 3-question formative assessment.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <h3 className="text-xl font-bold">Add Differentiation</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Use the "Differentiation Tool" to create a simplified reading passage for struggling readers and an extension prompt for advanced learners.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <h3 className="text-xl font-bold">Share Your Output</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Export the final doc to a PDF and submit it link.</p>
+                </div>
+              </div>
+
+              <div className="pt-10 space-y-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <Lightbulb className="text-yellow-400" size={32} /> Pro Tips for Mastery
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-pink-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Lightbulb size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-text block mb-1">Prompt Engineering:</span>
+                      Add details like "include hands-on activity" or "use real-world examples" for better outputs.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-site-primary-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text mb-4">
+                      <Zap size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-text block mb-1">Save Templates:</span>
+                      Save generated and proven templates for future units.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-yellow-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <TrendingUp size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-text block mb-1">Collaboration:</span>
+                      Use the "Share Library" to trade materials with department peers.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+                <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-2xl p-6 text-center">
+                  <p className="text-site-text font-medium italic">"Magic School AI turns planning delays into pedagogical power. Claim your lesson weekends back using #AISchoolManager"</p>
+                </div>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom CTA Card */}
+        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+          <div className="absolute opacity-20"></div>
+          
+          <div className="flex justify-center relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+              <Trophy size={32} />
+            </div>
+          </div>
+          
+          <div className="space-y-4 relative z-10">
+            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+              MagicSchool AI Challenge
+            </h2>
+            <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
+          </div>
           
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-yellow-300" />
-              Day 1 • Teacher Tools Module
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              MagicSchool <br /> AI Challenge
-            </h1>
-            <p className="text-lg text-white/80 max-w-xl font-medium">
-              Revolutionize Lesson Planning with AI-Powered Pedagogy
-            </p>
-          </div>
-        </div>
-
-        {/* What is MagicSchool AI */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is MagicSchool AI?</h2>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-              MagicSchool AI is an advanced AI platform designed specifically for educators. It automates lesson planning, generates differentiated instructional materials, and creates assessments aligned to standards—all while saving teachers <strong><span className="font-bold text-indigo-700">10+ hours weekly</span></strong>.
-            </p>
-            <p>
-              Click the button below to learn more about why educators need MagicSchool AI.
-            </p>
             <button 
-              onClick={() => setIsWhyOpen(!isWhyOpen)}
-              className="inline-flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-indigo-100 group"
+              onClick={onNext}
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
             >
-              Why Educators Need It
-              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+              Start Your Challenge
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
-
-            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <ul className="space-y-4 pb-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Users className="text-emerald-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Personalized Learning</strong>
-                    <span className="text-slate-600 text-sm">Generates leveled content for diverse student needs.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Clock className="text-emerald-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Time-Saver</strong>
-                    <span className="text-slate-600 text-sm">Cuts lesson planning time by 75% with targeted AI workflows.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <FileText className="text-emerald-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Standards-Aligned</strong>
-                    <span className="text-slate-600 text-sm">Supports CCSS, NGSS, and TEKS with 1-click adaptations.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Layers className="text-emerald-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Multimodal Outputs</strong>
-                    <span className="text-slate-600 text-sm">Creates worksheets, slides, rubrics, and exit tickets.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className=" flex items-center justify-center p-8 overflow-hidden relative">
-             <img src="/Magic trick-amico 1.svg" alt="Educator Working"/>
           </div>
         </div>
 
-        {/* Key Features Section */}
-        <div className="space-y-10 -mt-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">Key Features & How to Use Them</h2>
-            <p className="text-slate-600 text-lg">Discover the tools that will transform your classroom workflow.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Lesson Plan Generator */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
-                <BookOpen size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Lesson Plan Generator</h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Select grade/subject → Input topic → Choose standards → Generate draft.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Instantly creates ready-to-edit lesson plans.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Rubric Builder */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
-                <Award size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Rubric Builder</h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Choose assessment type → Customize criteria → Download.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Creates transparent grading tools in &lt;1 minute.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* IEP Suggestion Tool */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
-                <Shield size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">IEP Suggestion Tool</h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Input student strengths/needs → Generate draft goals.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Supports specialized instruction planning.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Choice Board Generator */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6">
-                <Layers size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6 underline decoration-indigo-500/30 underline-offset-8">Choice Board Generator</h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Input topic → Select format → Generate activity grid.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Empowers student agency and choice.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Differentiation Tool */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6 mx-auto">
-                <CheckSquare size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6">Differentiation Tool</h3>
-              <div className="space-y-6 text-left">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Paste text → Select grade levels → Generate versions.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Makes complex texts accessible to all.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Email Responder */}
-            <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-center">
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 mb-6 mx-auto">
-                <MessageSquare size={24} />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-6">Email Responder</h3>
-              <div className="space-y-6 text-left">
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">HOW TO USE</span>
-                  <p className="text-slate-600 leading-relaxed text-sm">Paste parent email → Set tone → Generate response.</p>
-                </div>
-                <div>
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">BENEFIT</span>
-                  <p className="text-indigo-600 font-medium text-sm">Professional communication in seconds.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        {/* Getting Started Guide */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-5">
-            <h2 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Getting Started Guide</h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Follow these simple steps to generate your first lesson and differentiate content for your class.
-            </p>
-            <div className=" relative overflow-hidden">
-               <img src="/Sign up-amico 1.png" alt="Workspace" className="w-full h-full object-cover" />
-            </div>
-          </div>
-
-          <div className="md:col-span-7 space-y-8 ">
-            
-            {/* Step 1 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-indigo-200">1</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-1">Sign Up</h3>
-                <p className="text-sm text-slate-600">Go to MagicSchool.ai → Click <strong className="text-indigo-600">"Sign Free"</strong> (no credit card required).</p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-indigo-200">2</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Create Your First Lesson</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "Lesson Plan Generator".</p>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1">
-                  <p><strong>Grade Level:</strong> e.g., 5th grade</p>
-                  <p><strong>Subject:</strong> e.g., Science</p>
-                  <p><strong>Topic:</strong> e.g., "Water Cycle"</p>
-                  <p><strong>Standard:</strong> e.g., NGSS-5-ESS2-1 → Click "Generate"</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-indigo-200">3</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Differentiate Content</h3>
-                <p className="text-sm text-slate-600 mb-2">Open the generated lesson → Click "Adapt for diversity" → Select:</p>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1">
-                  <p><strong>English Learners:</strong> "Add visual vocabulary words."</p>
-                  <p><strong>Gifted Students:</strong> "Extension activity" → Click "Apply changes".</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-indigo-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-indigo-200">4</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-1">Export & Share</h3>
-                <p className="text-sm text-slate-600">Click "Export" → Choose format (Google Docs, PDF) → Share with your PLC via link.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Practical Challenge */}
-        <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          
-          <div className="flex items-center gap-2 text-indigo-300 mb-4 text-xs font-bold uppercase tracking-widest relative z-10">
-            <Target size={14} /> PRACTICAL CHALLENGE: TASK
-          </div>
-          
-          <h2 className="text-3xl font-bold mb-10 leading-tight relative z-10">
-            "Design a differentiated <br className="hidden md:block"/> science lesson with AI-<br className="hidden md:block"/>generated supports."
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10">
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-indigo-500/30 border border-indigo-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-green-500/30 group-hover:border-green-400/30 group-hover:text-green-300">1</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Generate Base Lesson</h4>
-                <p className="text-indigo-200 text-sm">Use the "Lesson Plan Generator" to outline a 45-minute lesson covering Next Generation Science Standards (NGSS) objectives and agenda.</p>
-              </div>
-            </div>
-            
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-indigo-500/30 border border-indigo-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-green-500/30 group-hover:border-green-400/30 group-hover:text-green-300">2</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Create an Exit Ticket</h4>
-                <p className="text-indigo-200 text-sm">Use the "Quiz Generator" to make a 3-question formative assessment.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-indigo-500/30 border border-indigo-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-green-500/30 group-hover:border-green-400/30 group-hover:text-green-300">3</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Add Differentiation</h4>
-                <p className="text-indigo-200 text-sm">Use the "Differentiation Tool" to create a simplified reading passage for struggling readers and an extension prompt for advanced learners.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-indigo-500/30 border border-indigo-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-green-500/30 group-hover:border-green-400/30 group-hover:text-green-300">4</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Share Your Output</h4>
-                <p className="text-indigo-200 text-sm mb-3">Export the final doc to a PDF and submit it link.</p>
-                <span className="bg-indigo-950 px-3 py-1 rounded text-xs font-bold text-indigo-300">#AIEdChallenge</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Pro Tips & Assessment */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-           <div className="flex items-center justify-center">
-              <img src="/Notebook-bro-2 1.svg" alt="Notebook"/>
-           </div>
-
-           <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100">
-             <div className="flex items-center gap-2 text-amber-600 font-bold mb-6">
-               <Trophy size={18} /> Pro Tips for Mastery
-             </div>
-             
-             <ul className="space-y-4 mb-8">
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Prompt Engineering:</strong> Add details like <em>"include hands-on activity"</em> or <em>"use real-world examples"</em> for better outputs.</p>
-               </li>
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Save Templates:</strong> Save generated and proven templates for future units.</p>
-               </li>
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Collaboration:</strong> Use the "Share Library" to trade materials with department peers.</p>
-               </li>
-             </ul>
-
-             <div className="bg-white/60 p-4 rounded-xl text-center border border-amber-200">
-               <p className="text-xs text-amber-800 font-medium italic">
-                 "Magic School AI turns planning delays into pedagogical power. Claim your lesson weekends back using #AISchoolManager"
-               </p>
-             </div>
-           </div>
-        </div>
-
-        {/* Next Button */}
-        <button 
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-indigo-50/0 group-hover:bg-indigo-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors mb-1">Day 1: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 1</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-indigo-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
-            </div>
-          </div>
-        </button>
+        <p className="text-center text-site-text/60 text-sm pb-10">
+          Next Up: Day 2 – Continue your AI education journey
+        </p>
 
       </div>
     </div>
@@ -401,5 +425,3 @@ const MagicSchoolDay1 = ({ onNext }) => {
 };
 
 export default MagicSchoolDay1;
-
-

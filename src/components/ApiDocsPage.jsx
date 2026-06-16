@@ -10,12 +10,12 @@ const ApiDocsPage = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-site-bg font-sans text-site-text flex flex-col md:flex-row">
       {/* Sidebar Navigation */}
-      <div className="w-full md:w-64 bg-white border-r border-slate-200 p-6 flex-shrink-0">
+      <div className="w-full md:w-64 bg-site-bg border-r border-site-accent p-6 flex-shrink-0">
         <button 
           onClick={onBack}
-          className="flex items-center text-slate-500 hover:text-brand-primary transition-colors mb-8 text-sm font-medium"
+          className="flex items-center text-site-text/80 hover:text-brand-primary transition-colors mb-8 text-sm font-medium"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
@@ -25,13 +25,13 @@ const ApiDocsPage = ({ onBack }) => {
           <a href="#" className="flex items-center px-3 py-2 text-brand-primary bg-brand-primary/10 rounded-lg font-medium text-sm">
             <Key className="w-4 h-4 mr-3" /> Authentication
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
+          <a href="#" className="flex items-center px-3 py-2 text-site-text/80 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
             <Database className="w-4 h-4 mr-3" /> User Resources
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
+          <a href="#" className="flex items-center px-3 py-2 text-site-text/80 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
             <Code className="w-4 h-4 mr-3" /> Course Endpoints
           </a>
-          <a href="#" className="flex items-center px-3 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
+          <a href="#" className="flex items-center px-3 py-2 text-site-text/80 hover:bg-slate-100 rounded-lg font-medium text-sm transition-colors">
             <Terminal className="w-4 h-4 mr-3" /> Webhooks
           </a>
         </nav>
@@ -42,7 +42,7 @@ const ApiDocsPage = ({ onBack }) => {
         <div className="max-w-4xl mx-auto">
           <div className="mb-12">
             <h1 className="text-3xl font-bold text-brand-dark mb-4">Authentication</h1>
-            <p className="text-slate-600 leading-relaxed mb-6">
+            <p className="text-site-text/80 leading-relaxed mb-6">
               The HawkmanLabs API uses API keys to authenticate requests. You can view and manage your API keys in the Developer Settings dashboard.
               Your API keys carry many privileges, so be sure to keep them secure!
             </p>
@@ -56,7 +56,7 @@ const ApiDocsPage = ({ onBack }) => {
 
           <div className="mb-12">
             <h2 className="text-2xl font-bold text-brand-dark mb-4">Making a Request</h2>
-            <p className="text-slate-600 mb-6">
+            <p className="text-site-text/80 mb-6">
               All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
             </p>
             
@@ -82,7 +82,7 @@ const ApiDocsPage = ({ onBack }) => {
 
           <div>
             <h2 className="text-2xl font-bold text-brand-dark mb-4">Response Format</h2>
-            <p className="text-slate-600 mb-6">
+            <p className="text-site-text/80 mb-6">
               The HawkmanLabs API responds to successful requests with HTTP status 200 OK and a JSON body containing the requested data.
             </p>
             <div className="bg-[#0D1117] rounded-xl overflow-hidden shadow-lg border border-slate-800 p-4">

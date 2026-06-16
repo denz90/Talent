@@ -1,14 +1,86 @@
 @import "tailwindcss";
 
 @theme {
+  /* Keep your original brand fallback definitions if you need them elsewhere */
   --color-brand-primary: #155DFC;
-  --color-brand-secondary: #f0f7ff;
   --color-brand-accent: #9810FA;
+  --color-brand-secondary: #f0f7ff;
   --color-brand-dark: #350557;
+
+  --color-site-bg: var(--color-bg);
+  --color-site-text: var(--color-text);
+  --color-site-primary: var(--color-primary);
+  --color-site-accent: var(--color-accent);
+  
+  /* Register the dynamic gradient endpoints for Tailwind utility use */
+  --color-site-grad-from: var(--gradient-from);
+  --color-site-grad-to: var(--gradient-to);
+
   --font-sans: "Inter", "system-ui", "Segoe UI", "Roboto", "sans-serif";
   --font-mono: "ui-monospace", "Consolas", "monospace";
 }
 
+:root, [data-theme="default"] {
+  --color-bg: #171717;
+  --color-text: #FFFFFF;
+  --color-primary: #350557;
+  --color-accent: #121722;
+  --color-dark: #000000;
+  --color-light: #FFFFFF;
+  
+  /* Gradient variables */
+  --gradient-from: #350557;
+  --gradient-to: #FFFFFF;
+  --shadow-color: #155DFC;
+}
+
+[data-theme="timeless"] {
+  --color-bg: #E8F1F7;
+  --color-text: #131C25;
+  --color-primary: #2075A7;
+  --color-accent: #E8DFC4;
+
+  /* Gradient variables */
+  --gradient-from: #2075A7;
+  --gradient-to: #E8DFC4;
+  --shadow-color: #6b6a6a;
+}
+
+[data-theme="coastal"] {
+  --color-bg: #ccdde1; 
+  --color-text: #335765;
+  --color-primary: #74A8A4; 
+  --color-accent: #B6D9E0;
+
+  /* Gradient variables */
+  --gradient-from: #74A8A4;
+  --gradient-to: #B6D6E0;
+  --shadow-color: rgba(51, 87, 101, 0.2);
+}
+
+[data-theme="tranquil"] {
+  --color-bg: #F5F7FF;
+  --color-text: #2A365C; 
+  --color-primary: #A6B1D8;
+  --color-accent: #E2E4F8;
+
+  /* Gradient variables */
+  --gradient-from: #A6B1D8;
+  --gradient-to: #E2E4F8;
+  --shadow-color: rgba(42, 54, 92, 0.1);
+} /* ✅ FIX 1: Added the missing closing bracket here */
+
+
+/* Dynamic theme gradient utility class */
+.gradient-theme {
+  background: linear-gradient(to right, var(--gradient-from), var(--gradient-to)); 
+  border: none;
+  box-shadow: 0 6px 20px var(--shadow-color);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+/* 4. Your existing base structural styles */
 :root {
   --text: #4b5563;
   --text-h: #111827;
@@ -31,22 +103,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.dark {
-  --text: #94a3b8;
-  --text-h: #f8fafc;
-  --bg: #0f172a;
-  --card-bg: #1e293b;
-  --border: #334155;
-  --code-bg: rgba(109, 40, 217, 0.1);
-  --accent: #a855f7;
-}
-
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--bg);
-  color: var(--text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--color-site-text);
+  background-color: var(--color-site-bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {
@@ -74,7 +136,8 @@ body {
 
 /* Custom buttons */
 .btn-primary {
-  @apply bg-gradient-to-r from-brand-primary to-brand-accent text-white px-8 py-4 rounded-md font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-95;
+  /* ✅ FIX 2: Replaced the broken theme color utilities with raw CSS variables in brackets */
+  @apply bg-gradient-to-r from-[var(--color-brand-primary)] to-[var(--color-brand-accent)] text-white px-8 py-4 rounded-md font-bold hover:opacity-90 transition-all shadow-md hover:shadow-lg active:scale-95;
 }
 
 .btn-secondary {
@@ -85,13 +148,17 @@ body {
   @apply bg-white border border-slate-200 text-slate-900 px-8 py-4 rounded-md font-bold hover:bg-slate-50 transition-all active:scale-95;
 }
 
+/* Dynamic theme button utility */
+.btn-theme {
+  @apply bg-[var(--color-primary)] text-[var(--color-bg)] px-8 py-4 rounded-md font-bold hover:opacity-90 transition-all shadow-md active:scale-95;
+}
+
 /* Custom animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);

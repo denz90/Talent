@@ -30,7 +30,7 @@ export const PATHS_CONTENT = {
                   "To manage student attendance and grading records",
                   "To provide online tutoring sessions for students"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -41,7 +41,7 @@ export const PATHS_CONTENT = {
                   "Debate prompt",
                   "Exit ticket generator"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q3',
@@ -52,7 +52,7 @@ export const PATHS_CONTENT = {
                   "About 10 minutes",
                   "Less than 3 minutes"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q4',
@@ -63,7 +63,7 @@ export const PATHS_CONTENT = {
                   "Add specific details in your prompt, such as 'include hands-on activity' or 'use real-world examples'",
                   "Generate multiple lessons and combine them manually"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q5',
@@ -74,7 +74,7 @@ export const PATHS_CONTENT = {
                   "A debate prompt",
                   "An IEP goal document"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           },
@@ -94,7 +94,7 @@ export const PATHS_CONTENT = {
                   "Provide a platform for students to complete assignments independently",
                   "Manage school administration tasks such as timetables and staff scheduling"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -105,7 +105,7 @@ export const PATHS_CONTENT = {
                   "Translation Tool",
                   "Lesson Plan Generator"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
@@ -116,7 +116,7 @@ export const PATHS_CONTENT = {
                   "Evaluate and Create",
                   "Remember and Apply"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q4',
@@ -127,7 +127,7 @@ export const PATHS_CONTENT = {
                   "Click 'Add to My Library' to save and reuse optimized materials as templates",
                   "Share materials with colleagues via email for future reference"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q5',
@@ -138,7 +138,7 @@ export const PATHS_CONTENT = {
                   "Use the Assessment Creator and set question types to 'Short Answer'",
                   "Use the Translation Tool to convert the essay into a simpler language"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               }
             ]
           }
@@ -164,7 +164,7 @@ export const PATHS_CONTENT = {
                   "A video editing and multimedia platform created by Apple",
                   "A student grading and feedback tool created by Canva"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -175,7 +175,7 @@ export const PATHS_CONTENT = {
                   "It helps teach critical sourcing and avoid plagiarism",
                   "It automatically shares materials with students online"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
@@ -186,7 +186,7 @@ export const PATHS_CONTENT = {
                   "Fill-in-the-blank and essay questions",
                   "Only short answer questions for deeper thinking"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q4',
@@ -197,7 +197,7 @@ export const PATHS_CONTENT = {
                   "\"Suggest 3 engaging discussion starters about climate change for 12-year-olds.\"",
                   "\"List all scientific terms related to climate change in this document.\""
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q5',
@@ -208,7 +208,7 @@ export const PATHS_CONTENT = {
                   "Create a separate notebook for every individual document",
                   "Download all sources as PDFs and store them externally"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               }
             ]
           },
@@ -228,7 +228,7 @@ export const PATHS_CONTENT = {
                   "It translates the passage into multiple languages and removes all difficult words",
                   "It creates a video summary of the original text for visual learners"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -239,7 +239,7 @@ export const PATHS_CONTENT = {
                   "ELL/ESL students and multilingual families",
                   "Students preparing for standardized examinations"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
@@ -250,7 +250,7 @@ export const PATHS_CONTENT = {
                   "Click 'Translate' → Select Spanish → Download the bilingual version or print for parents",
                   "Use the Text Leveler → Select K-grade → Generate → Export as Google Doc"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q4',
@@ -261,7 +261,7 @@ export const PATHS_CONTENT = {
                   "Diffit replaces the need for specialist teachers such as SPED and ESL educators",
                   "Diffit generates legal documentation for IEP meetings and parent conferences"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
@@ -272,7 +272,7 @@ export const PATHS_CONTENT = {
                   "Generate simplified versions of primary sources to scaffold struggling writers",
                   "Export primary sources as flashcards for memorization practice"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           }
@@ -298,7 +298,7 @@ export const PATHS_CONTENT = {
                   "A student grading system that provides automated scores and written reports",
                   "A virtual classroom tool that replaces face-to-face teaching sessions"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -309,7 +309,7 @@ export const PATHS_CONTENT = {
                   "Discussion questions, opposing viewpoints, and interactive exercises",
                   "Timetables and curriculum mapping documents"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
@@ -320,7 +320,7 @@ export const PATHS_CONTENT = {
                   "\"Suggest 3 visuals for a solar system video\"",
                   "\"Explain photosynthesis for 5th graders\""
                 ],
-                correctAnswer: 3
+                correctAnswer: 4
               },
               {
                 id: 'q4',
@@ -331,7 +331,7 @@ export const PATHS_CONTENT = {
                   "Flipgrid and Screencastify",
                   "iMovie and Google Slides"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
@@ -342,7 +342,7 @@ export const PATHS_CONTENT = {
                   "The grade level, topic, and desired format for the output",
                   "A sample of a previous lesson plan to use as a style reference"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           },
@@ -362,7 +362,7 @@ export const PATHS_CONTENT = {
                   "To replace traditional classroom teaching with fully automated video instruction",
                   "To generate written lesson plans and printable worksheets for students"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -373,7 +373,7 @@ export const PATHS_CONTENT = {
                   "The Analytics Dashboard that shows participation, quiz results, and rewatch trends",
                   "The Interactive Quiz Overlay that stores student marks automatically"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
@@ -384,7 +384,7 @@ export const PATHS_CONTENT = {
                   "Multilingual classes and ESL learners through language adjustment",
                   "Students preparing for national examinations with timed practice"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q4',
@@ -395,7 +395,7 @@ export const PATHS_CONTENT = {
                   "Add more polls between the 2:00 and 3:00 minute marks",
                   "Shorten the video to end before the 2:15 mark to avoid confusion"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
@@ -406,7 +406,7 @@ export const PATHS_CONTENT = {
                   "Evenly spaced throughout regardless of content complexity",
                   "Right after complex topics to maximize retention"
                 ],
-                correctAnswer: 3
+                correctAnswer: 4
               }
             ]
           }
@@ -432,7 +432,7 @@ export const PATHS_CONTENT = {
                   "Pre-recorded instrumental versions of popular songs for student enjoyment",
                   "Music composed by professional artists donated for educational purposes"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
@@ -443,7 +443,7 @@ export const PATHS_CONTENT = {
                   "Length Control set to 10 seconds, and Download Options as WAV",
                   "BPM Customizer set to high energy, and Mood Adjuster set to energetic"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q3',
@@ -454,7 +454,7 @@ export const PATHS_CONTENT = {
                   "Pop",
                   "Cinematic"
                 ],
-                correctAnswer: 3
+                correctAnswer: 4
               },
               {
                 id: 'q4',
@@ -465,7 +465,7 @@ export const PATHS_CONTENT = {
                   "1 minute to 15 minutes",
                   "5 seconds to 3 minutes"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
@@ -476,7 +476,7 @@ export const PATHS_CONTENT = {
                   "Let kids pick genres for group projects as part of student co-creation",
                   "Have students rate the generated music and suggest improvements to the AI"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           },
@@ -489,58 +489,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 1,
-                question: "According to the challenge, what is the primary benefit of the Brisk Teaching Chrome extension?",
+                question: "According to the challenge, what type of tool is Brisk Teaching, and where does it need to be installed?",
                 options: [
-                  "It replaces Google Docs with a new word processor",
-                  "It integrates AI directly into the tools teachers already use, like Google Docs, Slides, and Canvas",
-                  "It records student audio for verbal assessments",
-                  "It manages school cafeteria menus"
+                  "A paid desktop application that requires monthly subscription and download",
+                  "A free AI-powered Chrome extension installed from the Chrome Web Store",
+                  "A web-based platform accessed directly through any internet browser",
+                  "A mobile app for iOS and Android that connects to Google Classroom"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
-                question: "Which Brisk feature allows a teacher to change the reading level of an article with just a few clicks?",
+                question: "A teacher wants to give a struggling student encouraging written feedback on their essay using Brisk Teaching. Which sequence of steps should the teacher follow?",
                 options: [
-                  "Feedback Generator",
-                  "Lesson Planner",
-                  "Leveler",
-                  "Resource Creator"
+                  "Upload essay as PDF → Click 'AI Detection' → Review highlighted sections",
+                  "Open Google Doc → Click Brisk icon → Sign in → Highlight paragraph → Click 'Feedback' → Choose 'Praise' → Edit → Insert",
+                  "Open news article → Click 'Generate Quiz' → Export to Google Forms",
+                  "Paste text → Click 'Simplify' → Adjust reading level → Download"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 3,
-                question: "According to the Getting Started Guide, what can the Feedback Generator provide based on a student's writing?",
+                question: "A teacher runs the AI detector on a student essay and gets a result of 80% or higher. According to the challenge, what should the teacher reflect on?",
                 options: [
-                  "Only a letter grade (A-F)",
-                  "Targeted, rubric-aligned feedback in seconds",
-                  "A summary for parents only",
-                  "Automatic translation into 100 languages"
+                  "How to improve the essay's grammar and sentence structure using Brisk",
+                  "How to simplify the essay to a lower reading grade level",
+                  "How they would address a student with 80%+ AI detection",
+                  "How to export the essay results to Google Classroom for record-keeping"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 4,
-                question: "What is the 'Brisk It' button used for in the Practical Challenge Task?",
+                question: "A teacher wants to differentiate a science article for Grade 6 students. What should they do in Brisk Teaching to achieve this?",
                 options: [
-                  "To shut down the computer",
-                  "To launch the Brisk menu on any webpage or Google Doc",
-                  "To search for images on Google",
-                  "To log out of the system"
+                  "Open the article → Click 'Generate Quiz' → Select Grade 6 difficulty",
+                  "Paste the science article into Brisk → Click 'Simplify' to Grade 6 level",
+                  "Upload the article as PDF → Click 'AI Detection' → Choose Grade 6 filter",
+                  "Highlight key sentences → Click 'Feedback' → Choose 'Constructive' tone"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 5,
-                question: "According to the Pro Tips section, how can Brisk help with personalized feedback?",
+                question: "The Pro Tips section of the challenge recommends a strategy for saving time when grading multiple student essays. What is this time-saving tip?",
                 options: [
-                  "It uses 'Targeted Feedback' to give actionable, specific suggestions to students",
-                  "It only provides praise to boost student confidence",
-                  "It grades everything as 'Pass/Fail'",
-                  "It emails the student's parents automatically"
+                  "Download all essays as a ZIP file and process them in one batch upload",
+                  "Use the AI Detection tool first to filter out AI-written work before grading",
+                  "Batch-grade essays by opening multiple Google Docs in separate tabs",
+                  "Share all essays with a colleague for co-grading using the Collaboration feature"
                 ],
-                correctAnswer: 0
+                correctAnswer: 3
               }
             ]
           },
@@ -560,51 +560,51 @@ export const PATHS_CONTENT = {
                   "It automatically grades PDF essays and generates report cards",
                   "It creates animated video lessons that students watch and respond to in writing"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
                 question: "According to the challenge, how does Snorkl specifically support ELL and neurodiverse learners?",
                 options: [
-                  "By providing simplified reading passages",
-                  "By allowing students to express understanding verbally, reducing the barrier of written language",
-                  "By translating all content into 50+ languages",
-                  "By providing extra time for all tests"
+                  "It translates all student responses into the teacher's preferred language automatically",
+                  "It provides visual flashcards and graphic organizers for complex topics",
+                  "It reduces reliance on written responses by allowing verbal submissions",
+                  "It generates simplified text versions of assignments for struggling readerss"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 3,
-                question: "In the Practical Challenge Task, what is the 'Thinking Prompt' used for?",
+                question: "What THREE elements does the AI analyze when reviewing a student's verbal submission?",
                 options: [
-                  "To give students the final answer to a math problem",
-                  "To guide student verbal explanations (e.g., 'Explain the steps to solve this equation')",
-                  "To record the teacher's lecture for later viewing",
-                  "To generate a multiple-choice quiz automatically"
+                  "Volume, speaking speed, and pronunciation accuracy",
+                  "Keywords, clarity, and gaps in the student's spoken response",
+                  "Grammar, spelling, and sentence structure from the transcript",
+                  "Engagement level, eye contact, and body language from video"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 4,
-                question: "What does the Snorkl AI do after a student submits their verbal explanation?",
+                question: "The Practical Challenge Task requires teachers to set up a rubric. According to the challenge, which THREE criteria should the rubric include?",
                 options: [
-                  "It deletes the recording for privacy",
-                  "It analyzes the explanation against the teacher's rubric and provides immediate, targeted feedback",
-                  "It sends a notification to the principal",
-                  "It plays the recording back to the whole class"
+                  "Grammar, Spelling, and Sentence Length",
+                  "Creativity, Enthusiasm, and Eye Contact",
+                  "Accuracy, Use of Vocabulary, and Clarity",
+                  "Duration, Fluency, and Topic Coverage"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 5,
-                question: "According to the Pro Tips section, what is 'Scaffolded Reflection' in Snorkl?",
+                question: "The Pro Tips section suggests a strategy called 'Flip Feedback.' According to the challenge, what does this approach involve?",
                 options: [
-                  "A way to build physical models in the classroom",
-                  "Using AI feedback to have students record a 'Version 2' of their explanation to improve their score",
-                  "A method for grading group projects",
-                  "An automated system for tracking attendance"
+                  "Having teachers record verbal feedback instead of writing comments",
+                  "Swapping student essays between classrooms for peer grading",
+                  "Having students review their own transcripts to self-assess their thinking",
+                  "Using Snorkl data to flip the classroom by assigning recordings as homework"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               }
             ]
           },
@@ -624,51 +624,51 @@ export const PATHS_CONTENT = {
                   "Import from Google Classroom or copy from an email attachment",
                   "Scan a handwritten essay or link a shared Google Doc"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
-                question: "The Practical Challenge Task asks teachers to analyze AI feedback after grading three essays. What exactly should a teacher note about each essay?",
+                question: "The Practical Challenge Task asks teachers to analyze AI feedback after grading three essays. What exactly should a teacher note about each essay, according to the task instructions?",
                 options: [
-                  "The total word count and font size used by the student",
-                  "One specific piece of 'Actionable Feedback' the AI suggested for improvement",
-                  "The date and time the essay was submitted for grading",
-                  "The student's previous grades in the same subject"
+                  "The word count, sentence length, and overall reading level of each essay",
+                  "Two strengths and weaknesses per essay (e.g., 'Strong thesis but weak citations')",
+                  "The plagiarism percentage and grammar score for each submission",
+                  "The time taken to grade each essay compared to manual grading"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 3,
-                question: "According to the challenge, what is the purpose of the 'Batch Grading' feature?",
+                question: "According to the Practical Challenge Task, what specific action should a teacher take when manually enhancing feedback on a chosen essay?",
                 options: [
-                  "To grade multiple essays simultaneously using the same rubric",
-                  "To translate essays into different languages",
-                  "To check for plagiarism across all students",
-                  "To generate lesson plans based on essay topics"
+                  "Rewrite the entire AI-generated feedback from scratch using the teacher's own words",
+                  "Lower the rubric score to match the teacher's personal grading standard",
+                  "Add 2 personalized comments (e.g., 'Expand on this example for clarity')",
+                  "Delete all AI comments and replace them with standard written remarks"
                 ],
-                correctAnswer: 0
+                correctAnswer: 3
               },
               {
                 id: 4,
-                question: "Which feature in EssayGrader.ai helps rewrite complex feedback into simpler terms for younger students?",
+                question: "According to the challenge, how does EssayGrader.ai specifically support ESL (English as a Second Language) students?",
                 options: [
-                  "Rubric Builder",
-                  "Language Simplifier",
-                  "Grammar Checker",
-                  "Feedback Bot"
+                  "It automatically translates essays into the student's native language for comparison",
+                  "It provides clear language improvement suggestions through the 'Language Simplifier' feedback",
+                  "It generates bilingual versions of grading rubrics for non-native speakers",
+                  "It reduces the grammar weighting in rubrics for students still developing English skills"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 5,
-                question: "According to the Pro Tips section, how can a teacher ensure 'Human-in-the-Loop' grading?",
+                question: "The Pro Tips section recommends a strategy called 'Batch Grading.' What does this involve and when is it most useful?",
                 options: [
-                  "By letting the AI grade everything and only checking the final scores",
-                  "By reviewing and editing the AI-generated feedback before sharing it with students",
-                  "By having students grade each other's work using the AI",
-                  "By printing the AI feedback and manually writing comments on it"
+                  "Grading one essay per day consistently throughout the school term",
+                  "Pairing each student's essay with a peer review before AI grading",
+                  "Uploading 50+ essays at once, which is particularly efficient at end-of-termI",
+                  "Having a co-teacher review AI grades before sharing results with students"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               }
             ]
           }
@@ -694,49 +694,49 @@ export const PATHS_CONTENT = {
                   "It creates video lessons that students watch before answering questions offline",
                   "It focuses exclusively on multiple-choice tests for standardized exam preparation"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
-                question: "According to the Getting Started Guide, what can the 'AI Question Generator' do with a long PDF document?",
+                question: "According to the challenge, Quizizz 'Boosts Engagement' by turning tests into multiplayer games. Which two specific gamification elements are mentioned?",
                 options: [
-                  "Summarize it into a single paragraph",
-                  "Instantly extract key concepts and generate a full quiz with multiple question types",
-                  "Translate it into 10 different languages",
-                  "Read it aloud to students as an audiobook"
+                  "Timers and certificates of achievement",
+                  "Badges and progress bars",
+                  "Memes and leaderboards",
+                  "Avatars and reward points"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 3,
-                question: "The Practical Challenge Task asks teachers to activate 'Adaptive Mode.' What does this feature specifically do during a live quiz?",
+                question: "The Adaptive Learning feature adjusts question difficulty based on student performance. What must a teacher do to activate this feature?",
                 options: [
-                  "It changes the color of the screen based on student performance",
-                  "It adjusts the difficulty of questions in real-time based on individual student answers",
-                  "It automatically grades the quiz and emails results to parents",
-                  "It plays music that matches the pace of student answering"
+                  "Upload a class roster so the AI can track individual student data",
+                  "Set a minimum score threshold before the difficulty changes",
+                  "Enable 'Adaptive Mode' in the quiz settings",
+                  "Select 'Advanced' difficulty when generating the initial quiz"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 4,
-                question: "What is the benefit of the 'Meme Sets' feature mentioned in the challenge?",
+                question: "After running a live quiz session, a teacher reviews the Reports section. What specific data analysis should the teacher perform?",
                 options: [
-                  "It teaches students how to create digital art",
-                  "It provides humorous, reinforcing feedback after each question to boost engagement",
-                  "It replaces traditional questions with image-based puzzles",
-                  "It allows students to chat with each other during the quiz"
+                  "Calculate the class average score and compare it to the previous quiz",
+                  "Identify the 2 most-missed questions and note why students may have struggled",
+                  "Export the CSV data and upload it to the school's grade management system",
+                  "Check how many students used Power-Ups and whether it improved their scores"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 5,
-                question: "According to the Pro Tips section, how can a teacher use the 'Live Leaderboard' to support a growth mindset?",
+                question: "According to the Pro Tips section, how can a teacher celebrate student progress and motivate learners after a quiz using a fun customization feature?",
                 options: [
-                  "By only showing the top 3 students to create competition",
-                  "By using it to celebrate progress and 'Power-Ups' rather than just high scores",
-                  "By hiding it completely so students don't feel discouraged",
-                  "By using it to assign extra homework to students at the bottom"
+                  "Customize post-quiz memes via Settings → Meme Library to celebrate progress",
+                  "Sync quiz results with Google Classroom to automatically post scores on the grade portal",
+                  "Enable Power-Ups like '50/50' or 'time freeze' during the quiz session",
+                  "Share the class leaderboard screenshot on the school's social media page"
                 ],
                 correctAnswer: 1
               }
@@ -758,51 +758,51 @@ export const PATHS_CONTENT = {
                   "Microsoft developed Khanmigo as a grading automation tool integrated with Microsoft Teams",
                   "Anthropic developed Khanmigo as a content generation platform for creating textbooks"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
-                question: "According to the Key Features table, what is the 'Socratic Tutor' mode designed to do?",
+                question: "What does the 'Student Progress' tab in the Teacher Dashboard show educators?",
                 options: [
-                  "Give students the correct answers immediately to save time",
-                  "Guide students through problems with hints and questions rather than giving answers",
-                  "Write full essays for students based on their prompts",
-                  "Grade student work and assign a numerical score"
+                  "A leaderboard ranking students by quiz scores and completion rates",
+                  "GA list of all assignments submitted with timestamps and file attachments",
+                  "Attendance records and participation rates for each student",
+                  "Khanmigo-flagged misconceptions, such as which students are confused about specific concepts"
                 ],
-                correctAnswer: 1
+                correctAnswer: 4
               },
               {
                 id: 3,
-                question: "In the Practical Challenge Task, what should a teacher use Khanmigo to generate for a 'Humanities' lesson?",
+                question: "According to the Practical Challenge Task, what specific criteria should a teacher use when asking Khanmigo to build a rubric for the debate activity?",
                 options: [
-                  "A 10-question multiple-choice quiz",
-                  "A full lesson plan including a hook, activities, and assessment",
-                  "A list of vocabulary words and their definitions",
-                  "A script for a 5-minute educational video"
+                  "Clarity and evidence",
+                  "Accuracy, Use of Vocabulary, and Clarity",
+                  "Grammar, structure, and argument strength",
+                  "Critical thinking, creativity, and collaboration"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 4,
-                question: "According to the Getting Started Guide, how can a teacher use the 'Student Progress' dashboard?",
+                question: "In the Practical Challenge Task, students are asked to seek tutoring help from Khanmigo. What specific question should students ask, and what key tip does the AI provide?",
                 options: [
-                  "To track attendance and late submissions",
-                  "To see which students are struggling and what specific concepts they need help with",
-                  "To compare their class performance against national standards",
-                  "To manage their own professional development hours"
+                  "Ask 'How do I structure a persuasive argument?' and the AI tip is 'Use claim-evidence-reasoning'",
+                  "Ask 'How do I write an introduction?' and the AI suggests using a hook sentence",
+                  "Ask 'Can you give me an example debate?' and the AI generates a sample transcript",
+                  "Ask 'What is a debate?' and the AI provides a dictionary definition"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 5,
-                question: "What is the benefit of the 'Co-Writing' feature mentioned in the pro tips?",
+                question: "WAccording to the Pro Tips section, how can a teacher get the best results when using the Lesson Planner in Khanmigo?",
                 options: [
-                  "It allows students to write essays together in real-time",
-                  "It acts as a partner that brainstorms ideas and provides feedback during the writing process",
-                  "It automatically formats student citations in APA or MLA style",
-                  "It translates student writing into 20+ different languages"
+                  "Keep prompts short and general so the AI has creative freedom to generate varied content",
+                  "Upload a class roster so Khanmigo can personalize lessons to individual student needs",
+                  "Use specific prompts that include duration, topic, and learner type — for example, 'Generate a 3-day lesson on quadratic equations for visual learners'",
+                  "Always start with a preset template and then ask the AI to make minor adjustments"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               }
             ]
           },
@@ -822,7 +822,7 @@ export const PATHS_CONTENT = {
                   "Virtual reality simulations that immerse students in subject matter",
                   "Pre-recorded video lectures that adjust speed based on viewing history"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
@@ -844,7 +844,7 @@ export const PATHS_CONTENT = {
                   "45-minute lesson on 'Fractions' or the teacher's subject of choice",
                   "90-minute lesson on 'Photosynthesis' aligned to NGSS standards"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 4,
@@ -855,7 +855,7 @@ export const PATHS_CONTENT = {
                   "It generates awards and certificates for top-performing students in the class",
                   "It syncs student data directly with the school's official report card system"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 5,
@@ -866,7 +866,7 @@ export const PATHS_CONTENT = {
                   "The 'Recommend Resources' button that auto-suggests videos and readings for struggling students",
                   "The Progress Dashboard filter to sort students by performance and manually assign links"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           },
@@ -886,7 +886,7 @@ export const PATHS_CONTENT = {
                   "Replace physical classrooms with fully remote AI-delivered instruction",
                   "Create printable worksheets and physical activity kits for hands-on classroom use"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 2,
@@ -897,38 +897,38 @@ export const PATHS_CONTENT = {
                   "They monitor student screen time and flag off-task behavior to the teacher",
                   "They generate parent communication reports based on student activity data"
                 ],
-                correctAnswer: 1
-              },
-              {
-                id: 3,
-                question: "In the Getting Started Guide, what THREE types of AI bots can a teacher add to a Space in Step 3?",
-                options: [
-                  "Research Bot, Writing Bot, and Presentation Bot",
-                  "Grading Bot, Attendance Bot, and Parent Communication Bot",
-                  "Quiz Bot, Guide Bot, and Scenario Bot",
-                  "Translation Bot, Summary Bot, and Discussion Bot"
-                ],
                 correctAnswer: 2
               },
               {
-                id: 4,
-                question: "According to the Getting Started Guide, how can a teacher invite students to join a SchoolAI Space?",
+                id: 3,
+                question: "How can a teacher invite students to join a SchoolAI Space?",
                 options: [
-                  "Students must be manually added by entering each individual email address",
                   "Teachers click 'Share' and copy the join link or generate QR codes",
+                  "Students must be manually added by entering each individual email address",
                   "Students search for the Space by name and request access from the teacher",
                   "Teachers export a PDF invitation and distribute it via email or print"
                 ],
                 correctAnswer: 1
               },
               {
-                id: 5,
-                question: "The Practical Challenge Task asks teachers to build an ecosystems Space. According to the challenge, which specific THREE AI bots should be added?",
+                id: 4,
+                question: "According to the Analytics Dashboard feature in the challenge, what type of visual data does it provide to help educators identify learning gaps?",
                 options: [
-                  "Research Bot, Writing Bot, and Quiz Bot",
-                  "Ecologist Guide, Quiz Bot, and Scenario Bot",
-                  "Science Bot, Discussion Bot, and Summary Bot",
-                  "Teacher Bot, Assessment Bot, and Support Bot"
+                  "Bar charts showing quiz scores sorted by student performance rank",
+                  "Heatmaps of student activity and time spent on tasks",
+                  "Pie charts displaying subject area coverage across the school year",
+                  "Line graphs tracking individual student progress over multiple sessions"
+                ],
+                correctAnswer: 1
+              },
+              {
+                id: 5,
+                question: "What is the 'Student-Led Design' strategy recommended for Mastery of SchoolAI Spaces?",
+                options: [
+                  "Having students vote on which Space templates they want the teacher to use for upcoming lessons",
+                  "Training students to moderate AI bot conversations and flag incorrect responses",
+                  "Assigning students to test and evaluate each other's completed Spaces for usability",
+                  "Allowing students to co-create Spaces as a peer teaching activity"
                 ],
                 correctAnswer: 1
               }
@@ -943,9 +943,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "How does Kahoot! AI simplify quiz creation?",
-                options: ["By generating questions from topics or PDFs", "By playing the game for you", "By automatically grading papers", "It doesn't use AI"],
-                correctAnswer: 0
+                question: "According to the challenge description, what is Kahoot! AI and which AI model powers it?",
+                options: [
+                  "A manual quiz builder that uses pre-loaded question banks created by teachers",
+                  "An AI-powered question generator that uses OpenAI's GPT-4 model to convert content into interactive quizzes",
+                  "A video lesson platform powered by Google Gemini for creating recorded tutorials",
+                  "A digital flashcard tool that uses machine learning to personalise revision schedules"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q2',
+                question: "According to the challenge's Step 3 (Customise Generation Settings), a teacher wants to create a quiz for students who are finding the topic difficult. Which Skill Level setting should they select?",
+                options: [
+                  "Intermediate, because it is the balanced middle option",
+                  "Advanced, because it prepares struggling learners for harder content",
+                  "Beginner, because it differentiates for students at that level",
+                  "Expert, because the challenge recommends pushing all learners further"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q3',
+                question: "The Pro Tips section warns teachers about one important limitation of Kahoot! AI-generated content. What is it, and what should teachers do about it?",
+                options: [
+                  "AI only supports English; teachers must manually translate questions for multilingual classes",
+                  "AI can occasionally produce incorrect information; teachers should always review questions carefully before using them",
+                  "AI-generated quizzes expire after 24 hours; teachers must regenerate them before each lesson",
+                  "AI cannot generate image descriptions; teachers must add all visuals manually after generation"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q4',
+                question: "A teacher wants to create a Kahoot! quiz about a breaking news story that happened this morning. Which input method and feature should they use?",
+                options: [
+                  "PDF Upload — scan a printout of the news article and upload it",
+                  "Wikipedia Integration — search for the news event title on Wikipedia",
+                  "Perplexity Integration — type the current event topic so AI pulls real-time information",
+                  "Topic-to-Quiz — type the news headline and generate from the AI's existing training data"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q5',
+                question: "According to the Pro Tips section, a teacher wants to reward careful thinking rather than speed during a complex topic quiz. Which feature should they enable?",
+                options: [
+                  "Confidence Mode — students rate how sure they are of each answer",
+                  "Accessibility Settings — adjust the display for inclusive play",
+                  "Accuracy Mode — turn off speed scoring to reward thoughtful analysis over quick reactions",
+                  "Flipped Classroom Mode — generate pre-lesson quizzes from textbook PDFs"
+                ],
+                correctAnswer: 3
               }
             ]
           }
@@ -964,9 +1013,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What does Scribble Diffusion turn into a high-quality image?",
-                options: ["A voice note", "A rough hand-drawn sketch", "A 1000-page essay", "A spreadsheet"],
+                question: "According to the challenge, what is the primary purpose of Scribble Diffusion for educators?",
+                options: [
+                  "To automatically grade student sketches",
+                  "To transform rough hand-drawn sketches into polished digital illustrations",
+                  "To replace traditional art teachers with AI", 
+                  "To generate full lesson plans from a single drawing"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q2',
+                question: "A teacher wants to help a student with motor skill challenges participate in a visual art activity. Which benefit of Scribble Diffusion directly supports this need?",
+                options: [
+                  "It supports inclusive learning for non-artists or students with motor skill challenges",
+                  "It requires advanced drawing skills to work properly",
+                  "It only works with typed descriptions, not drawings", 
+                  "It automatically animates all student drawings"
+                ],
                 correctAnswer: 1
+              },
+              {
+                id: 'q3',
+                question: "Which Pro Tip from the challenge suggests a way to improve accuracy when using Scribble Diffusion?",
+                options: [
+                  "Use the darkest pencil possible",
+                  "Draw only geometric shapes",
+                  "Sketch over a reference image for accuracy", 
+                  "Never redraw messy lines"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q4',
+                question: "According to the challenge, what should a teacher do if the AI output from Scribble Diffusion isn’t perfect?",
+                options: [
+                  "Delete the sketch and start a new lesson",
+                  "Redraw messy lines and retry",
+                  "Blame the students for poor drawing", 
+                  "Use a different AI tool without retrying"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q5',
+                question: "The challenge suggests using Scribble Diffusion to visualize which of the following types of abstract concepts?",
+                options: [
+                  "Mathematical formulas only",
+                  "Science diagrams and historical scenes",
+                  "Musical notation", 
+                  "Sports statistics"
+                ],
+                correctAnswer: 2
               }
             ]
           },
@@ -979,9 +1077,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the core focus of the Parlay tool?",
-                options: ["Grading math tests", "Facilitating structured and inclusive classroom discussions", "Designing school posters", "Tracking student attendance"],
-                correctAnswer: 1
+                question: "According to the challenge, what is the primary purpose of Parlay for educators?",
+                options: [
+                  "To automatically grade written essays", 
+                  "To create structured, inclusive, and data-rich student debates called RoundTables", 
+                  "To replace teachers during class discussions", 
+                  "To generate video lectures for students"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q2',
+                question: "A teacher has several shy students who rarely speak during class debates. Which Parlay feature is specifically designed to support quieter students?",
+                options: [
+                  "AI Feedback only",
+                  "Anonymous Mode only",
+                  "Written Mode (students type responses instead of speaking)", 
+                  "Custom Rubrics"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q3',
+                question: "During a live RoundTable discussion, how can a teacher encourage a specific quiet student to participate according to the challenge?",
+                options: [
+                  "Call on the student publicly in front of the class only",
+                  "Use the Teacher Dashboard to send private nudges",
+                  "Wait until the discussion ends to email the student", 
+                  "Disable anonymous mode to identify the student"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q4',
+                question: "After a Parlay discussion session ends, where can a teacher find AI-detected common misconceptions from students?",
+                options: [
+                  "In the Custom Rubrics section",
+                  "On the join code screen",
+                  "In the Analytics Tab under AI insights", 
+                  "Inside the Written Mode settings"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q5',
+                question: "According to the Pro Tips for Mastery, what is one suggested way to prepare students before using Parlay?",
+                options: [
+                  "Have them memorize discussion questions in advance",
+                  "Use Parlay's 'Discussion Skills' mini-lessons to teach active listening",
+                  "Require students to install third-party recording software", 
+                  "Disable all rubrics to reduce pressure"
+                ],
+                correctAnswer: 2
               }
             ]
           },
@@ -994,10 +1141,60 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "Who is 'Diya' in the Google Read Along app?",
-                options: ["The principal of the school", "An AI reading tutor that gives real-time feedback", "A character in a specific book", "The developer who built the app"],
+                question: "According to the challenge, what is the primary purpose of Read Along for educators?",
+                options: [
+                  "To replace English teachers completely", 
+                  "To grade reading comprehension essays automatically", 
+                  "To create animated story videos for students", 
+                  "To help children improve reading skills through real-time speech recognition and feedback"
+                ],
+                correctAnswer: 4
+              },
+              {
+                id: 'q2',
+                question: "A teacher has students who need to practice reading but have limited internet access at home. Which Read Along feature directly addresses this challenge?",
+                options: [
+                  "Offline Access (no internet needed after initial download)", 
+                  "Teacher Dashboard only", 
+                  "Custom Word Lists only", 
+                  "Multilingual Library only"
+                ],
                 correctAnswer: 1
-              }
+              },
+              {
+                id: 'q3',
+                question: "According to the Step-by-Step Getting Started Guide, what should a teacher enable to disable games and ensure focused reading practice?",
+                options: [
+                  "School Mode", 
+                  "Anonymous Mode", 
+                  "Reward System", 
+                  "AI Prompt Generator"
+                ],
+                correctAnswer: 1
+              },
+              {
+                id: 'q4',
+                question: "A teacher wants to reinforce specific vocabulary from their current science unit on ecosystems. Which feature should they use according to the challenge?",
+                options: [
+                  "AI Reading Buddy only", 
+                  "Custom Word Lists (upload vocabulary from current lessons)", 
+                  "Multilingual Library only", 
+                  "Reward System badges"
+                ],
+                correctAnswer: 2
+              },
+              {
+                id: 'q5',
+                question: "The Practical Challenge Task asks teachers to run a 3-day reading fluency experiment. On Day 2 of the intervention, what type of reading material should students use?",
+                options: [
+                  "Teacher's choice from the library", 
+                  "App-selected story only", 
+                  "Custom word list (e.g., 'science terms')", 
+                  "Student's choice from library only"
+                ],
+                correctAnswer: 3
+              },
+
             ]
           },
           { 
@@ -1009,58 +1206,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary purpose of Curipod?",
+                question: "According to the challenge, what is the primary purpose of Curipod for educators?",
                 options: [
-                  "To automate grading",
-                  "To transform passive learning into dynamic student-led conversations",
-                  "To create presentation slides from scratch",
-                  "To track teacher attendance"
+                  "To replace teachers with AI-generated lectures",
+                  "To generate thought-provoking questions, polls, and activities that transform passive learning into dynamic student-led conversations",
+                  "To automatically grade student essays",
+                  "To create 3D animations for science lessons"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "Which cognitive framework does Curipod use for its AI Discussion Generator?",
+                question: "A teacher pastes their lesson topic into Curipod. What does the AI Discussion Generator produce according to the challenge?",
                 options: [
-                  "Gardner's Multiple Intelligences",
-                  "Maslow's Hierarchy of Needs",
-                  "Bloom's Taxonomy",
-                  "Vygotsky's Zone of Proximal Development"
+                  "A full lesson plan with videos",
+                  "Leveled questions based on Bloom's Taxonomy",
+                  "A printable quiz with 50 questions",
+                  "A student attendance report"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "What is the benefit of the Live Word Clouds feature in Curipod?",
+                question: "During a live Curipod session, a teacher wants to instantly see the most common answers from the entire class. Which feature should they use?",
                 options: [
-                  "It generates weather reports",
-                  "It instantly gauges class consensus",
-                  "It downloads images from the web",
-                  "It records student audio"
+                  "Reflection Journals",
+                  "Parlay Integration",
+                  "Live Word Clouds",
+                  "Global Exchange"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 'q4',
-                question: "According to the challenge, how can teachers involve students in 'Student Co-Creation'?",
+                question: "According to the Pro Tips for Mastery, which mode should a teacher use to challenge class consensus and encourage deeper thinking?",
                 options: [
-                  "By having them grade each other's work",
-                  "By letting kids pick genres or topics for group projects",
-                  "By asking them to write the software code",
-                  "By having them manage the class budget"
+                  "'Quiet Classroom' mode",
+                  "'Devil's Advocate' mode",
+                  "'Auto-Grade' mode",
+                  "'Silent Reading' mode"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "Which tool can Curipod integrate with to structure Socratic seminars?",
+                question: "A teacher wants to connect their classroom with another classroom worldwide to compare debate outcomes. Which Curipod feature supports this?",
                 options: [
-                  "Kahoot!",
-                  "Parlay",
-                  "Quizizz",
-                  "Canva"
+                  "Reflection Journals only",
+                  "Parlay Integration only",
+                  "Global Exchange",
+                  "Live Word Clouds only"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               }
             ]
           },
@@ -1073,56 +1270,56 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary benefit of Labster for STEM education?",
+                question: "According to the challenge, what is the primary purpose of Labster for educators?",
                 options: [
-                  "It replaces the need for a science teacher",
-                  "It provides immersive, interactive science simulations in a safe 3D environment",
-                  "It only works for medical students",
-                  "It generates music for science videos"
+                  "To replace all physical science teachers with AI",
+                  "To provide immersive, interactive science simulations that replace or supplement physical labs with 3D environments",
+                  "To grade student lab reports automatically",
+                  "To livestream science experiments from real laboratories"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "Which feature in Labster allows students to overlay 3D lab equipment onto real-world surfaces?",
+                question: "A teacher wants students to conduct a DNA sequencing experiment but lacks expensive lab equipment. Which Labster benefit directly addresses this problem?",
                 options: [
-                  "VR Mode",
-                  "AR Mode (mobile app)",
-                  "2D Mode",
-                  "Textbook Mode"
+                  "Gamification and rewards only",
+                  "Safe and accessible virtual experiments (dangerous/expensive experiments done virtually)",
+                  "AR Mode for mobile devices only",
+                  "Pre-lab PDFs only"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "What can teachers see on the Labster Teacher Dashboard?",
+                question: "A teacher wants to view heatmaps of student attempts and quickly identify struggling students. Which Labster feature should they use?",
                 options: [
-                  "Student social media profiles",
-                  "Granular analytics on student progress, quiz scores, and time spent",
-                  "Only the final grade",
-                  "School cafeteria menus"
+                  "Lab Manuals",
+                  "AR Mode",
+                  "Teacher Dashboard",
+                  "Assignments section only"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 'q4',
-                question: "According to the challenge, how much time can Labster Manuals save teachers per week on lesson planning?",
+                question: "According to the Pro Tips for Mastery, which mode should a teacher use for struggling students who need more time and support?",
                 options: [
-                  "1 hour",
-                  "5+ hours",
-                  "10 minutes",
-                  "24 hours"
+                  "Expert Mode",
+                  "Slow Mode",
+                  "Quiz Mode",
+                  "AR Mode"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "Which subject is NOT specifically mentioned as part of Labster's 300+ simulations?",
+                question: "A teacher wants to enhance kinesthetic learning by allowing students to interact with 3D lab equipment in their physical classroom space. Which Labster feature supports this?",
                 options: [
-                  "Biology",
-                  "Chemistry",
-                  "Physics",
-                  "Art History"
+                  "Lab Manuals only",
+                  "Virtual Labs only",
+                  "AR Mode (use mobile app to overlay 3D lab equipment onto real-world surfaces)",
+                  "Teacher Dashboard only"
                 ],
                 correctAnswer: 3
               }
@@ -1137,58 +1334,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary function of Lumen5 for educators?",
+                question: "According to the challenge, what is the primary purpose of Lumen5 for educators?",
                 options: [
-                  "To grade student papers",
-                  "To transform text-based content into engaging educational videos",
+                  "To replace video editors with professional film crews",
+                  "To turn text (lesson plans, articles, scripts) into engaging educational videos using AI",
                   "To manage classroom behavior",
                   "To track school budgets"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "How does Lumen5's AI Script-to-Video feature work?",
+                question: "What should a teacher select as their use case when signing up for Lumen5?",
                 options: [
-                  "It records the teacher's voice and creates an avatar",
-                  "It analyzes text and automatically suggests visuals and scenes",
-                  "It downloads videos from YouTube",
-                  "It writes the entire curriculum from scratch"
+                  "Business",
+                  "Marketing",
+                  "Education",
+                  "Entertainment"
                 ],
-                correctAnswer: 1
+                correctAnswer: 3
               },
               {
                 id: 'q3',
-                question: "Which feature ensures consistent branding for institutional content?",
+                question: "A teacher wants to ensure their video is accessible for ESL students and compliant with accessibility standards. Which two features should they use according to the challenge?",
                 options: [
-                  "AI Script-to-Video",
-                  "Brand Kit",
-                  "Voiceover & Captions",
-                  "Media Library"
+                  "Voiceover and Captions (auto-captions supporting 20+ languages)",
+                  "Brand Kit and Collaboration only",
+                  "Media Library and Export only",
+                  "AI Script-to-Video only"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 'q4',
-                question: "What is the benefit of the 'Template Hack' mentioned in the pro tips?",
+                question: "Which template does Lumen5 offer for faster formatting of educational content?",
                 options: [
-                  "It provides free snacks",
-                  "It uses 'Education Explainer' templates to save 10+ minutes per video",
-                  "It allows teachers to skip the sign-up process",
-                  "It automatically translates the video"
+                  "'Business Pitch' template",
+                  "'Education Explainer' template",
+                  "'Movie Trailer' template",
+                  "News Report' template"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "How many languages are supported by Lumen5's auto-generated captions?",
+                question: "A teacher wants to maintain consistent school branding (colors and fonts) across all their educational videos. Which Lumen5 feature should they use?",
                 options: [
-                  "5",
-                  "10",
-                  "20+",
-                  "100+"
+                  " Voiceover & Captions",
+                  "Media Library",
+                  "Brand Kit (set school colors/fonts → apply to all videos automatically)",
+                  "Collaboration"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               }
             ]
           },
@@ -1201,58 +1398,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary goal of TeacherMatic?",
+                question: "A teacher reports feeling burned out from repetitive lesson preparation tasks. Which benefit of TeacherMatic directly addresses this problem?",
                 options: [
-                  "To replace teachers with AI robots",
-                  "To streamline lesson planning, worksheet creation, and assessment design",
-                  "To manage school cafeteria schedules",
-                  "To provide games for students to play during lunch"
+                  "Generates student report cards only",
+                  "Reduces burnout by automating repetitive tasks",
+                  "Provides free coffee vouchers",
+                  "Schedules parent-teacher conferences automatically"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "According to the challenge, how much time can TeacherMatic save on lesson planning compared to traditional methods?",
+                question: "A teacher wants to create two versions of a worksheet on the same topic—one for beginners and one for advanced students. Which feature and action from the Practical Challenge Task supports this?",
                 options: [
-                  "10%",
-                  "50%",
-                  "85%",
-                  "100%"
+                  "Use the Quiz Maker to generate true/false questions only",
+                  "Use the Worksheet Builder to make two versions (e.g., 'Beginner' and 'Advanced')",
+                  "Use the Resource Bank to find pre-made exit tickets",
+                  "Use the Rubric Creator to standardize grading"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "Which TeacherMatic feature allows educators to define assessment criteria and auto-generate editable benchmarks?",
+                question: "According to the Key Features table, what should a teacher do to standardize grading with clear benchmarks?",
                 options: [
-                  "Lesson Plan Generator",
-                  "Worksheet Builder",
-                  "Rubric Creator",
-                  "Quiz Maker"
+                  "Use the Quiz Maker to generate auto-graded quizzes",
+                  "Use the Rubric Creator to auto-generate editable rubrics",
+                  "Use the Lesson Plan Generator for structured plans",
+                  "Use the Resource Bank to browse templates"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q4',
-                question: "What is the benefit of the 'Batch Create' pro tip?",
+                question: "How can a teacher prepare a week's worth of materials efficiently in one session?",
                 options: [
-                  "It generates music for the classroom",
-                  "It allows preparing a month's worth of materials in one session",
-                  "It deletes old lesson plans",
-                  "It organizes student field trips"
+                  "Use the Quiz Maker for all subjects at once",
+                  "Batch create using the 'Resource Bank'",
+                  "Generate lesson plans one day at a time",
+                  "Manually type every worksheet from scratch"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "Which differentiation level includes 'Extension activities, critical thinking prompts, and independent research tasks'?",
+                question: "A teacher wants to collaborate with colleagues to build a departmental resource hub. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "Beginner",
-                  "Intermediate",
-                  "Advanced",
-                  "Special Needs"
+                  "Share your library with colleagues to build a departmental resource hub",
+                  "Keep all resources private and never share",
+                  "Delete resources after each use",
+                  "Use only printed materials instead of digital resources"
                 ],
-                correctAnswer: 2
+                correctAnswer: 1
               }
             ]
           },
@@ -1265,56 +1462,56 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary role of Fetchy for educators?",
+                question: "According to the challenge, what is the primary purpose of Fetchy for educators?",
                 options: [
-                  "To replace teachers in the classroom",
-                  "To act as a virtual assistant that automates administrative tasks and generates resources",
-                  "To manage school sports events",
-                  "To provide music for student dances"
+                  "To automate administrative tasks, generate teaching resources, and enhance classroom productivity as a virtual assistant for teachers",
+                  "To replace teachers with AI-powered virtual instructors",
+                  "To grade student essays automatically",
+                  "To create school lunch menus"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 'q2',
-                question: "Which Fetchy feature helps teachers send polished and empathetic messages to parents in seconds?",
+                question: "A teacher needs to send a polished, empathetic progress update to a parent about a student named Alex. What should the teacher do after selecting 'Progress Update' from the Communications section?",
                 options: [
-                  "Lesson Plan Generator",
-                  "Email Draft Assistant",
-                  "Worksheet Creator",
-                  "Meeting Agenda Builder"
+                  "Immediately click send without editing",
+                  "Fill in Student Name, Strengths, and Area for Growth, then click 'Generate Draft' and polish the tone",
+                  "Delete the draft and write the email from scratch",
+                  "Use the Lesson Plan Generator instead"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "According to the challenge, how much time can Fetchy save on drafting parent emails compared to traditional methods?",
+                question: "The Practical Challenge Task asks teachers to automate one week of lesson prep. After generating 3 lesson plans and screenshotting the 'Standards Alignment' section, what is the next step?",
                 options: [
-                  "20%",
-                  "50%",
-                  "90%",
-                  "100%"
+                  "Delete all lesson plans immediately",
+                  "Draft 2 emails (1 behavioral update + 1 curriculum preview) and share one email draft showing before/after AI refinement",
+                  "Skip parent communication entirely",
+                  "Generate only worksheets without any emails"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q4',
-                question: "What is the purpose of the 'Batch Tasks' pro tip in Fetchy?",
+                question: "According to the Key Features table, which Fetchy feature should a teacher use to keep team meetings focused and efficient by auto-generating discussion points and timelines?",
                 options: [
-                  "To create all lesson plans and parent emails for the entire week in one session",
-                  "To delete old emails automatically",
-                  "To play games with students",
-                  "To organize school assemblies"
+                  "Lesson Plan Generator",
+                  "Worksheet Creator",
+                  "Meeting Agenda Builder",
+                  "Email Draft Assistant"
                 ],
-                correctAnswer: 0
+                correctAnswer: 3
               },
               {
                 id: 'q5',
-                question: "Which of the following is a tool mentioned within the Email Draft Assistant?",
+                question: "A teacher wants to prepare all teaching materials for an entire week in one sitting. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "Weather Reports",
-                  "Behavioral Notes",
-                  "Budget Planning",
-                  "Social Media Posting"
+                  "Use Fetchy every Monday to prep the entire week's materials (Batch Tasks)",
+                  "Generate materials one day at a time only",
+                  "Avoid using templates for recurring needs",
+                  "Manually type every worksheet from scratch"
                 ],
                 correctAnswer: 1
               }
@@ -1331,56 +1528,56 @@ export const PATHS_CONTENT = {
                 id: 'q1',
                 question: "According to the challenge, what is the primary purpose of Ellie AI for educators?",
                 options: [
-                  "To automate administrative tasks, generate personalized materials, and provide data-driven insights",
-                  "To replace the need for physical textbooks entirely",
-                  "To provide a platform for student social media interaction",
-                  "To manage the school's heating and cooling systems"
+                  "To replace teachers with fully automated classrooms",
+                  "To act as an AI-powered virtual assistant that automates administrative tasks, generates personalized learning materials, and provides data-driven insights",
+                  "To create social media content for schools",
+                  "To design school building floor plans"
                 ],
-                correctAnswer: 0
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "Which Ellie AI feature is designed to identify at-risk students early through AI-generated analytics?",
+                question: "A teacher reports spending over 8 hours weekly on repetitive tasks like emails and grading. Which benefit of Ellie AI directly addresses this problem?",
                 options: [
-                  "Smart Lesson Planner",
-                  "Auto-Quiz Generator",
-                  "Student Progress Dashboard",
-                  "Pedagogical Chatbot"
+                  "Provides free coffee vouchers for teachers",
+                  "Saves 8+ hours/week by automating repetitive tasks (emails, grading, scheduling)",
+                  "Automatically hires substitute teachers",
+                  "Creates student ID cards"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "How much planning time can be cut by using Ellie AI's Smart Lesson Planner with standards-aligned content?",
+                question: "A teacher uploads a student essay as a PDF and wants AI-suggested rubric scores. Which feature should they use?",
                 options: [
-                  "10%",
-                  "30%",
-                  "70%",
-                  "100%"
+                  "Smart Lesson Planner",
+                  "Email Automation",
+                  "Feedback Assistant (Upload a student essay → Click 'Feedback Assistant' → Screenshot AI-suggested rubric scores)",
+                  "Pedagogical Chatbot"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q4',
-                question: "What is the benefit of the 'Pedagogical Chatbot' feature?",
+                question: "How can a teacher use Ellie AI while commuting to plan a lesson?",
                 options: [
-                  "It answers phone calls from parents",
-                  "It provides on-demand professional development and teaching strategies",
-                  "It orders classroom supplies automatically",
-                  "It schedules school bus routes"
+                  "Wait until arriving at school to type all lesson ideas",
+                  "Use Ellie's mobile app with voice commands (e.g., 'Plan a 9th-grade algebra lesson on polynomials')",
+                  "Send an email to themselves with lesson ideas",
+                  "Write lesson plans on paper during the commute"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "According to the weekly time savings breakdown, how much time can Ellie AI save on essay grading compared to traditional methods?",
+                question: "A teacher wants to receive automatic notifications when a student misses 3 or more assignments. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "25%",
-                  "50%",
-                  "85%+",
-                  "10%"
+                  "Set up AI alerts for when students miss 3+ assignments (Data-Driven Interventions)",
+                  "Manually check each student's record daily",
+                  "Ignore missing assignments completely",
+                  "Only check grades at the end of the semester"
                 ],
-                correctAnswer: 2
+                correctAnswer: 1
               }
             ]
           },
@@ -1393,56 +1590,56 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary benefit of Gradescope's 'AI Answer Groups' feature?",
+                question: "According to the challenge, what is the primary purpose of Gradescope for educators?",
                 options: [
-                  "It provides students with free snacks",
-                  "It allows educators to grade batches of similar responses in one action",
-                  "It generates new textbooks automatically",
-                  "It schedules school field trips"
+                  "To replace teachers with automated grading robots",
+                  "To help educators grade paper-based exams, online homework, and programming projects efficiently using AI-assisted grading and assessment tools",
+                  "To create video lectures for students",
+                  "To design school websites"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "How much grading time can be saved for 'Programming Assignments' using Gradescope's auto-grading tools?",
+                question: "A teacher wants to ensure consistent grading across all student submissions and reduce bias. Which two features support this goal?",
                 options: [
-                  "10%",
-                  "35%",
-                  "70%+",
-                  "100%"
+                  "Live chat and video conferencing",
+                  "Fairness with rubric-based grading and anonymization",
+                  "Automatic letter writing and parent notifications",
+                  "Student self-assessment and peer voting"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "Which Gradescope feature helps reduce unconscious bias by hiding student names during the grading process?",
+                question: "The Practical Challenge Task asks teachers to grade a batch of submissions using AI-assisted grouping. After uploading a sample assignment and creating a rubric with 3 criteria, what is the next step?",
                 options: [
-                  "Dynamic Rubrics",
-                  "AI Answer Groups",
-                  "Anonymous Grading",
-                  "Analytics Dashboard"
+                  "Skip grading entirely",
+                  "Grade 1 representative answer per AI group → Apply scores to all matches",
+                  "Manually grade each submission individually without using AI groups",
+                  "Delete the rubric and start over"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q4',
-                question: "What happens when you edit a rubric item in Gradescope using the 'Rubric Hack' mentioned in the pro tips?",
+                question: "A teacher wants to save time on future assignments by reusing grading criteria. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "The entire assignment is deleted",
-                  "Only the current student's score is updated",
-                  "It automatically updates the scores for all students already graded with that item",
-                  "It sends an email to the school principal"
+                  "Delete rubrics after each assignment",
+                  "Save rubrics as templates for future assignments (Rubric Hack)",
+                  "Manually recreate rubrics every time",
+                  "Avoid using rubrics altogether"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q5',
-                question: "Which subject areas are supported by Gradescope according to the 'Works Across All Subjects' section?",
+                question: "According to the Key Features table, what should a teacher use to view histograms, question stats, and grade distributions after grading to identify class-wide knowledge gaps?",
                 options: [
-                  "Only English Literature",
-                  "Only Physical Education",
-                  "Math, Physics, CS, and Engineering",
-                  "Only Art History"
+                  "Programming Exams feature only",
+                  "Analytics Dashboard",
+                  "Peer Review feature only",
+                  "AI Answer Groups only"
                 ],
                 correctAnswer: 2
               }
@@ -1457,58 +1654,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary purpose of Turnitin's 'Originality Report'?",
+                question: "According to the challenge, what is the primary purpose of Turnitin with AI Feedback for educators?",
                 options: [
-                  "To check the spelling of student names",
-                  "To identify uncited content or potential plagiarism by comparing work against a vast database",
-                  "To generate new essay topics for students",
-                  "To track student attendance"
+                  "To automatically grade all student assignments without teacher input",
+                  "To detect plagiarism and provide actionable insights on grammar, clarity, and structure while maintaining academic integrity",
+                  "To create video essays for students",
+                  "To replace writing teachers entirely"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "According to the challenge, what do the different highlight colors in AI Feedback represent?",
+                question: "A teacher wants to identify uncited content or potential plagiarism in student essays. According to the Key Features table, which feature should they use?",
                 options: [
-                  "Blue for grammar, Green for style, Red for plagiarism",
-                  "Red for grammar, Blue for style, Green for plagiarism",
-                  "Green for grammar, Red for style, Blue for plagiarism",
-                  "Yellow for everything"
-                ],
-                correctAnswer: 0
-              },
-              {
-                id: 'q3',
-                question: "Which Turnitin feature is specifically designed to let students resubmit improved drafts based on AI suggestions?",
-                options: [
-                  "Originality Report",
-                  "EKG Metrics",
-                  "Revision Assistant",
-                  "QuickMarks Library"
-                ],
-                correctAnswer: 2
-              },
-              {
-                id: 'q4',
-                question: "What does the 'E' in EKG Metrics stand for in the context of student writing analytics?",
-                options: [
-                  "Efficiency",
-                  "Engagement (time spent on feedback)",
-                  "Electronics",
-                  "Environment"
+                  "Originality Report (generates similarity score + sources)",
+                  "AI Writing Feedback only",
+                  "Peer Review only",
+                  "EKG Metrics only"
                 ],
                 correctAnswer: 1
               },
               {
-                id: 'q5',
-                question: "Approximately how much time can be saved on 'Grammar & Style Editing' using Turnitin's AI feedback tools?",
+                id: 'q3',
+                question: "The Practical Challenge Task asks teachers to analyze and improve a student essay. After uploading a sample essay and screenshotting the Originality Report, what is the next step?",
                 options: [
-                  "10%",
-                  "35%",
-                  "80%+",
-                  "50%"
+                  "Send the unedited essay directly to parents",
+                  "Skip AI feedback and only check for plagiarism",
+                  "Immediately delete the essay without providing feedback",
+                  "Apply AI Feedback by noting 3 grammar/style suggestions from AI Feedback Studio and adding 2 custom comments using QuickMarks"
                 ],
-                correctAnswer: 2
+                correctAnswer: 4
+              },
+              {
+                id: 'q4',
+                question: "How can a teacher filter false positives in Originality Reports (such as properly cited quotes showing as matches)?",
+                options: [
+                  "Delete the entire report",
+                  "Disable the Originality Report entirely",
+                  "Use 'Exclude Quotes' in Originality Reports",
+                  "Ignore all similarity scores"
+                ],
+                correctAnswer: 3
+              },
+              {
+                id: 'q5',
+                question: "A teacher wants to track long-term writing progress for individual students, including Engagement, Knowledge, and Growth. Which Key Feature provides this data?",
+                options: [
+                  "Originality Report",
+                  "AI Writing Feedback",
+                  "Peer Review",
+                  "EKG Metrics (Engagement, Knowledge, Growth analytics per student)"
+                ],
+                correctAnswer: 4
               }
             ]
           },
@@ -1521,56 +1718,56 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary purpose of Edthena AI Coach for educators?",
+                question: "According to the challenge, what is the primary purpose of Edthena AI Coach for educators?",
                 options: [
-                  "To record student lunch breaks",
-                  "To analyze classroom videos and provide personalized feedback for teaching refinement",
-                  "To replace physical classroom observations by principals",
-                  "To edit movies for the school film club"
+                  "To analyze classroom videos and provide personalized, evidence-based feedback to help educators refine their teaching strategies",
+                  " To replace human instructional coaches entirely",
+                  "To automatically grade student assignments",
+                  "To create student report cards"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 'q2',
-                question: "Which focus area allows AI to process a video and distribution of high-level vs. low-level questions?",
+                question: "A teacher feels anxious about receiving feedback from administrators. Which benefit of Edthena AI Coach addresses this concern?",
                 options: [
-                  "Classroom Management",
-                  "Lesson Pacing",
-                  "Questioning Techniques",
-                  "Student Engagement"
+                  "It only provides positive feedback",
+                  "It offers non-judgmental, actionable suggestions (Confidence Builder)",
+                  "It hides all feedback from the teacher",
+                  "It automatically shares videos with the entire school"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q3',
-                question: "According to the sample feedback report, what is the recommended wait time for teachers after asking a question?",
+                question: "A teacher wants to compare their teaching video against research-backed professional standards such as Danielson. Which Key Feature should they use?",
                 options: [
-                  "0.5 seconds",
-                  "1.2 seconds",
-                  "3-5 seconds",
-                  "10 minutes"
+                  "Video Upload only",
+                  "Skill Benchmarks (compare videos against research-backed teaching frameworks)",
+                  "AI Feedback only",
+                  "Collaborative PD only"
                 ],
                 correctAnswer: 2
               },
               {
                 id: 'q4',
-                question: "Which pro tip suggests using AI-generated transcripts to eliminate filler words?",
+                question: "What is the recommended length for classroom video clips to receive focused feedback from Edthena AI Coach?",
                 options: [
-                  "Focus Daily",
-                  "Track Progress",
-                  "Edit the Script",
-                  "Collaborative PD"
+                  "Short clips (5-15 mins)",
+                  "30-60 minutes (full class periods)",
+                  "2-3 minutes only",
+                  "Over 1 hour"
                 ],
-                correctAnswer: 2
+                correctAnswer: 1
               },
               {
                 id: 'q5',
-                question: "What is the 'Confidence Builder' benefit of Edthena AI Coach?",
+                question: "A teacher wants to visualize their improvement in specific teaching skills over time. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "It gives teachers free coffee",
-                  "It offers non-judgmental, actionable suggestions in a private space",
-                  "It guarantees a salary raise",
-                  "It makes the classroom lights brighter"
+                  "Delete all past reports weekly",
+                  "Export monthly reports to visualize improvement in specific skills",
+                  "Never save or track any progress data",
+                  "Only use AI feedback once per year"
                 ],
                 correctAnswer: 1
               }
@@ -1585,58 +1782,58 @@ export const PATHS_CONTENT = {
             quizData: [
               {
                 id: 'q1',
-                question: "What is the primary purpose of the 'Confusion Heatmap' in Loop AI?",
+                question: "According to the challenge, what is the primary purpose of Loop AI for educators?",
                 options: [
                   "To track student attendance",
-                  "To visualize class understanding and identify concepts causing the most confusion in real-time",
+                  "To analyze student feedback, discussions, and engagement data in real time to help educators identify knowledge gaps, improve teaching strategies, and personalize learning",
                   "To generate lunch menus for the cafeteria",
                   "To edit student videos"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               },
               {
                 id: 'q2',
-                question: "Which Loop AI feature uses AI to cluster similar student queries during a live session?",
+                question: "A teacher wants to instantly spot recurring misunderstandings during a live lesson. Which Loop AI feature should they use?",
                 options: [
                   "Knowledge Gaps",
                   "Sentiment Analysis",
                   "Live Q&A",
                   "Peer Loop"
                 ],
-                correctAnswer: 2
+                correctAnswer: 3
               },
               {
                 id: 'q3',
-                question: "According to the 'Assign Interventions' step, which of these is an AI-recommended resource for reteaching?",
+                question: "A teacher opens the Insights Dashboard after a lesson and sees a 'red' area on the Confusion Heatmap. What does this indicate?",
                 options: [
-                  "Physical textbooks",
-                  "Practice quizzes and targeted videos",
-                  "School field trip schedules",
-                  "Empty notebooks"
+                  "Red = frequent questions (areas where students are confused)",
+                  "Students were highly engaged and understood everything",
+                  "The internet connection was unstable",
+                  "The teacher spoke too quickly during the lesson"
                 ],
                 correctAnswer: 1
               },
               {
                 id: 'q4',
-                question: "What benefit does 'Anonymous Mode' provide during live Loop AI sessions?",
+                question: "The Practical Challenge Task asks teachers to run a Live Loop Session and implement one AI-suggested intervention. After hosting a Live Q&A and screenshotting the clustered questions, what is the next step?",
                 options: [
-                  "It hides the teacher's name from students",
-                  "It encourages struggling students to ask questions without fear of judgment",
-                  "It deletes all student data instantly",
-                  "It makes the screen turn black"
+                  "Immediately delete the session data without reviewing",
+                  "End the challenge without reflecting",
+                  "Skip AI suggestions and assign random resources to all students",
+                  "Review Insights by noting the top 'Confusion Point' flagged by AI and exporting the Sentiment Analysis report (PDF)"
                 ],
-                correctAnswer: 1
+                correctAnswer: 4
               },
               {
                 id: 'q5',
-                question: "How can Loop AI be combined with existing school systems for better efficiency?",
+                question: "A teacher wants to encourage honest responses from students during a sensitive classroom discussion. Which Pro Tip suggests a strategy for this?",
                 options: [
-                  "By printing all data on paper",
-                  "By integrating with an LMS like Canvas or Google Classroom to sync rosters and grades",
-                  "By deleting the LMS entirely",
-                  "By using only hand-drawn diagrams"
+                  "Require students to write their names on every comment",
+                  "Enable Anonymous Mode during sensitive discussions to boost honesty",
+                  "Record all student responses and play them back publicly",
+                  "Disable all student feedback features"
                 ],
-                correctAnswer: 1
+                correctAnswer: 2
               }
             ]
           }

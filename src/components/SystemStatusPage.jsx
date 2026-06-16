@@ -46,11 +46,11 @@ const SystemStatusPage = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans pb-20">
+    <div className="min-h-screen bg-site-bg font-sans pb-20">
       <div className="max-w-4xl mx-auto px-6 pt-16">
         <button 
           onClick={onBack}
-          className="flex items-center text-slate-500 hover:text-brand-primary transition-colors mb-8 text-sm font-medium"
+          className="flex items-center text-site-text/80 hover:text-brand-primary transition-colors mb-8 text-sm font-medium"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
@@ -62,19 +62,19 @@ const SystemStatusPage = ({ onBack }) => {
             <h1 className="text-2xl font-bold text-amber-800 mb-2">Some Systems Degraded</h1>
             <p className="text-amber-700">We are currently experiencing degraded performance with our AI Models Integration. Our team is investigating.</p>
           </div>
-          <div className="bg-white px-4 py-2 rounded-lg font-mono text-sm text-slate-500 border border-amber-100 shadow-sm flex items-center">
+          <div className="bg-site-bg px-4 py-2 rounded-lg font-mono text-sm text-site-text/80 border border-amber-100 shadow-sm flex items-center">
              <Clock className="w-4 h-4 mr-2 text-amber-500" /> Updated 5 mins ago
           </div>
         </div>
 
         {/* Services List */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-16">
-          <div className="px-6 py-4 bg-slate-50 border-b border-slate-200">
+        <div className="bg-site-bg rounded-2xl shadow-sm border border-site-accent overflow-hidden mb-16">
+          <div className="px-6 py-4 bg-site-bg border-b border-site-accent">
             <h2 className="text-lg font-bold text-brand-dark">Current Service Status</h2>
           </div>
           <div className="divide-y divide-slate-100">
             {services.map((service, idx) => (
-              <div key={idx} className="flex items-center justify-between px-6 py-5 hover:bg-slate-50 transition-colors">
+              <div key={idx} className="flex items-center justify-between px-6 py-5 hover:bg-site-bg transition-colors">
                 <span className="font-semibold text-slate-700">{service.name}</span>
                 <div className="flex items-center space-x-2">
                   {getStatusIcon(service.status)}
@@ -95,20 +95,20 @@ const SystemStatusPage = ({ onBack }) => {
           <h2 className="text-2xl font-bold text-brand-dark mb-6">Past Incidents</h2>
           <div className="space-y-6">
             {pastIncidents.map((incident, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 border-b border-slate-100 pb-4 gap-2">
+              <div key={idx} className="bg-site-bg rounded-2xl p-6 shadow-sm border border-site-accent">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 border-b border-site-accent pb-4 gap-2">
                   <div>
                     <h3 className="text-lg font-bold text-slate-800">{incident.title}</h3>
-                    <p className="text-sm text-slate-500">{incident.date}</p>
+                    <p className="text-sm text-site-text/80">{incident.date}</p>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider rounded-full">
+                    <span className="px-3 py-1 bg-slate-100 text-site-text/80 text-xs font-bold uppercase tracking-wider rounded-full">
                       {incident.status}
                     </span>
                     <span className="text-sm text-slate-400 font-medium">{incident.duration}</span>
                   </div>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed">{incident.description}</p>
+                <p className="text-site-text/80 text-sm leading-relaxed">{incident.description}</p>
               </div>
             ))}
           </div>

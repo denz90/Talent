@@ -42,8 +42,8 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-      <div className="max-w-[440px] w-full bg-white rounded-sm shadow-sm p-10 relative text-center">
+    <div className="min-h-screen bg-site-bg flex items-center justify-center p-6">
+      <div className="max-w-[440px] w-full bg-site-bg rounded-sm shadow-sm p-10 relative text-center">
         
         <button 
           onClick={onBack}
@@ -53,8 +53,8 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
         </button>
 
         <div className="mb-8 mt-4">
-          <h1 className="text-2xl font-bold text-slate-900 mb-2">Check Your Email</h1>
-          <p className="text-slate-500 text-sm">
+          <h1 className="text-2xl font-bold text-site-text mb-2">Check Your Email</h1>
+          <p className="text-site-text/80 text-sm">
             We sent a secure code to <br/>
             <span className="font-bold text-slate-800">{email}</span>
           </p>
@@ -74,7 +74,7 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
               value={otpCode}
               onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ''))} // Only allow numbers
               placeholder="000000"
-              className="w-full text-center tracking-[0.5em] text-3xl px-5 py-4 bg-slate-50 border border-slate-200 rounded-sm focus:outline-none focus:border-brand-primary/50 transition-all text-slate-900"
+              className="w-full text-center tracking-[0.5em] text-3xl px-5 py-4 bg-site-bg border border-site-accent rounded-sm focus:outline-none focus:border-brand-primary/50 transition-all text-site-text"
               required
             />
           </div>
@@ -89,7 +89,7 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
           </button>
         </form>
 
-        <div className="mt-8 text-sm text-slate-500">
+        <div className="mt-8 text-sm text-site-text/80">
           Didn't get the email? <br/>
           (Check your terminal for the simulated code!)
         </div>

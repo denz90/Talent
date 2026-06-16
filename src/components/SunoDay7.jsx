@@ -1,397 +1,363 @@
 import React, { useState } from 'react';
 import {
-  Sparkles,
-  Play,
-  Music,
-  Mic2,
-  ListMusic,
-  Headphones,
-  Target,
+  CheckCircle2,
   ChevronRight,
+  Clock,
+  Headphones,
+  Lightbulb,
+  ListMusic,
+  Mic2,
+  Music,
+  Settings,
+  Sparkles,
+  Target,
+  TrendingUp,
   Trophy,
   Volume2,
-  Settings
+  Zap,
 } from 'lucide-react';
 
 const SunoDay7 = ({ onNext }) => {
-  const [isWhyOpen, setIsWhyOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'challenge', label: 'Challenge' }
+  ];
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
-
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
+        
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#800020] via-[#bc1044] to-[#e6195e] text-white p-12 shadow-xl min-h-[300px] flex flex-col justify-end">
-          <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+        <div className="bg-site-primary-400 rounded-3xl p-10 ">
+        <div className="text-center space-y-6 pt-8">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
+            </div>
+          </div>
           
-          {/* Top Layer Graphic - Headphone concept */}
-          <div className="absolute top-1/2 right-12 -translate-y-1/2 opacity-30 pointer-events-none hidden md:block">
-             <Headphones size={200} className="text-white rotate-12" />
-          </div>
-
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-rose-200" />
-              Day 7 • Creative Arts & Multimedia
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Suno Challenge</h1>
+          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+            
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-site-text">
+              <Clock size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Saves Hours</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              Suno Challenge
-            </h1>
-            <p className="text-lg text-white/90 max-w-xl font-medium">
-              Compose original lesson soundtracks and educational songs in seconds.
-            </p>
+            <div className="flex items-center gap-2 text-site-text">
+              <Sparkles size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">AI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <TrendingUp size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Boosts Results</span>
+            </div>
           </div>
         </div>
+        </div>
 
-        {/* What is Suno? */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-6 tracking-tight">What is Suno?</h2>
-            <p className="text-slate-600 mb-8 leading-relaxed text-lg">
-              Suno is an AI-powered music generation tool that creates original, royalty-free music and songs for your classroom. Whether you need a catchy rhyme to help students memorize facts or a lo-fi background track for study sessions, Suno turns your prompts into professional-grade audio.
-            </p>
-
-            <button 
-              onClick={() => setIsWhyOpen(!isWhyOpen)}
-              className="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-rose-100 group"
+        {/* Tab Navigation */}
+        <div className="bg-site-button backdrop-blur-md p-1.5 rounded-2xl flex gap-2 border border-site-accent max-w-2xl mx-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
+                activeTab === tab.id 
+                ? 'bg-site-bg text-site-text shadow-lg scale-[1.02]' 
+                : 'text-site-text/80 hover:bg-site-bg'
+              }`}
             >
-              Why Educators Need It
-              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+              {tab.label}
             </button>
-
-            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <ul className="space-y-4 pb-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Play size={18} className="text-rose-600 fill-rose-600" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Engages Students</strong>
-                    <span className="text-slate-600 text-sm">Music enhances retention and makes complex lessons more dynamic and memorable.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Play size={18} className="text-rose-600 fill-rose-600" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Saves Time & Money</strong>
-                    <span className="text-slate-600 text-sm">No more searching for expensive royalty-free tracks for presentations or videos.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Play size={18} className="text-rose-600 fill-rose-600" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Unlimited Customization</strong>
-                    <span className="text-slate-600 text-sm">Tailor music exactly to your lesson mood, from upbeat energy to calming study vibes.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Play size={18} className="text-rose-600 fill-rose-600" />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Podcast Support</strong>
-                    <span className="text-slate-600 text-sm">Effortlessly create transitions and intro music for student podcast and video projects.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="relative h-[400px] flex items-center justify-center">
-             <div className="absolute inset-x-0 bottom-0 top-12 bg-rose-50 rounded-3xl -z-10 rotate-3 translate-y-4 opacity-50"></div>
-             <img src="/Music-bro 1.png" alt="Suno Illustration" className="w-full h-auto object-contain z-10 drop-shadow-2xl" />
-          </div>
+          ))}
         </div>
 
-        {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-rose-300 bg-white overflow-hidden shadow-sm -mt-8">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="bg-rose-50 border-b border-slate-100">
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-600">
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Music size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>Genre Selection</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Choose from ambient, cinematic, pop, or custom styles</td>
-                <td className="px-6 py-5 text-sm">Matches music to lesson tone perfectly</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Settings size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>Mood Adjuster</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Slide to adjust energy levels from calm to energetic</td>
-                <td className="px-6 py-5 text-sm">Sets the right atmosphere for classroom focus</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Volume2 size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>Length Control</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Set track duration from 10 seconds to 5 minutes</td>
-                <td className="px-6 py-5 text-sm">Fits music to your specific video or activity length</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Mic2 size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>BPM Customizer</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Modify beats per minute to match lesson pacing</td>
-                <td className="px-6 py-5 text-sm">Aligns music speed with instructional flow</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <ListMusic size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>Export Options</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Export as MP3/WAV with no watermarks</td>
-                <td className="px-6 py-5 text-sm">Safe for student projects and school presentations</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Headphones size={16} className="text-rose-500 flex-shrink-0" />
-                    <span>Instruments Only</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Toggle vocal removal for instrumental background music</td>
-                <td className="px-6 py-5 text-sm">Ensures music doesn't distract from core instruction</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Getting Started Guide */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-4">
-             <div className="relative mb-8">
-               <div className="absolute -inset-4 bg-rose-50 rounded-full blur-3xl opacity-50 -z-10"></div>
-               <img src="/Compose music-bro 1.png" alt="Workspace" className="w-full h-auto object-contain mix-blend-multiply drop-shadow-xl" />
-             </div>
-             <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">Step-by-Step Getting Started Guide</h2>
-                <p className="text-slate-500 mb-8 leading-relaxed">
-                  Compose your first classroom soundtrack in just 4 simple steps.
+        {/* Tab Content */}
+        <div className="min-h-[500px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl font-bold mb-6">What is Suno?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  Suno is an AI-powered music generation tool that creates original, royalty-free music and songs for your classroom. Whether you need a catchy rhyme to help students memorize facts or a lo-fi background track for study sessions, Suno turns your prompts into professional-grade audio.
                 </p>
-             </div>
-          </div>
-
-          <div className="md:col-span-8 space-y-6 relative">
-            <div className="absolute left-6 top-8 bottom-8 w-px bg-slate-100 z-0 hidden md:block"></div>
-
-            {/* Step 1 */}
-            <div className="flex gap-6 relative z-10 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-               <div className="w-12 h-12 rounded-2xl bg-[#800020] text-white font-bold flex items-center justify-center flex-shrink-0 text-lg shadow-lg">1</div>
-               <div>
-                 <h3 className="font-bold text-slate-900 mb-1 text-lg">Access Suno</h3>
-                 <p className="text-slate-600">Head to Suno.com and sign in with Google or Discord to starting composing.</p>
-               </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-6 relative z-10 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-               <div className="w-12 h-12 rounded-2xl bg-[#800020] text-white font-bold flex items-center justify-center flex-shrink-0 text-lg shadow-lg">2</div>
-               <div>
-                 <h3 className="font-bold text-slate-900 mb-1 text-lg">Generate Your First Track</h3>
-                 <p className="text-slate-600 mb-2">Click "Create" and input a simple prompt like: <span className="text-rose-600 font-medium">"An upbeat pop song about the water cycle."</span></p>
-               </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-6 relative z-10 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-               <div className="w-12 h-12 rounded-2xl bg-[#800020] text-white font-bold flex items-center justify-center flex-shrink-0 text-lg shadow-lg">3</div>
-               <div>
-                 <h3 className="font-bold text-slate-900 mb-1 text-lg">Customize with "Custom Mode"</h3>
-                 <p className="text-slate-600">Paste your specific lesson lyrics into the "Lyrics" box to create highly targeted educational content.</p>
-               </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-6 relative z-10 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-               <div className="w-12 h-12 rounded-2xl bg-[#800020] text-white font-bold flex items-center justify-center flex-shrink-0 text-lg shadow-lg">4</div>
-               <div>
-                 <h3 className="font-bold text-slate-900 mb-1 text-lg">Download & Use</h3>
-                 <p className="text-slate-600">Hit the "More" button → "Download" → Audio (WAV or MP3). Perfect for classroom play!</p>
-               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Practical Challenge */}
-        <div className="bg-[#800020] rounded-3xl p-12 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-
-          <div className="flex items-center gap-2 text-rose-300/80 mb-6 text-xs font-bold uppercase tracking-[0.2em] relative z-10">
-            <Target size={14} /> PRACTICAL CHALLENGE: TASK
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 leading-tight relative z-10 max-w-2xl">
-            "Create a 1-minute background track for a student podcast or video lesson."
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors">
-              <div className="flex items-center gap-4 mb-4">
-                 <div className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">1</div>
-                 <h4 className="font-bold text-lg">Choose a Theme</h4>
-              </div>
-              <p className="text-white/80 text-sm leading-relaxed">Select a theme (e.g., Ancient Egypt) or paste your own script. Set genre (e.g., Cinematic for history).</p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors">
-              <div className="flex items-center gap-4 mb-4">
-                 <div className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">2</div>
-                 <h4 className="font-bold text-lg">Track Style</h4>
-              </div>
-              <p className="text-white/80 text-sm leading-relaxed">Enter relevant style keywords (e.g., "Lo-fi beats, mysterious, atmospheric, piano").</p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors">
-              <div className="flex items-center gap-4 mb-4">
-                 <div className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">3</div>
-                 <h4 className="font-bold text-lg">Generate & Edit</h4>
-              </div>
-              <p className="text-white/80 text-sm leading-relaxed">Analyze the energy of the track. If not perfect, refine the description or style keywords.</p>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition-colors">
-              <div className="flex items-center gap-4 mb-4">
-                 <div className="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">4</div>
-                 <h4 className="font-bold text-lg">Share</h4>
-              </div>
-              <p className="text-white/80 text-sm leading-relaxed">Share your generation link or audio file on social with #SunoEDChallenge.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Examples Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-           <div className="bg-rose-50/50 border border-rose-100 rounded-3xl p-8 flex flex-col justify-between group hover:bg-rose-50 transition-colors">
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <Music size={24} className="text-rose-600" />
-                  <h3 className="text-xl font-bold text-slate-900">Music Examples</h3>
-                </div>
-                <div className="space-y-4 mb-8">
-                  <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100 group-hover:border-rose-200 transition-colors">
-                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-slate-400">Atmospheric</span>
-                        <Volume2 size={12} className="text-rose-400" />
-                     </div>
-                     <p className="text-sm font-bold text-slate-800">Lo-fi Study Beats</p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Sparkles size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Engages Students:</span>
+                      Music enhances retention and makes complex lessons more dynamic and memorable.
+                    </p>
                   </div>
-                  <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100 group-hover:border-rose-200 transition-colors">
-                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-slate-400">Cinematic</span>
-                        <Volume2 size={12} className="text-rose-400" />
-                     </div>
-                     <p className="text-sm font-bold text-slate-800">Podcast Intro Music</p>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Zap size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Saves Time &amp; Money:</span>
+                      No more searching for expensive royalty-free tracks for presentations or videos.
+                    </p>
                   </div>
-                  <div className="bg-white rounded-xl p-4 shadow-sm border border-slate-100 group-hover:border-rose-200 transition-colors">
-                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-slate-400">Acoustic</span>
-                        <Volume2 size={12} className="text-rose-400" />
-                     </div>
-                     <p className="text-sm font-bold text-slate-800">Reading Time Ambient</p>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <TrendingUp size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Unlimited Customization:</span>
+                      Tailor music exactly to your lesson mood, from upbeat energy to calming study vibes.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Lightbulb size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Podcast Support:</span>
+                      Effortlessly create transitions and intro music for student podcast and video projects.
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="h-48 rounded-2xl overflow-hidden shadow-md">
-                 <img src="/gamma_ai_classroom_image.png" alt="Recording Studio" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-           </div>
+            </div>
+          )}
 
-           <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 flex flex-col justify-between group hover:bg-slate-100 transition-colors">
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <Mic2 size={24} className="text-slate-600" />
-                  <h3 className="text-xl font-bold text-slate-900">Useful Tools</h3>
-                </div>
-                <div className="space-y-4 mb-8 text-slate-600 text-sm">
-                   <p className="flex items-center gap-3"><ChevronRight size={14} className="text-rose-500" /> Ensure lyrics are age-appropriate.</p>
-                   <p className="flex items-center gap-3"><ChevronRight size={14} className="text-rose-500" /> Use "Instrumental" mode for podcasts.</p>
-                   <p className="flex items-center gap-3"><ChevronRight size={14} className="text-rose-500" /> Mix vocals low for background use.</p>
-                </div>
-                <div className="bg-white rounded-2xl p-6 border border-slate-100 mb-6 group-hover:border-rose-200 transition-colors">
-                   <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600">
-                         <Headphones size={24} />
+          {activeTab === 'features' && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-600/40 flex items-center justify-center text-site-text">
+                    <Music size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Genre Selection</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Choose from ambient, cinematic, pop, or custom styles</p>
                       </div>
-                      <div>
-                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Mastery Tip</p>
-                         <p className="text-sm font-bold text-slate-800 italic">"Combine Suno with Canva!"</p>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Matches music to lesson tone perfectly</p>
                       </div>
-                   </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                    <Settings size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Mood Adjuster</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Slide to adjust energy levels from calm to energetic</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Sets the right atmosphere for classroom focus</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-green-600/40 flex items-center justify-center text-site-text">
+                    <Volume2 size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Length Control</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Set track duration from 10 seconds to 5 minutes</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Fits music to your specific video or activity length</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-600/40 flex items-center justify-center text-site-text">
+                    <Mic2 size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">BPM Customizer</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Modify beats per minute to match lesson pacing</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Aligns music speed with instructional flow</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-600/40 flex items-center justify-center text-site-text">
+                    <ListMusic size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Export Options</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Export as MP3/WAV with no watermarks</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Safe for student projects and school presentations</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-600/40 flex items-center justify-center text-site-text">
+                    <Headphones size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Instruments Only</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Toggle vocal removal for instrumental background music</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Ensures music doesn't distract from core instruction</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="h-48 rounded-2xl overflow-hidden shadow-md">
-                 <img src="/Robot face-pana 1.png" alt="Microphone" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+            </div>
+          )}
+
+          {activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="bg-site-bg rounded-3xl p-8 border border-site-accent text-site-text">
+                <p>Follow the official documentation to get started with this tool.</p>
               </div>
-           </div>
+            </div>
+          )}
+
+          {activeTab === 'challenge' && (
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-[#2e0052]">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-site-text">Practical Challenge Task</h2>
+                    <p className="text-site-text/70">"Create a 1-minute background track for a student podcast or video lesson."</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-400/20 px-4 py-2 rounded-lg inline-flex items-center gap-2 text-site-text text-sm font-bold">
+                  <Clock size={16} />
+                  Time Goal: Under 15 minutes
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent text-site-text">
+                  <p>Complete the challenge tasks using what you've learned today.</p>
+                </div>
+              </div>
+
+              <div className="pt-10 space-y-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <Lightbulb className="text-yellow-400" size={32} /> Pro Tips for Mastery
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-pink-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Lightbulb size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Target Music for Focus:</span>
+                      Use Lo-fi or classical styles for student independent working sessions to focus energy without distracting lyrics.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-site-primary-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Zap size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Student Co-Creation:</span>
+                      Let kids pick genres for group projects—engagement will soar!
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-yellow-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <TrendingUp size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Manage Templates:</span>
+                      Keep unit soundtracks in project folders to build your musical curriculum legacy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+                <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-2xl p-6 text-center">
+                  <p className="text-site-text font-medium italic">"Compose your lessons with the melody of innovation. Master Suno to orchestrate a truly modern classroom! 🎵"</p>
+                </div>
+            </div>
+          )}
         </div>
 
-        {/* Pro Tips & Assessment */}
-        <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100 max-w-3xl mx-auto">
-          <div className="flex items-center gap-2 text-amber-600 font-bold mb-6 text-lg">
-            <Trophy size={18} /> Pro Tips for Mastery
-          </div>
-
-          <ul className="space-y-5 mb-8">
-            <li className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-amber-500 mt-2.5 flex-shrink-0"></div>
-              <p className="text-slate-700"><strong>Target Music for Focus:</strong> Use Lo-fi or classical styles for student independent working sessions to focus energy without distracting lyrics.</p>
-            </li>
-            <li className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-amber-500 mt-2.5 flex-shrink-0"></div>
-              <p className="text-slate-700"><strong>Student Co-Creation:</strong> Let kids pick genres for group projects—engagement will soar!</p>
-            </li>
-            <li className="flex items-start gap-4">
-              <div className="w-2 h-2 rounded-full bg-amber-500 mt-2.5 flex-shrink-0"></div>
-              <p className="text-slate-700"><strong>Manage Templates:</strong> Keep unit soundtracks in project folders to build your musical curriculum legacy.</p>
-            </li>
-          </ul>
-
-          <div className="bg-white/80 p-5 rounded-2xl text-center border border-amber-200 shadow-sm">
-            <p className="text-sm text-amber-900 font-medium italic">
-              "Compose your lessons with the melody of innovation. Master Suno to orchestrate a truly modern classroom! 🎵"
-            </p>
-          </div>
-        </div>
-
-        {/* Final Button */}
-        <button 
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all rounded-2xl p-8 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-rose-50/0 group-hover:bg-rose-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-2xl font-bold text-slate-900 group-hover:text-rose-600 transition-colors mb-2 tracking-tight">Day 7: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-slate-500">Dive into your complete evaluation of Day 7</p>
-            <div className="mt-6 w-14 h-14 rounded-full bg-rose-50 group-hover:bg-rose-600 group-hover:text-white text-rose-600 border border-rose-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={24} />
+        {/* Bottom CTA Card */}
+        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+          <div className="absolute opacity-20"></div>
+          
+          <div className="flex justify-center relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+              <Trophy size={32} />
             </div>
           </div>
-        </button>
+          
+          <div className="space-y-4 relative z-10">
+            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+              Suno Challenge
+            </h2>
+            <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
+          </div>
+          
+          <div className="relative z-10">
+            <button 
+              onClick={onNext}
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            >
+              Start Your Challenge
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        </div>
+
+        <p className="text-center text-site-text/60 text-sm pb-10">
+          Next Up: Day 8 – Continue your AI education journey
+        </p>
 
       </div>
     </div>

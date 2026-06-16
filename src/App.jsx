@@ -113,10 +113,6 @@ const App = () => {
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('talent_oasis_theme') || 'light';
-  });
-
   // Persist state to localStorage
   useEffect(() => {
     localStorage.setItem('talent_oasis_view', view);
@@ -129,15 +125,6 @@ const App = () => {
       localStorage.removeItem('talent_oasis_tool');
     }
   }, [currentTool]);
-
-  useEffect(() => {
-    localStorage.setItem('talent_oasis_theme', theme);
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
 
   const handleNavClick = (sectionId) => {
     if (view !== 'home') {
@@ -170,8 +157,6 @@ const App = () => {
     return (
       <ProfileSettingsPage
         onBack={() => setView('dashboard')}
-        theme={theme}
-        onThemeChange={setTheme}
       />
     );
   }
@@ -271,7 +256,20 @@ if (view === 'login') {
       setView('login');
       return null;
     }
-    return <BeginnerPage onBack={() => setView('home')} />;
+    return (
+      <BeginnerPage 
+        onBack={() => setView('home')} 
+        currentUser={currentUser}
+        onLogout={() => {
+          localStorage.removeItem('hawkman_token');
+          setCurrentUser(null);
+          setView('home');
+        }}
+        onDashboard={() => setView('dashboard')}
+        onLogoClick={() => setView('home')}
+        onNavClick={handleNavClick}
+      />
+    );
   }
 
   if (view === 'help_center') {
@@ -291,7 +289,7 @@ if (view === 'login') {
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <div className="min-h-screen font-sans transition-colors duration-300">
       <Navbar
         currentUser={currentUser}   //Display username in the navbar when logged in
         onLogout={() => {           // Clear the VIP pass and user data on logout 
@@ -303,6 +301,8 @@ if (view === 'login') {
         onLogin={() => setView('login')}
         onLogoClick={() => setView('home')}
         onNavClick={handleNavClick}
+        onDashboard={() => setView('dashboard')}
+
       />
 
       <main>
@@ -316,8 +316,8 @@ if (view === 'login') {
               className="w-full h-full object-cover"
               alt="Hero Background"
             />
-            <div className="absolute inset-0 bg-brand-primary/60 mix-blend-multiply"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-dark/40 to-brand-dark/80"></div>
+            <div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
+            <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>
           </div>
 
           <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
@@ -335,21 +335,21 @@ if (view === 'login') {
             
             <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
               Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
-              Master UX Pilot, Midjourney, UX Pilot, and 50+ AI tools.
+              Perplexity AI, Claude AI, ChatGPT, Gamma AI, and 50+ AI tools.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <button className="btn-primary">Start Learning Free</button>
-              <button className="btn-secondary">Browse Courses</button>
+              <button className="text-site-text font-bold py-4 px-12 bg-site-primary">Start Learning Free</button>
+              <button className="text-site-accent font-bold py-4 px-12 bg-site-bg/20">Browse Courses</button>
             </div>
           </div>
         </section>
 
         {/* Popular AI Tools */}
-        <section id="tools" className="py-32 bg-white">
+        <section id="tools" className="py-32 ">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-brand-dark">Popular AI Tools You'll Master</h2>
-              <p className="text-slate-500 font-medium">Get hands-on experience with industry-leading AI platforms</p>
+              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
+              <p className="font-medium text-site-text/80">Get hands-on experience with industry-leading AI platforms</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <ToolCard
@@ -381,11 +381,11 @@ if (view === 'login') {
         </section>
 
         {/* Learning Paths */}
-        <section id="courses" className="py-32 bg-gray-100">
+        <section id="courses" className="py-32 bg-site-primary/20">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-brand-dark">Choose Your Learning Path</h2>
-              <p className="text-slate-500 font-medium">Structured courses designed for your skill level and goals</p>
+              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
+              <p className="font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
               <LearningPathCard
@@ -408,7 +408,6 @@ if (view === 'login') {
                   "Real-World Projects"
                 ]}
                 popular
-                dark
                 onClick={() => {
                   setSelectedLevel('Intermediate');
                   setView('path_selection');
@@ -434,11 +433,11 @@ if (view === 'login') {
         </section>
 
         {/* Testimonials */}
-        <section id="testimonials" className="py-32 bg-white">
+        <section id="testimonials" className="py-32">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-brand-dark">Loved by Learners Worldwide</h2>
-              <p className="text-slate-500 font-medium">Join thousands who've transformed their careers with AI</p>
+              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
+              <p className="font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
               <TestimonialCard

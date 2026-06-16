@@ -1,383 +1,418 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  CheckCircle2, 
-  UploadCloud, 
-  MessageSquare, 
-  FileText, 
-  Link, 
-  Headphones,
-  Target,
-  Trophy,
+import {
+  CheckCircle,
+  CheckCircle2,
   ChevronRight,
-  CheckCircle
+  Clock,
+  Headphones,
+  Lightbulb,
+  Link,
+  MessageSquare,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  UploadCloud,
+  Zap,
 } from 'lucide-react';
 
 const NotebookLMDay3 = ({ onNext }) => {
-  const [isWhyOpen, setIsWhyOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const tabs = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'features', label: 'Features' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'challenge', label: 'Challenge' }
+  ];
+
   return (
-    <div className="w-full h-full overflow-y-auto bg-white/50">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-purple-800 to-indigo-900 text-white p-12 shadow-xl min-h-[300px] flex flex-col justify-end">
-          <div className="absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff33_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-          
-          <div className="absolute -right-20 transform -rotate-12 top-0 opacity-10 font-bold text-9xl tracking-tighter whitespace-nowrap select-none">
-            NotebookLM
+        <div className="bg-site-primary-400 rounded-3xl p-10 ">
+        <div className="text-center space-y-6 pt-8">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
+            </div>
           </div>
+          
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">NotebookLM Challenge</h1>
+          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+            From Documents to Interactive Learning Platforms
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-8 pt-4">
+            <div className="flex items-center gap-2 text-site-text">
+              <Clock size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Saves Hours</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <Sparkles size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">AI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 text-site-text">
+              <TrendingUp size={18} />
+              <span className="text-sm font-bold uppercase tracking-widest">Boosts Results</span>
+            </div>
+          </div>
+        </div>
+        </div>
 
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl -ml-20 -mb-20"></div>
+        {/* Tab Navigation */}
+        <div className="bg-site-button backdrop-blur-md p-1.5 rounded-2xl flex gap-2 border border-site-accent max-w-2xl mx-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
+                activeTab === tab.id 
+                ? 'bg-site-bg text-site-text shadow-lg scale-[1.02]' 
+                : 'text-site-text/80 hover:bg-site-bg'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="min-h-[500px]">
+          {activeTab === 'overview' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl font-bold mb-6">What is NotebookLM?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  NotebookLM is an experimental, AI-powered ultimate study application designed by Google that helps users summarize, simplify, and learn from uploaded documents. Built around your unique curriculum, it acts as a personalized assistant tutor that grounds its output strictly in the content you upload.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Sparkles size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Knowledge Retrieval:</span>
+                      Instantly find specific key ideas across large document sets.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Zap size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Interactive Study Guides:</span>
+                      Autogenerate FAQs, glossaries, and outlines from your source text.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <TrendingUp size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Critical Engagement:</span>
+                      Create discussion questions tailored to your specific class level.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                      <Lightbulb size={24} />
+                    </div>
+                    <p className="text-site-text font-medium">
+                      <span className="font-bold text-site-primary block mb-1">Audio Summaries:</span>
+                      Convert text formats to engaging conversational "podcasts".
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'features' && (
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-pink-600/40 flex items-center justify-center text-site-text">
+                    <UploadCloud size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Source Upload</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Drag &amp; drop PDFs, Docs, or text files directly into the UI</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Build a knowledge base grounded only in your curriculum</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                    <Sparkles size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">AI Summary</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Automatic generation of a "source guide" upon upload</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Instantly get a bird's-eye view of complex topics</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-green-600/40 flex items-center justify-center text-site-text">
+                    <Link size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Citation Engine</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Hover over AI answers to see direct excerpts from your files</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Teach critical sourcing and avoid plagiarism</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-orange-600/40 flex items-center justify-center text-site-text">
+                    <MessageSquare size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Notebook Interaction</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Chat with your documents to find specific facts or ideas</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Extract precisely what you need for lesson planning</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-indigo-600/40 flex items-center justify-center text-site-text">
+                    <CheckCircle size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Collaborative Features</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Share entire notebooks with co-teachers or students</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Streamline unit planning across departments</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
+                  <div className="w-12 h-12 rounded-2xl bg-rose-600/40 flex items-center justify-center text-site-text">
+                    <Headphones size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-4">Voice-to-Note</h3>
+                    <div className="space-y-4">
+                      <div className="text-sm">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                        <p className="text-site-text">Dictate ideas and have AI summarize them into study guides</p>
+                      </div>
+                      <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                        <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                        <p className="text-xs font-bold text-green-100">Hands-free brainstorming for busy educators</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                {[
+          {
+                    "step": 1,
+                    "title": "Access NotebookLM",
+                    "content": "Go to notebooklm.google.com and sign in with Google. Click \"New Notebook\" to start your first \"Study Guide\" project."
+          },
+          {
+                    "step": 2,
+                    "title": "Upload Sources",
+                    "content": "Click \"Add Source\" and upload syllabus, assignment details, or reading materials (e.g., PDF). You can select up to 50 sources per specific Knowledge Base (e.g., Unit 1)."
+          },
+          {
+                    "step": 3,
+                    "title": "Ask AI to Organize Content",
+                    "content": "Type: \"Create a pacing guide for these materials based on a 4-week period.\" Click \"Pin\" to save the summary to your notes section. Type: \"Create a pacing guide for these materials based on a 4-week period.\""
+          },
+          {
+                    "step": 4,
+                    "title": "Generate Study Materials",
+                    "content": "Type: \"Act as an expert teacher. Write 5 discussion questions based on this document.\" Edit and save to a separate Google Doc. Type: \"Act as an expert teacher. Write 5 discussion questions based on this document.\""
+          }
+].map((step) => (
+                  <div key={step.step} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'challenge' && (
+            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center text-[#2e0052]">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-site-text">Practical Challenge Task</h2>
+                    <p className="text-site-text/70">"Transform a textbook chapter into an interactive study guide."</p>
+                  </div>
+                </div>
+                <div className="bg-yellow-400/20 px-4 py-2 rounded-lg inline-flex items-center gap-2 text-site-text text-sm font-bold">
+                  <Clock size={16} />
+                  Time Goal: Under 15 minutes
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <h3 className="text-xl font-bold">Upload a Source</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Find a reading passage or PDF specific to your subject content. Upload it into NotebookLM.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <h3 className="text-xl font-bold">Generate a Quiz</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Use the "Notebook guide" button to generate a 3-question quiz (mix true/false + short answer).</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <h3 className="text-xl font-bold">Ask a Question</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Ask the AI a specific question about the material to test its constraints. See if it references an outside topic.</p>
+                </div>
+                <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <h3 className="text-xl font-bold">Auto-Generate Audio</h3>
+                  </div>
+                  <p className="text-sm text-site-text">Click on the Deep Dive Audio generation button to create a 3-min "podcast" to introduce the reading to your specific class.</p>
+                </div>
+              </div>
+
+              <div className="pt-10 space-y-8">
+                <h2 className="text-3xl font-bold flex items-center gap-3">
+                  <Lightbulb className="text-yellow-400" size={32} /> Pro Tips for Mastery
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-pink-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Lightbulb size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Tag Sources:</span>
+                      Label uploads by topic (e.g., Biology – Cell Structure) for easy retrieval.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-site-primary-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <Zap size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Collaboration:</span>
+                      Share notebooks with co-teachers to co-create study aids.
+                    </p>
+                  </div>
+                  <div className="bg-site-bg p-6 rounded-3xl border border-site-accent relative overflow-hidden group hover:border-yellow-500/50 transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-site-primary/40 flex items-center justify-center text-site-text mb-4">
+                      <TrendingUp size={20} />
+                    </div>
+                    <p className="text-sm leading-relaxed text-site-text">
+                      <span className="font-bold text-site-primary block mb-1">Podcast Limitations:</span>
+                      The audio overview may occasionally invent slight banter but sticks closely to facts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+                <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-2xl p-6 text-center">
+                  <p className="text-site-text font-medium italic">"NotebookLM turns static chapters into dynamic study tools. Empower your students at home!"</p>
+                </div>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom CTA Card */}
+        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+          <div className="absolute opacity-20"></div>
+          
+          <div className="flex justify-center relative z-10">
+            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+              <Trophy size={32} />
+            </div>
+          </div>
+          
+          <div className="space-y-4 relative z-10">
+            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+              NotebookLM Challenge
+            </h2>
+            <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
+          </div>
           
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-purple-300" />
-              Day 3 • Assessment Module
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-tight">
-              NotebookLM <br /> Challenge
-            </h1>
-            <p className="text-lg text-white/80 max-w-xl font-medium">
-              From Documents to Interactive Learning Platforms
-            </p>
-          </div>
-        </div>
-
-        {/* What is NotebookLM */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">What is NotebookLM?</h2>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-              NotebookLM is an experimental, AI-powered ultimate study application designed by Google that helps users summarize, simplify, and learn from uploaded documents. Built around your unique curriculum, it acts as a personalized assistant tutor that grounds its output strictly in the content you upload.
-            </p>
-            
             <button 
-              onClick={() => setIsWhyOpen(!isWhyOpen)}
-              className="inline-flex items-center gap-2 bg-purple-50 hover:bg-purple-100 text-purple-700 px-5 py-2.5 rounded-xl font-bold transition-all active:scale-95 border border-purple-100 group"
+              onClick={onNext}
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
             >
-              Why Educators Need It
-              <ChevronRight size={18} className={`transition-transform duration-300 ${isWhyOpen ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
+              Start Your Challenge
+              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
-
-            <div className={`mt-6 transition-all duration-500 ease-in-out overflow-hidden ${isWhyOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-              <ul className="space-y-4 pb-2">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-purple-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Knowledge Retrieval</strong>
-                    <span className="text-slate-600 text-sm">Instantly find specific key ideas across large document sets.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-purple-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Interactive Study Guides</strong>
-                    <span className="text-slate-600 text-sm">Autogenerate FAQs, glossaries, and outlines from your source text.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-purple-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Critical Engagement</strong>
-                    <span className="text-slate-600 text-sm">Create discussion questions tailored to your specific class level.</span>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="text-purple-600" size={18} />
-                  </div>
-                  <div>
-                    <strong className="text-slate-900 block">Audio Summaries</strong>
-                    <span className="text-slate-600 text-sm">Convert text formats to engaging conversational "podcasts".</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="bg-purple-50 rounded-2xl h-80 border border-purple-100 flex items-center justify-center p-8 overflow-hidden relative">
-             <img src="/NotebookLM.png" alt="NotebookLM Study" className="w-full h-full object-contain relative z-10" />
           </div>
         </div>
 
-        {/* Key Features */}
-        <div className="rounded-2xl border border-slate-200 border-l-4 border-l-purple-300 bg-white overflow-hidden shadow-sm -mt-8">
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="bg-purple-50 border-b border-slate-100">
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Feature</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-2/4">How to Use</th>
-                <th className="px-6 py-4 font-bold text-slate-900 w-1/4">Benefit for Teachers</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-600">
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <UploadCloud size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Source Upload</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Drag & drop PDFs, Docs, or text files directly into the UI</td>
-                <td className="px-6 py-5 text-sm">Build a knowledge base grounded only in your curriculum</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Sparkles size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>AI Summary</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Automatic generation of a "source guide" upon upload</td>
-                <td className="px-6 py-5 text-sm">Instantly get a bird's-eye view of complex topics</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Link size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Citation Engine</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Hover over AI answers to see direct excerpts from your files</td>
-                <td className="px-6 py-5 text-sm">Teach critical sourcing and avoid plagiarism</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <MessageSquare size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Notebook Interaction</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Chat with your documents to find specific facts or ideas</td>
-                <td className="px-6 py-5 text-sm">Extract precisely what you need for lesson planning</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Collaborative Features</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Share entire notebooks with co-teachers or students</td>
-                <td className="px-6 py-5 text-sm">Streamline unit planning across departments</td>
-              </tr>
-              <tr>
-                <td className="px-6 py-5 font-bold text-slate-900">
-                  <div className="flex items-center gap-2">
-                    <Headphones size={16} className="text-purple-500 flex-shrink-0" />
-                    <span>Voice-to-Note</span>
-                  </div>
-                </td>
-                <td className="px-6 py-5">Dictate ideas and have AI summarize them into study guides</td>
-                <td className="px-6 py-5 text-sm">Hands-free brainstorming for busy educators</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        {/* Getting Started Guide */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div className="md:col-span-5">
-            <h2 className="text-2xl font-bold text-slate-900 mb-3 tracking-tight">Step-by-Step Getting Started Guide</h2>
-            <p className="text-slate-500 mb-8 leading-relaxed">
-              Transform your static texts into an interactive knowledge base with these simple steps.
-            </p>
-            <div className="bg-slate-100 rounded-2xl aspect-[4/3] relative overflow-hidden">
-               <img src="/Sign up-amico 1.png" alt="Workspace" className="w-full h-full object-cover" />
-            </div>
-          </div>
-          
-          <div className="md:col-span-7 space-y-8 relative">
-            <div className="absolute left-[15px] top-4 bottom-4 w-px bg-slate-200 z-0 hidden md:block"></div>
-            
-            {/* Step 1 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">1</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-1">Access NotebookLM</h3>
-                <p className="text-sm text-slate-600">Go to <strong className="text-purple-600">notebooklm.google.com</strong> and sign in with Google.</p>
-                <p className="text-sm text-slate-600 mt-1">Click "New Notebook" to start your first "Study Guide" project.</p>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">2</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Upload Sources</h3>
-                <p className="text-sm text-slate-600 mb-2">Click "Add Source" and upload syllabus, assignment details, or reading materials (e.g., PDF).</p>
-                <p className="text-sm text-slate-600">You can select up to 50 sources per specific Knowledge Base (e.g., Unit 1).</p>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">3</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Ask AI to Organize Content</h3>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1 mb-2">
-                  <p>Type: <em>"Create a pacing guide for these materials based on a 4-week period."</em></p>
-                </div>
-                <p className="text-sm text-slate-600">Click "Pin" to save the summary to your notes section.</p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">4</div>
-              <div>
-                <h3 className="font-bold text-slate-900 mb-2">Generate Study Materials</h3>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1 mb-2">
-                  <p>Type: <em>"Act as an expert teacher. Write 5 discussion questions based on this document."</em></p>
-                </div>
-                <p className="text-sm text-slate-600">Edit and save to a separate Google Doc.</p>
-              </div>
-            </div>
-            
-            {/* Step 5 */}
-            <div className="flex gap-4 relative z-10">
-              <div className="w-8 h-8 rounded-full bg-purple-600 text-white font-bold flex items-center justify-center flex-shrink-0 mt-1 shadow-md shadow-purple-200">5</div>
-              <div>
-                <p className="text-sm text-slate-600 mb-2">Create a Lesson Hook.</p>
-                <div className="bg-slate-50 border border-slate-100 rounded-lg p-3 text-sm text-slate-600 space-y-1 mb-2">
-                  <p>Type: <em>"Suggest 3 engaging discussion starters about [topic] for 12-year-olds."</em></p>
-                </div>
-                <p className="text-sm text-slate-600">Share the link with your specific class.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Practical Challenge */}
-        <div className="bg-gradient-to-br from-purple-900 via-indigo-900 to-indigo-950 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
-          
-          <div className="flex items-center gap-2 text-purple-300 mb-4 text-xs font-bold uppercase tracking-widest relative z-10">
-            <Target size={14} /> PRACTICAL CHALLENGE: TASK
-          </div>
-          
-          <h2 className="text-3xl font-bold mb-10 leading-tight relative z-10">
-            "Transform a textbook chapter <br className="hidden md:block"/> into an interactive study guide."
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 relative z-10 mb-8">
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-purple-500/30 border border-purple-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-indigo-400/50 group-hover:border-indigo-300 group-hover:text-indigo-100">1</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Upload a Source</h4>
-                <p className="text-purple-100 text-sm">Find a reading passage or PDF specific to your subject content. Upload it into NotebookLM.</p>
-              </div>
-            </div>
-            
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-purple-500/30 border border-purple-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-indigo-400/50 group-hover:border-indigo-300 group-hover:text-indigo-100">2</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Generate a Quiz</h4>
-                <p className="text-purple-100 text-sm">Use the "Notebook guide" button to generate a 3-question quiz (mix true/false + short answer).</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-purple-500/30 border border-purple-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-indigo-400/50 group-hover:border-indigo-300 group-hover:text-indigo-100">3</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Ask a Question</h4>
-                <p className="text-purple-100 text-sm">Ask the AI a specific question about the material to test its constraints. See if it references an outside topic.</p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 group cursor-pointer">
-              <div className="w-6 h-6 rounded-full bg-purple-500/30 border border-purple-400/30 flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors group-hover:bg-indigo-400/50 group-hover:border-indigo-300 group-hover:text-indigo-100">4</div>
-              <div className="group-hover:opacity-90 transition-opacity">
-                <h4 className="font-bold mb-1">Auto-Generate Audio</h4>
-                <p className="text-purple-100 text-sm">Click on the Deep Dive Audio generation button to create a 3-min "podcast" to introduce the reading to your specific class.</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="pt-6 border-t border-purple-500/30 relative z-10 flex items-center text-sm font-medium text-purple-200">
-             <strong className="text-yellow-300 mr-2">Bonus:</strong> Try pinning 3 essential key terms from the text to your note board.
-          </div>
-        </div>
-
-        {/* Pro Tips & Assessment */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-           <div className="flex items-center justify-center bg-purple-50 rounded-2xl p-8">
-              <img src="/Notebook-bro 1.png" alt="Notebook" className="w-full max-w-[250px] mix-blend-multiply opacity-80" />
-           </div>
-
-           <div className="bg-amber-50 rounded-2xl p-8 border border-amber-100">
-             <div className="flex items-center gap-2 text-amber-600 font-bold mb-6">
-               <Trophy size={18} /> Pro Tips for Mastery
-             </div>
-             
-             <ul className="space-y-4 mb-8">
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                  <p className="text-sm text-slate-700"><strong>Tag Sources:</strong> Label uploads by topic (e.g., Biology – Cell Structure) for easy retrieval.</p>
-               </li>
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Collaboration:</strong> Share notebooks with co-teachers to co-create study aids.</p>
-               </li>
-               <li className="flex items-start gap-3">
-                 <div className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
-                 <p className="text-sm text-slate-700"><strong>Podcast Limitations:</strong> The audio overview may occasionally invent slight banter but sticks closely to facts.</p>
-               </li>
-             </ul>
-
-             <div className="bg-white/60 p-4 rounded-xl text-center border border-amber-200">
-               <p className="text-xs text-amber-800 font-medium italic">
-                 "NotebookLM turns static chapters into dynamic study tools. Empower your students at home!"
-               </p>
-             </div>
-           </div>
-        </div>
-
-        {/* Ready to Create Quiz Section */}
-        <div className="bg-purple-50 rounded-3xl p-10 border border-purple-100 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-            <div>
-               <h3 className="text-2xl font-bold text-slate-900 mb-3">Ready to Create Your First Quiz?</h3>
-               <p className="text-slate-600 mb-6 text-sm leading-relaxed">
-                   NotebookLM is ideal for taking complex source material and making it accessible for student review.
-               </p>
-               <ul className="space-y-3">
-                   <li className="flex items-center gap-3 text-sm font-medium text-slate-700">
-                       <CheckCircle size={18} className="text-purple-600" /> Upload your class materials (PDF/Doc)
-                   </li>
-                   <li className="flex items-center gap-3 text-sm font-medium text-slate-700">
-                       <CheckCircle size={18} className="text-purple-600" /> Go to the saved notes board
-                   </li>
-                   <li className="flex items-center gap-3 text-sm font-medium text-slate-700">
-                       <CheckCircle size={18} className="text-purple-600" /> Click "Generate Quiz" for MCQs
-                   </li>
-               </ul>
-            </div>
-            <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 transform rotate-2">
-                <img src="/CourseContentDay2.png" alt="Quiz Generation" className="w-full rounded-xl object-cover aspect-square" />
-            </div>
-        </div>
-
-        {/* Next Button */}
-        <button 
-          onClick={onNext}
-          className="w-full bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all rounded-2xl p-6 flex flex-col items-center justify-center text-center group cursor-pointer relative overflow-hidden"
-        >
-          <div className="absolute inset-0 bg-purple-50/0 group-hover:bg-purple-50/50 transition-colors"></div>
-          <div className="relative z-10 flex flex-col items-center">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-purple-600 transition-colors mb-1">Day 3: TEST YOUR KNOWLEDGE</h3>
-            <p className="text-sm text-slate-500">Evaluate Your Complete Understanding of Day 3</p>
-            <div className="mt-4 w-10 h-10 rounded-full bg-slate-50 group-hover:bg-white text-slate-400 group-hover:text-purple-600 border border-slate-100 flex items-center justify-center transition-all shadow-sm">
-              <ChevronRight size={20} />
-            </div>
-          </div>
-        </button>
+        <p className="text-center text-site-text/60 text-sm pb-10">
+          Next Up: Day 4 – Continue your AI education journey
+        </p>
 
       </div>
     </div>
