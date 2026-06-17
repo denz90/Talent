@@ -316,28 +316,28 @@ const MagicSchoolDay1 = ({ onNext }) => {
                 
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">1</div>
                     <h3 className="text-xl font-bold">Generate Base Lesson</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Lesson Plan Generator" to outline a 45-minute lesson covering Next Generation Science Standards (NGSS) objectives and agenda.</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">2</div>
                     <h3 className="text-xl font-bold">Create an Exit Ticket</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Quiz Generator" to make a 3-question formative assessment.</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">3</div>
                     <h3 className="text-xl font-bold">Add Differentiation</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Differentiation Tool" to create a simplified reading passage for struggling readers and an extension prompt for advanced learners.</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">4</div>
                     <h3 className="text-xl font-bold">Share Your Output</h3>
                   </div>
                   <p className="text-sm text-site-text">Export the final doc to a PDF and submit it link.</p>

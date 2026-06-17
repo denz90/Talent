@@ -311,28 +311,28 @@ const EduaideDay2 = ({ onNext }) => {
                 
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">Part 1</div>
+                    <div className="w-10 h-10 rounded-xl bg-site-primary flex items-center justify-center text-site-text text-xs font-bold">1</div>
                     <h3 className="text-xl font-bold">Generate a Base Lesson Plan</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Lesson Plan Generator" to outline a 45-min lesson (e.g., Science, American Revolution).</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 2</div>
+                    <div className="w-10 h-10 rounded-xl bg-pink-600/40 flex items-center justify-center text-site-text text-xs font-bold">2</div>
                     <h3 className="text-xl font-bold">Add an Exit Ticket</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Assessment Generator" to create a short 3-question formative assessment.</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 3</div>
+                    <div className="w-10 h-10 rounded-xl bg-green-600/40 flex items-center justify-center text-site-text text-xs font-bold">3</div>
                     <h3 className="text-xl font-bold">Create Tiered Worksheets</h3>
                   </div>
                   <p className="text-sm text-site-text">Use the "Differentiate Maker" or "Task Generator" to create worksheets for varying levels (e.g., below, on, above level).</p>
                 </div>
                 <div className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">Part 4</div>
+                    <div className="w-10 h-10 rounded-xl bg-orange-600/40 flex items-center justify-center text-site-text text-xs font-bold">4</div>
                     <h3 className="text-xl font-bold">Bonus</h3>
                   </div>
                   <p className="text-sm text-site-text">Translate one resource into another language using the Translation tool.</p>

@@ -84,13 +84,14 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
             "
           >
             {/* Defult color = white */}
+            {/*
             <button
               onClick={() => setTheme('default')}
               className={`w-5 h-5 rounded-full bg-white border-2 cursor-pointer transition-transform hover:scale-125 ${
                 theme === 'default' ? 'border-slate-900 scale-110' : 'border-transparent'
               }`}
               title="Default"
-            />
+            />*/}
             {/* Button 1: Timeless Retro */}
             <button 
               onClick={() => setTheme('timeless')}
