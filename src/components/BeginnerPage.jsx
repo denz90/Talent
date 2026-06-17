@@ -135,7 +135,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
       <div className="lg:hidden fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="w-14 h-14 bg-brand-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
+          className="w-14 h-14 bg-site-accent text-site-text rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
         </button>
@@ -160,7 +160,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
               className="absolute inset-y-0 left-0 w-80 bg-site-bg p-8 shadow-2xl flex flex-col"
             >
               <div className="flex items-center justify-between mb-8">
-                <span className="font-bold text-brand-primary">Course Navigation</span>
+                <span className="font-bold text-site-text">Course Navigation</span>
                 <button onClick={() => setIsMobileMenuOpen(false)}><X className="w-5 h-5 text-slate-400" /></button>
               </div>
               <div className="overflow-y-auto flex-1">
@@ -186,7 +186,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                 onClick={onBack}
                 className="group flex items-center gap-2 text-site-text/80 hover:text-brand-primary transition-colors font-medium w-fit"
               >
-                <div className="p-2 rounded-full group-hover:bg-brand-secondary transition-colors">
+                <div className="p-2 rounded-full group-hover:bg-site-accent transition-colors">
                   <ArrowLeft className="w-4 h-4" />
                 </div>
                 Back to Learning Paths
@@ -207,7 +207,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                 <SectionHeader title={section.title} subtitle={section.subtitle} />
 
                 {section.type === 'intro' && (
-                  <ContentCard className="bg-gradient-to-br from-brand-primary to-brand-accent text-white border-none p-12 overflow-hidden relative">
+                  <ContentCard className="bg-gradient-to-br from-site-primary to-site-accent text-site-text border-none p-12 overflow-hidden relative">
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-site-bg/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                       <div>
@@ -227,22 +227,22 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       </div>
                       <div className="bg-site-bg/10 p-8 rounded-3xl backdrop-blur-md border border-white/20">
                         <h4 className="text-xl font-bold mb-4 flex items-center gap-2"><Star className="w-5 h-5 text-yellow-300 fill-yellow-300" /> Think of AI like a very smart intern on their first day.</h4>
-                        <p className="text-sm text-white/90 mb-4 font-medium italic">It is capable, but:</p>
+                        <p className="text-sm text-site-text/80 mb-4 font-medium italic">It is capable, but:</p>
                         <ul className="space-y-4">
                           <li className="flex gap-3 text-sm">
-                            <CheckCircle2 className="w-5 h-5 shrink-0 text-white/60" />
+                            <CheckCircle2 className="w-5 h-5 shrink-0 text-site-text/60" />
                             <span>It does not know your context</span>
                           </li>
                           <li className="flex gap-3 text-sm">
-                            <CheckCircle2 className="w-5 h-5 shrink-0 text-white/60" />
+                            <CheckCircle2 className="w-5 h-5 shrink-0 text-site-text/60" />
                             <span>It needs clear instructions</span>
                           </li>
                           <li className="flex gap-3 text-sm">
-                            <CheckCircle2 className="w-5 h-5 shrink-0 text-white/60" />
+                            <CheckCircle2 className="w-5 h-5 shrink-0 text-site-text/60" />
                             <span>It improves with feedback</span>
                           </li>
                         </ul>
-                        <p className="mt-6 pt-6 border-t border-white/10 text-sm font-bold">
+                        <p className="mt-6 pt-6 border-t border-site-accent/50 text-sm font-bold">
                           If you guide it well, it will produce excellent work.
                         </p>
                       </div>
@@ -251,13 +251,13 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                 )}
 
                 {section.type === 'intro' && (
-                  <div className="mt-8 bg-brand-secondary/50 border border-brand-primary/10 p-8 rounded-3xl flex items-start gap-4">
-                    <div className="p-3 bg-gradient-to-br from-brand-primary to-brand-accent text-white rounded-2xl shadow-lg shadow-brand-primary/20">
+                  <div className="mt-8 bg-site-bg/10 border border-site-primary p-8 rounded-3xl flex items-start gap-4">
+                    <div className="p-3 bg-gradient-to-br from-site-primary to-site-accent text-site-text rounded-2xl shadow-lg shadow-site-primary/20">
                       <Zap className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-primary mb-2">Activity:</h4>
-                      <p className="text-brand-dark leading-relaxed font-medium">
+                      <h4 className="font-bold text-site-primary mb-2">Activity:</h4>
+                      <p className="text-site-text/80 leading-relaxed font-medium">
                         Think about a task you do at work. Now imagine explaining it to someone who's never done it before. That's prompting.
                       </p>
                     </div>
@@ -272,20 +272,20 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-6">
-                        <h4 className="flex items-center gap-2 text-red-600 font-bold text-lg">
+                        <h4 className="flex items-center gap-2 text-site-text font-bold text-lg">
                           <XCircle className="w-5 h-5" /> Bad prompts are usually:
                         </h4>
-                        <ul className="space-y-3 pl-7 list-disc text-site-text/80 font-medium">
+                        <ul className="space-y-3 pl-7 list-disc text-site-text font-medium">
                           <li>Too vague</li>
                           <li>Missing context</li>
                           <li>Not specific</li>
                         </ul>
                       </div>
                       <div className="space-y-6">
-                        <h4 className="flex items-center gap-2 text-emerald-600 font-bold text-lg">
+                        <h4 className="flex items-center gap-2 text-site-text font-bold text-lg">
                           <CheckCircle2 className="w-5 h-5" /> Good prompts are:
                         </h4>
-                        <ul className="space-y-3 pl-7 list-disc text-site-text/80 font-medium">
+                        <ul className="space-y-3 pl-7 list-disc text-site-text font-medium">
                           <li>Clear</li>
                           <li>Specific</li>
                           <li>Structured</li>
@@ -295,49 +295,49 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                     <div className="grid md:grid-cols-2 gap-8">
                       <ContentCard className="border-red-100 bg-red-50/10 p-10">
-                        <div className="flex items-center gap-3 text-red-600 font-bold mb-6">
+                        <div className="flex items-center gap-3 text-site-text font-bold mb-6">
                           <XCircle className="w-6 h-6" />
                           <span>Bad Prompt:</span>
                         </div>
-                        <div className="bg-site-bg border border-red-100 p-8 rounded-2xl italic font-serif text-slate-400 mb-4 text-lg">
+                        <div className="bg-site-bg border border-site-accent p-8 rounded-2xl italic font-serif text-slate-400 mb-4 text-lg">
                           "Write about marketing"
                         </div>
-                        <p className="text-sm text-red-500 font-bold">Problem: Too vague</p>
+                        <p className="text-sm text-site-text font-bold">Problem: Too vague</p>
                       </ContentCard>
 
-                      <ContentCard className="border-emerald-100 bg-emerald-50/10 p-10">
-                        <div className="flex items-center gap-3 text-emerald-600 font-bold mb-6">
+                      <ContentCard className="border-site-accent bg-site-accent p-10">
+                        <div className="flex items-center gap-3 text-site-text font-bold mb-6">
                           <CheckCircle2 className="w-6 h-6" />
                           <span>Good Prompt:</span>
                         </div>
-                        <div className="bg-site-bg border border-emerald-100 p-8 rounded-2xl text-slate-700 font-medium mb-4 text-lg leading-relaxed">
-                          "Write a <span className="text-emerald-600 font-bold">300-word article</span> explaining <span className="text-emerald-600 font-bold">digital marketing</span> to <span className="text-emerald-600 font-bold">small business owners in Ghana</span>. Use simple language and local examples."
+                        <div className="bg-site-bg border border-site-accent p-8 rounded-2xl text-site-text font-medium mb-4 text-lg leading-relaxed">
+                          "Write a <span className="text-site-primary font-bold">300-word article</span> explaining <span className="text-site-primary font-bold">digital marketing</span> to <span className="text-site-primary font-bold">small business owners in Ghana</span>. Use simple language and local examples."
                         </div>
-                        <p className="text-xs text-emerald-600 font-medium opacity-80 leading-relaxed">
+                        <p className="text-xs text-site-text font-medium opacity-80 leading-relaxed">
                           Why it works: Clear task • Defined audience • Specific length • Context provided
                         </p>
                       </ContentCard>
                     </div>
 
-                    <ContentCard className="bg-gradient-to-r from-brand-primary to-brand-accent text-white text-center py-10 border-none">
+                    <ContentCard className="bg-gradient-to-r from-site-primary to-site-accent text-site-text text-center py-10 border-none">
                       <p className="text-xl font-bold">The more specific your instruction, the better the result.</p>
                     </ContentCard>
 
-                    <div className="bg-brand-secondary/50 border border-brand-primary/10 p-10 rounded-3xl">
+                    <div className="bg-site-secondary/50 border border-site-primary/10 p-10 rounded-3xl">
                       <div className="flex items-center gap-4 mb-8">
-                        <div className="p-3 bg-gradient-to-br from-brand-primary to-brand-accent text-white rounded-2xl shadow-lg">
+                        <div className="p-3 bg-gradient-to-br from-site-primary to-site-accent text-site-text rounded-2xl shadow-lg">
                           <Layout className="w-5 h-5" />
                         </div>
-                        <h4 className="font-bold text-xl text-brand-dark">Activity:</h4>
+                        <h4 className="font-bold text-xl text-site-text">Activity:</h4>
                       </div>
-                      <p className="text-brand-dark font-medium mb-8 text-lg">Turn these bad prompts into good ones:</p>
+                      <p className="text-site-text font-medium mb-8 text-lg">Turn these bad prompts into good ones:</p>
                       <div className="space-y-6">
                         {[
                           '1. "Tell me about climate change"',
                           '2. "Write an email"',
                           '3. "Help with my presentation"'
                         ].map((item, i) => (
-                          <div key={i} className="bg-site-bg/80 p-5 rounded-2xl shadow-sm border border-brand-primary/5 font-bold text-brand-dark">
+                          <div key={i} className="bg-site-bg/80 p-5 rounded-2xl shadow-sm border border-site-primary/5 font-bold text-site-text">
                             {item}
                           </div>
                         ))}
@@ -348,12 +348,12 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                 {section.type === 'formula' && (
                   <div className="space-y-12">
-                    <ContentCard className="p-0 overflow-hidden border-brand-primary/20 bg-brand-secondary/30">
-                      <div className="bg-gradient-to-r from-brand-primary to-brand-accent text-white p-10 text-center">
+                    <ContentCard className="p-0 overflow-hidden border-site-primary/20 bg-site-bg/30">
+                      <div className="bg-gradient-to-r from-site-primary to-site-accent text-site-text p-10 text-center">
                         <h3 className="text-2xl font-bold mb-8">The CRAFT Formula</h3>
                         <div className="flex justify-center gap-4 md:gap-6">
                           {['C', 'R', 'A', 'F', 'T'].map((l, i) => (
-                            <div key={i} className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-site-bg/10 flex items-center justify-center font-bold text-2xl md:text-3xl border border-white/20 backdrop-blur-md shadow-2xl">
+                            <div key={i} className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-site-bg/10 flex items-center justify-center font-bold text-2xl md:text-3xl border border-site-accent backdrop-blur-md shadow-2xl">
                               {l}
                             </div>
                           ))}
@@ -367,11 +367,11 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                           { l: 'F', t: 'Format', s: "How should it look?" },
                           { l: 'T', t: 'Tone', s: "What's the mood/style?" }
                         ].map((item, i) => (
-                          <div key={i} className="flex gap-4 items-center bg-site-bg p-5 rounded-2xl border border-brand-primary/5 shadow-sm">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-accent text-white flex items-center justify-center font-bold text-lg shrink-0 shadow-lg shadow-brand-primary/20">{item.l}</div>
+                          <div key={i} className="flex gap-4 items-center bg-site-bg p-5 rounded-2xl border border-site-primary/5 shadow-sm">
+                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-site-primary to-site-accent text-site-text flex items-center justify-center font-bold text-lg shrink-0 shadow-lg shadow-site-primary/20">{item.l}</div>
                             <div>
-                              <div className="font-bold text-brand-dark">{item.t}</div>
-                              <div className="text-xs text-slate-400 font-medium">{item.s}</div>
+                              <div className="font-bold text-site-text">{item.t}</div>
+                              <div className="text-xs text-site-text/80 font-medium">{item.s}</div>
                             </div>
                           </div>
                         ))}
@@ -380,7 +380,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                     <ContentCard className="p-10">
                       <h4 className="text-xl font-bold mb-8 flex items-center gap-3">
-                        <Star className="w-5 h-5 text-brand-primary fill-brand-primary" />
+                        <Star className="w-5 h-5 text-site-text fill-yellow-400" />
                         Example Using CRAFT
                       </h4>
                       <div className="space-y-6">
@@ -391,8 +391,8 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                           { l: 'Format', v: "250 words, 3 main sections" },
                           { l: 'Tone', v: "Professional but easy to understand" }
                         ].map((ex, i) => (
-                          <div key={i} className="flex gap-4 items-start pb-4 border-b border-slate-50 last:border-0">
-                            <span className="font-bold text-brand-primary min-w-[80px]">{ex.l}:</span>
+                          <div key={i} className="flex gap-4 items-start pb-4 border-b border-site-accent/20 last:border-0">
+                            <span className="font-bold text-site-text min-w-[80px]">{ex.l}:</span>
                             <span className="text-site-text/80 font-medium">{ex.v}</span>
                           </div>
                         ))}
@@ -406,12 +406,12 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       </div>
                     </ContentCard>
 
-                    <div className="bg-brand-secondary/50 border border-brand-primary/10 p-10 rounded-3xl">
-                      <h4 className="font-bold text-xl text-brand-dark mb-6">Activity:</h4>
-                      <p className="text-brand-dark font-medium mb-6">Use CRAFT to write prompts for:</p>
-                      <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 font-bold text-brand-primary uppercase tracking-tight">
+                    <div className="bg-site-bg border border-site-accent p-10 rounded-3xl">
+                      <h4 className="font-bold text-xl text-site-text mb-6">Activity:</h4>
+                      <p className="text-site-text font-medium mb-6">Use CRAFT to write prompts for:</p>
+                      <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 font-bold text-site-primary uppercase tracking-tight">
                         {['A social media post', 'A meeting agenda', 'A thank you letter'].map((item, i) => (
-                          <li key={i} className="bg-site-bg p-4 rounded-xl border border-brand-primary/10 text-center shadow-sm">• {item}</li>
+                          <li key={i} className="bg-site-bg p-4 rounded-xl border border-site-primary/10 text-center shadow-sm">• {item}</li>
                         ))}
                       </ul>
                     </div>
@@ -426,58 +426,58 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                         p: "Understand new topics",
                         e: "Explain [topic] to me like I'm hearing about it for the first time. Use simple language and real-world examples from Ghana.",
                         icon: Info,
-                        bg: "bg-blue-50/50"
+                        bg: "bg-site-bg"
                       },
                       {
                         t: "Creative Prompts (Content Generation)",
                         p: "Generate original content",
                         e: "Write 5 creative Instagram captions for [product/event]. Make them engaging and include relevant hashtags.",
                         icon: PenTool,
-                        bg: "bg-purple-50/50"
+                        bg: "bg-site-bg"
                       },
                       {
                         t: "Instructional Prompts (Step-by-Step)",
                         p: "Learn how to do something",
                         e: "Give me a step-by-step guide to [task]. Include common mistakes to avoid.",
                         icon: MessageSquare,
-                        bg: "bg-orange-50/50"
+                        bg: "bg-site-bg"
                       },
                       {
                         t: "Analytical Prompts (Comparison/Evaluation)",
                         p: "Compare options or analyze information",
                         e: "Compare [option A] and [option B] for [purpose]. List pros and cons of each.",
                         icon: Search,
-                        bg: "bg-emerald-50/50"
+                        bg: "bg-site-bg"
                       },
                       {
                         t: "Rewrite Prompts (Improvement)",
                         p: "Improve existing content",
                         e: "Rewrite this [email/paragraph] to sound more [professional/friendly/clear]. Keep the main message but improve the tone.",
                         icon: RefreshCw,
-                        bg: "bg-indigo-50/50"
+                        bg: "bg-site-bg"
                       },
                       {
                         t: "Summarization Prompts (Condensing)",
                         p: "Extract key information",
                         e: "Summarize this document in 5 bullet points. Focus on actionable insights.",
                         icon: FileText,
-                        bg: "bg-rose-50/50"
+                        bg: "bg-site-bg"
                       }
                     ].map((skill, i) => (
                       <ContentCard key={i} className={`border-site-accent ${skill.bg} p-10`}>
                         <div className="flex gap-8 items-start">
-                          <div className="w-16 h-16 rounded-2xl bg-site-bg shadow-xl flex items-center justify-center font-bold text-brand-primary shrink-0 border border-slate-50">
+                          <div className="w-16 h-16 rounded-2xl bg-site-bg shadow-xl flex items-center justify-center font-bold text-site-text shrink-0 border border-site-accent">
                             <skill.icon className="w-8 h-8" />
                           </div>
                           <div className="flex-1 space-y-4">
                             <div className="flex items-center gap-4">
-                              <span className="text-[10px] font-bold text-brand-primary uppercase tracking-widest bg-brand-secondary px-3 py-1 rounded-full border border-brand-primary/10">Type {i + 1}</span>
+                              <span className="text-[10px] font-bold text-site-primary uppercase tracking-widest bg-site-bg px-3 py-1 rounded-full border border-site-primary/10">Type {i + 1}</span>
                               <h4 className="text-xl font-bold text-site-text">{skill.t}</h4>
                             </div>
                             <p className="text-sm font-bold text-site-text/80 italic flex items-center gap-2">
                               <Search className="w-3.5 h-3.5" /> Purpose: {skill.p}
                             </p>
-                            <div className="bg-site-bg/80 p-6 rounded-2xl border-l-[6px] border-brand-primary text-slate-700 font-medium italic shadow-inner text-lg leading-relaxed">
+                            <div className="bg-site-bg/80 p-6 rounded-2xl border-l-[6px] border-site-primary text-slate-700 font-medium italic shadow-inner text-lg leading-relaxed">
                               "{skill.e}"
                             </div>
                           </div>
@@ -485,12 +485,12 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       </ContentCard>
                     ))}
 
-                    <div className="bg-brand-secondary/50 border border-brand-primary/10 p-6 md:p-10 rounded-3xl mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div className="bg-site-bg border border-site-accent p-6 md:p-10 rounded-3xl mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
                       <div className="space-y-1 text-center sm:text-left">
-                        <span className="text-brand-dark font-bold text-lg block">Practice a tool.</span>
+                        <span className="text-site-text font-bold text-lg block">Practice a tool.</span>
                         <p className="text-site-text/80 text-sm font-medium">Test these prompt types in our playground.</p>
                       </div>
-                      <button className="bg-gradient-to-r from-brand-primary to-brand-accent text-white px-10 py-4 rounded-xl font-bold shadow-lg shadow-brand-primary/20 hover:scale-105 hover:shadow-brand-primary/30 transition-all active:scale-95 border-none whitespace-nowrap">
+                      <button className="bg-gradient-to-r from-site-primary to-site-accent text-site-text px-10 py-4 rounded-xl font-bold shadow-lg shadow-site-primary/20 hover:scale-105 hover:shadow-site-primary/30 transition-all active:scale-95 border-none whitespace-nowrap">
                         Open Tool
                       </button>
                     </div>
@@ -499,7 +499,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                 {section.type === 'iteration' && (
                   <div className="space-y-8">
-                    <ContentCard className="bg-gradient-to-r from-brand-primary to-brand-accent text-white border-none p-12 overflow-hidden relative">
+                    <ContentCard className="bg-gradient-to-r from-site-primary to-site-accent text-site-text border-none p-12 overflow-hidden relative">
                       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-site-bg/10 rounded-full blur-3xl"></div>
                       <p className="text-2xl font-medium leading-relaxed max-w-2xl relative z-10 italic">
                         "You rarely get the perfect result on the first try. Iterating is the process of refining your prompt."
@@ -514,7 +514,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                         { t: "Change the Format or Tone", d: "Switch from a paragraph to bullets, or from formal to friendly." }
                       ].map((tech, i) => (
                         <div key={i} className="bg-site-bg p-8 rounded-3xl border border-site-accent shadow-sm flex gap-6 items-start hover:shadow-md transition-shadow">
-                          <div className="w-12 h-12 rounded-2xl bg-brand-secondary text-brand-primary flex items-center justify-center font-bold text-xl shrink-0">
+                          <div className="w-12 h-12 rounded-2xl bg-site-primary text-site-text flex items-center justify-center font-bold text-xl shrink-0">
                             {i + 1}
                           </div>
                           <div>
@@ -538,14 +538,14 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       <ContentCard key={i} className="flex flex-col md:flex-row gap-8 items-start">
                         <div className="md:w-1/3">
                           <h4 className="text-xl font-bold mb-3 text-site-text">{tech.t}</h4>
-                          <p className="text-sm text-site-text/80 font-medium leading-relaxed">{tech.d}</p>
+                          <p className="text-sm text-site-text font-medium leading-relaxed">{tech.d}</p>
                         </div>
-                        <div className="flex-1 w-full bg-site-primary text-brand-primary p-8 rounded-3xl font-mono text-sm border-l-8 border-brand-primary shadow-2xl relative overflow-hidden group">
+                        <div className="flex-1 w-full bg-site-bg text-site-text p-8 rounded-3xl font-mono text-sm border-l-8 border-site-primary shadow-2xl relative overflow-hidden group">
                           <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
                             <Zap className="w-8 h-8" />
                           </div>
-                          <p className="font-bold mb-2 text-white/40 uppercase tracking-widest text-[10px]">Example Command:</p>
-                          <span className="italic text-lg text-brand-secondary">"{tech.e}"</span>
+                          <p className="font-bold mb-2 text-site-text uppercase tracking-widest text-[10px]">Example Command:</p>
+                          <span className="italic text-lg text-site-text">"{tech.e}"</span>
                         </div>
                       </ContentCard>
                     ))}
@@ -565,14 +565,14 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                         { t: "Brainstorming & Ideation", icon: Zap, bg: "bg-orange-50/50" }
                       ].map((skill, i) => (
                         <ContentCard key={i} className={`hover:-translate-y-2 transition-transform h-full ${skill.bg}`}>
-                          <div className="w-14 h-14 rounded-2xl bg-site-bg text-brand-primary flex items-center justify-center mb-8 shadow-sm border border-slate-50">
+                          <div className="w-14 h-14 rounded-2xl bg-site-bg text-site-text flex items-center justify-center mb-8 shadow-sm border border-site-accent">
                             <skill.icon className="w-7 h-7" />
                           </div>
                           <h4 className="text-lg font-bold text-site-text leading-snug">{skill.t}</h4>
                         </ContentCard>
                       ))}
                     </div>
-                    <div className="p-10 bg-site-primary text-white rounded-[40px] text-center italic relative overflow-hidden">
+                    <div className="p-10 bg-site-primary text-site-text rounded-[40px] text-center italic relative overflow-hidden">
                       "The goal of prompting for work is to save time, not add work."
                     </div>
                   </div>
@@ -594,11 +594,11 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                         </div>
                       ))}
                     </div>
-                    <ContentCard className="bg-red-50 border-red-100/50 p-10">
-                      <h4 className="text-red-600 font-bold mb-4 flex items-center gap-2">
+                    <ContentCard className="bg-site-bg border-site-accent/50 p-10">
+                      <h4 className="text-site-text font-bold mb-4 flex items-center gap-2">
                         <AlertTriangle className="w-5 h-5" /> Important Reminder:
                       </h4>
-                      <p className="text-red-900/80 font-medium leading-relaxed">
+                      <p className="text-site-text/80 font-medium leading-relaxed">
                         AI is a tool to assist you, not replace your judgment. You are responsible for the final output.
                       </p>
                     </ContentCard>

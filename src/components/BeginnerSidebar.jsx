@@ -51,7 +51,7 @@ const BeginnerSidebar = ({ activeSection }) => {
           className={`w-full flex items-center justify-between p-5 transition-colors group ${isOpen ? 'bg-site-bg/50' : 'hover:bg-site-bg'}`}
         >
           <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-xl transition-colors ${isOpen ? 'bg-gradient-to-br from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/20' : 'bg-brand-secondary text-brand-primary'}`}>
+            <div className={`p-2 rounded-xl transition-colors ${isOpen ? 'bg-gradient-to-br from-site-primary to-site-accent text-site-text shadow-lg shadow-brand-primary/20' : 'bg-brand-secondary text-brand-primary'}`}>
               <PenTool className="w-4 h-4" />
             </div>
             <span className="font-bold text-site-text tracking-tight">Prompt Engineering</span>
@@ -60,7 +60,7 @@ const BeginnerSidebar = ({ activeSection }) => {
             animate={{ rotate: isOpen ? 0 : -90 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <ChevronDown className={`w-4 h-4 ${isOpen ? 'text-brand-primary' : 'text-slate-400 opacity-50'}`} />
+            <ChevronDown className={`w-4 h-4 ${isOpen ? 'text-site-primary' : 'text-slate-400 opacity-50'}`} />
           </motion.div>
         </button>
 
@@ -91,13 +91,13 @@ const BeginnerSidebar = ({ activeSection }) => {
         </AnimatePresence>
       </div>
 
-      <div className="mt-auto p-6 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-accent text-white relative overflow-hidden group">
+      <div className="mt-auto p-6 rounded-2xl bg-gradient-to-br from-site-primary to-site-accent text-site-text relative overflow-hidden group">
         <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-site-bg/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
         <h4 className="font-bold mb-2 relative z-10">Need Help?</h4>
-        <p className="text-xs text-white/80 mb-4 relative z-10 leading-relaxed">
+        <p className="text-xs text-site-text/80 mb-4 relative z-10 leading-relaxed">
           Stuck on a module? Ask our AI Tutor for instant clarification.
         </p>
-        <button className="w-full py-2 bg-site-bg text-brand-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
+        <button className="w-full py-2 bg-site-bg text-site-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
           Open AI Tutor
         </button>
       </div>
