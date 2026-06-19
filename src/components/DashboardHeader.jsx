@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Bell, User, Search, Sparkles, Settings, LogOut } from 'lucide-react';
 
-const DashboardHeader = ({ onLogout, onProfileSettings }) => {
+const DashboardHeader = ({ currentUser, onLogout, onProfileSettings }) => {
+  const displayName = currentUser?.username || currentUser?.name || currentUser?.email?.split('@')[0] || 'Learner';
+  const avatarSeed = currentUser?.username || 'default';
+  const planLabel = currentUser?.plan || 'Free Plan';
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  // Read persisted profile image from localStorage, fall back to generated avatar
+  const savedImg = localStorage.getItem('hawkman_profile_image');
+  const avatarSrc = savedImg || `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}`;
 
   return (
     <header className="h-20 border-b border-site-accent dark:border-slate-800 bg-site-bg dark:bg-site-primary flex items-center justify-between px-10 relative z-10 transition-colors duration-300">
@@ -40,11 +46,11 @@ const DashboardHeader = ({ onLogout, onProfileSettings }) => {
             onClick={() => setIsProfileOpen(!isProfileOpen)}
           >
             <div className="text-right flex flex-col justify-center">
-              <span className="text-sm font-bold text-site-text dark:text-white leading-none group-hover:text-brand-primary transition-colors">Alex Rivera</span>
-              <span className="text-[11px] font-bold text-slate-400 dark:text-site-text/80 uppercase tracking-wider mt-1">Free Plan</span>
+              <span className="text-sm font-bold text-site-text dark:text-white leading-none group-hover:text-brand-primary transition-colors">{displayName}</span>
+              <span className="text-[11px] font-bold text-slate-400 dark:text-site-text/80 uppercase tracking-wider mt-1">{planLabel}</span>
             </div>
             <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 border-2 border-slate-50 dark:border-slate-700 overflow-hidden flex items-center justify-center">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Avatar" className="w-full h-full object-cover" />
+              <img src={avatarSrc} alt="Avatar" className="w-full h-full object-cover" />
             </div>
           </div>
 

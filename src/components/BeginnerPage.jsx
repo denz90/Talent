@@ -22,7 +22,6 @@ import {
   PenTool
 } from 'lucide-react';
 import BeginnerSidebar from './BeginnerSidebar';
-import Navbar from './Navbar';
 
 // Course Data Model
 const COURSE_SECTIONS = [
@@ -124,12 +123,6 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
   return (
     <div className="min-h-screen bg-site-bg">
-      <Navbar
-        onSignup={() => { }}
-        onLogin={() => { }}
-        onLogoClick={onLogoClick}
-        onNavClick={onNavClick}
-      />
 
       {/* Mobile Sidebar Toggle */}
       <div className="lg:hidden fixed bottom-6 right-6 z-50">

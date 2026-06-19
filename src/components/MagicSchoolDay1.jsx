@@ -257,7 +257,7 @@ const MagicSchoolDay1 = ({ onNext }) => {
             <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
               
-              <div className="space-y-6">
+              <div className="space-y-6 ">
                 {[
           {
                     "step": 1,
@@ -281,12 +281,12 @@ const MagicSchoolDay1 = ({ onNext }) => {
           }
 ].map((step) => (
                   <div key={step.step} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
-                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-site-text flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
                       {step.step}
                     </div>
                     <div>
                       <h3 className="text-xl font-bold mb-1">{step.title}</h3>
-                      <p className="text-purple-100/80">{step.content}</p>
+                      <p className="text-site-text">{step.content}</p>
                     </div>
                   </div>
                 ))}

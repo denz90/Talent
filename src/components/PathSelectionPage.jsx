@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Brain, 
-  LogOut, 
+  ArrowLeft, 
   Pencil, 
   Palette, 
   Code2, 
@@ -38,7 +38,7 @@ const ProfessionCard = ({ title, description, icon: Icon, color, onClick }) => {
   );
 };
 
-const PathSelectionPage = ({ onLogout, onSelectPath, level }) => {
+const PathSelectionPage = ({ onBack, onSelectPath, level }) => {
   const paths = [
     {
       title: 'AI for Educators',
@@ -68,28 +68,20 @@ const PathSelectionPage = ({ onLogout, onSelectPath, level }) => {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] font-sans flex flex-col">
-      {/* Header */}
-      <header className="h-20 bg-site-bg border-b border-site-accent px-6 md:px-10 flex items-center justify-between">
-        <div className="flex items-center gap-280">
-          <button 
-            onClick={onLogout}
-            className="flex items-center gap-2 px-4 py-2 border border-site-accent rounded-lg text-sm font-medium text-slate-700 hover:bg-site-bg transition-colors"
-          >
-            <LogOut size={16} />
-            Back
-          </button>
-          
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#155DFC] rounded-xl flex items-center justify-center text-white shadow-sm">
-              <Brain size={24} strokeWidth={2} />
-            </div>
-            <span className="text-lg font-bold text-site-text leading-tight tracking-tight">AI Academy</span>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center pt-16 pb-20 px-6">
+      <main className="flex-1 flex flex-col items-center pt-16 pb-20 px-6 max-w-7xl mx-auto w-full">
+        {/* Back Button */}
+        <div className="w-full max-w-[900px] flex justify-start mb-8">
+          <button
+            onClick={onBack}
+            className="group flex items-center gap-2 text-site-text/80 hover:text-brand-primary transition-colors font-medium w-fit text-sm"
+          >
+            <div className="p-2 rounded-full hover:bg-site-accent transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+            </div>
+            Back to Home
+          </button>
+        </div>
         <div className="text-center mb-12">
           <h1 className="text-[32px] md:text-[40px] font-bold text-site-text mb-4 tracking-tight">
             Choose Your {level} Learning Path

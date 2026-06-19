@@ -147,6 +147,7 @@ const App = () => {
   if (view === 'dashboard') {
     return (
       <DashboardPage
+        currentUser={currentUser}
         onLogout={() => setView('home')}
         onProfileSettings={() => setView('profile_settings')}
       />
@@ -156,6 +157,7 @@ const App = () => {
   if (view === 'profile_settings') {
     return (
       <ProfileSettingsPage
+        currentUser={currentUser}
         onBack={() => setView('dashboard')}
       />
     );
@@ -198,37 +200,17 @@ if (view === 'login') {
   );
 }
 
-  if (currentTool) {
-    return (
-      <ToolDetailPage
-        tool={TOOLS_DATA[currentTool]}
-        onBack={() => setCurrentTool(null)}
-      />
-    );
-  }
-
   
 
-  if (view === 'path_selection') {
-    if (!currentUser) {
-      alert("You need to sign in to view courses!");
-      setView('login');
-      return null; 
-    }
-    return (
-      <PathSelectionPage
-        level={selectedLevel}
-        onLogout={() => {
-          localStorage.removeItem('hawkman_token');
-          setCurrentUser(null);
-          setView('login');
-        }}
-        onSelectPath={(course) => {
-          setActiveCourse(course);
-          setView('learning_page');
-        }}
-      />
-    );
+  if (view === 'path_selection' && !currentUser) {
+    alert("You need to sign in to view courses!");
+    setView('login');
+    return null; 
+  }
+
+  if (view === 'beginner' && !currentUser) {
+    setView('login');
+    return null;
   }
 
   if (view === 'learning_page' && activeCourse) {
@@ -247,45 +229,10 @@ if (view === 'login') {
           setView('login');
         }}
         onProfileSettings={() => setView('profile_settings')}
-      />
-    );
-  }
-
-  if (view === 'beginner') {
-    if (!currentUser) {
-      setView('login');
-      return null;
-    }
-    return (
-      <BeginnerPage 
-        onBack={() => setView('home')} 
-        currentUser={currentUser}
-        onLogout={() => {
-          localStorage.removeItem('hawkman_token');
-          setCurrentUser(null);
-          setView('home');
-        }}
+        onHome={() => setView('home')}
         onDashboard={() => setView('dashboard')}
-        onLogoClick={() => setView('home')}
-        onNavClick={handleNavClick}
       />
     );
-  }
-
-  if (view === 'help_center') {
-    return <HelpCenterPage onBack={() => setView('home')} />;
-  }
-
-  if (view === 'api_docs') {
-    return <ApiDocsPage onBack={() => setView('home')} />;
-  }
-
-  if (view === 'system_status') {
-    return <SystemStatusPage onBack={() => setView('home')} />;
-  }
-
-  if (view === 'blog') {
-    return <BlogPage onBack={() => setView('home')} />;
   }
 
   return (
@@ -302,162 +249,190 @@ if (view === 'login') {
         onLogoClick={() => setView('home')}
         onNavClick={handleNavClick}
         onDashboard={() => setView('dashboard')}
-
       />
 
       <main>
-        {/* ... existing main content */}
-        {/* Hero Section */}
-        <section className="relative min-h-[700px] flex items-center justify-center overflow-hidden">
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="/Firefly_GeminiFlash (1).png"
-              className="w-full h-full object-cover"
-              alt="Hero Background"
-            />
-            <div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
-            <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>
-          </div>
+        {currentTool ? (
+          <ToolDetailPage
+            tool={TOOLS_DATA[currentTool]}
+            onBack={() => setCurrentTool(null)}
+          />
+        ) : view === 'path_selection' ? (
+          <PathSelectionPage
+            level={selectedLevel}
+            onBack={() => setView('home')}
+            onSelectPath={(course) => {
+              setActiveCourse(course);
+              setView('learning_page');
+            }}
+          />
+        ) : view === 'beginner' ? (
+          <BeginnerPage 
+            onBack={() => setView('home')} 
+          />
+        ) : view === 'help_center' ? (
+          <HelpCenterPage onBack={() => setView('home')} />
+        ) : view === 'api_docs' ? (
+          <ApiDocsPage onBack={() => setView('home')} />
+        ) : view === 'system_status' ? (
+          <SystemStatusPage onBack={() => setView('home')} />
+        ) : view === 'blog' ? (
+          <BlogPage onBack={() => setView('home')} />
+        ) : (
+          <>
+            {/* Hero Section */}
+            <section className="relative min-h-[700px] flex items-center justify-center overflow-hidden">
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0 z-0">
+                <img
+                  src="/Firefly_GeminiFlash (1).png"
+                  className="w-full h-full object-cover"
+                  alt="Hero Background"
+                />
+                <div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
+                <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>
+              </div>
 
-          <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
-            <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-8 tracking-tight">
-              {currentUser ? (
-                <>
-                  Welcome back, <br /> {currentUser.username}!
-                </>
-              ) : (
-                <>
-                  Learn AI Tools That <br /> Power Tomorrow
-                </>
-              )}
-            </h1>
-            
-            <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
-              Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
-              Perplexity AI, Claude AI, ChatGPT, Gamma AI, and 50+ AI tools.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <button className="text-site-text font-bold py-4 px-12 bg-site-primary">Start Learning Free</button>
-              <button className="text-site-accent font-bold py-4 px-12 bg-site-bg/20">Browse Courses</button>
-            </div>
-          </div>
-        </section>
+              <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
+                <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-8 tracking-tight">
+                  {currentUser ? (
+                    <>
+                      Welcome back, <br /> {currentUser.username}!
+                    </>
+                  ) : (
+                    <>
+                      Learn AI Tools That <br /> Power Tomorrow
+                    </>
+                  )}
+                </h1>
+                
+                <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+                  Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
+                  Perplexity AI, Claude AI, ChatGPT, Gamma AI, and 50+ AI tools.
+                </p>
+                <div className="flex flex-wrap justify-center gap-6">
+                  <button className="text-site-text font-bold py-4 px-12 bg-site-primary">Start Learning Free</button>
+                  <button className="text-site-accent font-bold py-4 px-12 bg-site-bg/20">Browse Courses</button>
+                </div>
+              </div>
+            </section>
 
-        {/* Popular AI Tools */}
-        <section id="tools" className="py-32 ">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
-              <p className="font-medium text-site-text/80">Get hands-on experience with industry-leading AI platforms</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <ToolCard
-                icon={MessageCircle}
-                title="ChatGPT"
-                description="Master prompt engineering and advanced conversations"
-                onClick={() => setCurrentTool('chatgpt')}
-              />
-              <ToolCard
-                icon={BookOpen}
-                title="Claude AI"
-                description="Create stunning AI-generated artwork and designs"
-                onClick={() => setCurrentTool('claude_ai')}
-              />
-              <ToolCard
-                icon={Sparkles}
-                title="Gamma AI"
-                description="Accelerate coding with AI-powered assistance"
-                onClick={() => setCurrentTool('gamma_ai')}
-              />
-              <ToolCard
-                icon={Search}
-                title="Perplexity AI"
-                description="Advanced reasoning and content generation"
-                onClick={() => setCurrentTool('perplexity')}
-              />
-            </div>
-          </div>
-        </section>
+            {/* Popular AI Tools */}
+            <section id="tools" className="py-32 ">
+              <div className="max-w-7xl mx-auto px-6 text-center">
+                <div className="mb-20">
+                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
+                  <p className="font-medium text-site-text/80">Get hands-on experience with industry-leading AI platforms</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <ToolCard
+                    icon={MessageCircle}
+                    title="ChatGPT"
+                    description="Master prompt engineering and advanced conversations"
+                    onClick={() => setCurrentTool('chatgpt')}
+                  />
+                  <ToolCard
+                    icon={BookOpen}
+                    title="Claude AI"
+                    description="Create stunning AI-generated artwork and designs"
+                    onClick={() => setCurrentTool('claude_ai')}
+                  />
+                  <ToolCard
+                    icon={Sparkles}
+                    title="Gamma AI"
+                    description="Accelerate coding with AI-powered assistance"
+                    onClick={() => setCurrentTool('gamma_ai')}
+                  />
+                  <ToolCard
+                    icon={Search}
+                    title="Perplexity AI"
+                    description="Advanced reasoning and content generation"
+                    onClick={() => setCurrentTool('perplexity')}
+                  />
+                </div>
+              </div>
+            </section>
 
-        {/* Learning Paths */}
-        <section id="courses" className="py-32 bg-site-primary/20">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
-              <p className="font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-              <LearningPathCard
-                icon={Compass}
-                title="Beginner"
-                description="Start your AI journey from scratch. No prior experience needed."
-                features={[
-                  "Basic Prompting Techniques",
-                ]}
-                onClick={() => setView('beginner')}
-              />
-              <LearningPathCard
-                icon={Zap}
-                title="Intermediate"
-                description="Level up your skills with advanced techniques and workflows."
-                features={[
-                  "Advanced Prompting",
-                  "Multi-Tool Workflows",
-                  "Automation Basics",
-                  "Real-World Projects"
-                ]}
-                popular
-                onClick={() => {
-                  setSelectedLevel('Intermediate');
-                  setView('path_selection');
-                }}
-              />
-              <LearningPathCard
-                icon={Trophy}
-                title="Advanced"
-                description="Master AI integration and build production-ready solutions."
-                features={[
-                  "API Integration",
-                  "Custom AI Solutions",
-                  "Enterprise Workflows",
-                  "AI Strategy"
-                ]}
-                onClick={() => {
-                  setSelectedLevel('Advanced');
-                  setView('path_selection');
-                }}
-              />
-            </div>
-          </div>
-        </section>
+            {/* Learning Paths */}
+            <section id="courses" className="py-32 bg-site-primary/20">
+              <div className="max-w-7xl mx-auto px-6 text-center">
+                <div className="mb-20">
+                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
+                  <p className="font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
+                  <LearningPathCard
+                    icon={Compass}
+                    title="Beginner"
+                    description="Start your AI journey from scratch. No prior experience needed."
+                    features={[
+                      "Basic Prompting Techniques",
+                    ]}
+                    onClick={() => setView('beginner')}
+                  />
+                  <LearningPathCard
+                    icon={Zap}
+                    title="Intermediate"
+                    description="Level up your skills with advanced techniques and workflows."
+                    features={[
+                      "Advanced Prompting",
+                      "Multi-Tool Workflows",
+                      "Automation Basics",
+                      "Real-World Projects"
+                    ]}
+                    popular
+                    onClick={() => {
+                      setSelectedLevel('Intermediate');
+                      setView('path_selection');
+                    }}
+                  />
+                  <LearningPathCard
+                    icon={Trophy}
+                    title="Advanced"
+                    description="Master AI integration and build production-ready solutions."
+                    features={[
+                      "API Integration",
+                      "Custom AI Solutions",
+                      "Enterprise Workflows",
+                      "AI Strategy"
+                    ]}
+                    onClick={() => {
+                      setSelectedLevel('Advanced');
+                      setView('path_selection');
+                    }}
+                  />
+                </div>
+              </div>
+            </section>
 
-        {/* Testimonials */}
-        <section id="testimonials" className="py-32">
-          <div className="max-w-7xl mx-auto px-6 text-center">
-            <div className="mb-20">
-              <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
-              <p className="font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <TestimonialCard
-                quote="This platform completely changed how I approach my design work. The Midjourney course alone saved me hours every week."
-                author="Sarah Chen"
-                role="UI Designer"
-              />
-              <TestimonialCard
-                quote="The hands-on projects are incredible. I went from zero AI knowledge to building automated workflows for my business."
-                author="Marcus Johnson"
-                role="Entrepreneur"
-              />
-              <TestimonialCard
-                quote="Best investment in my career. The GitHub Copilot course doubled my coding productivity within a month."
-                author="Emily Rodriguez"
-                role="Software Engineer"
-              />
-            </div>
-          </div>
-        </section>
+            {/* Testimonials */}
+            <section id="testimonials" className="py-32">
+              <div className="max-w-7xl mx-auto px-6 text-center">
+                <div className="mb-20">
+                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
+                  <p className="font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                  <TestimonialCard
+                    quote="This platform completely changed how I approach my design work. The Midjourney course alone saved me hours every week."
+                    author="Sarah Chen"
+                    role="UI Designer"
+                  />
+                  <TestimonialCard
+                    quote="The hands-on projects are incredible. I went from zero AI knowledge to building automated workflows for my business."
+                    author="Marcus Johnson"
+                    role="Entrepreneur"
+                  />
+                  <TestimonialCard
+                    quote="Best investment in my career. The GitHub Copilot course doubled my coding productivity within a month."
+                    author="Emily Rodriguez"
+                    role="Software Engineer"
+                  />
+                </div>
+              </div>
+            </section>
+          </>
+        )}
       </main>
 
       <Footer onNavigate={setView} />

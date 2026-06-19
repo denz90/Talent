@@ -1,219 +1,490 @@
 import React, { useState, useRef } from 'react';
-import { ArrowLeft, Camera, Shield, User, Mail, Lock, CheckCircle2, X, Sun, Moon, Monitor } from 'lucide-react';
+import {
+  ArrowLeft, Camera, Shield, User, Mail, Lock,
+  CheckCircle2, X, Sun, Moon, Bell, Palette,
+  Eye, EyeOff, Zap, Globe, Trash2, AlertTriangle,
+  Save, ChevronRight, Sparkles
+} from 'lucide-react';
 
-const ProfileSettingsPage = ({ onBack, theme, onThemeChange, userData = { name: 'Alex Rivera', email: 'alex@example.com' } }) => {
-  const [name, setName] = useState(userData.name);
-  const [email, setEmail] = useState(userData.email);
-  const [isSaved, setIsSaved] = useState(false);
-  const [profileImage, setProfileImage] = useState("https://api.dicebear.com/7.x/avataaars/svg?seed=Alex");
-  const fileInputRef = useRef(null);
+/* ─── Field wrapper ─── */
+const Field = ({ label, icon: Icon, children }) => (
+  <div className="space-y-2">
+    <label className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest"
+      style={{ color: 'var(--color-text)', opacity: 0.5 }}>
+      {Icon && <Icon className="w-3 h-3" />}
+      {label}
+    </label>
+    {children}
+  </div>
+);
 
-  const handleSave = (e) => {
+const inputStyle = {
+  width: '100%',
+  padding: '12px 16px',
+  borderRadius: 12,
+  border: '1px solid var(--color-accent)',
+  background: 'var(--color-accent)',
+  color: 'var(--color-text)',
+  fontSize: 14,
+  fontWeight: 500,
+  outline: 'none',
+  transition: 'border-color 0.2s, box-shadow 0.2s',
+};
+
+const StyledInput = (props) => {
+  const [focused, setFocused] = useState(false);
+  return (
+    <input
+      {...props}
+      style={{
+        ...inputStyle,
+        borderColor: focused ? 'var(--color-primary)' : 'var(--color-accent)',
+        boxShadow: focused ? '0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent)' : 'none',
+      }}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    />
+  );
+};
+
+/* ─── Section card ─── */
+const Card = ({ title, icon: Icon, iconColor = 'var(--color-primary)', children }) => (
+  <section
+    className="rounded-2xl border p-6 space-y-5"
+    style={{ background: 'var(--color-bg)', borderColor: 'var(--color-accent)' }}
+  >
+    <div className="flex items-center gap-3 pb-4 border-b" style={{ borderColor: 'var(--color-accent)' }}>
+      <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: iconColor + '22' }}>
+        <Icon className="w-4 h-4" style={{ color: iconColor }} />
+      </div>
+      <h2 className="font-extrabold text-sm" style={{ color: 'var(--color-text)' }}>{title}</h2>
+    </div>
+    {children}
+  </section>
+);
+
+/* ─── Theme option ─── */
+const THEMES = [
+  { id: 'default',  label: 'Dark',     preview: ['#171717', '#350557', '#121722'] },
+  { id: 'timeless', label: 'Timeless', preview: ['#E8F1F7', '#2075A7', '#E8DFC4'] },
+  { id: 'coastal',  label: 'Coastal',  preview: ['#ccdde1', '#74A8A4', '#B6D9E0'] },
+  { id: 'tranquil', label: 'Tranquil', preview: ['#F5F7FF', '#A6B1D8', '#E2E4F8'] },
+];
+
+const ThemeCard = ({ theme, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className="relative flex flex-col items-center gap-2 p-3 rounded-2xl border transition-all hover:scale-105"
+    style={{
+      borderColor: active ? 'var(--color-primary)' : 'var(--color-accent)',
+      background: active ? 'color-mix(in srgb, var(--color-primary) 8%, transparent)' : 'var(--color-accent)',
+      boxShadow: active ? '0 0 0 2px var(--color-primary)' : 'none',
+    }}
+  >
+    {/* Mini preview swatch */}
+    <div className="w-full h-10 rounded-xl overflow-hidden flex">
+      {theme.preview.map((c, i) => (
+        <div key={i} className="flex-1" style={{ background: c }} />
+      ))}
+    </div>
+    <span className="text-xs font-bold" style={{ color: 'var(--color-text)', opacity: active ? 1 : 0.6 }}>
+      {theme.label}
+    </span>
+    {active && (
+      <div
+        className="absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center"
+        style={{ background: 'var(--color-primary)' }}
+      >
+        <CheckCircle2 className="w-3 h-3 text-white" />
+      </div>
+    )}
+  </button>
+);
+
+/* ─── Toggle switch ─── */
+const Toggle = ({ checked, onChange }) => (
+  <button
+    role="switch"
+    aria-checked={checked}
+    onClick={() => onChange(!checked)}
+    className="relative w-11 h-6 rounded-full transition-all flex-shrink-0"
+    style={{ background: checked ? 'var(--color-primary)' : 'var(--color-accent)' }}
+  >
+    <span
+      className="absolute top-1 w-4 h-4 rounded-full transition-all"
+      style={{
+        background: 'white',
+        left: checked ? 'calc(100% - 20px)' : 4,
+      }}
+    />
+  </button>
+);
+
+/* ═══════════════════════════════════════════════
+   MAIN COMPONENT
+═══════════════════════════════════════════════ */
+const ProfileSettingsPage = ({ currentUser, onBack, theme, onThemeChange }) => {
+  const displayName  = currentUser?.username || currentUser?.name  || '';
+  const displayEmail = currentUser?.email    || '';
+  const avatarSeed   = currentUser?.username || 'default';
+  const planLabel    = currentUser?.plan     || 'Free Plan';
+
+  /* form state */
+  const [username,    setUsername]    = useState(displayName);
+  const [email,       setEmail]       = useState(displayEmail);
+  /* Load image from localStorage on mount, fall back to generated avatar */
+  const defaultAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}`;
+  const [profileImg,  setProfileImg]  = useState(
+    () => localStorage.getItem('hawkman_profile_image') || defaultAvatar
+  );
+  const [currentPw,   setCurrentPw]   = useState('');
+  const [newPw,       setNewPw]       = useState('');
+  const [confirmPw,   setConfirmPw]   = useState('');
+  const [showNewPw,   setShowNewPw]   = useState(false);
+  const [isSaved,     setIsSaved]     = useState(false);
+  const [imgSaved,    setImgSaved]    = useState(false);
+  const [pwSaved,     setPwSaved]     = useState(false);
+  const [pwError,     setPwError]     = useState('');
+  const [activeTheme, setActiveTheme] = useState(theme || 'default');
+
+  /* notification prefs */
+  const [notifs, setNotifs] = useState({
+    streak:       true,
+    newCourse:    true,
+    achievements: true,
+    weeklyReport: false,
+    marketing:    false,
+  });
+
+  const fileRef = useRef(null);
+
+  const handleSaveProfile = (e) => {
     e.preventDefault();
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
   };
 
+  const handleSavePassword = (e) => {
+    e.preventDefault();
+    setPwError('');
+    if (!currentPw) { setPwError('Enter your current password.'); return; }
+    if (newPw.length < 8) { setPwError('New password must be at least 8 characters.'); return; }
+    if (newPw !== confirmPw) { setPwError('Passwords do not match.'); return; }
+    setPwSaved(true);
+    setCurrentPw(''); setNewPw(''); setConfirmPw('');
+    setTimeout(() => setPwSaved(false), 3000);
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+    // Warn if file is over 2 MB
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image must be under 2 MB. Please choose a smaller file.');
+      return;
     }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const dataUrl = reader.result;
+      setProfileImg(dataUrl);
+      localStorage.setItem('hawkman_profile_image', dataUrl); // ✅ persist
+      setImgSaved(true);
+      setTimeout(() => setImgSaved(false), 3000);
+    };
+    reader.readAsDataURL(file);
   };
 
-  const triggerFileInput = () => {
-    fileInputRef.current.click();
+  const handleRemoveImage = () => {
+    localStorage.removeItem('hawkman_profile_image');
+    setProfileImg(defaultAvatar);
   };
 
-  const removeImage = () => {
-    setProfileImage("https://api.dicebear.com/7.x/avataaars/svg?seed=Alex");
+  const handleThemeSelect = (id) => {
+    setActiveTheme(id);
+    if (onThemeChange) onThemeChange(id);
+    document.documentElement.setAttribute('data-theme', id);
   };
+
+  const toggleNotif = (key) => setNotifs(n => ({ ...n, [key]: !n[key] }));
 
   return (
-    <div className="min-h-screen bg-site-bg dark:bg-site-primary flex flex-col transition-colors duration-300">
-      {/* Header */}
-      <header className="h-20 bg-site-bg dark:bg-slate-800 border-b border-site-accent dark:border-slate-700 flex items-center px-10 justify-between sticky top-0 z-10">
-        <button 
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--color-bg)' }}>
+
+      {/* ── HEADER ── */}
+      <header
+        className="h-16 sticky top-0 z-20 flex items-center justify-between px-8 border-b"
+        style={{ background: 'var(--color-bg)', borderColor: 'var(--color-accent)', backdropFilter: 'blur(12px)' }}
+      >
+        <button
           onClick={onBack}
-          className="flex items-center gap-2 text-site-text/80 dark:text-slate-400 hover:text-brand-primary transition-colors font-bold text-[13px] uppercase tracking-widest"
+          className="flex items-center gap-2 text-sm font-bold transition-all hover:opacity-70"
+          style={{ color: 'var(--color-text)' }}
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Dashboard
         </button>
+
+        {/* Branding */}
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-brand-primary" />
-          <span className="font-bold text-site-text dark:text-white">Account Settings</span>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-primary)' }}>
+            <Sparkles className="w-4 h-4" style={{ color: 'var(--color-light)' }} />
+          </div>
+          <span className="font-extrabold text-sm" style={{ color: 'var(--color-text)' }}>Account Settings</span>
         </div>
-        <div className="w-32"></div> {/* Spacer for symmetry */}
+
+        {/* Save indicator */}
+        <div className="w-40 flex justify-end">
+          {isSaved && (
+            <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+              <CheckCircle2 className="w-4 h-4" /> Saved!
+            </div>
+          )}
+        </div>
       </header>
 
-      <main className="flex-1 max-w-3xl mx-auto w-full py-12 px-6">
-        <h1 className="text-3xl font-bold text-site-text dark:text-white mb-8 tracking-tight">Profile Settings</h1>
+      {/* ── CONTENT ── */}
+      <main className="flex-1 max-w-3xl mx-auto w-full py-10 px-6 space-y-6">
 
-        <div className="space-y-8">
-          {/* Appearance Section */}
-          <section className="bg-site-bg dark:bg-slate-800 p-8 rounded-sm shadow-sm border border-site-accent dark:border-slate-700">
-            <h3 className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mb-6">Appearance</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button 
-                onClick={() => onThemeChange('light')}
-                className={`flex items-center justify-between p-4 rounded-sm border transition-all ${
-                  theme === 'light' 
-                    ? 'border-brand-primary bg-brand-primary/5 ring-1 ring-brand-primary' 
-                    : 'border-site-accent dark:border-slate-700 hover:border-site-accent dark:hover:border-slate-600'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-sm ${theme === 'light' ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400'}`}>
-                    <Sun className="w-4 h-4" />
-                  </div>
-                  <span className={`text-sm font-bold ${theme === 'light' ? 'text-site-text dark:text-white' : 'text-site-text/80'}`}>Light Mode</span>
-                </div>
-                {theme === 'light' && <CheckCircle2 className="w-4 h-4 text-brand-primary" />}
-              </button>
-
-              <button 
-                onClick={() => onThemeChange('dark')}
-                className={`flex items-center justify-between p-4 rounded-sm border transition-all ${
-                  theme === 'dark' 
-                    ? 'border-brand-primary bg-brand-primary/5 ring-1 ring-brand-primary' 
-                    : 'border-site-accent dark:border-slate-700 hover:border-site-accent dark:hover:border-slate-600'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-sm ${theme === 'dark' ? 'bg-brand-primary text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400'}`}>
-                    <Moon className="w-4 h-4" />
-                  </div>
-                  <span className={`text-sm font-bold ${theme === 'dark' ? 'text-site-text dark:text-white' : 'text-site-text/80'}`}>Dark Mode</span>
-                </div>
-                {theme === 'dark' && <CheckCircle2 className="w-4 h-4 text-brand-primary" />}
-              </button>
+        {/* ── PROFILE HERO ── */}
+        <div
+          className="rounded-3xl p-8 flex items-center gap-6"
+          style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--gradient-to))' }}
+        >
+          {/* Avatar */}
+          <div className="relative flex-shrink-0 flex flex-col items-center gap-2">
+            <div
+              className="w-20 h-20 rounded-2xl overflow-hidden border-4"
+              style={{ borderColor: 'rgba(255,255,255,0.25)' }}
+            >
+              <img src={profileImg} alt="Profile" className="w-full h-full object-cover" />
             </div>
-          </section>
+            <button
+              onClick={() => fileRef.current.click()}
+              className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+              style={{ background: 'var(--color-light)', color: 'var(--color-primary)' }}
+            >
+              <Camera className="w-3.5 h-3.5" />
+            </button>
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+            {/* Remove button */}
+            <button
+              onClick={handleRemoveImage}
+              className="text-[11px] font-bold px-3 py-1 rounded-full transition-all hover:opacity-70"
+              style={{ background: 'rgba(255,255,255,0.18)', color: 'var(--color-light)', marginTop: 28 }}
+            >
+              Remove photo
+            </button>
+            {/* Saved toast */}
+            {imgSaved && (
+              <span className="text-[11px] font-bold text-emerald-300 flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3" /> Photo saved!
+              </span>
+            )}
+          </div>
 
-          {/* Profile Picture Section */}
-          <section className="bg-site-bg dark:bg-slate-800 p-8 rounded-sm shadow-sm border border-site-accent dark:border-slate-700">
-            <h3 className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mb-6">Profile Picture</h3>
-            <div className="flex items-center gap-8">
-              <div className="relative group">
-                <div className="w-24 h-24 rounded-full bg-slate-100 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-800 overflow-hidden flex items-center justify-center">
-                  <img src={profileImage} alt="Avatar" className="w-full h-full object-cover" />
-                </div>
-                <button 
-                  onClick={triggerFileInput}
-                  className="absolute bottom-0 right-0 w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-brand-accent transition-all"
-                >
-                  <Camera className="w-4 h-4" />
-                </button>
-              </div>
-              <div>
-                <input 
-                  type="file" 
-                  ref={fileInputRef}
-                  onChange={handleImageChange}
-                  className="hidden" 
-                  accept="image/*"
-                />
-                <p className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-1">Update your photo</p>
-                <p className="text-xs text-slate-400 font-medium mb-4">Allowed JPG, GIF or PNG. Max size of 2MB</p>
-                <div className="flex gap-3">
-                  <button 
-                    onClick={triggerFileInput}
-                    className="bg-site-primary dark:bg-slate-700 text-white px-5 py-2 rounded-sm text-[11px] font-bold uppercase tracking-widest hover:bg-slate-800 dark:hover:bg-slate-600 transition-all font-sans"
-                  >
-                    Upload New
-                  </button>
-                  <button 
-                    onClick={removeImage}
-                    className="text-red-500 px-5 py-2 rounded-sm text-[11px] font-bold uppercase tracking-widest hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-red-100 dark:border-red-900/30 font-sans"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
+          {/* Info */}
+          <div className="flex-1">
+            <h1 className="text-2xl font-extrabold" style={{ color: 'var(--color-light)' }}>
+              {username || 'Your Profile'}
+            </h1>
+            <p className="text-sm mt-0.5" style={{ color: 'var(--color-light)', opacity: 0.7 }}>{displayEmail}</p>
+            <div className="flex items-center gap-2 mt-3">
+              <span
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
+                style={{ background: 'rgba(255,255,255,0.18)', color: 'var(--color-light)' }}
+              >
+                <Zap className="w-3 h-3" /> {planLabel}
+              </span>
+              <span
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
+                style={{ background: 'rgba(255,255,255,0.18)', color: 'var(--color-light)' }}
+              >
+                <Globe className="w-3 h-3" /> Active
+              </span>
             </div>
-          </section>
-
-          {/* Personal Information */}
-          <section className="bg-site-bg dark:bg-slate-800 p-8 rounded-sm shadow-sm border border-site-accent dark:border-slate-700">
-            <h3 className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mb-6">Personal Information</h3>
-            <form className="space-y-6" onSubmit={handleSave}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-site-text/80 uppercase tracking-wide flex items-center gap-1.5">
-                    <User className="w-3 h-3" /> Full Name
-                  </label>
-                  <input 
-                    type="text" 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3 bg-site-bg dark:bg-site-primary/50 border border-site-accent dark:border-slate-700 rounded-sm focus:outline-none focus:border-brand-primary/30 focus:ring-4 focus:ring-brand-primary/5 transition-all font-medium text-site-text dark:text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-site-text/80 uppercase tracking-wide flex items-center gap-1.5">
-                    <Mail className="w-3 h-3" /> Email Address
-                  </label>
-                  <input 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 bg-site-bg dark:bg-site-primary/50 border border-site-accent dark:border-slate-700 rounded-sm focus:outline-none focus:border-brand-primary/30 focus:ring-4 focus:ring-brand-primary/5 transition-all font-medium text-site-text dark:text-white"
-                  />
-                </div>
-              </div>
-              <div className="flex justify-end pt-4">
-                <button type="submit" className="bg-brand-primary text-white px-8 py-3 rounded-sm text-[11px] font-bold uppercase tracking-widest hover:bg-brand-primary/90 transition-all shadow-lg shadow-brand-primary/20 flex items-center gap-2">
-                  {isSaved ? <><CheckCircle2 className="w-4 h-4" /> Changes Saved</> : 'Save Changes'}
-                </button>
-              </div>
-            </form>
-          </section>
-
-          {/* Change Password */}
-          <section className="bg-site-bg p-8 rounded-sm shadow-sm border border-site-accent">
-            <h3 className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mb-6">Security & Password</h3>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-[11px] font-bold text-site-text/80 uppercase tracking-wide flex items-center gap-1.5">
-                    <Lock className="w-3 h-3" /> Current Password
-                  </label>
-                  <input 
-                    type="password" 
-                    placeholder="••••••••"
-                    className="w-full px-4 py-3 bg-site-bg border border-site-accent rounded-sm focus:outline-none focus:border-brand-primary/30 transition-all font-medium text-site-text"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-site-text/80 uppercase tracking-wide">New Password</label>
-                    <input 
-                      type="password" 
-                      placeholder="••••••••"
-                      className="w-full px-4 py-3 bg-site-bg border border-site-accent rounded-sm focus:outline-none focus:border-brand-primary/30 transition-all font-medium text-site-text"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-[11px] font-bold text-site-text/80 uppercase tracking-wide">Confirm New Password</label>
-                    <input 
-                      type="password" 
-                      placeholder="••••••••"
-                      className="w-full px-4 py-3 bg-site-bg border border-site-accent rounded-sm focus:outline-none focus:border-brand-primary/30 transition-all font-medium text-site-text"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex justify-end pt-4">
-                <button className="bg-site-primary text-white px-8 py-3 rounded-sm text-[11px] font-bold uppercase tracking-widest hover:bg-slate-800 transition-all">Update Password</button>
-              </div>
-            </form>
-          </section>
+          </div>
         </div>
+
+        {/* ── PERSONAL INFO ── */}
+        <Card title="Personal Information" icon={User} iconColor="#155DFC">
+          <form onSubmit={handleSaveProfile} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <Field label="Username" icon={User}>
+                <StyledInput
+                  type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  placeholder="Your username"
+                />
+              </Field>
+              <Field label="Email Address" icon={Mail}>
+                <StyledInput
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                />
+              </Field>
+            </div>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-105 hover:shadow-lg"
+                style={{ background: 'var(--color-primary)', color: 'var(--color-light)' }}
+              >
+                {isSaved
+                  ? <><CheckCircle2 className="w-4 h-4" /> Saved!</>
+                  : <><Save className="w-4 h-4" /> Save Changes</>
+                }
+              </button>
+            </div>
+          </form>
+        </Card>
+
+        {/* ── THEME ── */}
+        <Card title="Appearance & Theme" icon={Palette} iconColor="#9810FA">
+          <p className="text-sm" style={{ color: 'var(--color-text)', opacity: 0.5 }}>
+            Choose a theme that matches your style. Changes apply instantly.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {THEMES.map(t => (
+              <ThemeCard
+                key={t.id}
+                theme={t}
+                active={activeTheme === t.id}
+                onClick={() => handleThemeSelect(t.id)}
+              />
+            ))}
+          </div>
+        </Card>
+
+        {/* ── NOTIFICATIONS ── */}
+        <Card title="Notification Preferences" icon={Bell} iconColor="#F59E0B">
+          <div className="space-y-4">
+            {[
+              { key: 'streak',       label: 'Streak reminders',      desc: 'Get reminded to keep your daily streak' },
+              { key: 'newCourse',    label: 'New course alerts',      desc: 'Be notified when new courses launch' },
+              { key: 'achievements', label: 'Achievement unlocks',    desc: 'Celebrate when you earn a new badge' },
+              { key: 'weeklyReport', label: 'Weekly progress report', desc: 'A summary of your learning each week' },
+              { key: 'marketing',    label: 'Tips & promotions',      desc: 'Occasional tips and special offers' },
+            ].map(({ key, label, desc }) => (
+              <div
+                key={key}
+                className="flex items-center justify-between p-4 rounded-2xl"
+                style={{ background: 'var(--color-accent)' }}
+              >
+                <div>
+                  <p className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>{label}</p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--color-text)', opacity: 0.45 }}>{desc}</p>
+                </div>
+                <Toggle checked={notifs[key]} onChange={() => toggleNotif(key)} />
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* ── CHANGE PASSWORD ── */}
+        <Card title="Security & Password" icon={Lock} iconColor="#10B981">
+          <form onSubmit={handleSavePassword} className="space-y-5">
+            <Field label="Current Password" icon={Lock}>
+              <StyledInput
+                type="password"
+                value={currentPw}
+                onChange={e => setCurrentPw(e.target.value)}
+                placeholder="••••••••"
+              />
+            </Field>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <Field label="New Password">
+                <div className="relative">
+                  <StyledInput
+                    type={showNewPw ? 'text' : 'password'}
+                    value={newPw}
+                    onChange={e => setNewPw(e.target.value)}
+                    placeholder="Min. 8 characters"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPw(!showNewPw)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 opacity-40 hover:opacity-70"
+                    style={{ color: 'var(--color-text)' }}
+                  >
+                    {showNewPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </Field>
+              <Field label="Confirm New Password">
+                <StyledInput
+                  type="password"
+                  value={confirmPw}
+                  onChange={e => setConfirmPw(e.target.value)}
+                  placeholder="••••••••"
+                />
+              </Field>
+            </div>
+
+            {/* Password strength */}
+            {newPw.length > 0 && (
+              <div className="space-y-1">
+                <div className="h-1.5 w-full rounded-full overflow-hidden" style={{ background: 'var(--color-accent)' }}>
+                  <div
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{
+                      width: `${Math.min(100, (newPw.length / 12) * 100)}%`,
+                      background: newPw.length < 6 ? '#EF4444' : newPw.length < 10 ? '#F59E0B' : '#10B981',
+                    }}
+                  />
+                </div>
+                <p className="text-[11px] font-semibold" style={{ color: 'var(--color-text)', opacity: 0.45 }}>
+                  {newPw.length < 6 ? 'Weak' : newPw.length < 10 ? 'Fair' : 'Strong'} password
+                </p>
+              </div>
+            )}
+
+            {pwError && (
+              <div className="flex items-center gap-2 text-red-400 text-sm font-semibold p-3 rounded-xl bg-red-400/10">
+                <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                {pwError}
+              </div>
+            )}
+
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-105 hover:shadow-lg"
+                style={{ background: '#10B981', color: 'white' }}
+              >
+                {pwSaved
+                  ? <><CheckCircle2 className="w-4 h-4" /> Password Updated!</>
+                  : <><Shield className="w-4 h-4" /> Update Password</>
+                }
+              </button>
+            </div>
+          </form>
+        </Card>
+
+        {/* ── DANGER ZONE ── */}
+        <Card title="Danger Zone" icon={AlertTriangle} iconColor="#EF4444">
+          <div
+            className="flex items-center justify-between p-4 rounded-2xl border"
+            style={{ borderColor: '#EF444430', background: '#EF444408' }}
+          >
+            <div>
+              <p className="text-sm font-bold text-red-400">Delete Account</p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--color-text)', opacity: 0.45 }}>
+                Permanently delete your account and all your data.
+              </p>
+            </div>
+            <button
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-red-400 border border-red-400/30 transition-all hover:bg-red-400/10"
+            >
+              <Trash2 className="w-3.5 h-3.5" /> Delete
+            </button>
+          </div>
+        </Card>
+
+        {/* Bottom spacing */}
+        <div className="h-6" />
       </main>
     </div>
   );

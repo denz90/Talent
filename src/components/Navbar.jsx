@@ -126,13 +126,24 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
             <div className="flex items-center gap-5">
               {/* User profile (e.g. A Adam) */}
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-site-primary flex items-center justify-center text-site-text text-[13px] font-bold shadow-sm select-none">
-                  {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
-                </div>
+                {/* Avatar: show uploaded photo if saved, else show initial */}
+                {(() => {
+                  const savedImg = localStorage.getItem('hawkman_profile_image');
+                  return savedImg ? (
+                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-site-accent flex-shrink-0 shadow-sm">
+                      <img src={savedImg} alt="avatar" className="w-full h-full object-cover" />
+                    </div>
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-site-primary flex items-center justify-center text-site-text text-[13px] font-bold shadow-sm select-none">
+                      {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  );
+                })()}
                 <span className="text-[14px] font-bold text-site-text tracking-tight">
                   {currentUser.username}
                 </span>
               </div>
+
 
               {/* Dashboard Button */}
               <button

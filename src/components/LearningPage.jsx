@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { API_BASE_URL } from '../config.js';
 import { PATHS_CONTENT } from '../data/PathContent';
+import Navbar from './Navbar';
 import MagicSchoolDay1 from './MagicSchoolDay1';
 import EduaideDay2 from './EduaideDay2';
 import NotebookLMDay3 from './NotebookLMDay3';
@@ -135,13 +136,13 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
   );
 };
 
-const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings }) => {
+const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings, onHome, onDashboard }) => {
   const [activeDay, setActiveDay] = useState(1);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   const [completedDays, setCompletedDays] = useState([0]);
-  const [unlockedLevel, setUnlockedLevel] = useState(1);
+  const [unlockedLevel, setUnlockedLevel] = useState(18);
   const [streakCount, setStreakCount] = useState(0);
 
   // Load saved progress on mount
@@ -282,10 +283,21 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   }
 
   return (
-    <div className={`min-h-screen font-sans flex transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
+    <div className="h-screen flex flex-col overflow-hidden">
+      <Navbar
+        currentUser={currentUser}
+        onLogout={onLogout}
+        onLogoClick={onHome}
+        onSignup={() => {}}
+        onLogin={() => {}}
+        onNavClick={onHome}
+        onDashboard={onDashboard}
+      />
 
-      {/* ── Sidebar ── */}
-      <aside className={`${isSidebarCollapsed ? 'w-0 border-none' : 'w-[320px]'} ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'} border-r flex flex-col h-screen flex-shrink-0 transition-all duration-500 overflow-hidden relative z-20`}>
+      <div className={`flex flex-1 overflow-hidden transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
+
+        {/* ── Sidebar ── */}
+        <aside className={`${isSidebarCollapsed ? 'w-0 border-none' : 'w-[320px]'} ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'} border-r flex flex-col h-full flex-shrink-0 transition-all duration-500 overflow-hidden relative z-20`}>
 
         {/* Header: Course Title & Progress */}
         <div className="p-6 border-b border-site-accent">
@@ -327,7 +339,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
               
               <div className="space-y-1">
                 {module.days.map((day) => {
-                  const isLocked = false;
+                  const isLocked = day.id > unlockedLevel;
                   const isCompleted = completedDays.includes(day.id);
                   return (
                     <div 
@@ -374,7 +386,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
       </aside>
 
       {/* ── Main Content ── */}
-      <main className="flex-1 bg-site-bg relative flex flex-col h-screen overflow-hidden">
+      <main className="flex-1 bg-site-bg relative flex flex-col h-full overflow-hidden">
 
         {/* Breadcrumb bar */}
         <div className={`w-full flex-shrink-0 border-b h-16 flex items-center justify-between px-8 z-10 shadow-sm transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] border-purple-900/50' : 'bg-site-bg border-site-accent'}`}>
@@ -389,98 +401,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
             <span className={`text-sm font-bold transition-colors ${isDarkModeDay ? 'text-purple-300' : 'text-slate-400'}`}>{moduleLabel}</span>
           </div>
           
-          <div className="relative">
-            <div 
-              onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className={`flex items-center gap-3 cursor-pointer p-1.5 rounded-2xl transition-all border ${isDarkModeDay ? 'hover:bg-site-bg/5 border-transparent' : 'hover:bg-site-bg border-transparent hover:border-site-accent'}`}
-            >
-              <div className="text-right hidden sm:block">
-                <p className={`text-sm font-bold leading-tight ${isDarkModeDay ? 'text-white' : 'text-site-text'}`}>
-                  {currentUser?.username || 'Pro Learner'}
-                </p>
-                <p className={`text-[10px] font-bold uppercase tracking-wider ${isDarkModeDay ? 'text-pink-400' : 'text-site-primary'}`}>
-                  {currentUser?.role || 'Active Member'}
-                </p>
-              </div>
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm border shadow-sm ${isDarkModeDay ? 'bg-purple-800/40 text-pink-400 border-purple-700' : 'bg-blue-50 text-site-primary border-blue-100'}`}>
-                {currentUser?.username ? currentUser.username.substring(0, 2).toUpperCase() : 'TE'}
-              </div>
-              <ChevronDown size={14} className={`text-slate-400 transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
-            </div>
-
-            {/* Dropdown Menu */}
-            {showProfileMenu && (
-              <>
-                <div 
-                  className="fixed inset-0 z-20" 
-                  onClick={() => setShowProfileMenu(false)}
-                ></div>
-                <div className={`absolute right-0 mt-2 w-56 rounded-2xl shadow-xl border py-2 z-30 animate-in fade-in slide-in-from-top-2 duration-200 ${isDarkModeDay ? 'bg-[#240042] border-purple-700' : 'bg-site-bg border-site-accent'}`}>
-                  <div className={`px-4 py-3 border-b mb-1 ${isDarkModeDay ? 'border-purple-800' : 'border-slate-50'}`}>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">My Progress</p>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Trophy size={14} className="text-yellow-500" />
-                          <span className={`text-xs font-bold ${isDarkModeDay ? 'text-purple-100' : 'text-slate-700'}`}>Completed</span>
-                        </div>
-                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-pink-400' : 'text-site-primary'}`}>{completedDays.filter(d => d > 0).length}/{allDays.length}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Flame size={14} className="text-orange-500" />
-                          <span className={`text-xs font-bold ${isDarkModeDay ? 'text-purple-100' : 'text-slate-700'}`}>Day Streak</span>
-                        </div>
-                        <span className={`text-xs font-black ${isDarkModeDay ? 'text-orange-400' : 'text-orange-600'}`}>{streakCount}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="py-1">
-                    <button 
-                      onClick={() => {
-                        onProfileSettings();
-                        setShowProfileMenu(false);
-                      }}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
-                    >
-                      <User size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
-                      My Profile
-                    </button>
-                    
-                    <button 
-                      onClick={() => setShowProfileMenu(false)}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
-                    >
-                      <Medal size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
-                      Achievements
-                    </button>
-
-                    <button 
-                      onClick={() => {
-                        onProfileSettings();
-                        setShowProfileMenu(false);
-                      }}
-                      className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-medium transition-colors ${isDarkModeDay ? 'text-purple-100 hover:bg-site-bg/5' : 'text-slate-700 hover:bg-site-bg'}`}
-                    >
-                      <Settings size={16} className={isDarkModeDay ? 'text-purple-400' : 'text-slate-400'} />
-                      Settings
-                    </button>
-                  </div>
-                  
-                  <div className={`h-px my-1 mx-2 ${isDarkModeDay ? 'bg-purple-800' : 'bg-slate-100'}`}></div>
-                  
-                  <button 
-                    onClick={onLogout}
-                    className={`w-full flex items-center gap-3 px-4 py-2 text-sm font-bold transition-colors ${isDarkModeDay ? 'text-pink-400 hover:bg-pink-500/10' : 'text-red-600 hover:bg-red-50'}`}
-                  >
-                    <LogOut size={16} />
-                    Sign Out
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
+          <div></div>
         </div>
 
         {/* Day content */}
@@ -528,6 +449,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
       </main>
     </div>
+  </div>
   );
 };
 
