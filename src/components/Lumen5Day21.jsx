@@ -202,10 +202,10 @@ const Lumen5Day21 = ({ onNext }) => {
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[
-                      { title: 'Input: Extract Key Content', desc: 'Draft 5-10 bullet points from your lesson plan (e.g., "Factors of Photosynthesis"). Review for accuracy.'},
-                      { title: 'Customize: Personalize Media', desc: 'Replace 2 stock images. Add a 10-second voiceover. Adjust text highlights for key terms.'},
-                      { title: 'Enhance: Accessibility', desc: 'Enable auto-captions. Translate into another language. Ensure ADA color contrast.'},
-                      { title: 'Publish: Share Your Output', desc: 'Export the video. Upload to LMS or share directly in Google Classroom/Canvas.'}
+                      { title: 'Input: Extract Key Content', icon: FileText, desc: 'Draft 5-10 bullet points from your lesson plan (e.g., "Factors of Photosynthesis"). Review for accuracy.'},
+                      { title: 'Customize: Personalize Media', icon: Sparkles, desc: 'Replace 2 stock images. Add a 10-second voiceover. Adjust text highlights for key terms.'},
+                      { title: 'Enhance: Accessibility', icon: Layers, desc: 'Enable auto-captions. Translate into another language. Ensure ADA color contrast.'},
+                      { title: 'Publish: Share Your Output', icon: Zap, desc: 'Export the video. Upload to LMS or share directly in Google Classroom/Canvas.'}
                     ].map((step, i) => (
                       <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                         <step.icon size={16} className="text-site-text" />
@@ -260,10 +260,10 @@ const Lumen5Day21 = ({ onNext }) => {
                 <h3 className="text-2xl font-bold text-site-text tracking-tight">10M+ Free Media Library</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { title: 'Stock Images & Videos', desc: 'Access millions of royalty-free files from Unsplash, Pexels, and more.'},
-                    { title: 'Custom Uploads', desc: 'Add your own images, videos, and graphics for personalization.'},
-                    { title: 'Brand Kit', desc: 'Set school colors and fonts to auto-apply across all videos.'},
-                    { title: 'Music Library', desc: 'Access free royalty-free background music or upload your own.'}
+                    { title: 'Stock Images & Videos', icon: Layers, desc: 'Access millions of royalty-free files from Unsplash, Pexels, and more.'},
+                    { title: 'Custom Uploads', icon: FileText, desc: 'Add your own images, videos, and graphics for personalization.'},
+                    { title: 'Brand Kit', icon: Target, desc: 'Set school colors and fonts to auto-apply across all videos.'},
+                    { title: 'Music Library', icon: Zap, desc: 'Access free royalty-free background music or upload your own.'}
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-site-bg border border-site-accent shadow-sm">
                       <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 flex-shrink-0">

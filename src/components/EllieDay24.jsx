@@ -313,10 +313,10 @@ const EllieDay24 = ({ onNext }) => {
                 <h3 className="text-2xl font-bold text-site-text tracking-tight">Seamless LMS Integration</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: 'Google Classroom'},
-                    { label: 'Canvas'},
-                    { label: 'Schoology'},
-                    { label: 'PowerSchool'}
+                    { label: 'Google Classroom', icon: BookOpen},
+                    { label: 'Canvas', icon: GraduationCap},
+                    { label: 'Schoology', icon: Layers},
+                    { label: 'PowerSchool', icon: TrendingUp}
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col items-center gap-2 p-4 bg-site-bg rounded-2xl shadow-sm border border-site-accent">
                       <item.icon size={20} className="text-indigo-600" />

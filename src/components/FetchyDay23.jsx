@@ -327,10 +327,10 @@ const FetchyDay23 = ({ onNext }) => {
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: 'Google Classroom'},
-                    { label: 'Canvas LMS'},
-                    { label: 'Google Drive'},
-                    { label: 'Email Clients'}
+                    { label: 'Google Classroom', icon: Layers},
+                    { label: 'Canvas LMS', icon: Target},
+                    { label: 'Google Drive', icon: FileText},
+                    { label: 'Email Clients', icon: MessageSquare}
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col items-center gap-2 p-4 bg-site-bg rounded-2xl shadow-sm">
                       <item.icon size={20} className="text-indigo-600" />

@@ -204,11 +204,11 @@ const LabsterDay20 = ({ onNext }) => {
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {[
-                      { title: 'Choose Lab', desc: 'Filter the catalog for your grade level. Select a lab (e.g., "Bacterial Growth"). Review the theoretical background.'},
-                      { title: 'Preview Lab', desc: 'Launch the "Demo" mode. Complete at least one experiment step. Screenshot your progress or lab result.'},
-                      { title: 'Assign Lab', desc: 'Create a class and assign the lab. Set a specific learning objective. Share the student invite link.'},
-                      { title: 'Post-Lab Analysis', desc: 'View student attempt reports. Identify one common misconception. Note how you would address it in class.'},
-                      { title: 'Reflection', desc: 'Collect student feedback on simulation ease. Note 1 benefit vs. physical lab. Share insights with #AIVirtualLabs.'}
+                      { title: 'Choose Lab', icon: BookOpen, desc: 'Filter the catalog for your grade level. Select a lab (e.g., "Bacterial Growth"). Review the theoretical background.'},
+                      { title: 'Preview Lab', icon: Target, desc: 'Launch the "Demo" mode. Complete at least one experiment step. Screenshot your progress or lab result.'},
+                      { title: 'Assign Lab', icon: FileText, desc: 'Create a class and assign the lab. Set a specific learning objective. Share the student invite link.'},
+                      { title: 'Post-Lab Analysis', icon: TrendingUp, desc: 'View student attempt reports. Identify one common misconception. Note how you would address it in class.'},
+                      { title: 'Reflection', icon: MessageSquare, desc: 'Collect student feedback on simulation ease. Note 1 benefit vs. physical lab. Share insights with #AIVirtualLabs.'}
                     ].map((step, i) => (
                       <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent space-y-6">
                         <step.icon size={16} className="text-site-text" />

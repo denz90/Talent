@@ -279,10 +279,10 @@ const CuripodDay19 = ({ onNext }) => {
                 <h3 className="text-2xl font-bold text-site-text tracking-tight">Real-Time Engagement Tools</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { title: 'Live Word Clouds', desc: 'Visualize student perspectives in real-time - see trending opinions change.'},
-                    { title: 'Participation Tracking', desc: 'Monitor which students are contributing and who needs encouragement.'},
-                    { title: 'Anonymous Responses', desc: 'Enable shy students to share ideas without fear of judgment.'},
-                    { title: 'Global Connections', desc: 'Connect your classroom with peers worldwide for diverse perspectives.'}
+                    { title: 'Live Word Clouds', icon: Layers, desc: 'Visualize student perspectives in real-time - see trending opinions change.'},
+                    { title: 'Participation Tracking', icon: TrendingUp, desc: 'Monitor which students are contributing and who needs encouragement.'},
+                    { title: 'Anonymous Responses', icon: MessageSquare, desc: 'Enable shy students to share ideas without fear of judgment.'},
+                    { title: 'Global Connections', icon: Sparkles, desc: 'Connect your classroom with peers worldwide for diverse perspectives.'}
                   ].map((tool, i) => (
                     <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-site-bg border border-site-accent shadow-sm">
                       <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 flex-shrink-0">
