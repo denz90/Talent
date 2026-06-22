@@ -131,51 +131,83 @@ const NAV = [
   { icon: Calendar,         label: 'Schedule',     id: 'schedule'      },
 ];
 
-const Sidebar = ({ active, setActive, collapsed, setCollapsed, onLogout, onProfileSettings }) => (
-  <aside
-    className="flex flex-col border-r transition-all duration-300 flex-shrink-0"
-    style={{ width: collapsed ? 68 : 224, borderColor: 'var(--color-accent)', background: 'var(--color-bg)' }}
-  >
-    <div className="flex items-center justify-end p-3">
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="p-1.5 rounded-lg transition-all hover:opacity-70"
-        style={{ background: 'var(--color-accent)', color: 'var(--color-text)' }}
-      >
-        {collapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
-      </button>
-    </div>
-    <nav className="flex-1 px-2 space-y-0.5">
-      {NAV.map(({ icon: Icon, label, id }) => {
-        const on = active === id;
-        return (
-          <button
-            key={id}
-            onClick={() => setActive(id)}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-sm font-semibold"
-            style={{
-              background: on ? 'var(--color-primary)' : 'transparent',
-              color: on ? 'var(--color-light)' : 'var(--color-text)',
-              opacity: on ? 1 : 0.65,
-            }}
-          >
-            <Icon className="w-4 h-4 flex-shrink-0" />
-            {!collapsed && <span className="truncate">{label}</span>}
-          </button>
-        );
-      })}
-    </nav>
-    {!collapsed && (
-      <div className="p-3 space-y-0.5 border-t mt-2" style={{ borderColor: 'var(--color-accent)' }}>
-        <button onClick={onProfileSettings} className="w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all hover:opacity-70 text-sm font-semibold" style={{ color: 'var(--color-text)', opacity: 0.6 }}>
-          <Settings className="w-4 h-4" /><span>Settings</span>
-        </button>
-        <button onClick={onLogout} className="w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all hover:bg-red-400/10 text-sm font-semibold text-red-400">
-          <LogOut className="w-4 h-4" /><span>Logout</span>
+const Sidebar = ({ active, setActive, collapsed, setCollapsed, onLogout, onProfileSettings, mobileOpen, setMobileOpen }) => (
+  <>
+    {/* Backdrop for Mobile Sidebar */}
+    {mobileOpen && (
+      <div 
+        className="fixed inset-0 bg-black/50 z-30 md:hidden"
+        onClick={() => setMobileOpen(false)}
+      />
+    )}
+    <aside
+      className={`flex flex-col border-r transition-all duration-300 flex-shrink-0 
+        fixed md:sticky top-20 bottom-0 z-40 md:z-auto md:translate-x-0
+        ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
+      style={{ 
+        width: collapsed ? 68 : 224, 
+        borderColor: 'var(--color-accent)', 
+        background: 'var(--color-bg)',
+        height: 'calc(100vh - 5rem)'
+      }}
+    >
+      <div className="flex items-center justify-end p-3">
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="p-1.5 rounded-lg transition-all hover:opacity-70"
+          style={{ background: 'var(--color-accent)', color: 'var(--color-text)' }}
+        >
+          {collapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
         </button>
       </div>
-    )}
-  </aside>
+      <nav className="flex-1 px-2 space-y-0.5">
+        {NAV.map(({ icon: Icon, label, id }) => {
+          const on = active === id;
+          return (
+            <button
+              key={id}
+              onClick={() => {
+                setActive(id);
+                setMobileOpen(false);
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-sm font-semibold"
+              style={{
+                background: on ? 'var(--color-primary)' : 'transparent',
+                color: on ? 'var(--color-light)' : 'var(--color-text)',
+                opacity: on ? 1 : 0.65,
+              }}
+            >
+              <Icon className="w-4 h-4 flex-shrink-0" />
+              {!collapsed && <span className="truncate">{label}</span>}
+            </button>
+          );
+        })}
+      </nav>
+      {!collapsed && (
+        <div className="p-3 space-y-0.5 border-t mt-2" style={{ borderColor: 'var(--color-accent)' }}>
+          <button 
+            onClick={() => {
+              onProfileSettings();
+              setMobileOpen(false);
+            }} 
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all hover:opacity-70 text-sm font-semibold" 
+            style={{ color: 'var(--color-text)', opacity: 0.6 }}
+          >
+            <Settings className="w-4 h-4" /><span>Settings</span>
+          </button>
+          <button 
+            onClick={() => {
+              onLogout();
+              setMobileOpen(false);
+            }} 
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-xl transition-all hover:bg-red-400/10 text-sm font-semibold text-red-400"
+          >
+            <LogOut className="w-4 h-4" /><span>Logout</span>
+          </button>
+        </div>
+      )}
+    </aside>
+  </>
 );
 
 /* ─── Course card ─── */
@@ -303,6 +335,7 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings }) => {
 
   const [activeNav,  setActiveNav]  = useState('overview');
   const [collapsed,  setCollapsed]  = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   /* Live backend data */
   const [stats,     setStats]     = useState(null);
@@ -359,9 +392,14 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings }) => {
 
   return (
     <div className="flex flex-col min-h-screen" style={{ background: 'var(--color-bg)' }}>
-      <DashboardHeader currentUser={currentUser} onLogout={onLogout} onProfileSettings={onProfileSettings} />
+      <DashboardHeader 
+        currentUser={currentUser} 
+        onLogout={onLogout} 
+        onProfileSettings={onProfileSettings} 
+        onToggleSidebar={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+      />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
         <Sidebar
           active={activeNav}
           setActive={setActiveNav}
@@ -369,6 +407,8 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings }) => {
           setCollapsed={setCollapsed}
           onLogout={onLogout}
           onProfileSettings={onProfileSettings}
+          mobileOpen={isMobileSidebarOpen}
+          setMobileOpen={setIsMobileSidebarOpen}
         />
 
         <main className="flex-1 overflow-y-auto p-6 space-y-6">

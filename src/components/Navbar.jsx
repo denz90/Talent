@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, LayoutDashboard, LogOut } from 'lucide-react';
+import { Sparkles, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 
 const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard }) => {
   // 1. Initialize theme state from localStorage, defaulting to 'timeless'
@@ -10,11 +10,25 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
     return 'timeless';
   });
 
+  // Mobile menu open state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   // 2. Automatically sync the state change directly to the html tag and localStorage
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('site-theme', theme);
   }, [theme]);
+
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const navItems = [
     { id: 'tools', label: 'Tools' },
@@ -46,7 +60,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
           </span>
         </a>
 
-        {/* Center Navigation */}
+        {/* Center Navigation - Hidden on Mobile */}
         <div className="hidden md:flex items-center gap-10">
           {navItems.map((item) => (
             <a
@@ -65,8 +79,8 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
           ))}
         </div>
 
-        {/* Theme Picker Dropdown Menu */}
-        <div className="relative group">
+        {/* Theme Picker Dropdown Menu - Hidden on Mobile */}
+        <div className="relative group hidden md:block">
           <button className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer">
             🎨 Theme
           </button>
@@ -83,15 +97,6 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
               transition-all duration-200
             "
           >
-            {/* Defult color = white */}
-            {/*
-            <button
-              onClick={() => setTheme('default')}
-              className={`w-5 h-5 rounded-full bg-white border-2 cursor-pointer transition-transform hover:scale-125 ${
-                theme === 'default' ? 'border-slate-900 scale-110' : 'border-transparent'
-              }`}
-              title="Default"
-            />*/}
             {/* Button 1: Timeless Retro */}
             <button 
               onClick={() => setTheme('timeless')}
@@ -119,8 +124,8 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
           </div>
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-8">
+        {/* Right Actions - Hidden on Mobile */}
+        <div className="hidden md:flex items-center gap-8">
           {currentUser ? (
             // User IS logged in: Show their name and a Sign Out button
             <div className="flex items-center gap-5">
@@ -143,7 +148,6 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                   {currentUser.username}
                 </span>
               </div>
-
 
               {/* Dashboard Button */}
               <button
@@ -180,8 +184,138 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
             </>
           )}
         </div>
+
+        {/* Mobile Hamburger Toggle Button */}
+        <div className="flex items-center md:hidden">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-site-text/80 hover:text-site-text transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
         
       </div>
+
+      {/* Mobile Drawer Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-[73px] z-40 bg-site-bg border-t border-site-accent flex flex-col p-6 animate-fade-in overflow-y-auto">
+          {/* Navigation Links */}
+          <div className="flex flex-col gap-6 mb-8">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => {
+                  setIsMobileMenuOpen(false);
+                  if (onNavClick) {
+                    e.preventDefault();
+                    onNavClick(item.id);
+                  }
+                }}
+                className="text-lg font-bold text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Theme Selector */}
+          <div className="mb-8 border-t border-site-accent/50 pt-6">
+            <p className="text-[11px] font-bold text-site-text/50 uppercase tracking-widest mb-4">🎨 Change Theme</p>
+            <div className="flex gap-4">
+              <button 
+                onClick={() => setTheme('timeless')}
+                className={`w-8 h-8 rounded-full bg-[#2075A7] border-2 cursor-pointer transition-transform hover:scale-110 ${
+                  theme === 'timeless' ? 'border-site-text scale-110' : 'border-transparent'
+                }`}
+                title="Timeless Retro"
+              />
+              <button 
+                onClick={() => setTheme('coastal')}
+                className={`w-8 h-8 rounded-full bg-[#74A8A4] border-2 cursor-pointer transition-transform hover:scale-110 ${
+                  theme === 'coastal' ? 'border-site-text scale-110' : 'border-transparent'
+                }`}
+                title="Coastal Retro"
+              />
+              <button 
+                onClick={() => setTheme('tranquil')}
+                className={`w-8 h-8 rounded-full bg-[#B7C9E6] border-2 cursor-pointer transition-transform hover:scale-110 ${
+                  theme === 'tranquil' ? 'border-site-text scale-110' : 'border-transparent'
+                }`}
+                title="Tranquil Sky"
+              />
+            </div>
+          </div>
+
+          {/* Mobile Actions */}
+          <div className="border-t border-site-accent/50 pt-6 flex flex-col gap-4 mt-auto">
+            {currentUser ? (
+              <>
+                <div className="flex items-center gap-3 mb-2">
+                  {(() => {
+                    const savedImg = localStorage.getItem('hawkman_profile_image');
+                    return savedImg ? (
+                      <div className="w-10 h-10 rounded-full overflow-hidden border border-site-accent flex-shrink-0">
+                        <img src={savedImg} alt="avatar" className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-site-primary flex items-center justify-center text-site-text font-bold">
+                        {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
+                      </div>
+                    );
+                  })()}
+                  <span className="text-base font-bold text-site-text">{currentUser.username}</span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onDashboard();
+                  }}
+                  className="w-full bg-site-bg border border-site-accent py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-accent/20 transition-all flex items-center justify-center gap-2"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  Dashboard
+                </button>
+
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onLogout();
+                  }}
+                  className="w-full bg-rose-500 hover:bg-rose-655 py-3.5 rounded-xl text-sm font-bold text-white transition-all flex items-center justify-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onLogin();
+                  }}
+                  className="w-full border border-site-accent py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-accent/20 transition-colors"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onSignup();
+                  }}
+                  className="w-full bg-site-primary py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-primary/80 transition-all text-center"
+                >
+                  Get Started
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

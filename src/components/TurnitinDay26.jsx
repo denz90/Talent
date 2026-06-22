@@ -1,68 +1,58 @@
 import React, { useState } from 'react';
-import { 
-  ShieldAlert, 
-  Sparkles, 
-  Clock, 
-  CheckCircle2, 
-  BarChart3, 
-  Layers, 
-  ArrowRight,
-  Zap,
-  FileText,
-  Trophy,
-  ChevronRight,
-  Target,
-  MessageSquare,
-  Users,
-  Search,
+import {
   BookOpen,
-  LineChart,
-  Flag,
-  PenTool
+  CheckCircle2,
+  ChevronRight,
+  Clock,
+  FileText,
+  Layers,
+  MessageSquare,
+  Shield,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  Zap
 } from 'lucide-react';
 
 const TurnitinDay26 = ({ onNext }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: BookOpen },
-    { id: 'features', label: 'Features', icon: Layers },
-    { id: 'guide', label: 'Guide', icon: Target },
-    { id: 'challenge', label: 'Challenge', icon: Trophy }
+    { id: 'overview', label: 'Overview'},
+    { id: 'features', label: 'Features'},
+    { id: 'guide', label: 'Guide'},
+    { id: 'challenge', label: 'Challenge'}
   ];
 
   return (
     <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-site-primary-400 rounded-3xl p-10">
-          <div className="absolute opacity-20"></div>
-          
-          <div className="absolute top-10 right-10 animate-pulse text-site-text">
-            <ShieldAlert size={64} strokeWidth={1} />
+        <div className="bg-site-primary-400 rounded-3xl p-10">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Shield className="text-[#2e0052]" size={32} />
+            </div>
           </div>
 
-          <div className="text-center space-y-6 pt-8 relative z-10">
-            <div className="inline-flex items-center gap-2 bg-site-bg/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-yellow-400" />
-              Day 26 • Academic Integrity
-            </div>
+          <div className="text-center space-y-6 pt-8">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight text-center">
               Day 26: Turnitin AI Feedback Challenge
             </h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 text-center">
-              Elevate Academic Integrity & Writing Growth with AI-Powered Feedback
+              Elevate Academic Integrity &amp; Writing Growth with AI-Powered Feedback
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
-                <Search size={16} /> Plagiarism Detection
+            <div className="flex flex-wrap justify-center gap-8 pt-4">
+              <span className="flex items-center gap-2 text-site-text">
+                <Layers size={16} /> Plagiarism Detection
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
-                <PenTool size={16} /> AI Feedback
+              <span className="flex items-center gap-2 text-site-text">
+                <Layers size={16} /> AI Feedback
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
-                <LineChart size={16} /> Writing Analytics
+              <span className="flex items-center gap-2 text-site-text">
+                <TrendingUp size={16} /> Writing Analytics
               </span>
             </div>
           </div>
@@ -80,66 +70,58 @@ const TurnitinDay26 = ({ onNext }) => {
                   : 'text-site-text/80 hover:bg-site-bg'
               }`}
             >
-              <tab.icon size={16} />
               {tab.label}
             </button>
           ))}
         </div>
 
         {/* Content Area */}
-        <div className="min-h-[400px]">
+        <div className="min-h-[500px]">
           {activeTab === 'overview' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <h2 className="text-3xl font-bold text-site-text tracking-tight">What is Turnitin AI Feedback Challenge?</h2>
-                  <p className="text-site-text/80 leading-relaxed text-lg">
-                    Turnitin is a plagiarism detection and writing feedback tool enhanced with AI to provide actionable insights on student submissions. Its AI Feedback Studio offers grammar checks, stylistic suggestions, and originality reports to improve writing quality while maintaining academic integrity.
-                  </p>
-                  <div className="grid grid-cols-1 gap-4">
-                    {[
-                      { icon: Search, title: '91B+ Web Pages', desc: 'Detects plagiarism across vast scholarly databases' },
-                      { icon: PenTool, title: 'Instant AI Feedback', desc: 'Grammar, clarity, and structural suggestions' },
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl text-site-text font-bold mb-6">What is Turnitin AI Feedback Challenge?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  Turnitin is a plagiarism detection and writing feedback tool enhanced with AI to provide actionable insights on student submissions. Its AI Feedback Studio offers grammar checks, stylistic suggestions, and originality reports to improve writing quality while maintaining academic integrity.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  { [
+                      { icon: Layers, title: '91B+ Web Pages', desc: 'Detects plagiarism across vast scholarly databases' },
+                      { icon: Layers, title: 'Instant AI Feedback', desc: 'Grammar, clarity, and structural suggestions' },
                       { icon: Clock, title: 'Reduced Grading Time', desc: 'With automated writing analytics and rubrics' },
                       { icon: Zap, title: 'Student Growth', desc: 'Actionable revision steps for self-improvement' }
                     ].map((item, i) => (
-                      <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
-                        <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
-                          <item.icon size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-site-text">{item.title}</h4>
-                          <p className="text-sm text-site-text/80">{item.desc}</p>
-                        </div>
+                    <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                      <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                        <item.icon size={24} />
                       </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="hidden"></div>
-                  <div className="bg-site-bg p-8 rounded-3xl shadow-xl border border-site-accent relative overflow-hidden group">
-                    <img src="/Teaching-pana 1.png" alt="Turnitin Illustration" className="w-full h-auto relative z-10" />
-                  </div>
+                      <p className="text-site-text font-medium">
+                        <span className="font-bold text-site-primary block mb-1">{item.title}:</span>
+                        {item.desc}
+                      </p>
+                    </div>
+                  )) }
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === 'features' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight">Key Features & How to Use Them</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                { [
                   {
                     title: 'Originality Report',
-                    icon: Search,
+                    icon: Layers,
                     color: 'purple',
                     howTo: 'Upload work → Generate similarity score + sources',
                     benefit: 'Identifies uncited content or potential plagiarism'
                   },
                   {
                     title: 'AI Writing Feedback',
-                    icon: PenTool,
+                    icon: Layers,
                     color: 'blue',
                     howTo: 'Enable "Feedback Studio" → AI highlights grammar/style issues',
                     benefit: 'Delivers detailed feedback without manual markup'
@@ -153,66 +135,65 @@ const TurnitinDay26 = ({ onNext }) => {
                   },
                   {
                     title: 'Peer Review',
-                    icon: Users,
+                    icon: Layers,
                     color: 'orange',
                     howTo: 'Set up student peer reviews within Turnitin',
                     benefit: 'Encourages collaborative learning'
                   },
                   {
                     title: 'EKG Metrics',
-                    icon: BarChart3,
+                    icon: TrendingUp,
                     color: 'indigo',
                     howTo: 'View "Engagement, Knowledge, Growth" analytics per student',
                     benefit: 'Tracks long-term writing progress'
                   }
                 ].map((feature, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
-                    <div className={`w-10 h-10 rounded-xl mb-6 flex items-center justify-center bg-site-primary/40 flex items-center justify-center text-site-text`}>
-                      <feature.icon size={20} />
+                    <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                      <feature.icon size={24} />
                     </div>
-                    <h3 className="text-lg font-bold text-site-text mb-4">{feature.title}</h3>
-                    <div className="space-y-4">
-                      <div className="p-3 bg-site-bg rounded-xl">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">How to Use</p>
-                        <p className="text-xs text-slate-700">{feature.howTo}</p>
-                      </div>
-                      <div className={`p-3 bg-site-primary/40 rounded-xl border border-site-accent/10`}>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Benefit</p>
-                        <p className="text-xs text-site-text font-semibold">{feature.benefit}</p>
+                    <div>
+                      <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                      <div className="space-y-4">
+                        <div className="text-sm">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                          <p className="text-site-text">{feature.howTo}</p>
+                        </div>
+                        <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                          <p className="text-xs font-bold text-green-100">{feature.benefit}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'guide' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight text-center">Step-by-Step Getting Started Guide</h2>
-              <div className="max-w-2xl mx-auto space-y-4">
-                {[
+          )}{activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                { [
                   { step: 1, title: 'Access Turnitin', desc: 'Go to Turnitin.com → Sign in (or request institutional access) → Click "Create Class" to set up your course' },
                   { step: 2, title: 'Enable AI Feedback', desc: 'Open your class → Click "Settings" → Toggle on "Feedback Studio (AI)" → Upload a rubric (optional)' },
                   { step: 3, title: 'Submit Student Work', desc: 'Click "Add Assignment" → Set deadline + enable "Originality Check" → Drag-and-drop student files (PDF/DOCX)' },
                   { step: 4, title: 'Review AI Feedback', desc: 'Open a submission → AI highlights grammar errors (blue), style suggestions (green), and plagiarism (red)' },
                   { step: 5, title: 'Share with Students', desc: 'Return submissions with feedback → Students view suggestions via their accounts → Use "Revision Assistant"' }
-                ].map((item, i) => (
+                ].map((step, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
-                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-site-primary/20">
-                      {item.step}
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-site-text flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
                     </div>
                     <div>
-                      <h4 className="font-bold text-site-text mb-1">{item.title}</h4>
-                      <p className="text-sm text-site-text/80 leading-relaxed">{item.desc}</p>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.desc}</p>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'challenge' && (
+          )}{activeTab === 'challenge' && (
             <div className="space-y-12 animate-in fade-in duration-500">
               <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
                 <div className="hidden"></div>
@@ -228,13 +209,13 @@ const TurnitinDay26 = ({ onNext }) => {
                       { 
                         title: 'Setup: Explore Example Essay', 
                         desc: 'Upload a sample essay. Review the "Originality Report" to check for uncited sources. Identify the similarity percentage.',
-                        icon: Search,
+                        icon: Layers,
                         step: 'Step 1'
                       },
                       { 
                         title: 'Analyze: Apply AI Feedback', 
                         desc: 'Enable "Feedback Studio." Review AI-generated suggestions for grammar, clarity, and style. Add QuickMarks.',
-                        icon: PenTool,
+                        icon: Layers,
                         step: 'Step 2'
                       },
                       { 
@@ -246,7 +227,7 @@ const TurnitinDay26 = ({ onNext }) => {
                       { 
                         title: 'Share: Share Challenge', 
                         desc: 'Export final feedback report. Post a screenshot of your QuickMarks library or dashboard with #AIEdChallenge.',
-                        icon: Users,
+                        icon: Layers,
                         step: 'Step 4'
                       }
                     ].map((step, i) => (
@@ -286,10 +267,10 @@ const TurnitinDay26 = ({ onNext }) => {
                 <h3 className="text-2xl font-bold tracking-tight text-center">Comprehensive Originality Database</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[
-                    { label: 'Web Pages', count: '91B+', icon: Search },
+                    { label: 'Web Pages', count: '91B+', icon: Layers },
                     { label: 'Student Papers', count: '1.4B+', icon: FileText },
                     { label: 'Journals', count: '190M+', icon: BookOpen },
-                    { label: 'Books', count: '70M+', icon: Layers }
+                    { label: 'Books', count: '70M+', icon: Target }
                   ].map((db, i) => (
                     <div key={i} className="flex flex-col items-center text-center space-y-3 group">
                       <div className="w-12 h-12 rounded-2xl bg-site-bg/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
@@ -307,9 +288,9 @@ const TurnitinDay26 = ({ onNext }) => {
               {/* Pro Tips Section */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { title: 'Deep Dive', icon: Search, desc: 'Always review high similarity scores manually; AI flags potential matches, but human judgment confirms integrity.' },
-                  { title: 'Trend Analysis', icon: LineChart, desc: 'Use the "EKG Metrics" dashboard to track if a student\'s writing quality is improving across multiple assignments.' },
-                  { title: 'Student Ownership', icon: Users, desc: 'Encourage students to use the "Revision Assistant" before final submission to foster a culture of growth.' }
+                  { title: 'Deep Dive', icon: Layers, desc: 'Always review high similarity scores manually; AI flags potential matches, but human judgment confirms integrity.' },
+                  { title: 'Trend Analysis', icon: TrendingUp, desc: 'Use the "EKG Metrics" dashboard to track if a student\'s writing quality is improving across multiple assignments.' },
+                  { title: 'Student Ownership', icon: Layers, desc: 'Encourage students to use the "Revision Assistant" before final submission to foster a culture of growth.' }
                 ].map((tip, i) => (
                   <div key={i} className="bg-site-bg p-6 rounded-3xl border border-site-accent space-y-4">
                     <div className="w-10 h-10 rounded-xl bg-site-primary/30 flex items-center justify-center text-site-text mb-4">
@@ -343,7 +324,7 @@ const TurnitinDay26 = ({ onNext }) => {
                   {[
                     { label: 'Engagement', icon: Clock, desc: 'Time spent reviewing feedback and interacting with suggestions.' },
                     { label: 'Knowledge', icon: BookOpen, desc: 'Mastery of writing concepts and adherence to academic integrity.' },
-                    { label: 'Growth', icon: LineChart, desc: 'Score improvement and reduction in writing errors over time.' }
+                    { label: 'Growth', icon: TrendingUp, desc: 'Score improvement and reduction in writing errors over time.' }
                   ].map((metric, i) => (
                     <div key={i} className="text-center space-y-4">
                       <div className="w-12 h-12 bg-site-bg/20 rounded-full flex items-center justify-center mx-auto">
@@ -372,7 +353,7 @@ const TurnitinDay26 = ({ onNext }) => {
               onClick={onNext}
               className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
             >
-              Start Your Challenge <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

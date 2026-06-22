@@ -43,7 +43,7 @@ const OTPVerificationPage = ({ email, onSuccess, onBack }) => {
 
   return (
     <div className="min-h-screen bg-site-bg flex items-center justify-center p-6">
-      <div className="max-w-[440px] w-full bg-site-bg rounded-sm shadow-sm p-10 relative text-center">
+      <div className="max-w-[440px] w-full bg-site-bg rounded-sm shadow-sm p-6 sm:p-10 relative text-center">
         
         <button 
           onClick={onBack}

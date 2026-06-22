@@ -247,7 +247,7 @@ const ProfileSettingsPage = ({ currentUser, onBack, theme, onThemeChange }) => {
 
         {/* ── PROFILE HERO ── */}
         <div
-          className="rounded-3xl p-8 flex items-center gap-6"
+          className="rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center text-center sm:text-left gap-6"
           style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--gradient-to))' }}
         >
           {/* Avatar */}
@@ -283,12 +283,12 @@ const ProfileSettingsPage = ({ currentUser, onBack, theme, onThemeChange }) => {
           </div>
 
           {/* Info */}
-          <div className="flex-1">
+          <div className="flex-1 w-full sm:w-auto">
             <h1 className="text-2xl font-extrabold" style={{ color: 'var(--color-light)' }}>
               {username || 'Your Profile'}
             </h1>
             <p className="text-sm mt-0.5" style={{ color: 'var(--color-light)', opacity: 0.7 }}>{displayEmail}</p>
-            <div className="flex items-center gap-2 mt-3">
+            <div className="flex items-center justify-center sm:justify-start gap-2 mt-3">
               <span
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold"
                 style={{ background: 'rgba(255,255,255,0.18)', color: 'var(--color-light)' }}

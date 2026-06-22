@@ -139,10 +139,15 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
 const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings, onHome, onDashboard }) => {
   const [activeDay, setActiveDay] = useState(1);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  });
   const [showQuiz, setShowQuiz] = useState(false);
   const [completedDays, setCompletedDays] = useState([0]);
-  const [unlockedLevel, setUnlockedLevel] = useState(18);
+  const [unlockedLevel, setUnlockedLevel] = useState(28);
   const [streakCount, setStreakCount] = useState(0);
 
   // Load saved progress on mount
@@ -185,6 +190,20 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
     fetchProgress();
   }, [course?.id]);
+
+  // Handle auto-collapsing sidebar on mobile screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsSidebarCollapsed(true);
+      } else {
+        setIsSidebarCollapsed(false);
+      }
+    };
+    handleResize(); // check initially
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (!course) return null;
 
@@ -294,10 +313,20 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
         onDashboard={onDashboard}
       />
 
-      <div className={`flex flex-1 overflow-hidden transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
+      <div className={`flex flex-1 overflow-hidden relative transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
+
+        {/* Backdrop for Mobile Sidebar Drawer */}
+        {!isSidebarCollapsed && (
+          <div 
+            className="fixed inset-0 bg-black/40 z-10 md:hidden"
+            onClick={() => setIsSidebarCollapsed(true)}
+          />
+        )}
 
         {/* ── Sidebar ── */}
-        <aside className={`${isSidebarCollapsed ? 'w-0 border-none' : 'w-[320px]'} ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'} border-r flex flex-col h-full flex-shrink-0 transition-all duration-500 overflow-hidden relative z-20`}>
+        <aside className={`border-r flex flex-col h-full flex-shrink-0 transition-all duration-300 overflow-hidden absolute md:relative z-20 
+          ${isSidebarCollapsed ? 'w-0 -translate-x-full border-none' : 'w-[320px] translate-x-0'} 
+          ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'}`}>
 
         {/* Header: Course Title & Progress */}
         <div className="p-6 border-b border-site-accent">
@@ -346,8 +375,11 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
                       key={day.id}
                       onClick={() => {
                         if (!isLocked) {
-                        setActiveDay(day.id);
-                        setShowQuiz(false);
+                          setActiveDay(day.id);
+                          setShowQuiz(false);
+                          if (window.innerWidth < 768) {
+                            setIsSidebarCollapsed(true);
+                          }
                         }
                       }} 
                       className={`flex items-start gap-3 p-3 rounded-xl transition-all ${

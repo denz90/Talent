@@ -74,7 +74,7 @@ const SignupPage = ({ onBack, onLoginClick, onRequireOTP }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-site-grad-from to-site-grad-to flex items-center justify-center p-6">
-      <div className="max-w-[440px] w-full bg-site-bg rounded-sm shadow-sm p-10 relative">
+      <div className="max-w-[440px] w-full bg-site-bg rounded-sm shadow-sm p-6 sm:p-10 relative">
         {/* Back Button */}
         <button 
           onClick={onBack}

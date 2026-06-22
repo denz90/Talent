@@ -1,66 +1,54 @@
 import React, { useState } from 'react';
-import { 
-  Briefcase, 
-  Sparkles, 
-  Clock, 
-  CheckCircle2, 
-  Mail, 
-  Layers, 
-  ArrowRight,
-  Zap,
-  FileText,
-  Trophy,
+import {
+  CheckCircle2,
   ChevronRight,
-  Target,
-  Calendar,
-  Users,
+  Clock,
+  FileText,
+  Layers,
   MessageSquare,
-  Globe,
-  Database,
-  BarChart3
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  Zap
 } from 'lucide-react';
 
 const FetchyDay23 = ({ onNext }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Briefcase },
-    { id: 'features', label: 'Features', icon: Layers },
-    { id: 'guide', label: 'Guide', icon: Target },
-    { id: 'challenge', label: 'Challenge', icon: Trophy }
+    { id: 'overview', label: 'Overview'},
+    { id: 'features', label: 'Features'},
+    { id: 'guide', label: 'Guide'},
+    { id: 'challenge', label: 'Challenge'}
   ];
 
   return (
     <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-site-primary-400 rounded-3xl p-10">
-          <div className="absolute opacity-20"></div>
+        <div className="bg-site-primary-400 rounded-3xl p-10">
           
           <div className="absolute top-10 right-10 animate-pulse text-site-text">
-            <Briefcase size={64} strokeWidth={1} />
+            <Layers size={64} strokeWidth={1} />
           </div>
 
-          <div className="text-center space-y-6 pt-8 relative z-10">
-            <div className="inline-flex items-center gap-2 bg-site-bg/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Sparkles size={14} className="text-yellow-400" />
-              Day 23 • AI Productivity
-            </div>
+          <div className="text-center space-y-6 pt-8">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight text-center">
               Day 23: Fetchy Challenge
             </h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 text-center">
               Streamline Teaching Tasks with AI-Powered Productivity
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
+            <div className="flex flex-wrap justify-center gap-8 pt-4">
+              <span className="flex items-center gap-2 text-site-text">
                 <Clock size={16} /> Saves 5+ Hours/Week
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
+              <span className="flex items-center gap-2 text-site-text">
                 <CheckCircle2 size={16} /> Standards-Aligned
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
+              <span className="flex items-center gap-2 text-site-text">
                 <MessageSquare size={16} /> AI Communication
               </span>
             </div>
@@ -79,56 +67,48 @@ const FetchyDay23 = ({ onNext }) => {
                   : 'text-site-text/80 hover:bg-site-bg'
               }`}
             >
-              <tab.icon size={16} />
               {tab.label}
             </button>
           ))}
         </div>
 
         {/* Content Area */}
-        <div className="min-h-[400px]">
+        <div className="min-h-[500px]">
           {activeTab === 'overview' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <h2 className="text-3xl font-bold text-site-text tracking-tight">What is Fetchy Challenge?</h2>
-                  <p className="text-site-text/80 leading-relaxed text-lg">
-                    Fetchy is an AI-driven platform designed specifically for educators to automate administrative tasks, generate teaching resources, and enhance classroom productivity. It acts as a virtual assistant for teachers, handling everything from lesson planning to parent communication.
-                  </p>
-                  <div className="grid grid-cols-1 gap-4">
-                    {[
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl text-site-text font-bold mb-6">What is Fetchy Challenge?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  Fetchy is an AI-driven platform designed specifically for educators to automate administrative tasks, generate teaching resources, and enhance classroom productivity. It acts as a virtual assistant for teachers, handling everything from lesson planning to parent communication.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  { [
                       { icon: Clock, title: 'Saves 5+ Hours/Week', desc: 'By automating repetitive tasks' },
                       { icon: CheckCircle2, title: 'Standards-Aligned', desc: 'Generates lesson plans in minutes' },
-                      { icon: Mail, title: 'AI Communication', desc: 'Simplifies parent-teacher emails with AI drafts' },
-                      { icon: BarChart3, title: 'Data-Driven Insights', desc: 'Personalize instruction with granular feedback' }
+                      { icon: MessageSquare, title: 'AI Communication', desc: 'Simplifies parent-teacher emails with AI drafts' },
+                      { icon: TrendingUp, title: 'Data-Driven Insights', desc: 'Personalize instruction with granular feedback' }
                     ].map((item, i) => (
-                      <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
-                        <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
-                          <item.icon size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-site-text">{item.title}</h4>
-                          <p className="text-sm text-site-text/80">{item.desc}</p>
-                        </div>
+                    <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                      <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                        <item.icon size={24} />
                       </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="hidden"></div>
-                  <div className="bg-site-bg p-8 rounded-3xl shadow-xl border border-site-accent relative overflow-hidden group">
-                    <img src="/Productivity-pana 1.png" alt="Fetchy Illustration" className="w-full h-auto relative z-10" />
-                  </div>
+                      <p className="text-site-text font-medium">
+                        <span className="font-bold text-site-primary block mb-1">{item.title}:</span>
+                        {item.desc}
+                      </p>
+                    </div>
+                  )) }
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === 'features' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight">Key Features & How to Use Them</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                { [
                   {
                     title: 'Lesson Plan Generator',
                     icon: FileText,
@@ -138,7 +118,7 @@ const FetchyDay23 = ({ onNext }) => {
                   },
                   {
                     title: 'Email Draft Assistant',
-                    icon: Mail,
+                    icon: MessageSquare,
                     color: 'blue',
                     howTo: 'Choose template (e.g., "Parent Update") → Add details → AI refines tone',
                     benefit: 'Sends polished, empathetic messages in seconds'
@@ -152,58 +132,57 @@ const FetchyDay23 = ({ onNext }) => {
                   },
                   {
                     title: 'Meeting Agenda Builder',
-                    icon: Calendar,
+                    icon: Layers,
                     color: 'orange',
                     howTo: 'Input goals (e.g., "PLC Meeting") → Auto-generate discussion points',
                     benefit: 'Keeps team meetings focused and efficient'
                   }
                 ].map((feature, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
-                    <div className={`w-10 h-10 rounded-xl mb-6 flex items-center justify-center bg-site-primary/40 flex items-center justify-center text-site-text`}>
-                      <feature.icon size={20} />
+                    <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
+                      <feature.icon size={24} />
                     </div>
-                    <h3 className="text-lg font-bold text-site-text mb-4">{feature.title}</h3>
-                    <div className="space-y-4">
-                      <div className="p-3 bg-site-bg rounded-xl">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">How to Use</p>
-                        <p className="text-xs text-slate-700">{feature.howTo}</p>
-                      </div>
-                      <div className={`p-3 bg-site-primary/40 rounded-xl border border-site-accent/10`}>
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Benefit</p>
-                        <p className="text-xs text-site-text font-semibold">{feature.benefit}</p>
+                    <div>
+                      <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                      <div className="space-y-4">
+                        <div className="text-sm">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                          <p className="text-site-text">{feature.howTo}</p>
+                        </div>
+                        <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                          <p className="text-xs font-bold text-green-100">{feature.benefit}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'guide' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight text-center">Step-by-Step Getting Started Guide</h2>
-              <div className="max-w-2xl mx-auto space-y-4">
-                {[
+          )}{activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                { [
                   { step: 1, title: 'Sign Up', desc: 'Go to Fetchy.io → Click "Try Free" → Sign up with Google/email' },
                   { step: 2, title: 'Generate Your First Lesson Plan', desc: 'Click "Lesson Plans" → Select Grade 5 Science → Enter topic "Ecosystems" → Choose "30-minute activity" → Toggle "Include NGSS Standards" → Click "Generate" → Edit the AI output' },
                   { step: 3, title: 'Draft a Parent Email', desc: 'Navigate to "Communications" → Select "Progress Update" → Fill in student name, strengths, and areas for growth → Click "Generate Draft" → Polish the tone' },
                   { step: 4, title: 'Create a Worksheet', desc: 'Open "Resources" → Choose "Vocabulary Matching" → Enter 10 science terms + definitions → Click "Download PDF" → Save to Google Drive' }
-                ].map((item, i) => (
+                ].map((step, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
-                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-site-primary/20">
-                      {item.step}
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-site-text flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
                     </div>
                     <div>
-                      <h4 className="font-bold text-site-text mb-1">{item.title}</h4>
-                      <p className="text-sm text-site-text/80 leading-relaxed">{item.desc}</p>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.desc}</p>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'challenge' && (
+          )}{activeTab === 'challenge' && (
             <div className="space-y-12 animate-in fade-in duration-500">
               <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
                 <div className="hidden"></div>
@@ -225,7 +204,7 @@ const FetchyDay23 = ({ onNext }) => {
                       { 
                         title: 'Communication: Parent Outreach', 
                         desc: 'Draft behavioral update and newsletter emails. Show before-and-after AI refinement. Note tone/clarity adjustments.',
-                        icon: Mail,
+                        icon: MessageSquare,
                         step: 'Step 2'
                       },
                       { 
@@ -237,7 +216,7 @@ const FetchyDay23 = ({ onNext }) => {
                       { 
                         title: 'Collaboration: Share Your Work', 
                         desc: 'Compile resources in Fetchy Library. Share with colleagues. Post with #FetchyChallenge.',
-                        icon: Users,
+                        icon: Layers,
                         step: 'Step 4'
                       }
                     ].map((step, i) => (
@@ -301,9 +280,9 @@ const FetchyDay23 = ({ onNext }) => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {[
                     { title: 'Lesson Plans', icon: FileText, desc: 'Standards aligned' },
-                    { title: 'Parent Emails', icon: Mail, desc: 'Empathetic tone' },
+                    { title: 'Parent Emails', icon: MessageSquare, desc: 'Empathetic tone' },
                     { title: 'Worksheets', icon: Layers, desc: 'Differentiated' },
-                    { title: 'Meeting Agendas', icon: Calendar, desc: 'Focused' }
+                    { title: 'Meeting Agendas', icon: Layers, desc: 'Focused' }
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col items-center text-center space-y-3 group">
                       <div className="w-12 h-12 rounded-2xl bg-site-bg/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
@@ -330,7 +309,7 @@ const FetchyDay23 = ({ onNext }) => {
                   ].map((tool, i) => (
                     <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-site-bg border border-site-accent shadow-sm hover:border-indigo-100 transition-colors">
                       <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold text-xs flex-shrink-0">
-                        <Mail size={16} />
+                        <MessageSquare size={16} />
                       </div>
                       <div>
                         <h4 className="font-bold text-site-text text-sm">{tool.tool}</h4>
@@ -348,10 +327,10 @@ const FetchyDay23 = ({ onNext }) => {
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {[
-                    { label: 'Google Classroom', icon: Globe },
-                    { label: 'Canvas LMS', icon: Database },
-                    { label: 'Google Drive', icon: FileText },
-                    { label: 'Email Clients', icon: Mail }
+                    { label: 'Google Classroom'},
+                    { label: 'Canvas LMS'},
+                    { label: 'Google Drive'},
+                    { label: 'Email Clients'}
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col items-center gap-2 p-4 bg-site-bg rounded-2xl shadow-sm">
                       <item.icon size={20} className="text-indigo-600" />
@@ -377,7 +356,7 @@ const FetchyDay23 = ({ onNext }) => {
               onClick={onNext}
               className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
             >
-              Start Your Challenge <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>

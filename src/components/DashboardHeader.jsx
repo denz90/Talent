@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Bell, User, Search, Sparkles, Settings, LogOut } from 'lucide-react';
+import { Bell, User, Search, Sparkles, Settings, LogOut, Menu } from 'lucide-react';
 
-const DashboardHeader = ({ currentUser, onLogout, onProfileSettings }) => {
+const DashboardHeader = ({ currentUser, onLogout, onProfileSettings, onToggleSidebar }) => {
   const displayName = currentUser?.username || currentUser?.name || currentUser?.email?.split('@')[0] || 'Learner';
   const avatarSeed = currentUser?.username || 'default';
   const planLabel = currentUser?.plan || 'Free Plan';
@@ -11,9 +11,17 @@ const DashboardHeader = ({ currentUser, onLogout, onProfileSettings }) => {
   const avatarSrc = savedImg || `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}`;
 
   return (
-    <header className="h-20 border-b border-site-accent dark:border-slate-800 bg-site-bg dark:bg-site-primary flex items-center justify-between px-10 relative z-10 transition-colors duration-300">
+    <header className="h-20 border-b border-site-accent dark:border-slate-800 bg-site-bg dark:bg-site-primary flex items-center justify-between px-4 md:px-10 relative z-10 transition-colors duration-300">
       {/* Logo Area */}
       <div className="flex items-center gap-3">
+        {/* Hamburger Toggle for Mobile Sidebar */}
+        <button 
+          onClick={onToggleSidebar}
+          className="p-2 -ml-1 text-site-text hover:bg-site-accent/20 rounded-lg md:hidden transition-colors"
+          aria-label="Toggle sidebar menu"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
         <div className="w-9 h-9 bg-site-primary dark:bg-site-bg rounded flex items-center justify-center text-white dark:text-site-text shadow-lg">
           <Sparkles className="w-5 h-5" />
         </div>

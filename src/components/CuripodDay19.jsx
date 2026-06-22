@@ -1,66 +1,56 @@
 import React, { useState } from 'react';
-import { 
-  MessageSquare, 
-  Sparkles, 
-  BarChart3, 
-  Globe, 
-  Users, 
-  Lightbulb, 
-  ArrowRight,
-  Zap,
-  Cloud,
-  FileText,
-  Trophy,
+import {
   CheckCircle2,
   ChevronRight,
-  Target,
+  FileText,
   Layers,
-  Search,
-  MessageCircle
+  Lightbulb,
+  MessageSquare,
+  Sparkles,
+  Target,
+  TrendingUp,
+  Trophy,
+  Zap
 } from 'lucide-react';
 
 const CuripodDay19 = ({ onNext }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Search },
-    { id: 'features', label: 'Features', icon: Layers },
-    { id: 'guide', label: 'Guide', icon: Target },
-    { id: 'challenge', label: 'Challenge', icon: Trophy }
+    { id: 'overview', label: 'Overview'},
+    { id: 'features', label: 'Features'},
+    { id: 'guide', label: 'Guide'},
+    { id: 'challenge', label: 'Challenge'}
   ];
 
   return (
     <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
+      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
-        <div className="relative rounded-3xl overflow-hidden bg-site-primary-400 rounded-3xl p-10">
-          <div className="absolute opacity-20"></div>
-          
-          <div className="absolute top-10 right-10 animate-pulse text-yellow-400">
-            <Sparkles size={48} />
+        <div className="bg-site-primary-400 rounded-3xl p-10">
+          <div className="flex justify-center">
+            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse">
+              <Sparkles className="text-[#2e0052]" size={32} />
+            </div>
           </div>
 
-          <div className="text-center space-y-6 pt-8 relative z-10">
-            <div className="inline-flex items-center gap-2 bg-site-bg/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
-              <Zap size={14} className="text-yellow-400" />
-              Day 19 • Student Engagement
-            </div>
+          <div className="text-center space-y-6 pt-8">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight text-center">
               Day 19: Curipod Challenge
             </h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 text-center">
               Spark Student Discussions with AI-Powered Conversations
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
+            <div className="flex flex-wrap justify-center gap-8 pt-4">
+              <span className="flex items-center gap-2 text-site-text">
                 <MessageSquare size={16} /> Boosts Engagement
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
+              <span className="flex items-center gap-2 text-site-text">
                 <Sparkles size={16} /> AI Prompts
               </span>
-              <span className="flex items-center gap-2 text-sm bg-site-bg/10 px-3 py-1 rounded-lg border border-white/10">
-                <Globe size={16} /> Global Connections
+              <span className="flex items-center gap-2 text-site-text">
+                <Layers size={16} /> Global Connections
               </span>
             </div>
           </div>
@@ -78,57 +68,48 @@ const CuripodDay19 = ({ onNext }) => {
                   : 'text-site-text/80 hover:bg-site-bg'
               }`}
             >
-              <tab.icon size={16} />
               {tab.label}
             </button>
           ))}
         </div>
 
         {/* Content Area */}
-        <div className="min-h-[400px]">
+        <div className="min-h-[500px]">
           {activeTab === 'overview' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <h2 className="text-3xl font-bold text-site-text tracking-tight">What is Curipod?</h2>
-                  <p className="text-site-text/80 leading-relaxed text-lg">
-                    Curipod is an interactive discussion platform that uses AI to generate thought-provoking questions, polls, and activities tailored to your lesson content. It transforms passive learning into dynamic student-led conversations.
-                  </p>
-                  <div className="grid grid-cols-1 gap-4">
-                    {[
-                      { icon: MessageCircle, title: 'Boosts Engagement', desc: 'Turns quiet classrooms into vibrant discussions' },
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <div className="bg-site-bg rounded-3xl p-10 border border-site-accent">
+                <h2 className="text-3xl text-site-text font-bold mb-6">What is Curipod?</h2>
+                <p className="text-site-text text-lg leading-relaxed opacity-90">
+                  Curipod is an interactive discussion platform that uses AI to generate thought-provoking questions, polls, and activities tailored to your lesson content. It transforms passive learning into dynamic student-led conversations.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                  { [
+                      { icon: MessageSquare, title: 'Boosts Engagement', desc: 'Turns quiet classrooms into vibrant discussions' },
                       { icon: Sparkles, title: 'AI-Powered Prompts', desc: 'Generates debate questions, exit tickets, and reflections in seconds' },
-                      { icon: BarChart3, title: 'Real-Time Analytics', desc: 'Tracks student participation and understanding' },
-                      { icon: Globe, title: 'Global Connections', desc: 'Lets classrooms collaborate with peers worldwide' }
+                      { icon: TrendingUp, title: 'Real-Time Analytics', desc: 'Tracks student participation and understanding' },
+                      { icon: Layers, title: 'Global Connections', desc: 'Lets classrooms collaborate with peers worldwide' }
                     ].map((item, i) => (
-                      <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
-                        <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
-                          <item.icon size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-site-text">{item.title}</h4>
-                          <p className="text-sm text-site-text/80">{item.desc}</p>
-                        </div>
+                    <div key={i} className="bg-site-bg p-8 rounded-2xl border border-site-primary flex flex-col gap-4 group hover:bg-site-bg transition-colors">
+                      <div className="w-12 h-12 rounded-xl bg-site-text flex items-center justify-center hover:bg-site-primary transition-colors text-site-accent">
+                        <item.icon size={24} />
                       </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="hidden"></div>
-                  <div className="bg-site-bg p-8 rounded-3xl shadow-xl border border-site-accent relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-150 duration-700"></div>
-                    <img src="/Social strategy-pana 1.png" alt="Curipod Interface" className="w-full h-auto relative z-10" />
-                  </div>
+                      <p className="text-site-text font-medium">
+                        <span className="font-bold text-site-primary block mb-1">{item.title}:</span>
+                        {item.desc}
+                      </p>
+                    </div>
+                  )) }
                 </div>
               </div>
             </div>
           )}
 
           {activeTab === 'features' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight">Key Features & How to Use Them</h2>
+            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Key Features &amp; How to Use Them</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
+                { [
                   {
                     title: 'AI Discussion Generator',
                     icon: Sparkles,
@@ -138,14 +119,14 @@ const CuripodDay19 = ({ onNext }) => {
                   },
                   {
                     title: 'Live Word Clouds',
-                    icon: Cloud,
+                    icon: Layers,
                     color: 'blue',
                     howTo: 'Students submit responses → AI visualizes trends in real time',
                     benefit: 'Instantly gauges class consensus'
                   },
                   {
                     title: 'Parlay Integration',
-                    icon: Users,
+                    icon: Layers,
                     color: 'emerald',
                     howTo: 'Sync with Parlay to structure Socratic seminars or peer feedback',
                     benefit: 'Deepens critical thinking skills'
@@ -159,52 +140,51 @@ const CuripodDay19 = ({ onNext }) => {
                   }
                 ].map((feature, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex flex-col gap-6">
-                    <div className={`w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text`}>
+                    <div className="w-12 h-12 rounded-2xl bg-site-primary/40 flex items-center justify-center text-site-text">
                       <feature.icon size={24} />
                     </div>
-                    <h3 className="text-xl font-bold text-site-text mb-4">{feature.title}</h3>
-                    <div className="space-y-4">
-                      <div className="p-4 bg-site-bg rounded-xl">
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">How to Use</p>
-                        <p className="text-sm text-slate-700">{feature.howTo}</p>
-                      </div>
-                      <div className={`p-4 bg-site-primary/40 rounded-xl border border-site-accent/10`}>
-                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Benefit</p>
-                        <p className="text-sm text-site-text font-semibold">{feature.benefit}</p>
+                    <div>
+                      <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                      <div className="space-y-4">
+                        <div className="text-sm">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1">How to Use:</p>
+                          <p className="text-site-text">{feature.howTo}</p>
+                        </div>
+                        <div className="bg-site-primary/40 p-3 rounded-xl border border-site-accent/10">
+                          <p className="text-site-text uppercase font-bold text-[10px] tracking-widest mb-1 text-green-400">Benefit:</p>
+                          <p className="text-xs font-bold text-green-100">{feature.benefit}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'guide' && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <h2 className="text-3xl font-bold text-site-text tracking-tight text-center">Step-by-Step Getting Started Guide</h2>
-              <div className="max-w-2xl mx-auto space-y-4">
-                {[
+          )}{activeTab === 'guide' && (
+            <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <h2 className="text-3xl font-bold text-center">Getting Started Guide</h2>
+              
+              <div className="space-y-6">
+                { [
                   { step: 1, title: 'Sign Up', desc: 'Go to Curipod.com → Click "Educator Sign Up" (free for teachers)' },
                   { step: 2, title: 'Create Your First Discussion', desc: 'Click "New Discussion" → Enter your topic (e.g., "Climate Change") → Choose format: Debate, Q&A, or Reflection' },
                   { step: 3, title: 'Customize AI Prompts', desc: 'Edit generated questions and add multimedia (images/videos) for context' },
                   { step: 4, title: 'Launch Live Session', desc: 'Share join code/link → Students respond via devices → Use Word Cloud to highlight common answers' },
                   { step: 5, title: 'Analyze & Export Data', desc: 'View participation reports under "Activity Insights" → Export responses as CSV for grading' }
-                ].map((item, i) => (
+                ].map((step, i) => (
                   <div key={i} className="bg-site-bg rounded-3xl p-8 border border-site-accent flex items-center gap-8 group hover:translate-x-2 transition-all">
-                    <div className="w-14 h-14 rounded-full bg-site-primary text-white flex items-center justify-center text-2xl font-black shadow-lg shadow-site-primary/20">
-                      {item.step}
+                    <div className="w-14 h-14 rounded-full bg-site-primary text-site-text flex items-center justify-center text-2xl font-black shadow-lg shadow-pink-500/20">
+                      {step.step}
                     </div>
                     <div>
-                      <h4 className="font-bold text-site-text mb-1">{item.title}</h4>
-                      <p className="text-sm text-site-text/80 leading-relaxed">{item.desc}</p>
+                      <h3 className="text-xl font-bold mb-1">{step.title}</h3>
+                      <p className="text-site-text">{step.desc}</p>
                     </div>
                   </div>
-                ))}
+                )) }
               </div>
             </div>
-          )}
-
-          {activeTab === 'challenge' && (
+          )}{activeTab === 'challenge' && (
             <div className="space-y-12 animate-in fade-in duration-500">
               <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-3xl p-10">
                 <div className="hidden"></div>
@@ -220,7 +200,7 @@ const CuripodDay19 = ({ onNext }) => {
                       { 
                         title: 'Generate Questions', 
                         desc: 'Input your subject (e.g., "Ethics of AI in education"). Review AI-generated debate questions. Screenshot 3 debate questions Curipod suggests.',
-                        icon: Search,
+                        icon: Layers,
                         step: 'Prepare'
                       },
                       { 
@@ -232,13 +212,13 @@ const CuripodDay19 = ({ onNext }) => {
                       { 
                         title: 'Assign Reflections', 
                         desc: 'Use the "Exit Ticket" feature. Ask: "What\'s one counter-argument you heard today?" Collect anonymous student responses.',
-                        icon: MessageCircle,
+                        icon: MessageSquare,
                         step: 'Reflection'
                       },
                       { 
                         title: 'Bonus: Global Exchange', 
                         desc: 'Connect with another classroom via Curipod. Compare debate outcomes. Analyze different perspectives.',
-                        icon: Globe,
+                        icon: Layers,
                         step: 'Extension'
                       }
                     ].map((step, i) => (
@@ -282,7 +262,7 @@ const CuripodDay19 = ({ onNext }) => {
                 {[
                   { title: 'Spark Controversy', icon: Zap, desc: 'Use "Devil\'s Advocate" mode to challenge consensus and push students to defend their reasoning with evidence.' },
                   { title: 'Low-Tech Option', icon: CheckCircle2, desc: 'Print QR codes for students without devices. They can scan and join from their phones or shared devices.' },
-                  { title: 'Role Play', icon: Users, desc: 'Assign students AI-generated personas (e.g., "Debate as a scientist vs. politician") for perspective-taking.' }
+                  { title: 'Role Play', icon: Layers, desc: 'Assign students AI-generated personas (e.g., "Debate as a scientist vs. politician") for perspective-taking.' }
                 ].map((tip, i) => (
                   <div key={i} className="bg-site-bg p-6 rounded-3xl border border-site-accent space-y-4">
                     <div className="w-10 h-10 rounded-xl bg-site-primary/30 flex items-center justify-center text-site-text mb-4">
@@ -299,10 +279,10 @@ const CuripodDay19 = ({ onNext }) => {
                 <h3 className="text-2xl font-bold text-site-text tracking-tight">Real-Time Engagement Tools</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { title: 'Live Word Clouds', desc: 'Visualize student perspectives in real-time - see trending opinions change.', icon: Cloud },
-                    { title: 'Participation Tracking', desc: 'Monitor which students are contributing and who needs encouragement.', icon: BarChart3 },
-                    { title: 'Anonymous Responses', desc: 'Enable shy students to share ideas without fear of judgment.', icon: MessageCircle },
-                    { title: 'Global Connections', desc: 'Connect your classroom with peers worldwide for diverse perspectives.', icon: Globe }
+                    { title: 'Live Word Clouds', desc: 'Visualize student perspectives in real-time - see trending opinions change.'},
+                    { title: 'Participation Tracking', desc: 'Monitor which students are contributing and who needs encouragement.'},
+                    { title: 'Anonymous Responses', desc: 'Enable shy students to share ideas without fear of judgment.'},
+                    { title: 'Global Connections', desc: 'Connect your classroom with peers worldwide for diverse perspectives.'}
                   ].map((tool, i) => (
                     <div key={i} className="flex items-center gap-4 p-5 rounded-2xl bg-site-bg border border-site-accent shadow-sm">
                       <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 flex-shrink-0">
@@ -320,7 +300,7 @@ const CuripodDay19 = ({ onNext }) => {
               {/* Parlay Integration */}
               <div className="bg-gradient-to-r from-emerald-900 to-teal-900 p-8 rounded-3xl text-white shadow-lg space-y-4">
                 <div className="flex items-center gap-3">
-                  <Users size={24} className="text-emerald-400" />
+                  <Layers size={24} className="text-emerald-400" />
                   <h3 className="text-xl font-bold">Parlay Integration</h3>
                 </div>
                 <p className="text-site-text/80 leading-relaxed">
@@ -351,7 +331,7 @@ const CuripodDay19 = ({ onNext }) => {
               onClick={onNext}
               className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
             >
-              Start Your Challenge <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
