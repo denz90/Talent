@@ -21,7 +21,6 @@ import {
 
 import SignupPage from './components/SignupPage';
 import LoginPage from './components/LoginPage';
-//Possible added this  
 import OTPVerificationPage from './components/OTPVerificationPage';
 import DashboardPage from './components/DashboardPage';
 import ProfileSettingsPage from './components/ProfileSettingsPage';
@@ -32,7 +31,6 @@ import HelpCenterPage from './components/HelpCenterPage';
 import ApiDocsPage from './components/ApiDocsPage';
 import SystemStatusPage from './components/SystemStatusPage';
 import BlogPage from './components/BlogPage';
-// importing the API base URL from config
 import { API_BASE_URL } from './config.js'; 
 
 const TOOLS_DATA = {
@@ -73,6 +71,7 @@ const TOOLS_DATA = {
     image: "/perplexityAI.png"
   }
 };
+
 const App = () => {
   const [view, setView] = useState('home');
   const [activeCourse, setActiveCourse] = useState(null);
@@ -94,9 +93,8 @@ const App = () => {
           
           if (response.ok) {
             const userData = await response.json();
-            setCurrentUser(userData); // Memory restored!
+            setCurrentUser(userData);
           } else {
-            // Token is expired or fake, kick it out
             localStorage.removeItem('hawkman_token'); 
             setCurrentUser(null);
           }
@@ -109,10 +107,10 @@ const App = () => {
     checkAuth();
   }, []);
 
-
   const [currentTool, setCurrentTool] = useState(() => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
+
   // Persist state to localStorage
   useEffect(() => {
     localStorage.setItem('talent_oasis_view', view);
@@ -129,7 +127,6 @@ const App = () => {
   const handleNavClick = (sectionId) => {
     if (view !== 'home') {
       setView('home');
-      // Use a small timeout to allow the view to switch and elements to render
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -173,9 +170,9 @@ const App = () => {
       <SignupPage 
         onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} 
         onLoginClick={() => setView('login')} 
-        onRequireOTP={(email) => {           // new prop
-          setRegisteredEmail(email);         // Save email
-          setView('otp');                    // Switch to the OTP screen
+        onRequireOTP={(email) => {          
+          setRegisteredEmail(email);        
+          setView('otp');                    
         }}
       />
     );
@@ -191,21 +188,18 @@ const App = () => {
     );
   }
 
-  //dashboard is fake so like.... gotta change this later (done)    
-if (view === 'login') {
-  return (
-    <LoginPage 
-      onBack={() => setView('home')} 
-      onSignupClick={() => setView('signup')} 
-      onLoginSuccess={(profileData) => {
-        setCurrentUser(profileData); // Save the user details!
-        setView('home');             // Send them straight to the courses
-      }}
-    />
-  );
-}
-
-  
+  if (view === 'login') {
+    return (
+      <LoginPage 
+        onBack={() => setView('home')} 
+        onSignupClick={() => setView('signup')} 
+        onLoginSuccess={(profileData) => {
+          setCurrentUser(profileData); 
+          setView('home');             
+        }}
+      />
+    );
+  }
 
   if (view === 'path_selection' && !currentUser) {
     alert("You need to sign in to view courses!");
@@ -243,8 +237,8 @@ if (view === 'login') {
   return (
     <div className="min-h-screen font-sans transition-colors duration-300">
       <Navbar
-        currentUser={currentUser}   //Display username in the navbar when logged in
-        onLogout={() => {           // Clear the VIP pass and user data on logout 
+        currentUser={currentUser}   
+        onLogout={() => {           
           localStorage.removeItem('hawkman_token');
           setCurrentUser(null);
           setView('home');
@@ -315,10 +309,31 @@ if (view === 'login') {
                   Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
                   Perplexity AI, Claude AI, ChatGPT, Gamma AI, and 50+ AI tools.
                 </p>
+                
+                {/* REPLACED BUTTONS START HERE */}
                 <div className="flex flex-wrap justify-center gap-6">
-                  <button className="text-site-text font-bold py-4 px-12 bg-site-primary">Start Learning Free</button>
-                  <button className="text-site-accent font-bold py-4 px-12 bg-site-bg/20">Browse Courses</button>
+                  <button 
+                    onClick={() => {
+                      if (currentUser) {
+                        setView('path_selection'); 
+                      } else {
+                        setView('signup');
+                      }
+                    }}
+                    className="text-site-text font-bold py-4 px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95"
+                  >
+                    Start Learning Free
+                  </button>
+
+                  <button 
+                    onClick={() => handleNavClick('courses')}
+                    className="text-site-accent font-bold py-4 px-12 bg-site-bg/20 hover:bg-site-bg/40 border border-site-accent/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95"
+                  >
+                    Browse Courses
+                  </button>
                 </div>
+                {/* REPLACED BUTTONS END HERE */}
+
               </div>
             </section>
 

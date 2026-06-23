@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
 
+// 1. Centralize Themes so you never hardcode a swatch block in JSX again
+const THEME_OPTIONS = [
+  { id: 'timeless', label: 'Timeless Retro', swatch: '#2075A7' },
+  { id: 'coastal', label: 'Coastal Retro', swatch: '#74A8A4' },
+  { id: 'tranquil', label: 'Tranquil Sky', swatch: '#B7C9E6' },
+];
+
 const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard }) => {
-  // 1. Initialize theme state from localStorage, defaulting to 'timeless'
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('site-theme') || 'timeless';
@@ -10,16 +16,15 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
     return 'timeless';
   });
 
-  // Mobile menu open state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // 2. Automatically sync the state change directly to the html tag and localStorage
+  // Sync Theme
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('site-theme', theme);
   }, [theme]);
 
-  // Close mobile menu on resize to desktop
+  // Handle Desktop Resize force-close
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -30,6 +35,24 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // 2. Prevent background page scrolling when Mobile Menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Safe SSR Avatar check
+  const getSavedAvatar = () => {
+    if (typeof window === 'undefined') return null;
+    return localStorage.getItem('hawkman_profile_image');
+  };
+
   const navItems = [
     { id: 'tools', label: 'Tools' },
     { id: 'courses', label: 'Courses' },
@@ -38,8 +61,9 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-site-bg/80 backdrop-blur-md border-b border-site-accent py-4 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-site-bg/80 backdrop-blur-md border-b border-site-accent transition-colors duration-300">
+      {/* MAIN BAR */}
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
         {/* Logo */}
         <a
@@ -60,7 +84,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
           </span>
         </a>
 
-        {/* Center Navigation - Hidden on Mobile */}
+        {/* Center Navigation - Desktop */}
         <div className="hidden md:flex items-center gap-10">
           {navItems.map((item) => (
             <a
@@ -79,61 +103,34 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
           ))}
         </div>
 
-        {/* Theme Picker Dropdown Menu - Hidden on Mobile */}
+        {/* Theme Picker Dropdown - Desktop */}
         <div className="relative group hidden md:block">
           <button className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer">
             🎨 Theme
           </button>
 
-          <div
-            className="
-              absolute left-0 top-full mt-2
-              flex gap-3
-              bg-site-bg border border-site-accent shadow-xl rounded-full
-              px-4 py-2 z-50
-              opacity-0 invisible
-              group-hover:opacity-100
-              group-hover:visible
-              transition-all duration-200
-            "
-          >
-            {/* Button 1: Timeless Retro */}
-            <button 
-              onClick={() => setTheme('timeless')}
-              className={`w-5 h-5 rounded-full bg-[#2075A7] border-2 cursor-pointer transition-transform hover:scale-125 ${
-                theme === 'timeless' ? 'border-slate-900 scale-110' : 'border-transparent'
-              }`}
-              title="Timeless Retro"
-            />
-            {/* Button 2: Coastal Retro */}
-            <button 
-              onClick={() => setTheme('coastal')}
-              className={`w-5 h-5 rounded-full bg-[#74A8A4] border-2 cursor-pointer transition-transform hover:scale-125 ${
-                theme === 'coastal' ? 'border-slate-900 scale-110' : 'border-transparent'
-              }`}
-              title="Coastal Retro"
-            />
-            {/* Button 3: Tranquil Sky */}
-            <button 
-              onClick={() => setTheme('tranquil')}
-              className={`w-5 h-5 rounded-full bg-[#B7C9E6] border-2 cursor-pointer transition-transform hover:scale-125 ${
-                theme === 'tranquil' ? 'border-slate-900 scale-110' : 'border-transparent'
-              }`}
-              title="Tranquil Sky"
-            />
+          <div className="absolute left-0 top-full mt-2 flex gap-3 bg-site-bg border border-site-accent shadow-xl rounded-full px-4 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            {THEME_OPTIONS.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setTheme(t.id)}
+                style={{ backgroundColor: t.swatch }}
+                className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-transform hover:scale-125 ${
+                  theme === t.id ? 'border-site-text scale-110 shadow-sm' : 'border-transparent'
+                }`}
+                title={t.label}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Right Actions - Hidden on Mobile */}
+        {/* Right Actions - Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {currentUser ? (
-            // User IS logged in: Show their name and a Sign Out button
             <div className="flex items-center gap-5">
-              {/* User profile (e.g. A Adam) */}
               <div className="flex items-center gap-2">
-                {/* Avatar: show uploaded photo if saved, else show initial */}
                 {(() => {
-                  const savedImg = localStorage.getItem('hawkman_profile_image');
+                  const savedImg = getSavedAvatar();
                   return savedImg ? (
                     <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-site-accent flex-shrink-0 shadow-sm">
                       <img src={savedImg} alt="avatar" className="w-full h-full object-cover" />
@@ -149,7 +146,6 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                 </span>
               </div>
 
-              {/* Dashboard Button */}
               <button
                 onClick={onDashboard}
                 className="bg-site-bg hover:bg-site-bg border border-site-accent/80 px-4 py-2 rounded-xl text-[13px] font-bold text-site-text hover:text-site-text flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
@@ -158,7 +154,6 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                 <span>Dashboard</span>
               </button>
 
-              {/* Red Sign Out Button */}
               <button
                 onClick={onLogout}
                 className="p-2 text-rose-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all active:scale-95 cursor-pointer"
@@ -168,100 +163,94 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
               </button>
             </div>
           ) : (
-            // User is NOT logged in: Show the original Sign In / Get Started buttons
             <>
-              <button
-                onClick={onLogin}
-                className="text-[13px] font-bold text-site-text/80 hover:text-site-text transition-colors"
-              >
+              <button onClick={onLogin} className="text-[13px] font-bold text-site-text/80 hover:text-site-text transition-colors cursor-pointer">
                 Sign In
               </button>
-              <button
-                onClick={onSignup}
-                className="bg-site-primary text-site-text px-6 py-2.5 rounded-sm text-[13px] font-bold hover:bg-site-primary/80 transition-all uppercase tracking-tight">
+              <button onClick={onSignup} className="bg-site-primary text-site-text px-6 py-2.5 rounded-sm text-[13px] font-bold hover:bg-site-primary/80 transition-all uppercase tracking-tight cursor-pointer">
                 Get Started
               </button>
             </>
           )}
         </div>
 
-        {/* Mobile Hamburger Toggle Button */}
+        {/* Hamburger Toggle - Mobile */}
         <div className="flex items-center md:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-site-text/80 hover:text-site-text transition-colors"
+            className="p-2 text-site-text/80 hover:text-site-text transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-        
       </div>
 
-      {/* Mobile Drawer Overlay */}
+      {/* MOBILE DRAWER BACKDROP (Clicks outside close the menu) */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 bottom-0 top-[73px] z-50 bg-site-bg border-t border-site-accent flex flex-col p-6 animate-fade-in overflow-y-auto">
-          {/* Navigation Links */}
-          <div className="flex flex-col gap-6 mb-8">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => {
-                  setIsMobileMenuOpen(false);
-                  if (onNavClick) {
-                    e.preventDefault();
-                    onNavClick(item.id);
-                  }
-                }}
-                className="text-lg font-bold text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
+        <div 
+          className="md:hidden fixed inset-0 top-full bg-black/40 backdrop-blur-xs z-40"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
-          {/* Mobile Theme Selector */}
-          <div className="mb-8 border-t border-site-accent/50 pt-6">
-            <p className="text-[11px] font-bold text-site-text/50 uppercase tracking-widest mb-4">🎨 Change Theme</p>
-            <div className="flex gap-4">
-              <button 
-                onClick={() => setTheme('timeless')}
-                className={`w-8 h-8 rounded-full bg-[#2075A7] border-2 cursor-pointer transition-transform hover:scale-110 ${
-                  theme === 'timeless' ? 'border-site-text scale-110' : 'border-transparent'
-                }`}
-                title="Timeless Retro"
-              />
-              <button 
-                onClick={() => setTheme('coastal')}
-                className={`w-8 h-8 rounded-full bg-[#74A8A4] border-2 cursor-pointer transition-transform hover:scale-110 ${
-                  theme === 'coastal' ? 'border-site-text scale-110' : 'border-transparent'
-                }`}
-                title="Coastal Retro"
-              />
-              <button 
-                onClick={() => setTheme('tranquil')}
-                className={`w-8 h-8 rounded-full bg-[#B7C9E6] border-2 cursor-pointer transition-transform hover:scale-110 ${
-                  theme === 'tranquil' ? 'border-site-text scale-110' : 'border-transparent'
-                }`}
-                title="Tranquil Sky"
-              />
+      {/* MOBILE DRAWER PANEL */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 w-full bg-site-bg border-b border-site-accent p-6 z-50 shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto flex flex-col justify-between">
+          
+          <div>
+            {/* Links */}
+            <div className="flex flex-col gap-5 mb-6">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    if (onNavClick) {
+                      e.preventDefault();
+                      onNavClick(item.id);
+                    }
+                  }}
+                  className="text-lg font-bold text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider block py-1"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Theme Picker */}
+            <div className="py-4 border-t border-site-accent/60">
+              <p className="text-[11px] font-bold text-site-text/50 uppercase tracking-widest mb-3">🎨 Change Theme</p>
+              <div className="flex gap-4">
+                {THEME_OPTIONS.map((t) => (
+                  <button
+                    key={t.id}
+                    onClick={() => setTheme(t.id)}
+                    style={{ backgroundColor: t.swatch }}
+                    className={`w-8 h-8 rounded-full border-2 cursor-pointer transition-transform hover:scale-110 ${
+                      theme === t.id ? 'border-site-text scale-110 shadow-md' : 'border-transparent'
+                    }`}
+                    title={t.label}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Mobile Actions */}
-          <div className="border-t border-site-accent/50 pt-6 flex flex-col gap-4 mt-auto">
+          {/* Mobile Footer Actions */}
+          <div className="border-t border-site-accent/60 pt-6 flex flex-col gap-3 mt-4">
             {currentUser ? (
               <>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-3 mb-1">
                   {(() => {
-                    const savedImg = localStorage.getItem('hawkman_profile_image');
+                    const savedImg = getSavedAvatar();
                     return savedImg ? (
-                      <div className="w-10 h-10 rounded-full overflow-hidden border border-site-accent flex-shrink-0">
+                      <div className="w-9 h-9 rounded-full overflow-hidden border border-site-accent flex-shrink-0">
                         <img src={savedImg} alt="avatar" className="w-full h-full object-cover" />
                       </div>
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-site-primary flex items-center justify-center text-site-text font-bold">
+                      <div className="w-9 h-9 rounded-full bg-site-primary flex items-center justify-center text-site-text font-bold">
                         {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
                       </div>
                     );
@@ -269,36 +258,38 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                   <span className="text-base font-bold text-site-text">{currentUser.username}</span>
                 </div>
 
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    onDashboard();
-                  }}
-                  className="w-full bg-site-bg border border-site-accent py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-accent/20 transition-all flex items-center justify-center gap-2"
-                >
-                  <LayoutDashboard className="w-4 h-4" />
-                  Dashboard
-                </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      onDashboard();
+                    }}
+                    className="bg-site-bg border border-site-accent py-3 rounded-xl text-xs font-bold text-site-text hover:bg-site-accent/20 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </button>
 
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    onLogout();
-                  }}
-                  className="w-full bg-rose-500 hover:bg-rose-655 py-3.5 rounded-xl text-sm font-bold text-white transition-all flex items-center justify-center gap-2"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Sign Out
-                </button>
+                  <button
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      onLogout();
+                    }}
+                    className="bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 py-3 rounded-xl text-xs font-bold text-rose-500 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                </div>
               </>
             ) : (
-              <>
+              <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     onLogin();
                   }}
-                  className="w-full border border-site-accent py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-accent/20 transition-colors"
+                  className="border border-site-accent py-3 rounded-xl text-xs font-bold text-site-text hover:bg-site-accent/20 transition-colors cursor-pointer"
                 >
                   Sign In
                 </button>
@@ -307,13 +298,14 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                     setIsMobileMenuOpen(false);
                     onSignup();
                   }}
-                  className="w-full bg-site-primary py-3.5 rounded-xl text-sm font-bold text-site-text hover:bg-site-primary/80 transition-all text-center"
+                  className="bg-site-primary py-3 rounded-xl text-xs font-bold text-site-text hover:bg-site-primary/80 transition-all text-center cursor-pointer shadow-sm"
                 >
                   Get Started
                 </button>
-              </>
+              </div>
             )}
           </div>
+
         </div>
       )}
     </nav>
