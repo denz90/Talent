@@ -148,7 +148,12 @@ const App = () => {
     return (
       <DashboardPage
         currentUser={currentUser}
-        onLogout={() => setView('home')}
+        onLogout={() => {
+          localStorage.removeItem('hawkman_token');
+          setCurrentUser(null);
+          setView('home');
+        }}
+        onBack={() => setView('home')}
         onProfileSettings={() => setView('profile_settings')}
       />
     );

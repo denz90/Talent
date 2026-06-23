@@ -200,7 +200,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
 
       {/* Mobile Drawer Overlay */}
       {isMobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 bottom-0 top-[73px] z-40 bg-site-bg border-t border-site-accent flex flex-col p-6 animate-fade-in overflow-y-auto">
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-[73px] z-50 bg-site-bg border-t border-site-accent flex flex-col p-6 animate-fade-in overflow-y-auto">
           {/* Navigation Links */}
           <div className="flex flex-col gap-6 mb-8">
             {navItems.map((item) => (

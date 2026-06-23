@@ -329,7 +329,7 @@ const StreakDots = ({ streak }) => (
 /* ═══════════════════════════════════════════════
    MAIN DASHBOARD
 ═══════════════════════════════════════════════ */
-const DashboardPage = ({ currentUser, onLogout, onProfileSettings }) => {
+const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => {
   const displayName = currentUser?.username || currentUser?.name || currentUser?.email?.split('@')[0] || 'Learner';
   const avatarSeed  = currentUser?.username || 'default';
 
@@ -412,6 +412,19 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings }) => {
         />
 
         <main className="flex-1 overflow-y-auto p-6 space-y-6">
+
+          {/* Back to Academy Home Button */}
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-site-text/80 hover:text-site-primary transition-colors font-semibold text-sm w-fit group"
+            >
+              <div className="p-1.5 rounded-full hover:bg-site-accent transition-colors flex items-center justify-center">
+                <ChevronLeft className="w-4 h-4" />
+              </div>
+              Back to Academy Home
+            </button>
+          )}
 
           {/* ── ERROR BANNER ── */}
           {statsError && (

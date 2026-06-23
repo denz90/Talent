@@ -124,20 +124,32 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
   return (
     <div className="min-h-screen bg-site-bg">
 
-      {/* Mobile Sidebar Toggle */}
-      <div className="lg:hidden fixed bottom-6 right-6 z-50">
+      {/* Mobile sticky back bar – always visible on small screens */}
+      <div className="lg:hidden sticky top-[57px] z-40 bg-site-bg/95 backdrop-blur-md border-b border-site-accent px-4 py-3 flex items-center justify-between shadow-sm">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-site-text/80 hover:text-site-primary transition-colors font-semibold text-sm"
+        >
+          <div className="p-1.5 rounded-full hover:bg-site-accent transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+          </div>
+          Back
+        </button>
+        <span className="text-xs font-bold text-site-text/60 uppercase tracking-widest">Beginner Course</span>
+        {/* Mobile sidebar toggle (hamburger) */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="w-14 h-14 bg-site-accent text-site-text rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform"
+          className="p-2 rounded-xl bg-site-accent text-site-text hover:opacity-80 active:scale-95 transition-all"
+          aria-label="Toggle course navigation"
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
         </button>
       </div>
 
       {/* Mobile Sidebar Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div key="mobile-menu-container" className="fixed inset-0 z-50 lg:hidden">
+          <motion.div key="mobile-menu-container" className="fixed inset-0 z-40 lg:hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -150,45 +162,47 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute inset-y-0 left-0 w-80 bg-site-bg p-8 shadow-2xl flex flex-col"
+              className="absolute inset-y-0 left-0 w-72 bg-site-bg p-6 shadow-2xl flex flex-col"
             >
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-6">
                 <span className="font-bold text-site-text">Course Navigation</span>
                 <button onClick={() => setIsMobileMenuOpen(false)}><X className="w-5 h-5 text-slate-400" /></button>
               </div>
               <div className="overflow-y-auto flex-1">
-                <BeginnerSidebar activeSection={activeSection} />
+                <BeginnerSidebar activeSection={activeSection} className="flex flex-col gap-6 w-full" />
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto px-6 pt-32 pb-20">
-        <div className="flex gap-12 relative items-start">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-32 pb-20">
+        <div className="flex flex-col lg:flex-row gap-12 relative items-start">
 
-          {/* Desktop Sidebar */}
-          <BeginnerSidebar activeSection={activeSection} />
+          {/* Desktop Left Column (Sidebar + Back Button) */}
+          <div className=" lg:flex flex-col gap-6 sticky top-28 pr-4 flex-shrink-0">
+            <button
+              onClick={onBack}
+              className="flex items-center gap-2 text-site-text/80 hover:text-brand-primary transition-colors font-semibold text-sm w-fit group mb-2"
+            >
+              <div className="p-2 rounded-full group-hover:bg-site-accent transition-colors flex items-center justify-center">
+                <ArrowLeft className="w-4 h-4" />
+              </div>
+              Back to Learning Paths
+            </button>
+            <BeginnerSidebar activeSection={activeSection} className="w-72 flex flex-col gap-6" />
+          </div>
 
           {/* Main Content Area */}
-          <main className="flex-1 space-y-16">
+          <main className="flex-1 space-y-16 min-w-0">
 
-            {/* Hero / Back Button */}
-            <div className="flex flex-col gap-6">
-              <button
-                onClick={onBack}
-                className="group flex items-center gap-2 text-site-text/80 hover:text-brand-primary transition-colors font-medium w-fit"
-              >
-                <div className="p-2 rounded-full group-hover:bg-site-accent transition-colors">
-                  <ArrowLeft className="w-4 h-4" />
-                </div>
-                Back to Learning Paths
-              </button>
+            {/* Hero – shows title and description */}
+            <div className="flex flex-col gap-4 lg:gap-6">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-site-text mb-4 tracking-tight">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-site-text mb-3 md:mb-4 tracking-tight">
                   Prompt Engineering for Beginners
                 </h1>
-                <p className="text-lg text-site-text/80 max-w-2xl leading-relaxed">
+                <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed">
                   The ultimate guide to communicating with AI. Learn how to transform your ideas into perfect results.
                 </p>
               </div>
@@ -196,7 +210,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
             {/* Sections */}
             {COURSE_SECTIONS.map((section) => (
-              <section key={section.id} id={section.id} className="scroll-mt-32">
+              <section key={section.id} id={section.id} className="scroll-mt-28 lg:scroll-mt-32">
                 <SectionHeader title={section.title} subtitle={section.subtitle} />
 
                 {section.type === 'intro' && (

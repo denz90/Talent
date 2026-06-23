@@ -29,7 +29,7 @@ const SidebarItem = ({ icon: Icon, label, href, active = false }) => (
   </a>
 );
 
-const BeginnerSidebar = ({ activeSection }) => {
+const BeginnerSidebar = ({ activeSection, className = "w-72 hidden lg:flex flex-col gap-6 sticky top-28 pr-4 custom-scrollbar" }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const topics = [
@@ -44,7 +44,7 @@ const BeginnerSidebar = ({ activeSection }) => {
   ];
 
   return (
-    <aside className="w-72 hidden lg:flex flex-col gap-6 sticky top-28 pr-4 custom-scrollbar">
+    <aside className={className}>
       <div className="bg-site-bg rounded-[24px] border border-site-accent overflow-hidden shadow-sm hover:shadow-md transition-shadow">
         <button
           onClick={() => setIsOpen(!isOpen)}
