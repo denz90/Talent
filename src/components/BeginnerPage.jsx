@@ -214,7 +214,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                 <h1 className="text-3xl md:text-5xl font-bold text-site-text mb-3 md:mb-4 tracking-tight">
                   Prompt Engineering <br className="md:hidden" /> for Beginners
                 </h1>
-                <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed">
+                <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed"> </p> 
                 <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed">
                   The ultimate guide to communicating with AI. Learn how to transform your ideas into perfect results.
                 </p>

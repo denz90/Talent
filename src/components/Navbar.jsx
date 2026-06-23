@@ -74,7 +74,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
               onLogoClick();
             }
           }}
-          className="flex items-center gap-2 group"
+          className="flex items-center gap-2 group cursor-pointer"
         >
           <div className="w-8 h-8 bg-site-primary rounded flex items-center justify-center">
             <Sparkles className="text-site-text w-5 h-5" />
@@ -96,7 +96,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                   onNavClick(item.id);
                 }
               }}
-              className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider"
+              className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider cursor-pointer"
             >
               {item.label}
             </a>
