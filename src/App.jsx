@@ -157,6 +157,18 @@ const App = () => {
         }}
         onBack={() => setView('home')}
         onProfileSettings={() => setView('profile_settings')}
+        onNavigate={({ view: targetView, course, tool }) => {
+          if (tool) {
+            // Open tool detail page inside the main home layout
+            setCurrentTool(tool);
+            setView('home');
+          } else if (course) {
+            setActiveCourse(course);
+            setView(targetView);
+          } else {
+            setView(targetView);
+          }
+        }}
       />
     );
   }

@@ -211,7 +211,7 @@ const Sidebar = ({ active, setActive, collapsed, setCollapsed, onLogout, onProfi
 );
 
 /* ─── Course card ─── */
-const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId }) => {
+const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId, onNavigate }) => {
   const Icon = course.icon;
   const pct = progress?.progress_percent ?? 0;
   const [saving, setSaving] = useState(false);
@@ -232,7 +232,11 @@ const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId }) 
       console.error(e);
     }
     setSaving(false);
-    if (onContinue) onContinue(course);
+    if (onNavigate) {
+      onNavigate({ view: 'learning_page', course: { ...course, level: 'Intermediate' } });
+    } else if (onContinue) {
+      onContinue(course);
+    }
   };
 
   const statusLabel = pct === 0 ? 'Not Started' : pct >= 100 ? 'Completed' : 'In Progress';
@@ -275,10 +279,18 @@ const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId }) 
   );
 };
 
+/* ─── Greeting helper ─── */
+const getGreeting = () => {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 18) return 'Good afternoon';
+  return 'Good evening';
+};
+
 /* ─── Weekly chart ─── */
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const WeeklyChart = ({ data }) => {
-  const vals = data || [45, 90, 30, 120, 75, 0, 60];
+  const vals = data || Array(7).fill(0);
   const max = Math.max(...vals, 1);
   const todayIdx = new Date().getDay() === 0 ? 6 : new Date().getDay() - 1;
   return (
@@ -329,7 +341,7 @@ const StreakDots = ({ streak }) => (
 /* ═══════════════════════════════════════════════
    MAIN DASHBOARD
 ═══════════════════════════════════════════════ */
-const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => {
+const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack, onNavigate }) => {
   const displayName = currentUser?.username || currentUser?.name || currentUser?.email?.split('@')[0] || 'Learner';
   const avatarSeed  = currentUser?.username || 'default';
 
@@ -442,7 +454,7 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => 
           >
             <div>
               <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-light)', opacity: 0.7 }}>
-                Good morning 👋
+                {getGreeting()} 👋
               </p>
               <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: 'var(--color-light)' }}>
                 Welcome back, {displayName}!
@@ -454,6 +466,14 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => 
               </p>
               <div className="flex gap-3 mt-5">
                 <button
+                  onClick={() => {
+                    const inProgress = COURSES.find(c => {
+                      const pct = progressMap[c.id]?.progress_percent ?? 0;
+                      return pct > 0 && pct < 100;
+                    });
+                    const target = inProgress || COURSES[0];
+                    if (onNavigate) onNavigate({ view: 'learning_page', course: { ...target, level: 'Intermediate' } });
+                  }}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-105"
                   style={{ background: 'var(--color-light)', color: 'var(--color-primary)' }}
                 >
@@ -497,7 +517,11 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => 
             <div className="lg:col-span-2 rounded-3xl border p-6 flex flex-col gap-4" style={{ background: 'var(--color-bg)', borderColor: 'var(--color-accent)' }}>
               <div className="flex items-center justify-between">
                 <h2 className="font-extrabold text-base" style={{ color: 'var(--color-text)' }}>My Courses</h2>
-                <button className="flex items-center gap-1 text-xs font-bold" style={{ color: 'var(--color-primary)' }}>
+                <button
+                  onClick={() => onNavigate && onNavigate({ view: 'path_selection' })}
+                  className="flex items-center gap-1 text-xs font-bold"
+                  style={{ color: 'var(--color-primary)' }}
+                >
                   View All <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
@@ -509,6 +533,7 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => 
                     progress={progressMap[course.id]}
                     userId={currentUser?.id}
                     onUpdateProgress={handleProgressUpdate}
+                    onNavigate={onNavigate}
                   />
                 ))}
               </div>
@@ -690,17 +715,18 @@ const DashboardPage = ({ currentUser, onLogout, onProfileSettings, onBack }) => 
           {/* ── AI TOOLS ── */}
           <div className="rounded-3xl border p-6" style={{ background: 'var(--color-bg)', borderColor: 'var(--color-accent)' }}>
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-extrabold text-base" style={{ color: 'var(--color-text)' }}>AI Tools Used in Your Courses</h2>
+              <h2 className="font-extrabold text-base" style={{ color: 'var(--color-text)' }}>Popular AI Tools You’ll Master</h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { name: 'ChatGPT',    desc: 'Conversational AI',        icon: MessageSquare, color: '#10B981' },
-                { name: 'Gamma AI',   desc: 'Slides & Presentations',   icon: Lightbulb,     color: '#F59E0B' },
-                { name: 'Claude',     desc: 'Research & Analysis',      icon: Brain,         color: '#9810FA' },
-                { name: 'Perplexity', desc: 'Fact-Checking & Research', icon: Search,        color: '#155DFC' },
-              ].map(({ name, desc, icon: Icon, color }) => (
+                { name: 'ChatGPT',    desc: 'Conversational AI',        icon: MessageSquare, color: '#10B981', toolKey: 'chatgpt'    },
+                { name: 'Gamma AI',   desc: 'Slides & Presentations',   icon: Lightbulb,     color: '#F59E0B', toolKey: 'gamma_ai'   },
+                { name: 'Claude',     desc: 'Research & Analysis',      icon: Brain,         color: '#9810FA', toolKey: 'claude_ai'  },
+                { name: 'Perplexity', desc: 'Fact-Checking & Research', icon: Search,        color: '#155DFC', toolKey: 'perplexity' },
+              ].map(({ name, desc, icon: Icon, color, toolKey }) => (
                 <div
                   key={name}
+                  onClick={() => onNavigate && onNavigate({ view: 'home', tool: toolKey })}
                   className="group flex flex-col items-start gap-3 p-4 rounded-2xl border cursor-pointer transition-all hover:shadow-md hover:-translate-y-0.5"
                   style={{ borderColor: 'var(--color-accent)', background: 'var(--color-accent)' }}
                 >
