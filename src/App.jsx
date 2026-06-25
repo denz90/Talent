@@ -111,6 +111,11 @@ const App = () => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
 
+  // Scroll to top on every page/view change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [view, currentTool]);
+
   // Persist state to localStorage
   useEffect(() => {
     localStorage.setItem('talent_oasis_view', view);
