@@ -98,7 +98,7 @@ const BeginnerSidebar = ({ activeSection, className = "w-72 hidden lg:flex flex-
           Stuck on a module? Ask our AI Tutor for instant clarification.
         </p>
         <button className="w-full py-2 bg-site-bg text-site-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
-          Open AI Tutor
+          Practice your Prompting skills with ChatGPT
         </button>
       </div>
     </aside>

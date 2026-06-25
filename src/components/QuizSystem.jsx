@@ -69,6 +69,11 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
     );
   }
 
+  const score = shuffledQuestions.filter(q => answers[q.id] === q.correctAnswer).length;
+  const wrongNumbers = shuffledQuestions
+    .map((q, i) => (isSubmitted && answers[q.id] !== q.correctAnswer ? i + 1 : null))
+    .filter(Boolean);
+
   return (
     <div className={`w-full h-full overflow-y-auto transition-colors duration-500 ${isDarkMode ? 'bg-gradient-to-br from-[#0F172B] via-[#2e0052] to-[#0F172B]' : 'bg-site-bg'}`}>
       <div className="max-w-3xl mx-auto px-6 py-12 pb-32">
@@ -93,60 +98,103 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
             </div>
             <h1 className={`text-3xl font-bold mb-2 tracking-tight ${isDarkMode ? 'text-white' : 'text-site-text'}`}>Knowledge Check</h1>
             <p className={isDarkMode ? 'text-purple-200/60 font-medium' : 'text-site-text/80 font-medium'}>{dayTitle} Assessment</p>
+            
+            {/* Live score bar while submitted */}
+            {isSubmitted && (
+              <div className="mt-6 flex items-center justify-center gap-3">
+                <span className={`text-2xl font-black ${score === shuffledQuestions.length ? 'text-emerald-500' : 'text-red-500'}`}>
+                  {score} / {shuffledQuestions.length}
+                </span>
+                <span className={`text-sm font-bold px-3 py-1 rounded-full ${
+                  score === shuffledQuestions.length
+                    ? 'bg-emerald-500/15 text-emerald-600'
+                    : 'bg-red-500/15 text-red-600'
+                }`}>
+                  {score === shuffledQuestions.length ? '🎉 Perfect score!' : `${Math.round((score / shuffledQuestions.length) * 100)}%`}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Questions */}
         <div className="space-y-8 mb-12">
-          {shuffledQuestions.map((q, index) => (
-            <div key={q.id} className={`${isDarkMode ? 'bg-site-bg/5 border-purple-500/20 shadow-xl hover:border-pink-500/30' : 'bg-site-bg border-site-accent shadow-sm hover:border-blue-200'} rounded-3xl p-8 border transition-all`}>
-              <div className="flex items-start gap-4 mb-6">
-                <span className={`w-8 h-8 rounded-lg ${isDarkMode ? 'bg-site-bg/10 text-purple-300' : 'bg-slate-100 text-site-text/80'} flex items-center justify-center font-bold text-sm flex-shrink-0`}>
-                  {index + 1}
-                </span>
-                <h3 className={`text-lg font-bold pt-1 leading-tight ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
-                  {q.question}
-                </h3>
-              </div>
+          {shuffledQuestions.map((q, index) => {
+            const selectedIdx = answers[q.id];
+            const isQuestionCorrect = selectedIdx === q.correctAnswer;
 
-              <div className="space-y-3">
-                {q.options.map((opt, optIdx) => {
-                  const isSelected = answers[q.id] === optIdx;
-                  
-                  let buttonClass = "w-full text-left p-5 rounded-2xl border transition-all duration-200 flex items-center justify-between ";
-                  
-                  if (!isSubmitted) {
-                    buttonClass += isSelected 
-                      ? (isDarkMode ? "bg-pink-500/20 border-pink-500 text-white font-bold shadow-lg shadow-pink-500/10" : "bg-blue-50 border-blue-500 text-blue-700 font-bold shadow-md shadow-blue-100")
-                      : (isDarkMode ? "bg-site-bg/5 border-white/10 hover:border-purple-400 hover:bg-site-bg/10 text-purple-200" : "bg-site-bg border-site-accent hover:border-blue-300 hover:bg-site-bg text-site-text/80");
-                  } else {
-                    if (isSelected) {
-                      if (hasPassed) {
-                        buttonClass += "bg-emerald-500/10 border-emerald-500 text-emerald-400 font-bold";
-                      } else {
-                        buttonClass += isDarkMode ? "bg-purple-500/20 border-purple-500 text-purple-200 font-bold opacity-80" : "bg-blue-50 border-blue-400 text-blue-700 font-bold opacity-80";
-                      }
+            return (
+              <div key={q.id} className={`rounded-3xl p-8 border transition-all ${
+                  isSubmitted
+                    ? isQuestionCorrect
+                      ? 'border-emerald-400/50 shadow-md shadow-emerald-500/5'
+                      : 'border-red-400/50 shadow-md shadow-red-500/5'
+                    : isDarkMode
+                      ? 'bg-site-bg/5 border-purple-500/20 shadow-xl hover:border-pink-500/30'
+                      : 'bg-site-bg border-site-accent shadow-sm hover:border-blue-200'
+                } ${isDarkMode ? 'bg-site-bg/5' : 'bg-site-bg'}`}>
+                <div className="flex items-start gap-4 mb-6">
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm flex-shrink-0 transition-all ${
+                    isSubmitted
+                      ? isQuestionCorrect
+                        ? 'bg-emerald-500/20 text-emerald-600'
+                        : 'bg-red-500/20 text-red-600'
+                      : isDarkMode
+                        ? 'bg-site-bg/10 text-purple-300'
+                        : 'bg-slate-100 text-site-text/80'
+                  }`}>
+                    {isSubmitted ? (isQuestionCorrect ? '✓' : '✗') : index + 1}
+                  </span>
+                  <h3 className={`text-lg font-bold pt-1 leading-tight ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
+                    {q.question}
+                  </h3>
+                </div>
+
+                <div className="space-y-3">
+                  {q.options.map((opt, optIdx) => {
+                    const isSelected = selectedIdx === optIdx;
+                    const isCorrectOption = optIdx === q.correctAnswer;
+                    
+                    let cls = "w-full text-left p-5 rounded-2xl border transition-all duration-200 flex items-center justify-between gap-3 ";
+                    
+                    if (!isSubmitted) {
+                      cls += isSelected 
+                        ? (isDarkMode ? "bg-pink-500/20 border-pink-500 text-white font-bold shadow-lg shadow-pink-500/10" : "bg-blue-50 border-blue-500 text-blue-700 font-bold shadow-md shadow-blue-100")
+                        : (isDarkMode ? "bg-site-bg/5 border-white/10 hover:border-purple-400 hover:bg-site-bg/10 text-purple-200" : "bg-site-bg border-site-accent hover:border-blue-300 hover:bg-site-bg text-site-text/80");
+                    } else if (isCorrectOption) {
+                      cls += "bg-emerald-500/10 border-emerald-500 text-emerald-700 font-bold";
+                    } else if (isSelected) {
+                      cls += isDarkMode ? "bg-red-500/15 border-red-500 text-red-300 font-bold" : "bg-red-50 border-red-400 text-red-700 font-bold";
                     } else {
-                      buttonClass += isDarkMode ? "bg-site-bg/5 border-white/5 text-purple-200/20 opacity-30" : "bg-site-bg border-site-accent text-slate-300 opacity-40";
+                      cls += isDarkMode ? "bg-site-bg/5 border-white/5 text-purple-200/25 opacity-30" : "bg-site-bg border-site-accent text-slate-300 opacity-40";
                     }
-                  }
 
-                  return (
-                    <button
-                      key={optIdx}
-                      disabled={isSubmitted}
-                      onClick={() => handleSelectAnswer(q.id, optIdx)}
-                      className={buttonClass}
-                    >
-                      <span className="flex-1">{opt}</span>
-                      {isSubmitted && hasPassed && isSelected && <CheckCircle2 size={20} className="text-emerald-500 flex-shrink-0" />}
-                      {isSubmitted && !hasPassed && isSelected && <Brain size={20} className={`${isDarkMode ? 'text-purple-400' : 'text-blue-400'} flex-shrink-0 animate-pulse`} />}
-                    </button>
-                  );
-                })}
+                    return (
+                      <button
+                        key={optIdx}
+                        disabled={isSubmitted}
+                        onClick={() => handleSelectAnswer(q.id, optIdx)}
+                        className={cls}
+                      >
+                        <span className="flex-1 text-left">{opt}</span>
+                        {isSubmitted && isCorrectOption && <CheckCircle2 size={20} className="text-emerald-500 flex-shrink-0" />}
+                        {isSubmitted && isSelected && !isCorrectOption && <XCircle size={20} className="text-red-500 flex-shrink-0" />}
+                      </button>
+                    );
+                  })}
+                </div>
+                
+                {isSubmitted && (
+                  <p className={`mt-4 text-xs font-bold flex items-center gap-1.5 ${isQuestionCorrect ? 'text-emerald-600' : 'text-red-600'}`}>
+                    {isQuestionCorrect
+                      ? <><CheckCircle2 size={13} /> Correct!</>
+                      : <><XCircle size={13} /> Incorrect — the green answer above is correct</>
+                    }
+                  </p>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Footer Actions */}
@@ -180,9 +228,18 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
                 <div className="w-12 h-12 bg-red-100/10 rounded-xl flex items-center justify-center text-red-500 mx-auto mb-4">
                   <XCircle size={24} />
                 </div>
-                <h3 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-red-900'}`}>Not Quite Right</h3>
-                <p className={`${isDarkMode ? 'text-purple-200/60' : 'text-red-700/80'} mb-8 leading-relaxed`}>
-                  Review the lesson material once more and try again. You'll get it next time!
+                <h3 className={`text-xl font-bold mb-1 ${isDarkMode ? 'text-white' : 'text-red-900'}`}>Not Quite Right</h3>
+                <p className={`text-sm font-black mb-3 ${isDarkMode ? 'text-red-300' : 'text-red-600'}`}>
+                  {score} / {shuffledQuestions.length} correct
+                </p>
+                {wrongNumbers.length > 0 && (
+                  <p className={`text-sm mb-2 font-medium ${isDarkMode ? 'text-purple-200/70' : 'text-red-700/80'}`}>
+                    Question{wrongNumbers.length > 1 ? 's' : ''} <strong>{wrongNumbers.join(', ')}</strong>{' '}
+                    {wrongNumbers.length > 1 ? 'need' : 'needs'} another look.
+                  </p>
+                )}
+                <p className={`text-xs mb-8 ${isDarkMode ? 'text-purple-200/40' : 'text-red-500/60'}`}>
+                  The correct answers are highlighted in green above. Review them, then retry.
                 </p>
                 <button
                   onClick={handleRetry}
