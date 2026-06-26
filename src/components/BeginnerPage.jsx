@@ -192,18 +192,28 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
         <div className="flex gap-12 relative items-start">
 
           {/* Desktop Sidebar (Hidden securely on mobile) */}
-          <div className="hidden lg:block w-64 shrink-0 sticky top-32">
+          <div className="hidden lg:flex lg:flex-col w-64 shrink-0 sticky top-32 gap-3">
+            {/* Back button sits on top of the sidebar */}
+            <button
+              onClick={onBack}
+              className="group flex items-center gap-2 text-site-text/80 hover:text-site-primary transition-colors font-semibold text-sm w-fit"
+            >
+              <div className="p-1.5 rounded-full group-hover:bg-site-accent transition-colors">
+                <ArrowLeft className="w-4 h-4" />
+              </div>
+              Back to Learning Paths
+            </button>
             <BeginnerSidebar activeSection={activeSection} />
           </div>
 
           {/* Main Content Area - Added min-w-0 to prevent flex blowout */}
           <main className="flex-1 min-w-0 space-y-12 md:space-y-16">
 
-            {/* Hero / Back Button */}
+            {/* Hero / Back Button – back button hidden on desktop (lives in sidebar column) */}
             <div className="flex flex-col gap-4 md:gap-6">
               <button
                 onClick={onBack}
-                className="group flex items-center gap-2 text-site-text/80 hover:text-site-text transition-colors font-medium w-fit text-sm md:text-base"
+                className="lg:hidden group flex items-center gap-2 text-site-text/80 hover:text-site-text transition-colors font-medium w-fit text-sm md:text-base"
               >
                 <div className="p-2 rounded-full group-hover:bg-site-accent transition-colors">
                   <ArrowLeft className="w-4 h-4" />
@@ -294,7 +304,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-4 md:space-y-6">
                         <h4 className="flex items-center gap-2 text-site-text font-bold text-base md:text-lg">
-                          <XCircle className="w-5 h-5 text-rose-500" /> Bad prompts are usually:
+                          <XCircle className="w-5 h-5 text-rose-500" /> weak prompts are usually:
                         </h4>
                         <ul className="space-y-2 md:space-y-3 pl-7 list-disc text-site-text font-medium text-sm md:text-base">
                           <li>Too vague</li>
@@ -319,7 +329,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       <ContentCard className="border-rose-500/20 bg-rose-500/5">
                         <div className="flex items-center gap-3 text-rose-500 font-bold mb-4 md:mb-6">
                           <XCircle className="w-5 h-5 md:w-6 md:h-6" />
-                          <span>Bad Prompt:</span>
+                          <span>Weak Prompt:</span>
                         </div>
                         <div className="bg-site-bg border border-rose-500/20 p-5 md:p-8 rounded-2xl italic font-serif text-site-text/60 mb-4 text-base md:text-lg">
                           "Write about marketing"
@@ -505,16 +515,6 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                         </div>
                       </ContentCard>
                     ))}
-
-                    <div className="bg-site-bg border border-site-accent p-6 md:p-10 rounded-2xl md:rounded-3xl mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
-                      <div className="space-y-1 text-center sm:text-left">
-                        <span className="text-site-text font-bold text-base md:text-lg block">Practice a tool.</span>
-                        <p className="text-site-text/80 text-xs md:text-sm font-medium">Test these prompt types in our playground.</p>
-                      </div>
-                      <button className="w-full sm:w-auto bg-gradient-to-r from-site-primary to-site-accent text-site-text px-8 md:px-10 py-3 md:py-4 rounded-xl font-bold shadow-lg shadow-site-primary/20 hover:scale-105 transition-all active:scale-95 border-none">
-                        Open Tool
-                      </button>
-                    </div>
                   </div>
                 )}
 

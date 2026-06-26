@@ -41,7 +41,7 @@ const Footer = ({ onNavigate }) => {
 
           {/* Column 2: Platform */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[11px]">Platform</h4>
+            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Platform</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text">
               <li><a href="#" className="hover:text-site-text transition-colors">Features</a></li>
               <li><a href="#" className="hover:text-site-text transition-colors">Pricing</a></li>
@@ -52,7 +52,7 @@ const Footer = ({ onNavigate }) => {
 
           {/* Column 3: Learning */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[11px]">Learning</h4>
+            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Learning</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text">
               <li><a href="#" className="hover:text-site-text transition-colors">Course Catalog</a></li>
               <li><a href="#" className="hover:text-site-text transition-colors">Certifications</a></li>
@@ -63,7 +63,7 @@ const Footer = ({ onNavigate }) => {
 
           {/* Column 4: Resources */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[11px]">Resources</h4>
+            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Resources</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text">
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('help_center'); }} className="hover:text-white transition-colors">Help Center</button></li>
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('api_docs'); }} className="hover:text-white transition-colors">API Documentation</button></li>
@@ -74,7 +74,7 @@ const Footer = ({ onNavigate }) => {
 
           {/* Column 5: Company */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[11px]">Company</h4>
+            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Company</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text">
               <li><a href="#" className="hover:text-site-text transition-colors">About Us</a></li>
               <li><a href="#" className="hover:text-site-text transition-colors">Careers</a></li>
