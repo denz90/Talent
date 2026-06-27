@@ -146,28 +146,18 @@ const App = () => {
     }
   };
 
-  if (view === 'dashboard') {
+if (view === 'dashboard') {
     return (
       <DashboardPage
         currentUser={currentUser}
-        onLogout={() => {
-          localStorage.removeItem('hawkman_token');
-          setCurrentUser(null);
-          setView('home');
-        }}
+        onLogout={() => { /* existing logout logic */ }}
         onBack={() => setView('home')}
         onProfileSettings={() => setView('profile_settings')}
-        onNavigate={({ view: targetView, course, tool }) => {
-          if (tool) {
-            // Open tool detail page inside the main home layout
-            setCurrentTool(tool);
-            setView('home');
-          } else if (course) {
-            setActiveCourse(course);
-            setView(targetView);
-          } else {
-            setView(targetView);
-          }
+        onNavigateTool={(toolId) => setCurrentTool(toolId)}
+        onNavigateCourse={(course) => { setActiveCourse(course); setView('learning_page'); }}
+        onNavigatePath={(level) => { 
+          if (level === 'beginner') { setView('beginner'); } 
+          else { setSelectedLevel(level); setView('path_selection'); }
         }}
       />
     );
