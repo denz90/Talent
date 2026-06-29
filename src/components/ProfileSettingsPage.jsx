@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   ArrowLeft, Camera, Shield, User, Mail, Lock,
   CheckCircle2, X, Sun, Moon, Bell, Palette,
@@ -65,7 +65,6 @@ const Card = ({ title, icon: Icon, iconColor = 'var(--color-primary)', children 
 
 /* ─── Theme option ─── */
 const THEMES = [
-  { id: 'default',  label: 'Dark',     preview: ['#171717', '#350557', '#121722'] },
   { id: 'timeless', label: 'Timeless', preview: ['#E8F1F7', '#2075A7', '#E8DFC4'] },
   { id: 'coastal',  label: 'Coastal',  preview: ['#ccdde1', '#74A8A4', '#B6D9E0'] },
   { id: 'tranquil', label: 'Tranquil', preview: ['#F5F7FF', '#A6B1D8', '#E2E4F8'] },
@@ -145,7 +144,15 @@ const ProfileSettingsPage = ({ currentUser, onBack, theme, onThemeChange }) => {
   const [imgSaved,    setImgSaved]    = useState(false);
   const [pwSaved,     setPwSaved]     = useState(false);
   const [pwError,     setPwError]     = useState('');
-  const [activeTheme, setActiveTheme] = useState(theme || 'default');
+  const [activeTheme, setActiveTheme] = useState(() => {
+    const currentTheme = theme || localStorage.getItem('site-theme') || 'timeless';
+    return currentTheme === 'default' ? 'timeless' : currentTheme;
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', activeTheme);
+    localStorage.setItem('site-theme', activeTheme);
+  }, [activeTheme]);
 
   /* notification prefs */
   const [notifs, setNotifs] = useState({
@@ -202,7 +209,6 @@ const ProfileSettingsPage = ({ currentUser, onBack, theme, onThemeChange }) => {
   const handleThemeSelect = (id) => {
     setActiveTheme(id);
     if (onThemeChange) onThemeChange(id);
-    document.documentElement.setAttribute('data-theme', id);
   };
 
   const toggleNotif = (key) => setNotifs(n => ({ ...n, [key]: !n[key] }));
