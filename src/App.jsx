@@ -31,6 +31,7 @@ import HelpCenterPage from './components/HelpCenterPage';
 import ApiDocsPage from './components/ApiDocsPage';
 import SystemStatusPage from './components/SystemStatusPage';
 import BlogPage from './components/BlogPage';
+import CompanyPage from './components/CompanyPage';
 import { API_BASE_URL } from './config.js'; 
 
 const TOOLS_DATA = {
@@ -74,10 +75,18 @@ const TOOLS_DATA = {
 
 const App = () => {
   const [view, setView] = useState('home');
-  const [activeCourse, setActiveCourse] = useState(null);
+  const [activeCourse, setActiveCourse] = useState(() => {
+    try {
+      const saved = localStorage.getItem('talent_oasis_active_course');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
+  });
   const [selectedLevel, setSelectedLevel] = useState('Intermediate');
   const [registeredEmail, setRegisteredEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [companyTab, setCompanyTab] = useState('about_us');
 
   // Auto-Login: Check for token when the app loads
   useEffect(() => {
@@ -119,15 +128,103 @@ const App = () => {
   // Persist state to localStorage
   useEffect(() => {
     localStorage.setItem('talent_oasis_view', view);
+    if (view === 'beginner') {
+      localStorage.setItem('talent_oasis_last_type', 'beginner');
+    }
   }, [view]);
 
   useEffect(() => {
     if (currentTool) {
       localStorage.setItem('talent_oasis_tool', currentTool);
+      localStorage.setItem('talent_oasis_last_tool', currentTool);
+      localStorage.setItem('talent_oasis_last_type', 'tool');
     } else {
       localStorage.removeItem('talent_oasis_tool');
     }
   }, [currentTool]);
+
+  useEffect(() => {
+    if (activeCourse) {
+      localStorage.setItem('talent_oasis_active_course', JSON.stringify(activeCourse));
+      localStorage.setItem('talent_oasis_last_type', 'course');
+    } else {
+      localStorage.removeItem('talent_oasis_active_course');
+    }
+  }, [activeCourse]);
+
+  const resumeActiveCourse = async () => {
+    if (activeCourse) {
+      setView('learning_page');
+      return;
+    }
+
+    const token = localStorage.getItem('hawkman_token');
+    if (token) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/dashboard/stats`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.ok) {
+          const statsData = await response.json();
+          if (statsData.course_progress && statsData.course_progress.length > 0) {
+            // Find first course that has progress
+            const inProgress = statsData.course_progress.find(cp => cp.progress_percent > 0 && cp.progress_percent < 100);
+            const targetProgress = inProgress || statsData.course_progress[0];
+            
+            // Map course_id to the course details
+            const coursesMap = {
+              1: { title: 'AI for Educators', color: '#a855f7' },
+              2: { title: 'AI for Designers', color: '#ec4899' },
+              3: { title: 'AI for Developers', color: '#2563eb' },
+              4: { title: 'AI for Content Creators', color: '#16a34a' }
+            };
+
+            const matchedCourse = coursesMap[targetProgress?.course_id || 1];
+            if (matchedCourse) {
+              const resObj = {
+                title: matchedCourse.title,
+                color: matchedCourse.color,
+                level: 'Intermediate' // default level
+              };
+              setActiveCourse(resObj);
+              setView('learning_page');
+              return;
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch dashboard stats to resume:", err);
+      }
+    }
+
+    // Default fallback: AI for Educators
+    const defaultCourse = {
+      title: 'AI for Educators',
+      color: '#a855f7',
+      level: 'Intermediate'
+    };
+    setActiveCourse(defaultCourse);
+    setView('learning_page');
+  };
+
+  const resumeLastLearning = async () => {
+    const lastType = localStorage.getItem('talent_oasis_last_type');
+    const lastTool = localStorage.getItem('talent_oasis_last_tool');
+
+    if (lastType === 'tool' && lastTool) {
+      setCurrentTool(lastTool);
+      return;
+    }
+
+    if (lastType === 'beginner') {
+      setView('beginner');
+      return;
+    }
+
+    await resumeActiveCourse();
+  };
 
   const handleNavClick = (sectionId) => {
     if (view !== 'home') {
@@ -284,6 +381,8 @@ if (view === 'dashboard') {
           <SystemStatusPage onBack={() => setView('home')} />
         ) : view === 'blog' ? (
           <BlogPage onBack={() => setView('home')} />
+        ) : view === 'company' ? (
+          <CompanyPage onBack={() => setView('home')} initialTab={companyTab} />
         ) : (
           <>
             {/* Hero Section */}
@@ -322,14 +421,14 @@ if (view === 'dashboard') {
                   <button 
                     onClick={() => {
                       if (currentUser) {
-                        setView('path_selection'); 
+                        resumeLastLearning();
                       } else {
                         setView('signup');
                       }
                     }}
                     className="text-site-text font-bold py-4 px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95"
                   >
-                    Start Learning Free
+                    {currentUser ? 'Continue Learning' : 'Start Learning Free'}
                   </button>
 
                   <button 
@@ -462,7 +561,14 @@ if (view === 'dashboard') {
         )}
       </main>
 
-      <Footer onNavigate={setView} />
+      <Footer onNavigate={(targetView) => {
+        if (['about_us', 'careers', 'contact', 'partners'].includes(targetView)) {
+          setCompanyTab(targetView);
+          setView('company');
+        } else {
+          setView(targetView);
+        }
+      }} />
     </div>
   );
 };

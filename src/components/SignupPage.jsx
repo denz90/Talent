@@ -78,7 +78,7 @@ const SignupPage = ({ onBack, onLoginClick, onRequireOTP }) => {
         {/* Back Button */}
         <button 
           onClick={onBack}
-          className="absolute top-6 right-6 flex items-center gap-1.5 text-site-text/80 hover:text-site-text/60 transition-colors text-[13px] font-bold uppercase tracking-wider bg-site-bg px-3 py-1.5 rounded-sm border border-site-accent"
+          className="absolute top-6 left-6 flex items-center gap-1.5 text-site-text/80 hover:text-site-text/60 transition-colors text-[13px] font-bold uppercase tracking-wider bg-site-bg px-3 py-1.5 rounded-sm border border-site-accent"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Back

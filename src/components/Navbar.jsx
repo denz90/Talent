@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
+import { Sparkles, LayoutDashboard, LogOut, Menu, X, ChevronDown } from 'lucide-react';
 
 // 1. Centralize Themes so you never hardcode a swatch block in JSX again
 const THEME_OPTIONS = [
@@ -17,6 +17,19 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
   });
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Close user dropdown on outside click
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    const handleClose = (e) => {
+      if (!e.target.closest('.user-dropdown-container')) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClose);
+    return () => document.removeEventListener('mousedown', handleClose);
+  }, [isDropdownOpen]);
 
   // Sync Theme
   useEffect(() => {
@@ -104,63 +117,114 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
         </div>
 
         {/* Theme Picker Dropdown - Desktop */}
-        <div className="relative group hidden md:block">
-          <button className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer">
-            🎨 Theme
-          </button>
+        {!currentUser && (
+          <div className="relative group hidden md:block">
+            <button className="text-[13px] font-medium text-site-text/80 hover:text-site-text transition-colors uppercase tracking-wider flex items-center gap-1 cursor-pointer">
+              🎨 Theme
+            </button>
 
-          <div className="absolute left-0 top-full mt-2 flex gap-3 bg-site-bg border border-site-accent shadow-xl rounded-full px-4 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            {THEME_OPTIONS.map((t) => (
-              <button
-                key={t.id}
-                onClick={() => setTheme(t.id)}
-                style={{ backgroundColor: t.swatch }}
-                className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-transform hover:scale-125 ${
-                  theme === t.id ? 'border-site-text scale-110 shadow-sm' : 'border-transparent'
-                }`}
-                title={t.label}
-              />
-            ))}
+            <div className="absolute left-0 top-full mt-2 flex gap-3 bg-site-bg border border-site-accent shadow-xl rounded-full px-4 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              {THEME_OPTIONS.map((t) => (
+                <button
+                  key={t.id}
+                  onClick={() => setTheme(t.id)}
+                  style={{ backgroundColor: t.swatch }}
+                  className={`w-5 h-5 rounded-full border-2 cursor-pointer transition-transform hover:scale-125 ${
+                    theme === t.id ? 'border-site-text scale-110 shadow-sm' : 'border-transparent'
+                  }`}
+                  title={t.label}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Right Actions - Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {currentUser ? (
-            <div className="flex items-center gap-5">
-              <div className="flex items-center gap-2">
+            <div className="relative user-dropdown-container">
+              {/* Dropdown Trigger Button */}
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="flex items-center gap-2.5 p-1.5 pr-3 rounded-full bg-site-bg hover:bg-site-accent/40 border border-site-accent/60 transition-all cursor-pointer select-none"
+              >
                 {(() => {
                   const savedImg = getSavedAvatar();
                   return savedImg ? (
-                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-site-accent flex-shrink-0 shadow-sm">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border border-site-accent flex-shrink-0 shadow-xs">
                       <img src={savedImg} alt="avatar" className="w-full h-full object-cover" />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 rounded-full bg-site-primary flex items-center justify-center text-site-text text-[13px] font-bold shadow-sm select-none">
+                    <div className="w-8 h-8 rounded-full bg-site-primary flex items-center justify-center text-site-text text-[13px] font-bold shadow-xs">
                       {currentUser.username ? currentUser.username.charAt(0).toUpperCase() : 'U'}
                     </div>
                   );
                 })()}
-                <span className="text-[14px] font-bold text-site-text tracking-tight">
+                <span className="text-[13px] font-bold text-site-text truncate max-w-[120px]">
                   {currentUser.username}
                 </span>
-              </div>
-
-              <button
-                onClick={onDashboard}
-                className="bg-site-bg hover:bg-site-bg border border-site-accent/80 px-4 py-2 rounded-xl text-[13px] font-bold text-site-text hover:text-site-text flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-              >
-                <LayoutDashboard className="w-4 h-4 text-site-text/80" />
-                <span>Dashboard</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-site-text/60 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              <button
-                onClick={onLogout}
-                className="p-2 text-rose-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all active:scale-95 cursor-pointer"
-                title="Sign Out"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
+              {/* Dropdown Menu Overlay */}
+              {isDropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-64 bg-site-bg/95 backdrop-blur-md border border-site-accent shadow-2xl rounded-2xl p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  {/* Signed in details */}
+                  <div className="px-2 pb-3 mb-2 border-b border-site-accent/60">
+                    <p className="text-[10px] font-bold text-site-text/40 uppercase tracking-widest">Signed in as</p>
+                    <p className="text-[14px] font-extrabold text-site-text truncate">{currentUser.username}</p>
+                    {currentUser.email && (
+                      <p className="text-[11px] text-site-text/50 truncate mt-0.5">{currentUser.email}</p>
+                    )}
+                  </div>
+
+                  {/* Themes choice list */}
+                  <div className="px-2 py-2 mb-2">
+                    <p className="text-[10px] font-bold text-site-text/40 uppercase tracking-widest mb-2 flex items-center gap-1.5">🎨 Theme Selection</p>
+                    <div className="flex gap-2.5">
+                      {THEME_OPTIONS.map((t) => (
+                        <button
+                          key={t.id}
+                          onClick={() => setTheme(t.id)}
+                          style={{ backgroundColor: t.swatch }}
+                          className={`w-6 h-6 rounded-full border-2 cursor-pointer transition-all hover:scale-115 ${
+                            theme === t.id ? 'border-site-text scale-110 shadow-sm' : 'border-transparent'
+                          }`}
+                          title={t.label}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Divider line */}
+                  <div className="h-px bg-site-accent/60 my-2" />
+
+                  {/* Nav Actions */}
+                  <div className="space-y-1">
+                    <button
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        onDashboard();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-bold text-site-text hover:bg-site-accent transition-all cursor-pointer text-left"
+                    >
+                      <LayoutDashboard className="w-4 h-4 text-site-text/70" />
+                      <span>Dashboard</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        onLogout();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-bold text-rose-500 hover:bg-rose-500/10 transition-all cursor-pointer text-left"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <>

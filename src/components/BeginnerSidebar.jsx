@@ -37,7 +37,7 @@ const BeginnerSidebar = ({ activeSection, className = "w-72 hidden lg:flex flex-
     { id: 'basics', label: 'Prompting Basics', icon: Lightbulb },
     { id: 'craft', label: 'The CRAFT Formula', icon: PenTool },
     { id: 'skills', label: 'Practical Skills', icon: Zap },
-    { id: 'iteration', label: 'Iteration Prompting', icon: RefreshCw },
+    { id: 'iteration', label: 'Iterative Prompting', icon: RefreshCw },
     { id: 'advanced', label: 'Advanced Techniques', icon: Settings },
     { id: 'work', label: 'Prompting for Work', icon: FileText },
     { id: 'ethics', label: 'Ethics & Limitations', icon: ShieldAlert },

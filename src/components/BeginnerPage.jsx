@@ -304,7 +304,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="space-y-4 md:space-y-6">
                         <h4 className="flex items-center gap-2 text-site-text font-bold text-base md:text-lg">
-                          <XCircle className="w-5 h-5 text-rose-500" /> weak prompts are usually:
+                          <XCircle className="w-5 h-5 text-rose-500" /> Ineffective prompts are usually:
                         </h4>
                         <ul className="space-y-2 md:space-y-3 pl-7 list-disc text-site-text font-medium text-sm md:text-base">
                           <li>Too vague</li>
@@ -314,7 +314,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       </div>
                       <div className="space-y-4 md:space-y-6">
                         <h4 className="flex items-center gap-2 text-site-text font-bold text-base md:text-lg">
-                          <CheckCircle2 className="w-5 h-5 text-emerald-500" /> Good prompts are:
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500" /> Effective prompts are:
                         </h4>
                         <ul className="space-y-2 md:space-y-3 pl-7 list-disc text-site-text font-medium text-sm md:text-base">
                           <li>Clear</li>
@@ -329,7 +329,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       <ContentCard className="border-rose-500/20 bg-rose-500/5">
                         <div className="flex items-center gap-3 text-rose-500 font-bold mb-4 md:mb-6">
                           <XCircle className="w-5 h-5 md:w-6 md:h-6" />
-                          <span>Weak Prompt:</span>
+                          <span>Ineffective Prompt:</span>
                         </div>
                         <div className="bg-site-bg border border-rose-500/20 p-5 md:p-8 rounded-2xl italic font-serif text-site-text/60 mb-4 text-base md:text-lg">
                           "Write about marketing"
@@ -341,7 +341,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       <ContentCard className="border-site-primary/30 bg-site-primary/5">
                         <div className="flex items-center gap-3 text-site-primary font-bold mb-4 md:mb-6">
                           <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" />
-                          <span>Good Prompt:</span>
+                          <span>Effective Prompt:</span>
                         </div>
                         <div className="bg-site-bg border border-site-primary/20 p-5 md:p-8 rounded-2xl text-site-text font-medium mb-4 text-base md:text-lg leading-relaxed">
                           "Write a <span className="text-site-primary font-bold">300-word article</span> explaining <span className="text-site-primary font-bold">digital marketing</span> to <span className="text-site-primary font-bold">small business owners in Ghana</span>. Use simple language and local examples."

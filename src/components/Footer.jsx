@@ -76,10 +76,10 @@ const Footer = ({ onNavigate }) => {
           <div>
             <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Company</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text">
-              <li><a href="#" className="hover:text-site-text transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Partners</a></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('about_us'); }} className="hover:text-white transition-colors">About Us</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('careers'); }} className="hover:text-white transition-colors">Careers</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('contact'); }} className="hover:text-white transition-colors">Contact</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('partners'); }} className="hover:text-white transition-colors">Partners</button></li>
             </ul>
           </div>
 
