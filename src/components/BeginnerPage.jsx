@@ -518,7 +518,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                   </div>
                 )}
 
-                {section.type === 'iteration' && (
+                {section.type === 'iterative' && (
                   <div className="space-y-6 md:space-y-8">
                     <ContentCard className="bg-gradient-to-r from-site-primary to-site-accent text-site-text border-none p-8 md:p-12 overflow-hidden relative">
                       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-site-bg/10 rounded-full blur-3xl hidden md:block"></div>
