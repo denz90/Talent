@@ -46,6 +46,54 @@
   --shadow-color: #6b6a6a;
 }
 
+[data-theme="cinnamon"] {
+  --color-bg: #3D1703;
+  --color-text: #E4C4B4;
+  --color-primary: #C8957A;
+  --color-accent: #B47857;
+
+  /*Gradient variables */
+  --gradient-from: #3D1703;
+  --gradient-to: #C8957A;
+  --shadow-color: #B47857;
+}
+
+[data-theme="cinnamon2"] {
+  --color-bg: #E4C4B4;
+  --color-text: #3D1703;
+  --color-primary: #9B532D;
+  --color-accent: #B47857;
+
+  /* Gradient variables */
+  --gradient-from: #9B532D;
+  --gradient-to: #E4C4B4;
+  --shadow-color: #B47857;
+}
+
+[data-theme="forestmist"] {
+  --color-bg: #CAD2C5;
+  --color-text: #2F3E46;
+  --color-primary: #354F52;
+  --color-accent: #84A98C;
+
+  /* Gradient variables */
+  --gradient-from: #354F52;
+  --gradient-to: #CAD2C5;
+  --shadow-color: #84A98C;
+}
+
+[data-theme='forestmist2'] {
+  --color-bg: #2F3E46;
+  --color-text: #CAD2C5;
+  --color-primary: #84A98C;
+  --color-accent: #52796F;
+
+  /* gradient variables */
+  --gradient-from: #84A98C;
+  --gradient-to: #2F3E46;
+  --shadow-color: #52796F;
+}
+
 [data-theme="coastal"] {
   --color-bg: #ccdde1; 
   --color-text: #335765;
