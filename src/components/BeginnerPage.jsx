@@ -34,7 +34,7 @@ const COURSE_SECTIONS = [
   {
     id: 'basics',
     title: '2. Prompting Basics',
-    subtitle: 'Good vs Bad Prompts',
+    subtitle: 'Effective vs Ineffective Prompts',
     type: 'comparison'
   },
   {
@@ -45,15 +45,15 @@ const COURSE_SECTIONS = [
   },
   {
     id: 'skills',
-    title: '4. Practical Prompting Skills',
-    subtitle: 'The 6 Prompt Types You Must Master',
+    title: '4. The 6 Prompt Types',
+    subtitle: 'You must master',
     type: 'skills-list'
   },
   {
-    id: 'iteration',
-    title: '5. Iteration Prompting',
+    id: 'iterative',
+    title: '5. Iterative Prompting',
     subtitle: 'Refining and Improving Your Results',
-    type: 'iteration'
+    type: 'iterative'
   },
   {
     id: 'advanced',
@@ -437,7 +437,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                       <div className="mt-8 md:mt-10 bg-site-bg p-6 md:p-8 rounded-2xl md:rounded-3xl border border-site-accent shadow-inner">
                         <p className="text-[10px] md:text-[11px] font-bold text-site-text/50 uppercase tracking-widest mb-3 md:mb-4">Full Prompt:</p>
                         <p className="text-site-text/90 font-medium italic leading-relaxed text-base md:text-lg">
-                          "Act as a professional report writer. I need to create an executive summary of this month's activities for my supervisor. Write a 250-word summary with 3 main sections: achievements, challenges, and next steps. Use professional but clear language."
+                          "Act as a professional report writer and write an executive summary of this month's activities for my supervisor. Write a 250-word summary with 3 main sections: achievements, challenges, and next steps. Use professional but clear language."
                         </p>
                       </div>
                     </ContentCard>
@@ -529,18 +529,24 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
 
                     <div className="grid sm:grid-cols-2 gap-4 md:gap-8">
                       {[
-                        { t: "Ask for Variations", d: "Ask the AI to provide multiple options so you can pick the best one." },
-                        { t: "Refine Instructions", d: "If the output was too long or too short, adjust the prompt rules." },
-                        { t: "Add Missing Context", d: "Give the AI more background info it missed the first time." },
-                        { t: "Change the Format", d: "Switch from a paragraph to bullets, or from formal to friendly." }
+                        { t: "Ask for Variations", d: 'Ask the AI to provide multiple options so you can pick the best one.', e:"Give me 3 different slogans for a coffee shop." },
+                        { t: "Refine Instructions", d: 'If the output was too long or too short, adjust the prompt rules.', e:"First Prompt:Write about AI.\nFollow-up Prompt:Make it 50 words and easy for a 10-year-old to understand." },
+                        { t: "Add Missing Context", d: "Give the AI more background info it missed the first time.", e:"First Prompt:Write a social media post about a sale.\nFollow-up Prompt:The sale is for a clothing store in Accra and targets university students." },
+                        { t: "Change the Format", d: "Switch from a paragraph to bullets, or from formal to friendly.", e:"First Prompt:Explain digital marketing.\nFollow-up Prompt:Put the explanation in bullet points." }
                       ].map((tech, i) => (
                         <div key={i} className="bg-site-bg p-6 md:p-8 rounded-2xl md:rounded-3xl border border-site-accent shadow-sm flex flex-col md:flex-row gap-4 md:gap-6 items-start hover:shadow-md transition-shadow">
                           <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-site-primary text-site-text flex items-center justify-center font-bold text-lg md:text-xl shrink-0">
                             {i + 1}
                           </div>
-                          <div>
+                          <div className="flex-1 w-full">
                             <h4 className="font-bold text-site-text mb-1 md:mb-2 text-base md:text-lg">{tech.t}</h4>
-                            <p className="text-site-text/80 text-xs md:text-sm font-medium">{tech.d}</p>
+                            <p className="text-site-text/80 text-xs md:text-sm font-medium mb-3">{tech.d}</p>
+                            {tech.e && (
+                              <div className="bg-site-accent/40 border border-site-accent/60 p-3.5 rounded-xl font-mono text-[11px] md:text-xs text-site-text/90 whitespace-pre-line">
+                                <p className="font-bold mb-1 text-[9px] md:text-[10px] text-site-text/50 uppercase tracking-widest">Example Prompt:</p>
+                                <span className="italic">"{tech.e}"</span>
+                              </div>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -552,7 +558,7 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                   <div className="space-y-6">
                     {[
                       { t: "Chain-of-Thought", d: 'Adding "Think step by step" to your prompt helps the AI reason through complex tasks.', e: "Explain why X happens. Think step by step." },
-                      { t: "Few-Shot Prompting", d: "Providing 1-3 examples of how the AI should respond dramatically improves accuracy.", e: "User: Hello -> AI: Hi! [Example 1]..." },
+                      { t: "Few-Shot Prompting", d: "Providing 1-3 examples of how the AI should respond dramatically improves accuracy.", e: "Example 1: English: Hello, French: Bonjour\nExample 2: English: Thank you, French: Merci" },
                       { t: "Multimodal Prompting", d: "Modern AI can process images, PDFs, and data files along with text.", e: "[Upload File] + Summarize this report." },
                       { t: "System Commands", d: "Set permanent rules for the entire conversation using system prompts.", e: "Always respond in a concise, bulleted format." }
                     ].map((tech, i) => (

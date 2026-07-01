@@ -6,10 +6,10 @@ const THEME_OPTIONS = [
   { id: 'timeless', label: 'Timeless Retro', swatch: '#2075A7' },
   { id: 'coastal', label: 'Coastal Retro', swatch: '#74A8A4' },
   { id: 'tranquil', label: 'Tranquil Sky', swatch: '#B7C9E6' },
-  { id: 'forestmist', label: 'Forestmist', swatch: '#CAD2C5' },
-  { id: 'forestmist2', label: 'Forestmist2', swatch: '#2F3E46' },
-  { id: 'cinnamon', label: 'Cinnamon', swatch: '#3D1703' },
-  { id: 'cinnamon2', label: 'cinnamon2', swatch: '#E4C4B4'}
+  { id: 'gray', label: 'gray', swatch: '#BDBDBD' },
+  { id: 'gray2', label: 'gray2', swatch: '#2F3E46' },
+  { id: 'burge', label: 'burge', swatch: '#FAF7F3' },
+  { id: 'burge2', label: 'burge2', swatch: '#876434' }
 ];
 
 const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard }) => {

@@ -37,7 +37,7 @@ const BeginnerSidebar = ({ activeSection, className = "w-72 hidden lg:flex flex-
     { id: 'basics', label: 'Prompting Basics', icon: Lightbulb },
     { id: 'craft', label: 'The CRAFT Formula', icon: PenTool },
     { id: 'skills', label: 'Practical Skills', icon: Zap },
-    { id: 'iteration', label: 'Iterative Prompting', icon: RefreshCw },
+    { id: 'iterative', label: 'Iterative Prompting', icon: RefreshCw },
     { id: 'advanced', label: 'Advanced Techniques', icon: Settings },
     { id: 'work', label: 'Prompting for Work', icon: FileText },
     { id: 'ethics', label: 'Ethics & Limitations', icon: ShieldAlert },
@@ -93,10 +93,6 @@ const BeginnerSidebar = ({ activeSection, className = "w-72 hidden lg:flex flex-
 
       <div className="mt-auto p-6 rounded-2xl bg-gradient-to-br from-site-primary to-site-accent text-site-text relative overflow-hidden group">
         <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-site-bg/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
-        <h4 className="font-bold mb-2 relative z-10">Need Help?</h4>
-        <p className="text-xs text-site-text/80 mb-4 relative z-10 leading-relaxed">
-          Stuck on a module? Ask our AI Tutor for instant clarification.
-        </p>
         <button className="w-full py-2 bg-site-bg text-site-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
           Practice your Prompting skills with ChatGPT
         </button>
