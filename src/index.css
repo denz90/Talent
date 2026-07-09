@@ -46,7 +46,7 @@
   --shadow-color: #6b6a6a;
 }
 
-[data-theme="burge"] {
+[data-theme="biege"] {
   --color-bg: #FAF7F3;
   --color-text: #876434;
   --color-primary: #AC7F42;
@@ -58,7 +58,7 @@
   --shadow-color: #D0B084;
 }
 
-[data-theme="burge2"] {
+[data-theme="biege2"] {
   --color-bg: #876434;
   --color-text: #FAF7F3;
   --color-primary: #AC7F42;

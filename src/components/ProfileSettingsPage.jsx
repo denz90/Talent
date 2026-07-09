@@ -68,6 +68,8 @@ const THEMES = [
   { id: 'timeless', label: 'Timeless', preview: ['#E8F1F7', '#2075A7', '#E8DFC4'] },
   { id: 'coastal',  label: 'Coastal',  preview: ['#ccdde1', '#74A8A4', '#B6D9E0'] },
   { id: 'tranquil', label: 'Tranquil', preview: ['#F5F7FF', '#A6B1D8', '#E2E4F8'] },
+  { id: 'biege', label: 'biege', preview: ['#FBF7F2', '#D9C8A9', '#EBDCD0'] },
+  { id: 'gray', label: 'gray', preview: ['#D9D9D9', '#333333', '#BFBFBF']}
 ];
 
 const ThemeCard = ({ theme, active, onClick }) => (
