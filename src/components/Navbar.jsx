@@ -7,7 +7,7 @@ const THEME_OPTIONS = [
   { id: 'coastal', label: 'Coastal Retro', swatch: '#74A8A4' },
   { id: 'tranquil', label: 'Tranquil Sky', swatch: '#B7C9E6' },
   { id: 'gray', label: 'gray', swatch: '#2F3E46' },
-  { id: 'beige2', label: 'beige2', swatch: '#876434' }
+  { id: 'beige', label: 'beige', swatch: '#876434' }
 ];
 
 const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard }) => {
