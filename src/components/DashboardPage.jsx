@@ -65,20 +65,6 @@ const fetchDashboardStats = async () => {
   return res.json();
 };
 
-const postProgress = async (userId, courseId, progressPercent) => {
-  const res = await fetch(`${API_BASE_URL}/api/progress/update`, {
-    method: 'POST',
-    headers: authHeader(),
-    body: JSON.stringify({
-      user_id: userId,
-      course_id: courseId,
-      progress_percent: progressPercent,
-    }),
-  });
-  if (!res.ok) throw new Error('Progress update failed');
-  return res.json();
-};
-
 /* ═══════════════════════════════════════════════
    UI HELPERS & FORMATTERS
 ═══════════════════════════════════════════════ */
@@ -192,42 +178,25 @@ const Sidebar = ({ active, setActive, collapsed, setCollapsed, onLogout, onProfi
   </>
 );
 
-/* ─── Course card ─── */
-const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId, onNavigate }) => {
+/* ─── Course card – READ‑ONLY, no API calls ─── */
+const CourseCard = ({ course, progress, onNavigateToPath }) => {
   const Icon = course.icon;
   const pct = progress?.progress_percent ?? 0;
-  const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState('');
-
-  const handleContinue = async (e) => {
-    e.stopPropagation();
-    if (!userId) return;
-    setSaving(true);
-    try {
-      const newPct = Math.min(100, pct + 10);
-      const result = await postProgress(userId, course.id, newPct);
-      onUpdateProgress(course.id, newPct);
-      if (result.badges_unlocked?.length > 0) {
-        setToast(`🏆 Badge unlocked: ${result.badges_unlocked.join(', ')}`);
-        setTimeout(() => setToast(''), 4000);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-    setSaving(false);
-    if (onNavigate) {
-      onNavigate({ view: 'learning_page', course: { ...course, level: 'Intermediate' } });
-    } else if (onContinue) {
-      onContinue(course);
-    }
-  };
 
   const statusLabel = pct === 0 ? 'Not Started' : pct >= 100 ? 'Completed' : 'In Progress';
   const statusColor = pct === 0 ? '#94a3b8' : pct >= 100 ? '#10B981' : course.color;
 
+  // Only navigate – no API calls
+  const handleNavigate = (e) => {
+    if (e) e.stopPropagation();
+    if (onNavigateToPath) {
+      onNavigateToPath('Intermediate');
+    }
+  };
+
   return (
     <div
-      onClick={() => onContinue && onContinue(course)}
+      onClick={handleNavigate}
       className="flex items-center gap-4 p-4 rounded-2xl border transition-all hover:shadow-md group cursor-pointer bg-white dark:bg-transparent"
       style={{ borderColor: 'var(--color-accent)' }}
     >
@@ -245,20 +214,14 @@ const CourseCard = ({ course, progress, onContinue, onUpdateProgress, userId, on
       <div className="flex-shrink-0 flex flex-col items-end justify-between gap-1">
         <span className="text-xs font-bold" style={{ color: 'var(--color-text)', opacity: 0.4 }}>{Math.round(pct)}%</span>
         <button
-          onClick={handleContinue}
-          disabled={saving}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-bold transition-all hover:scale-105 disabled:opacity-50"
+          onClick={handleNavigate}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] uppercase tracking-wider font-bold transition-all hover:scale-105"
           style={{ background: course.color, color: 'white' }}
         >
-          {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Play className="w-3 h-3 fill-white" />}
+          <Play className="w-3 h-3 fill-white" />
           {pct === 0 ? 'Start' : pct >= 100 ? 'Review' : 'Continue'}
         </button>
       </div>
-      {toast && (
-        <div className="fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl text-sm font-bold text-white shadow-xl" style={{ background: 'var(--color-primary)' }}>
-          {toast}
-        </div>
-      )}
     </div>
   );
 };
@@ -310,7 +273,7 @@ const WeeklyChart = ({ data }) => {
 };
 
 /* ═══════════════════════════════════════════════
-   MAIN DASHBOARD
+   MAIN DASHBOARD – READ‑ONLY
 ═══════════════════════════════════════════════ */
 const DashboardPage = ({ 
   currentUser, 
@@ -330,14 +293,17 @@ const DashboardPage = ({
   /* Live backend data */
   const [stats,     setStats]     = useState(null);
   const [statsError,   setStatsError]   = useState(false);
+  const [loadingStats, setLoadingStats] = useState(false);
   
   /* Per-course progress map */
   const [progressMap, setProgressMap] = useState({});
 
   const loadStats = useCallback(async () => {
+    setLoadingStats(true);
     setStatsError(false);
     try {
       const data = await fetchDashboardStats();
+      console.log('📊 Dashboard stats loaded:', data);
       setStats(data);
 
       if (data?.course_progress && Array.isArray(data.course_progress)) {
@@ -350,23 +316,17 @@ const DashboardPage = ({
     } catch (e) {
       console.warn('Dashboard stats failed to load.', e);
       setStatsError(true);
+    } finally {
+      setLoadingStats(false);
     }
   }, []);
 
   useEffect(() => { loadStats(); }, [loadStats]);
 
-  const handleProgressUpdate = (courseId, newPct) => {
-    setProgressMap(prev => ({
-      ...prev,
-      [courseId]: { ...(prev[courseId] || {}), progress_percent: newPct },
-    }));
-    loadStats();
-  };
-
   /* Driven by API response */
   const streak           = stats?.streak ?? 0;
+  const bestStreak       = stats?.best_streak ?? 0;
   const totalXP          = stats?.total_xp ?? 0;
-  const hoursThisWeek    = stats?.hours_this_week ?? 0;
   const badgesUnlocked   = stats?.badges_unlocked ?? [];
 
   return (
@@ -472,7 +432,7 @@ const DashboardPage = ({
               >
                 <div className="relative z-10">
                   <p className="text-sm font-semibold mb-1" style={{ color: 'var(--color-light)', opacity: 0.7 }}>
-                    Welcome back, {displayName}!
+                    {getGreeting()}, {displayName}!
                   </p>
                   <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: 'var(--color-light)' }}>
                     Ready to continue your AI journey?
@@ -487,10 +447,11 @@ const DashboardPage = ({
                     </button>
                     <button
                       onClick={loadStats}
-                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-105"
+                      disabled={loadingStats}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all hover:scale-105 disabled:opacity-50"
                       style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--color-light)', border: '1px solid rgba(255,255,255,0.25)' }}
                     >
-                      Refresh Stats
+                      {loadingStats ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Refresh Stats'}
                     </button>
                   </div>
                 </div>
@@ -498,25 +459,28 @@ const DashboardPage = ({
                 <div className="absolute right-10 -bottom-8 w-28 h-28 rounded-full pointer-events-none" style={{ background: 'rgba(255,255,255,0.04)' }} />
               </div>
 
-              {/* UNIFORM 3-COLUMN STATS GRID */}
+              {/* 3-COLUMN STATS GRID */}
               <div className="grid grid-cols-3 gap-4">
                 
+                {/* Current Streak */}
                 <div className="rounded-2xl p-5 border flex flex-col items-center text-center bg-white dark:bg-transparent transition-all hover:shadow-md" style={{ borderColor: 'var(--color-accent)' }}>
                   <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-orange-500/10">
                     <Flame className="w-5 h-5 text-orange-500" />
                   </div>
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--color-text)', opacity: 0.6 }}>Learning Streak</h3>
+                  <h3 className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--color-text)', opacity: 0.6 }}>Current Streak</h3>
                   <p className="text-2xl font-black" style={{ color: 'var(--color-text)' }}>{streak} <span className="text-sm font-bold opacity-50">Days</span></p>
                 </div>
 
+                {/* Best Streak */}
                 <div className="rounded-2xl p-5 border flex flex-col items-center text-center bg-white dark:bg-transparent transition-all hover:shadow-md" style={{ borderColor: 'var(--color-accent)' }}>
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-emerald-500/10">
-                    <Clock className="w-5 h-5 text-emerald-500" />
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-amber-500/10">
+                    <Trophy className="w-5 h-5 text-amber-500" />
                   </div>
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--color-text)', opacity: 0.6 }}>Hours Learned</h3>
-                  <p className="text-2xl font-black" style={{ color: 'var(--color-text)' }}>{hoursThisWeek}h</p>
+                  <h3 className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: 'var(--color-text)', opacity: 0.6 }}>Best Streak</h3>
+                  <p className="text-2xl font-black" style={{ color: 'var(--color-text)' }}>{bestStreak} <span className="text-sm font-bold opacity-50">Days</span></p>
                 </div>
 
+                {/* Total XP */}
                 <div className="rounded-2xl p-5 border flex flex-col items-center text-center bg-white dark:bg-transparent transition-all hover:shadow-md" style={{ borderColor: 'var(--color-accent)' }}>
                   <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3 bg-purple-500/10">
                     <Zap className="w-5 h-5 text-purple-500" />
@@ -527,7 +491,7 @@ const DashboardPage = ({
 
               </div>
 
-              {/* MY COURSES */}
+              {/* MY COURSES – READ‑ONLY */}
               <div className="rounded-3xl border p-6 flex flex-col gap-4 bg-gray-50/50 dark:bg-transparent" style={{ borderColor: 'var(--color-accent)' }}>
                 <div className="flex items-center justify-between">
                   <h2 className="font-extrabold text-base" style={{ color: 'var(--color-text)' }}>My Courses</h2>
@@ -538,9 +502,7 @@ const DashboardPage = ({
                       key={course.id}
                       course={course}
                       progress={progressMap[course.id]}
-                      userId={currentUser?.id}
-                      onUpdateProgress={handleProgressUpdate}
-                      onContinue={onNavigateCourse}
+                      onNavigateToPath={onNavigatePath}
                     />
                   ))}
                 </div>
@@ -659,4 +621,4 @@ const DashboardPage = ({
   );
 };
 
-export default DashboardPage;  
+export default DashboardPage;

@@ -34,20 +34,34 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
     }
   };
 
-  const handleSubmitQuiz = () => {
-    const score = shuffledQuestions.reduce((acc, q) => {
-      return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
-    }, 0);
+const handleSubmitQuiz = () => {
+  const score = shuffledQuestions.reduce((acc, q) => {
+    return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
+  }, 0);
 
-    setIsSubmitted(true);
-    if (score === shuffledQuestions.length) {
-      setHasPassed(true);
-      // Wait a bit to show success state before passing
-      setTimeout(() => {
-        if (onPass) onPass();
-      }, 2000);
-    }
-  };
+  console.log("📊 QUIZ: Score =", score, "/", shuffledQuestions.length);
+  console.log("📊 QUIZ: Perfect score required? Yes (score === total)");
+
+  setIsSubmitted(true);
+
+  if (score === shuffledQuestions.length) {
+    console.log("✅ QUIZ: PERFECT SCORE! Setting hasPassed = true");
+    setHasPassed(true);
+    
+    console.log("⏰ QUIZ: Scheduling onPass() in 2000ms...");
+    setTimeout(() => {
+      console.log("⏰ QUIZ: setTimeout FIRED! Calling onPass()");
+      if (onPass) {
+        console.log("✅ QUIZ: onPass exists, calling it...");
+        onPass();
+      } else {
+        console.error("❌ QUIZ: onPass is UNDEFINED!");
+      }
+    }, 2000);
+  } else {
+    console.log("❌ QUIZ: Not a perfect score. No pass.");
+  }
+};
 
   const handleRetry = () => {
     setAnswers({});

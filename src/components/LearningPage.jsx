@@ -49,6 +49,15 @@ import TurnitinDay26 from './TurnitinDay26';
 import EdthenaDay27 from './EdthenaDay27';
 import LoopDay28 from './LoopDay28';
 import QuizSystem from './QuizSystem';
+import StreakCelebration from './StreakCelebration';  // <-- NEW
+
+// ─── COURSE ID MAPPING (fallback if course.id is missing) ───
+const COURSE_ID_MAP = {
+  'AI for Educators': 1,
+  'AI for Designers': 2,
+  'AI for Developers': 3,
+  'AI for Content Creators': 4,
+};
 
 const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -62,8 +71,6 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
   return (
     <div className="w-full h-full overflow-y-auto bg-site-bg/50">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-16 pb-32">
-        
-        {/* Header Hero */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 text-white p-12 shadow-xl">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 bg-site-bg/10 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-white/20">
@@ -79,7 +86,6 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
           </div>
         </div>
 
-        {/* Placeholder Content */}
         <div className="bg-site-bg p-10 rounded-3xl border border-site-accent shadow-sm text-center space-y-6">
           <div className="w-20 h-20 bg-site-bg rounded-2xl flex items-center justify-center mx-auto text-slate-400">
             <Clock size={40} />
@@ -107,7 +113,6 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
           </div>
         </div>
 
-        {/* Structure Example */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-blue-50 p-8 rounded-2xl border border-blue-100">
             <h3 className="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
@@ -150,17 +155,33 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   const [unlockedLevel, setUnlockedLevel] = useState(28);
   const [streakCount, setStreakCount] = useState(0);
 
+  // ─── NEW STATE FOR STREAK CELEBRATION ───
+  const [showStreakCelebration, setShowStreakCelebration] = useState(false);
+  const [latestStreak, setLatestStreak] = useState(0);
+  const [previousStreak, setPreviousStreak] = useState(0);
+  const [latestXP, setLatestXP] = useState(0);
+  const [latestTotalXP, setLatestTotalXP] = useState(0);
+
+  // ─── Resolve course ID ───
+  const getCourseId = () => {
+    if (course?.id) return course.id;
+    const id = COURSE_ID_MAP[course?.title];
+    console.log("🔍 Resolved course ID from title:", course?.title, "->", id);
+    return id;
+  };
+  const courseId = getCourseId();
+
   // Load saved progress on mount
   useEffect(() => {
     const fetchProgress = async () => {
       const token = localStorage.getItem('hawkman_token');
-      if (!token || !course?.id) {
+      if (!token || !courseId) {
         fallbackToLocal();
         return;
       }
       
       try {
-        const response = await fetch(`${API_BASE_URL}/api/progress/${course.id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/progress/${courseId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -168,7 +189,6 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
         
         if (response.ok) {
           const data = await response.json();
-          // Ensure 0 is always in completedDays so day 0 (if any) works
           setCompletedDays(data.completed_days?.length ? [0, ...data.completed_days] : [0]);
           setUnlockedLevel(data.unlocked_level || 1);
           setStreakCount(data.streak_count || 0);
@@ -182,14 +202,14 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
     };
 
     const fallbackToLocal = () => {
-      const savedLevel = localStorage.getItem(`unlocked_level_${course?.id || 'default'}`);
+      const savedLevel = localStorage.getItem(`unlocked_level_${courseId || 'default'}`);
       if (savedLevel) setUnlockedLevel(parseInt(savedLevel, 10));
-      const savedCompleted = localStorage.getItem(`completed_days_${course?.id || 'default'}`);
+      const savedCompleted = localStorage.getItem(`completed_days_${courseId || 'default'}`);
       if (savedCompleted) setCompletedDays(JSON.parse(savedCompleted));
     };
 
     fetchProgress();
-  }, [course?.id]);
+  }, [courseId]);
 
   // Handle auto-collapsing sidebar on mobile screens
   useEffect(() => {
@@ -200,7 +220,7 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
         setIsSidebarCollapsed(false);
       }
     };
-    handleResize(); // check initially
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -212,7 +232,6 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   const pathContent = PATHS_CONTENT[contentKey] || PATHS_CONTENT['AI for Educators'];
   const { icon: Icon, color, modules } = pathContent;
   
-  // Flat list of days for progress and navigation
   const allDays = modules.flatMap(m => m.days);
   const currentDayData = allDays.find(d => d.id === activeDay);
   const isDarkModeDay = false;
@@ -230,6 +249,13 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   };
 
   const handleDayComplete = async () => {
+    console.log("🔥🔥🔥 handleDayComplete: STARTED 🔥🔥🔥");
+    console.log("📅 activeDay:", activeDay);
+    console.log("📚 courseId:", courseId);
+
+    // Store current streak BEFORE API call
+    const prevStreak = streakCount;
+
     let newCompleted = [...completedDays];
     let newUnlockedLevel = unlockedLevel;
 
@@ -243,16 +269,17 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
     }
 
     // Backup to local storage
-    if (course?.id) {
-      localStorage.setItem(`unlocked_level_${course.id}`, newUnlockedLevel.toString());
-      localStorage.setItem(`completed_days_${course.id}`, JSON.stringify(newCompleted));
+    if (courseId) {
+      localStorage.setItem(`unlocked_level_${courseId}`, newUnlockedLevel.toString());
+      localStorage.setItem(`completed_days_${courseId}`, JSON.stringify(newCompleted));
     }
 
     // Sync with API
     const token = localStorage.getItem('hawkman_token');
-    if (token && course?.id) {
+    if (token && courseId) {
+      console.log("📤 Sending POST to /api/progress/", courseId);
       try {
-        const response = await fetch(`${API_BASE_URL}/api/progress/${course.id}`, {
+        const response = await fetch(`${API_BASE_URL}/api/progress/${courseId}`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -260,16 +287,32 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
           },
           body: JSON.stringify({ completed_day: activeDay })
         });
-        
+        console.log("📥 Response status:", response.status);
         if (response.ok) {
           const data = await response.json();
+          console.log("✅ API response:", data);
+          
+          // Update states
           setStreakCount(data.streak_count);
           setUnlockedLevel(data.unlocked_level);
           setCompletedDays(data.completed_days?.length ? [0, ...data.completed_days] : [0]);
+          
+          // ─── SHOW CELEBRATION ───
+          setPreviousStreak(prevStreak);
+          setLatestStreak(data.streak_count);
+          setLatestTotalXP(data.total_xp || 0);
+          setLatestXP(10); // 10 XP earned per day
+          setShowStreakCelebration(true);
+          
+        } else {
+          const errText = await response.text();
+          console.error("❌ API error:", response.status, errText);
         }
       } catch (err) {
-        console.error("Failed to sync progress:", err);
+        console.error("❌ Fetch error:", err);
       }
+    } else {
+      console.warn("⚠️ Skipping API call: token=", !!token, "courseId=", courseId);
     }
   };
 
@@ -285,12 +328,17 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
   const moduleLabel = currentModule ? currentModule.title.toUpperCase() : '';
 
   if (showQuiz) {
+    console.log("📚 LearningPage: Showing Quiz for day", activeDay);
+    console.log("📚 LearningPage: QuizData exists?", !!currentDayData?.quizData);
     return (
       <div className="w-full h-screen">
         <QuizSystem 
           dayTitle={currentDayData.title}
           quizData={currentDayData.quizData}
           onPass={() => {
+            console.log("🔥🔥🔥 LearningPage: onPass CALLED! 🔥🔥🔥");
+            console.log("📅 activeDay:", activeDay);
+            console.log("📚 courseId:", courseId);
             handleDayComplete();
             goToNextDay();
           }}
@@ -315,7 +363,6 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
       <div className={`flex flex-1 overflow-hidden relative transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] text-white' : 'bg-site-bg text-site-text'}`}>
 
-        {/* Backdrop for Mobile Sidebar Drawer */}
         {!isSidebarCollapsed && (
           <div 
             className="fixed inset-0 bg-black/40 z-10 md:hidden"
@@ -323,12 +370,10 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
           />
         )}
 
-        {/* ── Sidebar ── */}
         <aside className={`border-r flex flex-col h-full flex-shrink-0 transition-all duration-300 overflow-hidden absolute md:relative z-20 
           ${isSidebarCollapsed ? 'w-0 -translate-x-full border-none' : 'w-[320px] translate-x-0'} 
           ${isDarkModeDay ? 'bg-[#240042] border-purple-900/50' : 'bg-site-bg border-site-accent'}`}>
 
-        {/* Header: Course Title & Progress */}
         <div className="p-6 border-b border-site-accent">
           <button 
             onClick={onBack}
@@ -358,7 +403,6 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
           <p className={`text-xs font-medium mt-1 ${isDarkModeDay ? 'text-purple-400' : 'text-site-text/80'}`}>{progress}% Completed</p>
         </div>
 
-        {/* Middle: Modules (scrollable) */}
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           {modules.map((module) => (
             <div key={module.id}>
@@ -417,10 +461,8 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
       </aside>
 
-      {/* ── Main Content ── */}
       <main className="flex-1 bg-site-bg relative flex flex-col h-full overflow-hidden">
 
-        {/* Breadcrumb bar */}
         <div className={`w-full flex-shrink-0 border-b h-16 flex items-center justify-between px-8 z-10 shadow-sm transition-colors duration-500 ${isDarkModeDay ? 'bg-[#2e0052] border-purple-900/50' : 'bg-site-bg border-site-accent'}`}>
           <div className="flex items-center gap-4">
             <button 
@@ -436,7 +478,6 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
           <div></div>
         </div>
 
-        {/* Day content */}
         <div className="flex-1 overflow-hidden">
           {(course.title === 'AI for Educators' && course.level !== 'Advanced') ? (
             <>
@@ -481,10 +522,20 @@ const LearningPage = ({ course, currentUser, onBack, onLogout, onProfileSettings
 
       </main>
     </div>
+
+    {/* ─── STREAK CELEBRATION POPUP ─── */}
+    {showStreakCelebration && (
+      <StreakCelebration 
+        streak={latestStreak}
+        previousStreak={previousStreak}
+        xpEarned={latestXP}
+        totalXP={latestTotalXP}
+        onClose={() => setShowStreakCelebration(false)}
+      />
+    )}
+
   </div>
   );
 };
 
 export default LearningPage;
-
-
