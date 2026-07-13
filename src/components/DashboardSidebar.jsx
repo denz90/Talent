@@ -1,56 +1,100 @@
 import React from 'react';
 import { 
-  Library, 
-  Cpu, 
-  MessageSquare, 
-  Image as ImageIcon, 
+  LayoutDashboard, 
+  BookOpen, 
   Brain, 
-  Code2, 
-  Database,
-  Eye
+  Trophy,
+  Settings,
+  LogOut,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
-const SidebarItem = ({ icon: Icon, label, active = false }) => (
-  <button className={`w-full flex items-center gap-3 px-4 py-3 rounded-sm transition-all text-sm font-medium ${
-    active 
-      ? 'bg-brand-primary text-white shadow-md' 
-      : 'text-site-text/80 hover:bg-site-bg hover:text-site-text'
-  }`}>
+const SidebarItem = ({ icon: Icon, label, active = false, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium ${
+      active 
+        ? 'bg-brand-primary text-white shadow-md' 
+        : 'text-site-text/70 hover:bg-site-accent/20 hover:text-site-text'
+    }`}
+  >
     <Icon className="w-4 h-4" />
     {label}
   </button>
 );
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({ 
+  active, 
+  setActive, 
+  collapsed, 
+  setCollapsed, 
+  onLogout, 
+  onProfileSettings 
+}) => {
+  const navItems = [
+    { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    { id: 'courses', label: 'My Courses', icon: BookOpen },
+    { id: 'tools', label: 'AI Tools', icon: Brain },
+    { id: 'achievements', label: 'Achievements', icon: Trophy },
+  ];
+
   return (
-    <div className="w-64 border-r border-site-accent dark:border-slate-800 bg-site-bg dark:bg-slate-950 min-h-screen flex flex-col p-6 gap-8 transition-colors duration-300">
-      {/* Learning Paths */}
-      <div>
-        <h3 className="text-[11px] font-bold text-slate-400 dark:text-site-text/80 uppercase tracking-widest mb-4 px-4 font-sans text-left">Learning Paths</h3>
-        <div className="space-y-1">
-          <SidebarItem icon={Brain} label="AI Fundamentals" active />
-          <SidebarItem icon={Code2} label="Machine Learning" />
-          <SidebarItem icon={MessageSquare} label="Natural Language" />
-          <SidebarItem icon={Eye} label="Computer Vision" />
-        </div>
+    <aside 
+      className={`flex flex-col h-full transition-all duration-300 ${
+        collapsed ? 'w-[68px]' : 'w-[240px]'
+      }`}
+      style={{ 
+        background: 'var(--color-bg)',
+        borderRight: '1px solid var(--color-accent)'
+      }}
+    >
+      {/* Collapse toggle */}
+      <div className="flex justify-end p-4" style={{ borderBottom: '1px solid var(--color-accent)' }}>
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="p-1.5 rounded-lg transition-all hover:opacity-70"
+          style={{ background: 'var(--color-accent)', color: 'var(--color-text)' }}
+        >
+          {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        </button>
       </div>
 
-      {/* Popular Tools */}
-      <div>
-        <h3 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4 px-4 font-sans">Popular Tools</h3>
-        <div className="space-y-3">
-          {['UX Pilot', 'Midjourney', 'UX Pilot'].map((tool, idx) => (
-            <button key={idx} className="w-full flex items-center gap-3 px-4 py-3 border border-site-accent rounded-sm hover:border-site-accent hover:shadow-sm transition-all">
-              <div className="w-8 h-8 bg-slate-100 rounded flex items-center justify-center">
-                <div className="w-4 h-4 bg-slate-300 rounded-sm"></div>
-              </div>
-              <span className="text-sm font-bold text-slate-700">{tool}</span>
-              <div className="ml-auto w-1 h-1 bg-brand-primary rounded-full"></div>
-            </button>
-          ))}
-        </div>
+      {/* Navigation */}
+      <nav className="flex-1 p-4 space-y-1">
+        {navItems.map((item) => (
+          <SidebarItem
+            key={item.id}
+            icon={item.icon}
+            label={item.label}
+            active={active === item.id}
+            onClick={() => setActive(item.id)}
+          />
+        ))}
+      </nav>
+
+      {/* Bottom actions */}
+      <div className="p-4 space-y-1" style={{ borderTop: '1px solid var(--color-accent)' }}>
+        <button
+          onClick={onProfileSettings}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-site-text/70 hover:bg-site-accent/20 hover:text-site-text ${
+            collapsed ? 'justify-center' : ''
+          }`}
+        >
+          <Settings className="w-4 h-4" />
+          {!collapsed && 'Settings'}
+        </button>
+        <button
+          onClick={onLogout}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-medium text-red-500 hover:bg-red-50/50 ${
+            collapsed ? 'justify-center' : ''
+          }`}
+        >
+          <LogOut className="w-4 h-4" />
+          {!collapsed && 'Logout'}
+        </button>
       </div>
-    </div>
+    </aside>
   );
 };
 
