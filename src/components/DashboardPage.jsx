@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import DashboardHeader from './DashboardHeader';
-import DashboardSidebar from './DashboardSidebar';  
+import DashboardSidebar from './DashboardSidebar';
 import { API_BASE_URL } from '../config.js';
 import {
   Flame, Trophy, Play, Clock, BookOpen, CheckCircle2,
@@ -139,6 +139,47 @@ const CourseCard = ({ course, progress, onNavigateToPath }) => {
   );
 };
 
+/* ─── Badge Card – with tier colors ─── */
+const BadgeCard = ({ badge }) => {
+  const tierColors = {
+    bronze: { bg: '#CD7F32', light: '#CD7F3225', glow: 'rgba(205, 127, 50, 0.3)' },
+    silver: { bg: '#C0C0C0', light: '#C0C0C025', glow: 'rgba(192, 192, 192, 0.3)' },
+    gold: { bg: '#FFD700', light: '#FFD70025', glow: 'rgba(255, 215, 0, 0.3)' },
+    platinum: { bg: '#E5E4E2', light: '#E5E4E225', glow: 'rgba(229, 228, 226, 0.3)' },
+    diamond: { bg: '#B9F2FF', light: '#B9F2FF25', glow: 'rgba(185, 242, 255, 0.3)' },
+  };
+
+  const tier = tierColors[badge.tier] || tierColors.bronze;
+
+  return (
+    <div 
+      className="flex flex-col items-center text-center p-3 rounded-2xl border transition-all hover:scale-105"
+      style={{ 
+        borderColor: tier.bg, 
+        background: tier.light,
+        boxShadow: `0 0 20px ${tier.glow}`
+      }}
+    >
+      <div 
+        className="w-10 h-10 rounded-full flex items-center justify-center mb-2 text-xl"
+        style={{ 
+          background: tier.light,
+          border: `2px solid ${tier.bg}`
+        }}
+      >
+        {badge.icon || '🏆'}
+      </div>
+      <p className="font-bold text-[10px]" style={{ color: 'var(--color-text)' }}>{badge.name}</p>
+      <span 
+        className="text-[8px] font-bold uppercase tracking-wider mt-0.5"
+        style={{ color: tier.bg }}
+      >
+        {badge.tier}
+      </span>
+    </div>
+  );
+};
+
 /* ─── Greeting helper ─── */
 const getGreeting = () => {
   const h = new Date().getHours();
@@ -186,7 +227,7 @@ const WeeklyChart = ({ data }) => {
 };
 
 /* ═══════════════════════════════════════════════
-   MAIN DASHBOARD – WITH NEW SIDEBAR
+   MAIN DASHBOARD
 ═══════════════════════════════════════════════ */
 const DashboardPage = ({ 
   currentUser, 
@@ -359,7 +400,7 @@ const DashboardPage = ({
                 </div>
               </div>
 
-              {/* Achievements */}
+              {/* Achievements with Tiers */}
               <div className="rounded-3xl border p-6 flex flex-col bg-white dark:bg-transparent" style={{ borderColor: 'var(--color-accent)' }}>
                 <h2 className="font-extrabold text-[11px] uppercase tracking-wider mb-4" style={{ color: 'var(--color-text)' }}>
                   Unlocked Achievements
@@ -371,20 +412,15 @@ const DashboardPage = ({
                   </div>
                 ) : (
                   <div className="grid grid-cols-2 gap-3">
-                    {badgesUnlocked.map((title) => (
-                      <div key={title} className="flex flex-col items-center text-center p-3 rounded-2xl border" style={{ borderColor: 'var(--color-primary)', background: 'var(--color-bg)' }}>
-                        <div className="w-10 h-10 rounded-full flex items-center justify-center mb-2" style={{ background: 'var(--color-primary)22' }}>
-                          <Award className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
-                        </div>
-                        <p className="font-bold text-[10px]" style={{ color: 'var(--color-text)' }}>{title}</p>
-                      </div>
+                    {badgesUnlocked.map((badge) => (
+                      <BadgeCard key={badge.name} badge={badge} />
                     ))}
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Weekly Chart (optional) */}
+            {/* Weekly Chart */}
             <div className="rounded-3xl border p-6 flex flex-col bg-white dark:bg-transparent" style={{ borderColor: 'var(--color-accent)' }}>
               <div className="flex items-center justify-between">
                 <h2 className="font-extrabold text-base" style={{ color: 'var(--color-text)' }}>Study Time</h2>
@@ -462,13 +498,8 @@ const DashboardPage = ({
               </div>
             ) : (
               <div className="grid grid-cols-2 gap-3">
-                {badgesUnlocked.map((title) => (
-                  <div key={title} className="flex flex-col items-center text-center p-3 rounded-2xl border" style={{ borderColor: 'var(--color-primary)', background: 'var(--color-bg)' }}>
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center mb-2" style={{ background: 'var(--color-primary)22' }}>
-                      <Award className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
-                    </div>
-                    <p className="font-bold text-[10px]" style={{ color: 'var(--color-text)' }}>{title}</p>
-                  </div>
+                {badgesUnlocked.map((badge) => (
+                  <BadgeCard key={badge.name} badge={badge} />
                 ))}
               </div>
             )}
@@ -490,7 +521,6 @@ const DashboardPage = ({
       />
 
       <div className="flex flex-1 overflow-hidden relative">
-        {/* NEW SIDEBAR */}
         <DashboardSidebar
           active={activeNav}
           setActive={setActiveNav}
@@ -528,4 +558,4 @@ const DashboardPage = ({
   );
 };
 
-export default DashboardPage;
+export default DashboardPage; 
