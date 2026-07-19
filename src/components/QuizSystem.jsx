@@ -11,10 +11,29 @@ import {
 } from 'lucide-react';
 
 const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
-  // Helper to shuffle questions
+  // Helper to shuffle questions and their options
   const shuffleQuestions = (data) => {
     if (!data) return [];
-    return [...data].sort(() => Math.random() - 0.5);
+    return [...data]
+      .map(q => {
+        // Create an array of options with their original indices
+        const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+        // Shuffle the options
+        const shuffledOptions = [...optionsWithIndex].sort(() => Math.random() - 0.5);
+        // The correctAnswer in PathContent.js is 1-based (1, 2, 3, 4)
+        // Convert it to a 0-based index (0, 1, 2, 3) for our internal logic
+        const zeroBasedCorrectAnswer = Number(q.correctAnswer) - 1;
+        
+        // Find the new index of the correct answer
+        const newCorrectAnswerIndex = shuffledOptions.findIndex(o => o.originalIndex === zeroBasedCorrectAnswer);
+        
+        return {
+          ...q,
+          options: shuffledOptions.map(o => o.text),
+          correctAnswer: newCorrectAnswerIndex
+        };
+      })
+      .sort(() => Math.random() - 0.5);
   };
 
   const [answers, setAnswers] = useState({});
@@ -23,9 +42,13 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
   const [prevQuizData, setPrevQuizData] = useState(quizData);
   const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleQuestions(quizData));
 
+  // Reset state if quizData changes (e.g., navigating to a different day)
   if (quizData !== prevQuizData) {
     setPrevQuizData(quizData);
     setShuffledQuestions(shuffleQuestions(quizData));
+    setAnswers({});
+    setIsSubmitted(false);
+    setHasPassed(false);
   }
 
   const handleSelectAnswer = (questionId, optionIndex) => {
