@@ -394,8 +394,8 @@ if (view === 'dashboard') {
                   className="w-full h-full object-cover"
                   alt="Hero Background"
                 />
-                <div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
-                <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>
+                {/*<div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
+                <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>*/}
               </div>
 
               <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
@@ -426,14 +426,14 @@ if (view === 'dashboard') {
                         setView('signup');
                       }
                     }}
-                    className="text-site-text font-bold py-4 px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95"
+                    className="text-white font-bold py-4 px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95"
                   >
                     {currentUser ? 'Continue Learning' : 'Start Learning Free'}
                   </button>
 
                   <button 
                     onClick={() => handleNavClick('courses')}
-                    className="text-site-accent font-bold py-4 px-12 bg-site-bg/20 hover:bg-site-bg/40 border border-site-accent/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95"
+                    className="text-white font-bold py-4 px-12 bg-site-bg/20 hover:bg-site-bg/40 border border-site-accent/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95"
                   >
                     Browse Courses
                   </button>

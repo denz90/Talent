@@ -60,7 +60,7 @@
 
 [data-theme="beige2"] {
   --color-bg: #876434;
-  --color-text: #FAF7F3;
+  --color-text: #000000;
   --color-primary: #AC7F42;
   --color-accent: #D0B084;
 
@@ -71,14 +71,14 @@
 }
 
 [data-theme="gray"] {
-  --color-bg: #2D2D2D;
-  --color-text: #e4e4e4;
-  --color-primary: #9F9F9F;
-  --color-accent: #696969;
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-primary: #755091;
+  --color-accent: #9fbdff;
 
   /* Gradient variables */
-  --gradient-from: #9F9F9F;
-  --gradient-to: #2D2D2D;
+  --gradient-from: #755091;
+  --gradient-to: #c9d5f7;
   --shadow-color: #696969;
 }
 
@@ -116,8 +116,7 @@
   --gradient-from: #A6B1D8;
   --gradient-to: #E2E4F8;
   --shadow-color: rgba(42, 54, 92, 0.1);
-} /* ✅ FIX 1: Added the missing closing bracket here */
-
+} 
 
 /* Dynamic theme gradient utility class */
 .gradient-theme {
