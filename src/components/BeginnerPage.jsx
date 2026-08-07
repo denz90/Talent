@@ -19,12 +19,64 @@ import {
   Eye,
   Menu,
   X,
-  PenTool
+  PenTool,
+  Brain,
+  Globe,
+  Clock,
+  Briefcase,
+  MonitorPlay,
+  TrendingUp,
+  Heart,
+  Car,
+  DollarSign,
+  BookOpen,
+  Sparkles,
+  Lightbulb,
+  Activity
 } from 'lucide-react';
 import BeginnerSidebar from './BeginnerSidebar';
+import GeminiDay5 from './GeminiDay5';
+import ReadAlongDay18 from './ReadAlongDay18';
+import ScribbleDiffusionDay16 from './ScribbleDiffusionDay16';
+import EduaideDay2 from './EduaideDay2';
+import DiffitDay4 from './DiffitDay4';
+import SunoDay7 from './SunoDay7';
+import Lumen5Day21 from './Lumen5Day21';
+import QuizSystem from './QuizSystem';
+import { CHALLENGE_QUIZZES } from '../data/ChallengeQuizzes';
 
 // Course Data Model
 const COURSE_SECTIONS = [
+  {
+    id: 'ai-welcome',
+    title: 'Introduction To Artificial Intelligence',
+    subtitle: 'What this training will equip you with',
+    type: 'ai-welcome'
+  },
+  {
+    id: 'ai-foundation',
+    title: 'Foundation & Origin',
+    subtitle: 'What is AI and where did it come from?',
+    type: 'ai-foundation'
+  },
+  {
+    id: 'ai-types',
+    title: 'The AI Family (Types)',
+    subtitle: 'Understanding the AI ecosystem',
+    type: 'ai-types'
+  },
+  {
+    id: 'ai-industries',
+    title: 'AI in Education & Industries',
+    subtitle: 'How AI is transforming our world',
+    type: 'ai-industries'
+  },
+  {
+    id: 'ai-everyday',
+    title: 'Everyday AI',
+    subtitle: 'How & When to Use AI',
+    type: 'ai-everyday'
+  },
   {
     id: 'intro',
     title: '1. What is a Prompt?',
@@ -72,6 +124,48 @@ const COURSE_SECTIONS = [
     title: '8. Ethical Limitations & Mistakes',
     subtitle: 'Essential considerations for AI users',
     type: 'ethics'
+  },
+  {
+    id: 'eduaide',
+    title: 'Eduaide AI Challenge',
+    subtitle: 'AI-Powered Lesson Planning',
+    type: 'eduaide'
+  },
+  {
+    id: 'diffit',
+    title: 'Diffit Challenge',
+    subtitle: 'Differentiate Any Text',
+    type: 'diffit'
+  },
+  {
+    id: 'gemini',
+    title: 'Google Gemini Challenge',
+    subtitle: 'Your AI Assistant',
+    type: 'gemini'
+  },
+  {
+    id: 'suno',
+    title: 'Suno AI Challenge',
+    subtitle: 'Create AI Music',
+    type: 'suno'
+  },
+  {
+    id: 'scribble',
+    title: 'Scribble Diffusion Challenge',
+    subtitle: 'Turn Sketches into Art',
+    type: 'scribble'
+  },
+  {
+    id: 'readalong',
+    title: 'Read Along AI Challenge',
+    subtitle: 'AI Reading Assistant',
+    type: 'readalong'
+  },
+  {
+    id: 'lumen5',
+    title: 'Lumen5 Challenge',
+    subtitle: 'AI Video Creation',
+    type: 'lumen5'
   }
 ];
 
@@ -93,33 +187,39 @@ const ContentCard = ({ children, className = "" }) => (
   </motion.div>
 );
 
-const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
-  const [activeSection, setActiveSection] = useState('intro');
+const BeginnerPage = ({ onBack }) => {
+  const [activeSection, setActiveSection] = useState('ai-welcome');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
-  // Intersection Observer for sidebar sync
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      {
-        threshold: [0.2, 0.5, 0.8],
-        rootMargin: "-20% 0px -20% 0px"
-      }
+  const isIntroActive = ['ai-welcome', 'ai-foundation', 'ai-types', 'ai-industries', 'ai-everyday'].includes(activeSection);
+  const isPromptingActive = ['intro', 'basics', 'craft', 'skills', 'iterative', 'advanced', 'work', 'ethics'].includes(activeSection);
+  const isChallengeActive = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'].includes(activeSection);
+
+  if (showQuiz && isChallengeActive) {
+    const currentSection = COURSE_SECTIONS.find(s => s.id === activeSection);
+    return (
+      <div className="w-full min-h-screen bg-site-bg">
+        <QuizSystem 
+          dayTitle={currentSection.title}
+          quizData={CHALLENGE_QUIZZES[activeSection]}
+          onPass={() => {
+            setShowQuiz(false);
+            const challengeOrder = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'];
+            const currentIndex = challengeOrder.indexOf(activeSection);
+            if (currentIndex !== -1 && currentIndex < challengeOrder.length - 1) {
+              setActiveSection(challengeOrder[currentIndex + 1]);
+              window.scrollTo(0, 0);
+            }
+          }}
+          onBack={() => setShowQuiz(false)}
+          isDarkMode={false}
+        />
+      </div>
     );
+  }
 
-    COURSE_SECTIONS.forEach((section) => {
-      const el = document.getElementById(section.id);
-      if (el) observer.observe(el);
-    });
 
-    return () => observer.disconnect();
-  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -181,15 +281,15 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                 </button>
               </div>
               <div className="overflow-y-auto flex-1">
-                <BeginnerSidebar activeSection={activeSection} className="flex flex-col gap-6 w-full" />
+                <BeginnerSidebar activeSection={activeSection} onSelectSection={(id) => { setActiveSection(id); setIsMobileMenuOpen(false); }} className="flex flex-col gap-6 w-full" />
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-20">
-        <div className="flex gap-12 relative items-start">
+      <div className={`mx-auto max-w-7xl px-4 sm:px-6 pt-24 md:pt-32 pb-20`}>
+        <div className={`flex gap-12 relative items-start`}>
 
           {/* Desktop Sidebar (Hidden securely on mobile) */}
           <div className="hidden lg:flex lg:flex-col w-64 shrink-0 sticky top-32 gap-3">
@@ -203,14 +303,14 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
               </div>
               Back to Learning Paths
             </button>
-            <BeginnerSidebar activeSection={activeSection} />
+            <BeginnerSidebar activeSection={activeSection} onSelectSection={setActiveSection} />
           </div>
 
           {/* Main Content Area - Added min-w-0 to prevent flex blowout */}
-          <main className="flex-1 min-w-0 space-y-12 md:space-y-16">
+          <main className={`flex-1 min-w-0 space-y-12 md:space-y-16`}>
 
             {/* Hero / Back Button – back button hidden on desktop (lives in sidebar column) */}
-            <div className="flex flex-col gap-4 md:gap-6">
+            <div className={`flex flex-col gap-4 md:gap-6 ${isChallengeActive ? 'hidden' : ''}`}>
               <button
                 onClick={onBack}
                 className="lg:hidden group flex items-center gap-2 text-site-text/80 hover:text-site-text transition-colors font-medium w-fit text-sm md:text-base"
@@ -222,19 +322,293 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
               </button>
               <div>
                 <h1 className="text-3xl md:text-5xl font-bold text-site-text mb-3 md:mb-4 tracking-tight">
-                  Prompt Engineering <br className="md:hidden" /> for Beginners
+                  {isIntroActive && <>Introduction To <br className="md:hidden" /> Artificial Intelligence</>}
+                  {isPromptingActive && <>Prompt Engineering <br className="md:hidden" /> for Beginners</>}
                 </h1>
-                <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed"> </p> 
                 <p className="text-base md:text-lg text-site-text/80 max-w-2xl leading-relaxed">
-                  The ultimate guide to communicating with AI. Learn how to transform your ideas into perfect results.
+                  {isIntroActive && "Your first step into the world of AI. Understand the basics, its types, and how it's transforming our everyday lives."}
+                  {isPromptingActive && "The ultimate guide to communicating with AI. Learn how to transform your ideas into perfect results."}
                 </p>
               </div>
             </div>
 
             {/* Sections */}
-            {COURSE_SECTIONS.map((section) => (
-              <section key={section.id} id={section.id} className="scroll-mt-28 lg:scroll-mt-32">
-                <SectionHeader title={section.title} subtitle={section.subtitle} />
+            {COURSE_SECTIONS.filter(s => s.id === activeSection).map((section) => (
+              <section key={section.id} id={section.id} className={`animate-in fade-in slide-in-from-bottom-4 duration-500 ${isChallengeActive ? 'rounded-3xl overflow-hidden border border-site-accent shadow-sm' : ''}`}>
+                {!isChallengeActive && <SectionHeader title={section.title} subtitle={section.subtitle} />}
+
+                {section.type === 'ai-welcome' && (
+                  <div className="space-y-8 md:space-y-12">
+                    <ContentCard className="bg-gradient-to-br from-site-primary to-site-accent text-site-text border-none p-6 md:p-12 overflow-hidden relative">
+                      <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-site-bg/10 rounded-full blur-3xl hidden md:block"></div>
+                      <div className="relative z-10">
+                        <p className="text-xl md:text-3xl font-medium leading-relaxed italic mb-8">
+                          "AI can become your teaching assistant, supporting your work, saving time, and helping you focus on what matters most: your students."
+                        </p>
+                      </div>
+                    </ContentCard>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <ContentCard>
+                        <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-site-text">
+                          <CheckCircle2 className="text-emerald-500 w-6 h-6" /> What This Training Will Equip You With
+                        </h4>
+                        <ul className="space-y-4">
+                          {[
+                            "What AI is (and what it is not)",
+                            "How AI can support daily teaching tasks",
+                            "How to talk to AI using prompts",
+                            "AI tools for generating resources"
+                          ].map((item, i) => (
+                            <li key={i} className="flex gap-3 items-start">
+                              <Zap className="w-5 h-5 shrink-0 text-site-primary mt-0.5" />
+                              <span className="font-medium text-site-text/90 text-sm md:text-base">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </ContentCard>
+
+                      <ContentCard>
+                        <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-site-text">
+                          <User className="text-site-primary w-6 h-6" /> Who This Is For
+                        </h4>
+                        <p className="font-medium text-site-text/90 text-sm md:text-base leading-relaxed">
+                          Software developers, Educators, Graphic Designers, especially beginners with no AI experience.
+                        </p>
+                      </ContentCard>
+                    </div>
+                  </div>
+                )}
+
+                {section.type === 'ai-foundation' && (
+                  <div className="space-y-8 md:space-y-12">
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <ContentCard className="bg-site-primary/5 border-site-primary/20">
+                        <h4 className="text-xl font-bold mb-4 text-site-primary">What is AI?</h4>
+                        <p className="text-site-text/90 font-medium leading-relaxed text-sm md:text-base">
+                          Artificial Intelligence (AI) is software that helps you think faster, work smarter, and save time, like a teaching assistant that never gets tired.
+                        </p>
+                      </ContentCard>
+
+                      <ContentCard className="bg-rose-500/5 border-rose-500/20">
+                        <h4 className="text-xl font-bold mb-4 text-rose-500 flex items-center gap-2">
+                          <XCircle className="w-5 h-5" /> AI is NOT:
+                        </h4>
+                        <ul className="space-y-3">
+                          {["A human", "Always correct (hallucinates)", "A replacement for teachers", "Magic"].map((item, i) => (
+                            <li key={i} className="flex gap-3 items-start">
+                              <div className="w-2 h-2 rounded-full bg-rose-500 mt-2 shrink-0" />
+                              <span className="font-medium text-site-text/90 text-sm md:text-base">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </ContentCard>
+                    </div>
+
+                    <ContentCard>
+                      <h4 className="text-xl md:text-2xl font-bold mb-8 text-site-text text-center">The Origin of Artificial Intelligence</h4>
+                      
+                      <div className="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-site-primary/30 before:to-transparent">
+                        {[
+                          { year: "1950s", title: "Birth of AI", desc: "AI began as a scientific idea in research labs" },
+                          { year: "1956-1969", title: "Early Systems", desc: "Followed strict rules: if this, then that" },
+                          { year: "1970s to mid 1980s", title: "Limited Capability", desc: "Could calculate but not learn" },
+                          { year: "1985-1989", title: "Foundation Built", desc: "Progress was slow, but groundwork was laid" }
+                        ].map((item, i) => (
+                          <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-site-bg bg-site-primary text-site-bg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow md:mx-auto z-10">
+                              <div className="w-3 h-3 bg-site-bg rounded-full"></div>
+                            </div>
+                            <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-site-accent bg-site-bg shadow-sm transition-all hover:shadow-md">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-1">
+                                <h5 className="font-bold text-site-primary">{item.year}</h5>
+                                <span className="text-xs font-bold text-site-text/50 uppercase tracking-widest">{item.title}</span>
+                              </div>
+                              <p className="text-site-text/80 text-sm font-medium">{item.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="mt-10 p-6 bg-site-bg/50 rounded-2xl border border-site-accent text-center text-sm md:text-base font-bold italic text-site-text/80">
+                        "AI did not start in schools—it started in research labs."
+                      </div>
+                    </ContentCard>
+                  </div>
+                )}
+
+                {section.type === 'ai-types' && (
+                  <div className="space-y-8 md:space-y-12">
+                    <p className="text-site-text/80 font-medium text-base md:text-lg italic border-l-4 border-site-accent pl-4 md:pl-6 leading-relaxed">
+                      Understanding the different types of AI helps you choose the right tool for your task. Here's how the AI ecosystem breaks down:
+                    </p>
+
+                    <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
+                      {[
+                        { 
+                          title: "Machine Learning (ML)", 
+                          desc: "Learns from data and improves over time without being reprogrammed.",
+                          ex: "Netflix recommendations, fraud detection",
+                          icon: Brain,
+                          color: "from-blue-500 to-cyan-500"
+                        },
+                        { 
+                          title: "Deep Learning (DL)", 
+                          desc: "Uses many layers (neural networks) to understand complex data like images, sound, and text.",
+                          ex: "Face recognition, voice assistants",
+                          icon: Activity,
+                          color: "from-purple-500 to-pink-500"
+                        },
+                        { 
+                          title: "Generative AI (GenAI)", 
+                          desc: "Creates new content from user prompts—text, images, videos, music.",
+                          ex: "ChatGPT, DALL·E, Runway ML",
+                          icon: Sparkles,
+                          color: "from-site-primary to-site-accent"
+                        }
+                      ].map((item, i) => (
+                        <ContentCard key={i} className="flex flex-col h-full hover:-translate-y-1 transition-transform">
+                          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white mb-6 shadow-lg`}>
+                            <item.icon className="w-6 h-6" />
+                          </div>
+                          <h4 className="text-lg font-bold text-site-text mb-3">{item.title}</h4>
+                          <p className="text-site-text/80 font-medium text-sm md:text-base mb-6 flex-grow">{item.desc}</p>
+                          <div className="bg-site-bg/50 p-4 rounded-xl border border-site-accent/50">
+                            <p className="text-[10px] font-bold text-site-text/50 uppercase tracking-widest mb-1">Example</p>
+                            <p className="text-sm font-medium text-site-text/90">{item.ex}</p>
+                          </div>
+                        </ContentCard>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {section.type === 'ai-industries' && (
+                  <div className="space-y-8 md:space-y-12">
+                    <ContentCard className="bg-gradient-to-r from-site-primary/10 to-transparent border-site-primary/20">
+                      <h4 className="text-2xl font-bold mb-4 text-site-text">Why AI in Education? Why Now?</h4>
+                      <p className="text-site-text/90 font-medium text-base md:text-lg mb-8">
+                        AI is transforming education at a critical moment. The opportunity is clear: AI can amplify what educators do best.
+                      </p>
+                      
+                      <div className="grid sm:grid-cols-3 gap-6">
+                        {[
+                          { title: "Growing Workload", desc: "Teachers juggle increasing administrative tasks with limited time for personalized student support.", icon: Briefcase },
+                          { title: "Digital Reality", desc: "AI is already part of students' lives. Schools are becoming more digital every day.", icon: Globe },
+                          { title: "Educator Leadership", desc: "Teachers must lead responsible AI use in the classroom and model best practices.", icon: Target }
+                        ].map((item, i) => (
+                          <div key={i} className="bg-site-bg p-5 rounded-2xl border border-site-accent">
+                            <item.icon className="w-6 h-6 text-site-primary mb-3" />
+                            <h5 className="font-bold text-site-text mb-2">{item.title}</h5>
+                            <p className="text-sm text-site-text/80 font-medium">{item.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </ContentCard>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <ContentCard>
+                        <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-site-text">
+                          <Heart className="text-rose-500 w-6 h-6" /> HEALTHCARE | MINISTRY
+                        </h4>
+                        <div className="space-y-6">
+                          <div>
+                            <h5 className="font-bold text-site-text text-sm md:text-base mb-1">Supporting Critical Decisions</h5>
+                            <p className="text-xs font-bold text-site-primary uppercase tracking-widest mb-2">Symptom Checking & Diagnosis</p>
+                            <p className="text-site-text/80 text-sm md:text-base font-medium leading-relaxed">
+                              Doctors use Isabel Healthcare and Ada Health to compare symptoms with millions of past cases before making decisions. AI suggests possible conditions and tests to support clinical judgment.
+                            </p>
+                          </div>
+                          <div className="h-px bg-site-accent/50 w-full" />
+                          <div>
+                            <p className="text-xs font-bold text-site-primary uppercase tracking-widest mb-2">Sermon Preparation Support</p>
+                            <p className="text-site-text/80 text-sm md:text-base font-medium leading-relaxed">
+                              Pastors use tools like ChatGPT, Logos AI, and Sermonary AI to organize ideas and structure messages. The AI suggests themes and outlines, but the message still comes from the pastor.
+                            </p>
+                          </div>
+                        </div>
+                      </ContentCard>
+
+                      <ContentCard>
+                        <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-site-text">
+                          <DollarSign className="text-emerald-500 w-6 h-6" /> FINANCE | TRANSPORTATION
+                        </h4>
+                        <div className="space-y-6">
+                          <div>
+                            <p className="text-xs font-bold text-site-primary uppercase tracking-widest mb-2">Fraud Detection</p>
+                            <p className="text-site-text/80 text-sm md:text-base font-medium leading-relaxed">
+                              Banks use AI tools like Feedzai, Visa Advanced Authorization, and Mastercard Decision Intelligence to detect fraud before money is lost by monitoring transactions and alerting unusual activity.
+                            </p>
+                          </div>
+                          <div className="h-px bg-site-accent/50 w-full" />
+                          <div>
+                            <p className="text-xs font-bold text-site-primary uppercase tracking-widest mb-2">Personal Finance</p>
+                            <p className="text-site-text/80 text-sm md:text-base font-medium leading-relaxed">
+                              AI apps like Cleo, Zeta, and Mint analyze spending patterns and suggest better money habits to help people budget smarter.
+                            </p>
+                          </div>
+                          <div className="h-px bg-site-accent/50 w-full" />
+                          <div>
+                            <p className="text-xs font-bold text-site-primary uppercase tracking-widest mb-2">Route Planning</p>
+                            <p className="text-site-text/80 text-sm md:text-base font-medium leading-relaxed">
+                              Google Maps and Waze use AI to predict traffic conditions and suggest faster routes in real-time, saving commuters time daily.
+                            </p>
+                          </div>
+                        </div>
+                      </ContentCard>
+                    </div>
+                  </div>
+                )}
+
+                {section.type === 'ai-everyday' && (
+                  <div className="space-y-8 md:space-y-12">
+                    <ContentCard className="bg-gradient-to-r from-site-primary to-site-accent text-site-text border-none">
+                      <div className="flex flex-col md:flex-row items-center gap-8">
+                        <div className="md:w-1/2">
+                          <h4 className="text-2xl md:text-3xl font-bold mb-4">Everyday AI You Already Use</h4>
+                          <p className="text-site-text/90 font-medium text-base md:text-lg">
+                            You are already using AI, now it's time to use it intentionally.
+                          </p>
+                        </div>
+                        <div className="md:w-1/2 grid grid-cols-2 gap-4 w-full">
+                          {[
+                            { title: "Autocorrect", desc: "When marking or typing", icon: PenTool },
+                            { title: "Video Recs", desc: "YouTube & TikTok suggestions", icon: MonitorPlay },
+                            { title: "Search Recs", desc: "Google predictive text", icon: Search },
+                            { title: "Face Unlock", desc: "On your phone", icon: Eye }
+                          ].map((item, i) => (
+                            <div key={i} className="bg-site-bg/10 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                              <item.icon className="w-5 h-5 mb-2 opacity-80" />
+                              <h5 className="font-bold text-sm">{item.title}</h5>
+                              <p className="text-xs opacity-80">{item.desc}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </ContentCard>
+
+                    <ContentCard>
+                      <h4 className="text-xl md:text-2xl font-bold mb-8 text-site-text">How & When to Use AI</h4>
+                      <div className="space-y-6">
+                        {[
+                          { title: "Plan Your Lessons", desc: "Use AI to brainstorm activities, create lesson outlines, and develop curriculum materials efficiently. Generate worksheets, quizzes, discussion prompts quickly.", icon: BookOpen },
+                          { title: "Support Students", desc: "Personalize learning experiences and provide differentiated instruction for diverse needs.", icon: User },
+                          { title: "Review & Refine", desc: "Always review AI-generated content before using it with students to ensure quality and accuracy.", icon: RefreshCw }
+                        ].map((item, i) => (
+                          <div key={i} className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start bg-site-bg p-5 md:p-6 rounded-2xl border border-site-accent shadow-sm">
+                            <div className="w-12 h-12 rounded-2xl bg-site-primary/10 text-site-primary flex items-center justify-center shrink-0">
+                              <item.icon className="w-6 h-6" />
+                            </div>
+                            <div>
+                              <h5 className="font-bold text-site-text text-lg mb-2">{item.title}</h5>
+                              <p className="text-site-text/80 font-medium text-sm md:text-base leading-relaxed">{item.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </ContentCard>
+                  </div>
+                )}
 
                 {section.type === 'intro' && (
                   <>
@@ -631,6 +1005,14 @@ const BeginnerPage = ({ onBack, onLogoClick, onNavClick }) => {
                     </ContentCard>
                   </div>
                 )}
+
+                {section.type === 'eduaide' && <EduaideDay2 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'diffit' && <DiffitDay4 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'gemini' && <GeminiDay5 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'suno' && <SunoDay7 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'scribble' && <ScribbleDiffusionDay16 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'readalong' && <ReadAlongDay18 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+                {section.type === 'lumen5' && <Lumen5Day21 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
               </section>
             ))}
 

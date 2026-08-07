@@ -43,7 +43,7 @@ const ReadAlongDay18 = ({ onNext }) => {
   ];
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text font-sans">
+    <div className="w-full bg-site-primary text-site-text font-sans">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
