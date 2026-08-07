@@ -188,40 +188,20 @@ const ContentCard = ({ children, className = "" }) => (
 );
 
 const BeginnerPage = ({ onBack }) => {
+  // ✅ ALL hooks FIRST - in the same order every time
   const [activeSection, setActiveSection] = useState('ai-welcome');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
 
+  // ✅ Compute derived values AFTER hooks
   const isIntroActive = ['ai-welcome', 'ai-foundation', 'ai-types', 'ai-industries', 'ai-everyday'].includes(activeSection);
   const isPromptingActive = ['intro', 'basics', 'craft', 'skills', 'iterative', 'advanced', 'work', 'ethics'].includes(activeSection);
   const isChallengeActive = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'].includes(activeSection);
+  
+  const currentSection = COURSE_SECTIONS.find(s => s.id === activeSection);
+  const challengeOrder = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'];
 
-  if (showQuiz && isChallengeActive) {
-    const currentSection = COURSE_SECTIONS.find(s => s.id === activeSection);
-    return (
-      <div className="w-full min-h-screen bg-site-bg">
-        <QuizSystem 
-          dayTitle={currentSection.title}
-          quizData={CHALLENGE_QUIZZES[activeSection]}
-          onPass={() => {
-            setShowQuiz(false);
-            const challengeOrder = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'];
-            const currentIndex = challengeOrder.indexOf(activeSection);
-            if (currentIndex !== -1 && currentIndex < challengeOrder.length - 1) {
-              setActiveSection(challengeOrder[currentIndex + 1]);
-              window.scrollTo(0, 0);
-            }
-          }}
-          onBack={() => setShowQuiz(false)}
-          isDarkMode={false}
-        />
-      </div>
-    );
-  }
-
-
-
-  // Lock body scroll when mobile menu is open
+  // ✅ Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -230,6 +210,36 @@ const BeginnerPage = ({ onBack }) => {
     }
     return () => { document.body.style.overflow = 'unset'; }
   }, [isMobileMenuOpen]);
+
+  // ✅ Handle quiz pass - moves to next challenge
+  const handleQuizPass = () => {
+    setShowQuiz(false);
+    const currentIndex = challengeOrder.indexOf(activeSection);
+    if (currentIndex !== -1 && currentIndex < challengeOrder.length - 1) {
+      setActiveSection(challengeOrder[currentIndex + 1]);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  // ✅ Handle quiz back
+  const handleQuizBack = () => {
+    setShowQuiz(false);
+  };
+
+  // ✅ NOW we can conditionally render after all hooks are declared
+  if (showQuiz && isChallengeActive) {
+    return (
+      <div className="w-full min-h-screen bg-site-bg">
+        <QuizSystem 
+          dayTitle={currentSection?.title || 'Challenge'}
+          quizData={CHALLENGE_QUIZZES[activeSection]}
+          onPass={handleQuizPass}
+          onBack={handleQuizBack}
+          isDarkMode={false}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-site-bg">
