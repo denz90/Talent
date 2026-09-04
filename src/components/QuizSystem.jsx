@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   CheckCircle2, 
   XCircle, 
@@ -11,7 +11,13 @@ import {
 } from 'lucide-react';
 
 const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
-  // Helper to shuffle questions and their options
+  // ✅ ALL hooks FIRST - in the same order every time
+  const [answers, setAnswers] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasPassed, setHasPassed] = useState(false);
+  const [prevQuizData, setPrevQuizData] = useState(quizData);
+  
+  // Helper function to shuffle questions and their options
   const shuffleQuestions = (data) => {
     if (!data) return [];
     return [...data]
@@ -36,20 +42,19 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
       .sort(() => Math.random() - 0.5);
   };
 
-  const [answers, setAnswers] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [hasPassed, setHasPassed] = useState(false);
-  const [prevQuizData, setPrevQuizData] = useState(quizData);
+  // Initialize shuffledQuestions with useState
   const [shuffledQuestions, setShuffledQuestions] = useState(() => shuffleQuestions(quizData));
 
-  // Reset state if quizData changes (e.g., navigating to a different day)
-  if (quizData !== prevQuizData) {
-    setPrevQuizData(quizData);
-    setShuffledQuestions(shuffleQuestions(quizData));
-    setAnswers({});
-    setIsSubmitted(false);
-    setHasPassed(false);
-  }
+  // ✅ Use useEffect for side effects (resetting when quizData changes)
+  useEffect(() => {
+    if (quizData !== prevQuizData) {
+      setPrevQuizData(quizData);
+      setShuffledQuestions(shuffleQuestions(quizData));
+      setAnswers({});
+      setIsSubmitted(false);
+      setHasPassed(false);
+    }
+  }, [quizData, prevQuizData]);
 
   const handleSelectAnswer = (questionId, optionIndex) => {
     if (!isSubmitted) {
@@ -57,34 +62,34 @@ const QuizSystem = ({ dayTitle, quizData, onPass, onBack, isDarkMode }) => {
     }
   };
 
-const handleSubmitQuiz = () => {
-  const score = shuffledQuestions.reduce((acc, q) => {
-    return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
-  }, 0);
+  const handleSubmitQuiz = () => {
+    const score = shuffledQuestions.reduce((acc, q) => {
+      return acc + (answers[q.id] === q.correctAnswer ? 1 : 0);
+    }, 0);
 
-  console.log("📊 QUIZ: Score =", score, "/", shuffledQuestions.length);
-  console.log("📊 QUIZ: Perfect score required? Yes (score === total)");
+    console.log("📊 QUIZ: Score =", score, "/", shuffledQuestions.length);
+    console.log("📊 QUIZ: Perfect score required? Yes (score === total)");
 
-  setIsSubmitted(true);
+    setIsSubmitted(true);
 
-  if (score === shuffledQuestions.length) {
-    console.log("✅ QUIZ: PERFECT SCORE! Setting hasPassed = true");
-    setHasPassed(true);
-    
-    console.log("⏰ QUIZ: Scheduling onPass() in 2000ms...");
-    setTimeout(() => {
-      console.log("⏰ QUIZ: setTimeout FIRED! Calling onPass()");
-      if (onPass) {
-        console.log("✅ QUIZ: onPass exists, calling it...");
-        onPass();
-      } else {
-        console.error("❌ QUIZ: onPass is UNDEFINED!");
-      }
-    }, 2000);
-  } else {
-    console.log("❌ QUIZ: Not a perfect score. No pass.");
-  }
-};
+    if (score === shuffledQuestions.length) {
+      console.log("✅ QUIZ: PERFECT SCORE! Setting hasPassed = true");
+      setHasPassed(true);
+      
+      console.log("⏰ QUIZ: Scheduling onPass() in 2000ms...");
+      setTimeout(() => {
+        console.log("⏰ QUIZ: setTimeout FIRED! Calling onPass()");
+        if (onPass) {
+          console.log("✅ QUIZ: onPass exists, calling it...");
+          onPass();
+        } else {
+          console.error("❌ QUIZ: onPass is UNDEFINED!");
+        }
+      }, 2000);
+    } else {
+      console.log("❌ QUIZ: Not a perfect score. No pass.");
+    }
+  };
 
   const handleRetry = () => {
     setAnswers({});
