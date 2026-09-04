@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
 
 //importing the API base URL from config
 import { API_BASE_URL } from '../config';
@@ -162,9 +162,10 @@ const SignupPage = ({ onBack, onLoginClick, onRequireOTP }) => {
           <button 
             type="submit"
             disabled={isLoading}
-            className={`w-full bg-site-primary text-site-text font-bold py-5 rounded-sm transition-all shadow-lg shadow-site-primary/20 mt-4 
+            className={`w-full bg-site-primary text-site-text font-bold py-5 rounded-sm transition-all shadow-lg shadow-site-primary/20 mt-4 flex items-center justify-center gap-2
               ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-site-primary/80 active:scale-[0.98]'}`}
           >
+            {isLoading && <Loader2 size={20} className="animate-spin" />}
             {isLoading ? 'Creating Account...' : 'Create Account'}
           </button>
         </form>
