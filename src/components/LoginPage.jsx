@@ -1,8 +1,27 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 //importing the API base URL from config
 import { API_BASE_URL } from '../config';
+
+const LoadingDots = () => (
+  <div className="flex gap-1.5 items-center justify-center">
+    {[0, 1, 2].map((dot) => (
+      <motion.div
+        key={dot}
+        className="w-2.5 h-2.5 bg-white rounded-full opacity-80"
+        animate={{ y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
+        transition={{
+          duration: 0.6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: dot * 0.15,
+        }}
+      />
+    ))}
+  </div>
+);
 
 // Notice we changed onBack('dashboard') to a new prop: onLoginSuccess
 const LoginPage = ({ onBack, onSignupClick, onLoginSuccess }) => {
@@ -139,8 +158,7 @@ const LoginPage = ({ onBack, onSignupClick, onLoginSuccess }) => {
             className={`w-full bg-site-primary text-site-text font-bold py-5 rounded-sm transition-all shadow-lg shadow-site-primary/20 mt-4 flex items-center justify-center gap-2
               ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-site-primary/80 active:scale-[0.98]'}`}
           >
-            {isLoading && <Loader2 size={20} className="animate-spin" />}
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? <LoadingDots /> : 'Sign In'}
           </button>
         </form>
 
