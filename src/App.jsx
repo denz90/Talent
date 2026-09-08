@@ -253,7 +253,7 @@ if (view === 'dashboard') {
         onNavigateTool={(toolId) => setCurrentTool(toolId)}
         onNavigateCourse={(course) => { setActiveCourse(course); setView('learning_page'); }}
         onNavigatePath={(level) => { 
-          if (level === 'beginner') { setView('beginner'); } 
+          if (level === 'beginner') { setSelectedLevel('Beginner'); setView('path_selection'); } 
           else { setSelectedLevel(level); setView('path_selection'); }
         }}
       />
@@ -365,13 +365,17 @@ if (view === 'dashboard') {
             level={selectedLevel}
             onBack={() => setView('home')}
             onSelectPath={(course) => {
-              setActiveCourse(course);
-              setView('learning_page');
+              if (selectedLevel === 'Beginner') {
+                setView('beginner');
+              } else {
+                setActiveCourse(course);
+                setView('learning_page');
+              }
             }}
           />
         ) : view === 'beginner' ? (
           <BeginnerPage 
-            onBack={() => setView('home')} 
+            onBack={() => setView('path_selection')} 
           />
         ) : view === 'help_center' ? (
           <HelpCenterPage onBack={() => setView('home')} />
@@ -494,7 +498,10 @@ if (view === 'dashboard') {
                     features={[
                       "Basic Prompting Techniques",
                     ]}
-                    onClick={() => setView('beginner')}
+                    onClick={() => {
+                      setSelectedLevel('Beginner');
+                      setView('path_selection');
+                    }}
                   />
                   <LearningPathCard
                     icon={Zap}
