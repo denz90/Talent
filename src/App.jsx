@@ -33,6 +33,8 @@ import SystemStatusPage from './components/SystemStatusPage';
 import BlogPage from './components/BlogPage';
 import CompanyPage from './components/CompanyPage';
 import { API_BASE_URL } from './config.js'; 
+import overviewVideo from './assets/Introduction video.mp4';
+ 
 
 const TOOLS_DATA = {
   chatgpt: {
@@ -446,6 +448,41 @@ if (view === 'dashboard') {
 
               </div>
             </section>
+
+           {/* 🎥 Video Section - Production Ready */}
+          <section className="py-16 md:py-24 bg-site-bg/50">
+            <div className="max-w-5xl mx-auto px-6">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-site-text mb-3">
+                  What You'll Learn
+                </h2>
+                <p className="text-site-text/70 font-medium">
+                  Watch this quick overview of our AI learning platform
+                </p>
+              </div>
+              
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+                {/* 16:9 Aspect Ratio Container */}
+                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                  <video
+                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline  // Important for mobile
+                  >
+
+
+                    {/* Multiple formats for better browser support */}
+                    <source src={overviewVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </section>
+
 
             {/* Popular AI Tools */}
             <section id="tools" className="py-32 ">
