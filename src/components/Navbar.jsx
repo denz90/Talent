@@ -6,7 +6,7 @@ const THEME_OPTIONS = [
   { id: 'timeless', label: 'Timeless Retro', swatch: '#2075A7' },
   { id: 'coastal', label: 'Coastal Retro', swatch: '#74A8A4' },
   { id: 'tranquil', label: 'Tranquil Sky', swatch: '#B7C9E6' },
-  { id: 'gray', label: 'gray', swatch: '#2F3E46' },
+  { id: 'gray', label: 'gray', swatch: '#755091' },
   { id: 'beige', label: 'beige', swatch: '#876434' }
 ];
 
