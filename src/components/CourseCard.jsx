@@ -1,12 +1,10 @@
 import React from 'react';
 import { ExternalLink, Clock, Star } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const CourseCard = ({ title, description, duration, rating, image }) => {
   return (
-    <motion.div
-      whileHover={{ y: -8 }}
-      className="bg-[#DBDBDB] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group"
+    <div
+      className="bg-[#DBDBDB] rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full group"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -39,7 +37,7 @@ const CourseCard = ({ title, description, duration, rating, image }) => {
           </button>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

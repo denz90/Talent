@@ -5,10 +5,6 @@ import LearningPathCard from './components/LearningPathCard';
 import TestimonialCard from './components/TestimonialCard';
 import Footer from './components/Footer';
 import {
-  MessageSquare,
-  Image as ImageIcon,
-  Code2,
-  Cpu,
   Zap,
   Compass,
   Trophy,
