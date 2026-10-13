@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 
 const LearningPathCard = ({ icon: Icon, title, description, features, popular, dark, onClick }) => {
   return (
-    <div className={`relative p-10 rounded-sm flex flex-col h-full text-left transition-all duration-300 ${dark ? 'bg-site-primary text-site-text shadow-2xl scale-105 z-10' : 'bg-site-bg text-site-text border border-site-accent hover:border-site-accent shadow-sm'}`}>
+    <div className={`relative p-6 sm:p-8 md:p-10 rounded-sm flex flex-col h-full text-left transition-all duration-300 ${dark ? 'bg-site-primary text-site-text shadow-2xl md:scale-105 z-10' : 'bg-site-bg text-site-text border border-site-accent hover:border-site-accent shadow-sm'}`}>
       {popular && (
         <label className="absolute top-6 right-6 bg-site-bg text-site-primary text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest shadow-sm">
           Popular

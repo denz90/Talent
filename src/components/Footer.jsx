@@ -32,14 +32,14 @@ const TikTokIcon = () => (
 
 const Footer = ({ onNavigate }) => {
   return (
-  <footer className="px-5 sm:px-10 lg:px-24 py-10 lg:py-16 bg-site-primary text-site-text">
+  <footer className="px-4 sm:px-8 lg:px-24 py-8 sm:py-10 lg:py-16 bg-site-primary text-site-text">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-16 text-left">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-12 mb-10 sm:mb-12 md:mb-16 text-left">
           
           {/* Column 1: Branding & Intro (Takes up more space) */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2">
             {/* Replace with an actual <img /> logo in production */}
             <h3 className="text-2xl font-bold text-site-text mb-4 tracking-tight">
               HawkmanLabs.
@@ -49,7 +49,7 @@ const Footer = ({ onNavigate }) => {
             </p>
 
             {/* Social Icons */}
-            <div className="flex gap-4 mt-12">
+            <div className="flex flex-wrap gap-4 mt-6 sm:mt-10">
             <a href="https://www.facebook.com/profile.php?id=61580819033887" aria-label="Facebook" className="text-site-text hover:text-white/70 transition-colors">
               <FacebookIcon />
             </a>

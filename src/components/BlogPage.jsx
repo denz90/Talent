@@ -32,7 +32,7 @@ const BlogPage = ({ onBack }) => {
   return (
     <div className="min-h-screen bg-site-bg font-sans pb-24">
       {/* Blog Header */}
-      <div className="bg-brand-dark pt-20 pb-20 px-6">
+      <div className="bg-brand-dark pt-14 sm:pt-16 md:pt-20 pb-14 sm:pb-16 md:pb-20 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center">
           <button 
             onClick={onBack}
@@ -41,12 +41,12 @@ const BlogPage = ({ onBack }) => {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </button>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">HawkmanLabs Blog</h1>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto font-medium">Insights, updates, and deep dives into the intersection of AI and modern education.</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight">HawkmanLabs Blog</h1>
+          <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto font-medium">Insights, updates, and deep dives into the intersection of AI and modern education.</p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-10 relative z-10">
         {/* Featured Post */}
         <div className="bg-site-bg rounded-3xl overflow-hidden shadow-xl border border-site-accent flex flex-col lg:flex-row mb-16">
           <div className="lg:w-1/2 h-64 lg:h-auto relative">

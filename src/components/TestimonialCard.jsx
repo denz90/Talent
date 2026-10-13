@@ -3,7 +3,7 @@ import { Star } from 'lucide-react';
 
 const TestimonialCard = ({ quote, author, role, avatar }) => {
   return (
-    <div className="border border-site-accent p-8 rounded-sm bg-site-bg text-left flex flex-col gap-6 h-full shadow-sm hover:shadow-lg transition-all duration-300">
+    <div className="border border-site-accent p-5 sm:p-6 md:p-8 rounded-sm bg-site-bg text-left flex flex-col gap-4 sm:gap-6 h-full shadow-sm hover:shadow-lg transition-all duration-300">
       <div className="flex gap-1">
         {[...Array(5)].map((_, i) => (
           <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />

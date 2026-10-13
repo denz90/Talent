@@ -9,8 +9,20 @@ const ToolDetailPage = ({ tool, onBack }) => {
   return (
     <div className="min-h-screen bg-site-bg">
       <div className="flex flex-col lg:flex-row min-h-screen">
+        {/* Mobile Image - shown above content on mobile */}
+        <div className="block lg:hidden w-full h-48 sm:h-64 relative overflow-hidden">
+          <img
+            src={image}
+            alt={title}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-site-bg/80"></div>
+        </div>
+
         {/* Left Content */}
-        <div className="w-full lg:w-3/5 p-8 lg:p-24 flex flex-col justify-center">
+        <div className="w-full lg:w-3/5 p-5 sm:p-8 md:p-12 lg:p-24 flex flex-col justify-center">
           <button
             onClick={onBack}
             className="flex items-center gap-2 text-slate-400 hover:text-brand-primary transition-colors mb-12 font-bold uppercase tracking-widest text-xs"
@@ -19,7 +31,7 @@ const ToolDetailPage = ({ tool, onBack }) => {
             Back to Home
           </button>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-brand-dark mb-12 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark mb-6 sm:mb-8 md:mb-12 tracking-tight">
             {title}
           </h1>
 
@@ -58,7 +70,7 @@ const ToolDetailPage = ({ tool, onBack }) => {
             </section>
 
             {/* Prompt Section */}
-            <section className="bg-site-bg p-8 rounded-sm border-l-4 border-brand-primary">
+            <section className="bg-site-bg p-4 sm:p-6 md:p-8 rounded-sm border-l-4 border-brand-primary">
               <h2 className="text-xl font-bold text-site-text mb-4">Prompt</h2>
               <p className="text-site-text/80 bg-site-bg p-6 rounded border border-site-accent italic leading-relaxed font-medium mb-6">
                 "{prompt}"

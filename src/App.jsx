@@ -421,7 +421,7 @@ const App = () => {
         ) : (
           <>
             {/* Hero Section */}
-            <section className="relative min-h-[700px] flex items-center justify-center overflow-hidden">
+            <section className="relative min-h-[520px] sm:min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden">
               {/* Background Image with Overlay */}
               <div className="absolute inset-0 z-0">
                 <picture>
@@ -442,12 +442,12 @@ const App = () => {
                     height="1195"
                   />
                 </picture>
-                {/*<div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
-                <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>*/}
+                {/* Dark overlay for mobile text readability */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 md:from-black/30 md:via-black/20 md:to-black/40"></div>
               </div>
 
-              <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
-                <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-8 tracking-tight">
+              <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center text-white pt-14 sm:pt-16 md:pt-20 pb-8 sm:pb-12">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] sm:leading-[1.05] mb-4 sm:mb-6 md:mb-8 tracking-tight drop-shadow-lg">
                   {currentUser ? (
                     <>
                       Welcome back, <br /> {currentUser.username}!
@@ -459,13 +459,13 @@ const App = () => {
                   )}
                 </h1>
                 
-                <p className="text-lg md:text-xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 mb-8 sm:mb-10 md:mb-12 leading-relaxed max-w-2xl mx-auto font-medium drop-shadow-md">
                   Interactive courses, hands-on projects, and real-world applications. <br className="hidden md:block" />
                   Perplexity AI, Claude AI, ChatGPT, Gamma AI, and 50+ AI tools.
                 </p>
                 
-                {/* REPLACED BUTTONS START HERE */}
-                <div className="flex flex-wrap justify-center gap-6">
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
                   <button 
                     onClick={() => {
                       if (currentUser) {
@@ -474,26 +474,25 @@ const App = () => {
                         setView('signup');
                       }
                     }}
-                    className="text-white font-bold py-4 px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95"
+                    className="text-white font-bold py-3 sm:py-4 px-8 sm:px-12 bg-site-primary hover:bg-site-primary/80 transition-all cursor-pointer rounded-sm shadow-lg active:scale-95 text-sm sm:text-base"
                   >
                     {currentUser ? 'Continue Learning' : 'Start Learning Free'}
                   </button>
 
                   <button 
                     onClick={() => handleNavClick('courses')}
-                    className="text-white font-bold py-4 px-12 bg-site-bg/20 hover:bg-site-bg/40 border border-site-accent/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95"
+                    className="text-white font-bold py-3 sm:py-4 px-8 sm:px-12 bg-white/10 hover:bg-white/20 border border-white/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95 text-sm sm:text-base"
                   >
                     Browse Courses
                   </button>
                 </div>
-                {/* REPLACED BUTTONS END HERE */}
 
               </div>
             </section>
 
            {/* 🎥 Video Section - Production Ready */}
-          <section className="py-16 md:py-24 bg-site-bg/50">
-            <div className="max-w-5xl mx-auto px-6">
+          <section className="py-10 sm:py-16 md:py-24 bg-site-bg/50">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold text-site-text mb-3">
                   What You'll Learn
@@ -527,13 +526,13 @@ const App = () => {
 
 
             {/* Popular AI Tools */}
-            <section id="tools" className="py-32 ">
-              <div className="max-w-7xl mx-auto px-6 text-center">
-                <div className="mb-20">
-                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
+            <section id="tools" className="py-12 sm:py-20 md:py-32">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+                <div className="mb-10 sm:mb-16 md:mb-20">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
                   <p className="font-medium text-site-text/80">Get hands-on experience with industry-leading AI platforms</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                   <ToolCard
                     icon={MessageCircle}
                     title="ChatGPT"
@@ -563,13 +562,13 @@ const App = () => {
             </section>
 
             {/* Learning Paths */}
-            <section id="courses" className="py-32 bg-site-primary/20">
-              <div className="max-w-7xl mx-auto px-6 text-center">
-                <div className="mb-20">
-                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
-                  <p className="font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
+            <section id="courses" className="py-12 sm:py-20 md:py-32 bg-site-primary/20">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+                <div className="mb-10 sm:mb-16 md:mb-20">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
+                  <p className="text-sm sm:text-base font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
                   <LearningPathCard
                     icon={Compass}
                     title="Beginner"
@@ -618,13 +617,13 @@ const App = () => {
             </section>
 
             {/* Testimonials */}
-            <section id="testimonials" className="py-32">
-              <div className="max-w-7xl mx-auto px-6 text-center">
-                <div className="mb-20">
-                  <h2 className="text-4xl font-bold mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
-                  <p className="font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
+            <section id="testimonials" className="py-12 sm:py-20 md:py-32">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+                <div className="mb-10 sm:mb-16 md:mb-20">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
+                  <p className="text-sm sm:text-base font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
                   <TestimonialCard
                     quote="This platform completely changed how I approach my design work. The Midjourney course alone saved me hours every week."
                     author="Sarah Chen"

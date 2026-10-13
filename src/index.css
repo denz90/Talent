@@ -218,19 +218,30 @@ body {
   animation: fadeIn 0.5s ease-out forwards;
 }
 
+/* Hide scrollbar utility for tab navigation on mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ═══════════════════════════════════════════════
    RESPONSIVENESS OVERRIDES FOR COURSE DAY PAGES
    ═══════════════════════════════════════════════ */
 @media (max-width: 640px) {
   /* Day tab navigation bar */
-  .bg-site-button.backdrop-blur-md.p-1\.5.rounded-2xl.flex.gap-2.border.border-site-accent.max-w-2xl.mx-auto {
+  .bg-site-button.backdrop-blur-md.p-1\.5.rounded-2xl.flex.gap-2.border.border-site-accent.max-w-2xl.mx-auto,
+  div[class*="backdrop-blur-md"][class*="rounded-2xl"][class*="max-w-2xl"] {
     display: grid !important;
-    grid-template-cols: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 0.5rem !important;
     padding: 0.5rem !important;
     border-radius: 1rem !important;
   }
-  .bg-site-button.backdrop-blur-md.p-1\.5.rounded-2xl.flex.gap-2.border.border-site-accent.max-w-2xl.mx-auto button {
+  .bg-site-button.backdrop-blur-md.p-1\.5.rounded-2xl.flex.gap-2.border.border-site-accent.max-w-2xl.mx-auto button,
+  div[class*="backdrop-blur-md"][class*="rounded-2xl"][class*="max-w-2xl"] button {
     font-size: 0.8rem !important;
     padding: 0.5rem 0.25rem !important;
   }

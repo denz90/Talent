@@ -77,7 +77,7 @@ const CompanyPage = ({ onBack, initialTab }) => {
     <div className="min-h-screen bg-site-bg text-site-text font-sans pb-24 transition-colors duration-300">
       
       {/* Dynamic Header Hero */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-site-primary via-site-accent/70 to-site-primary py-24 px-6 text-center text-white border-b border-site-accent/35">
+      <div className="relative overflow-hidden bg-gradient-to-br from-site-primary via-site-accent/70 to-site-primary py-14 sm:py-18 md:py-24 px-4 sm:px-6 text-center text-white border-b border-site-accent/35">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/20 mix-blend-multiply" />
           <div className="absolute inset-0 bg-site-primary/40 backdrop-blur-2xs" />
@@ -92,10 +92,10 @@ const CompanyPage = ({ onBack, initialTab }) => {
             Back to Home
           </button>
           
-          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight leading-none drop-shadow-sm">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-3 sm:mb-4 tracking-tight leading-none drop-shadow-sm">
             Hawkman Labs
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto font-medium leading-relaxed">
             Empowering individuals and organizations through innovation, technology, and skills development.
           </p>
         </div>
@@ -106,8 +106,8 @@ const CompanyPage = ({ onBack, initialTab }) => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="max-w-7xl mx-auto px-6 mt-12 mb-12">
-        <div className="flex flex-wrap justify-center md:justify-start gap-3 p-1.5 bg-site-accent/30 rounded-2xl border border-site-accent/60 max-w-fit mx-auto md:mx-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-6 sm:mt-8 md:mt-12 mb-8 sm:mb-10 md:mb-12">
+        <div className="flex overflow-x-auto sm:flex-wrap sm:overflow-visible justify-start sm:justify-center md:justify-start gap-2 sm:gap-3 p-1.5 bg-site-accent/30 rounded-2xl border border-site-accent/60 max-w-fit mx-auto md:mx-0 scrollbar-hide">
           {tabs.map((tab) => {
             const TabIcon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -115,7 +115,7 @@ const CompanyPage = ({ onBack, initialTab }) => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 whitespace-nowrap ${
                   isActive 
                     ? 'bg-site-primary text-white shadow-md' 
                     : 'text-site-text hover:bg-site-accent/50'

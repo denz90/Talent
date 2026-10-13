@@ -44,17 +44,17 @@ const ReadAlongDay18 = ({ onNext }) => {
 
   return (
     <div className="w-full bg-site-primary text-site-text font-sans">
-      <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
+      <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-10 space-y-8 sm:space-y-12 pb-24 sm:pb-32">
         
         {/* Header Hero */}
-        <div className="text-center space-y-6 pt-8">
+        <div className="text-center space-y-4 sm:space-y-6 pt-4 sm:pt-8">
           <div className="flex justify-center">
-            <div className="bg-yellow-400 p-3 rounded-2xl transform rotate-12 animate-pulse shadow-lg shadow-yellow-400/20">
-              <Sparkles className="text-[#2e0052]" size={32} />
+            <div className="bg-yellow-400 p-2.5 sm:p-3 rounded-2xl transform rotate-12 animate-pulse shadow-lg shadow-yellow-400/20">
+              <Sparkles className="text-[#2e0052]" size={28} />
             </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight">Day 18: Read Along Challenge</h1>
-          <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight px-2">Day 18: Read Along Challenge</h1>
+          <p className="text-base sm:text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 px-2">
             Boost Literacy with AI-Powered Reading Support
           </p>
           
@@ -472,29 +472,29 @@ const ReadAlongDay18 = ({ onNext }) => {
         </div>
 
         {/* Bottom CTA Card */}
-        <div className="relative rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-12 text-center space-y-8 shadow-2xl shadow-site-accent-600/20">
+        <div className="relative rounded-3xl sm:rounded-[40px] overflow-hidden bg-gradient-to-r from-site-grad-from to-site-grad-to p-6 sm:p-10 md:p-12 text-center space-y-6 sm:space-y-8 shadow-2xl shadow-site-accent-600/20">
           <div className="absolute opacity-20"></div>
           
           <div className="flex justify-center relative z-10">
-            <div className="w-16 h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 shadow-inner">
-              <Trophy size={32} />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-site-bg/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 shadow-inner">
+              <Trophy size={28} />
             </div>
           </div>
           
-          <div className="space-y-4 relative z-10">
-            <h2 className="text-4xl font-black max-w-2xl mx-auto leading-tight">
+          <div className="space-y-3 sm:space-y-4 relative z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black max-w-2xl mx-auto leading-tight">
               "Read Along turns every tablet into a patient literacy tutor."
             </h2>
-            <p className="text-site-text font-medium">Share your experiment results with #AIReadAlongChallenge!</p>
+            <p className="text-sm sm:text-base text-site-text font-medium">Share your experiment results with #AIReadAlongChallenge!</p>
           </div>
           
           <div className="relative z-10">
             <button 
               onClick={onNext}
-              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+              className="bg-site-bg text-site-primary px-6 sm:px-10 py-3.5 sm:py-5 rounded-2xl font-black text-base sm:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 mx-auto group w-full sm:w-auto"
             >
               Start Your Quiz
-              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
+              <ChevronRight size={22} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </div>
