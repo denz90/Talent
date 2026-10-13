@@ -424,13 +424,24 @@ const App = () => {
             <section className="relative min-h-[700px] flex items-center justify-center overflow-hidden">
               {/* Background Image with Overlay */}
               <div className="absolute inset-0 z-0">
-                <img
-                  src="/Firefly_GeminiFlash (1).png"
-                  className="w-full h-full object-cover"
-                  alt="Hero Background"
-                  fetchPriority="high"
-                  decoding="async"
-                />
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet="/hero-bg-mobile.avif 960w, /hero-bg-desktop.avif 1600w"
+                    sizes="100vw"
+                  />
+                  <img
+                    src="/hero-bg-desktop.jpg"
+                    srcSet="/hero-bg-mobile.jpg 960w, /hero-bg-desktop.jpg 1600w"
+                    sizes="100vw"
+                    className="w-full h-full object-cover"
+                    alt="Hero Background"
+                    fetchPriority="high"
+                    decoding="async"
+                    width="1600"
+                    height="1195"
+                  />
+                </picture>
                 {/*<div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
                 <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>*/}
               </div>
