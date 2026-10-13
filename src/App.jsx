@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import ToolCard from './components/ToolCard';
 import LearningPathCard from './components/LearningPathCard';
 import TestimonialCard from './components/TestimonialCard';
 import Footer from './components/Footer';
-import ToolDetailPage from './components/ToolDetailPage';
 import {
   MessageSquare,
   Image as ImageIcon,
@@ -19,19 +18,28 @@ import {
   Sparkles
 } from 'lucide-react';
 
-import SignupPage from './components/SignupPage';
-import LoginPage from './components/LoginPage';
-import OTPVerificationPage from './components/OTPVerificationPage';
-import DashboardPage from './components/DashboardPage';
-import ProfileSettingsPage from './components/ProfileSettingsPage';
-import BeginnerPage from './components/BeginnerPage';
-import PathSelectionPage from './components/PathSelectionPage';
-import LearningPage from './components/LearningPage';
-import HelpCenterPage from './components/HelpCenterPage';
-import ApiDocsPage from './components/ApiDocsPage';
-import SystemStatusPage from './components/SystemStatusPage';
-import BlogPage from './components/BlogPage';
-import CompanyPage from './components/CompanyPage';
+// Lazy load non-home views to code-split and drastically reduce critical path bundle size
+const ToolDetailPage = lazy(() => import('./components/ToolDetailPage'));
+const SignupPage = lazy(() => import('./components/SignupPage'));
+const LoginPage = lazy(() => import('./components/LoginPage'));
+const OTPVerificationPage = lazy(() => import('./components/OTPVerificationPage'));
+const DashboardPage = lazy(() => import('./components/DashboardPage'));
+const ProfileSettingsPage = lazy(() => import('./components/ProfileSettingsPage'));
+const BeginnerPage = lazy(() => import('./components/BeginnerPage'));
+const PathSelectionPage = lazy(() => import('./components/PathSelectionPage'));
+const LearningPage = lazy(() => import('./components/LearningPage'));
+const HelpCenterPage = lazy(() => import('./components/HelpCenterPage'));
+const ApiDocsPage = lazy(() => import('./components/ApiDocsPage'));
+const SystemStatusPage = lazy(() => import('./components/SystemStatusPage'));
+const BlogPage = lazy(() => import('./components/BlogPage'));
+const CompanyPage = lazy(() => import('./components/CompanyPage'));
+
+const PageLoadingFallback = () => (
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <div className="w-8 h-8 border-4 border-brand-primary border-t-transparent rounded-full animate-spin" />
+  </div>
+);
+
 import { API_BASE_URL } from './config.js'; 
 import overviewVideo from './assets/Introduction video.mp4';
  
@@ -122,9 +130,21 @@ const App = () => {
     return localStorage.getItem('talent_oasis_tool') || null;
   });
 
-  // Scroll to top on every page/view change
+  const isFirstMount = useRef(true);
+
+  // Scroll to top on page/view changes (deferred to next frame to prevent forced reflow)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
+    if (window.scrollY > 0) {
+      const frameId = requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
+      return () => cancelAnimationFrame(frameId);
+    }
   }, [view, currentTool]);
 
   // Persist state to localStorage
@@ -245,65 +265,75 @@ const App = () => {
     }
   };
 
-if (view === 'dashboard') {
+  if (view === 'dashboard') {
     return (
-      <DashboardPage
-        currentUser={currentUser}
-        onLogout={() => { /* existing logout logic */ }}
-        onBack={() => setView('home')}
-        onProfileSettings={() => setView('profile_settings')}
-        onNavigateTool={(toolId) => setCurrentTool(toolId)}
-        onNavigateCourse={(course) => { setActiveCourse(course); setView('learning_page'); }}
-        onNavigatePath={(level) => { 
-          if (level === 'beginner') { setSelectedLevel('Beginner'); setView('path_selection'); } 
-          else { setSelectedLevel(level); setView('path_selection'); }
-        }}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <DashboardPage
+          currentUser={currentUser}
+          onLogout={() => { /* existing logout logic */ }}
+          onBack={() => setView('home')}
+          onProfileSettings={() => setView('profile_settings')}
+          onNavigateTool={(toolId) => setCurrentTool(toolId)}
+          onNavigateCourse={(course) => { setActiveCourse(course); setView('learning_page'); }}
+          onNavigatePath={(level) => { 
+            if (level === 'beginner') { setSelectedLevel('Beginner'); setView('path_selection'); } 
+            else { setSelectedLevel(level); setView('path_selection'); }
+          }}
+        />
+      </Suspense>
     );
   }
 
   if (view === 'profile_settings') {
     return (
-      <ProfileSettingsPage
-        currentUser={currentUser}
-        onBack={() => setView('dashboard')}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <ProfileSettingsPage
+          currentUser={currentUser}
+          onBack={() => setView('dashboard')}
+        />
+      </Suspense>
     );
   }
 
   if (view === 'signup') {
     return (
-      <SignupPage 
-        onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} 
-        onLoginClick={() => setView('login')} 
-        onRequireOTP={(email) => {          
-          setRegisteredEmail(email);        
-          setView('otp');                    
-        }}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <SignupPage 
+          onBack={(v) => setView(v === 'dashboard' ? 'dashboard' : 'home')} 
+          onLoginClick={() => setView('login')} 
+          onRequireOTP={(email) => {          
+            setRegisteredEmail(email);        
+            setView('otp');                    
+          }}
+        />
+      </Suspense>
     );
   }
 
   if (view === 'otp') {
     return (
-      <OTPVerificationPage 
-        email={registeredEmail}
-        onBack={() => setView('signup')}
-        onSuccess={() => setView('login')}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <OTPVerificationPage 
+          email={registeredEmail}
+          onBack={() => setView('signup')}
+          onSuccess={() => setView('login')}
+        />
+      </Suspense>
     );
   }
 
   if (view === 'login') {
     return (
-      <LoginPage 
-        onBack={() => setView('home')} 
-        onSignupClick={() => setView('signup')} 
-        onLoginSuccess={(profileData) => {
-          setCurrentUser(profileData); 
-          setView('home');             
-        }}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <LoginPage 
+          onBack={() => setView('home')} 
+          onSignupClick={() => setView('signup')} 
+          onLoginSuccess={(profileData) => {
+            setCurrentUser(profileData); 
+            setView('home');             
+          }}
+        />
+      </Suspense>
     );
   }
 
@@ -324,19 +354,21 @@ if (view === 'dashboard') {
       return null;
     }
     return (
-      <LearningPage
-        currentUser={currentUser}
-        course={activeCourse}
-        onBack={() => setView('path_selection')}
-        onLogout={() => {
-          localStorage.removeItem('hawkman_token');
-          setCurrentUser(null);
-          setView('login');
-        }}
-        onProfileSettings={() => setView('profile_settings')}
-        onHome={() => setView('home')}
-        onDashboard={() => setView('dashboard')}
-      />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <LearningPage
+          currentUser={currentUser}
+          course={activeCourse}
+          onBack={() => setView('path_selection')}
+          onLogout={() => {
+            localStorage.removeItem('hawkman_token');
+            setCurrentUser(null);
+            setView('login');
+          }}
+          onProfileSettings={() => setView('profile_settings')}
+          onHome={() => setView('home')}
+          onDashboard={() => setView('dashboard')}
+        />
+      </Suspense>
     );
   }
 
@@ -357,11 +389,12 @@ if (view === 'dashboard') {
       />
 
       <main>
-        {currentTool ? (
-          <ToolDetailPage
-            tool={TOOLS_DATA[currentTool]}
-            onBack={() => setCurrentTool(null)}
-          />
+        <Suspense fallback={<PageLoadingFallback />}>
+          {currentTool ? (
+            <ToolDetailPage
+              tool={TOOLS_DATA[currentTool]}
+              onBack={() => setCurrentTool(null)}
+            />
         ) : view === 'path_selection' ? (
           <PathSelectionPage
             level={selectedLevel}
@@ -605,6 +638,7 @@ if (view === 'dashboard') {
             </section>
           </>
         )}
+        </Suspense>
       </main>
 
       <Footer onNavigate={(targetView) => {

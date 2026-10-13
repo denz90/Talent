@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ArrowLeft, 
   Sparkles, 
@@ -25,9 +25,21 @@ const CompanyPage = ({ onBack, initialTab }) => {
     }
   }, [initialTab]);
 
-  // Scroll to top on tab switch
+  const isFirstMount = useRef(true);
+
+  // Scroll to top on tab switch (deferred to next frame to prevent forced reflow)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
+    if (window.scrollY > 0) {
+      const frameId = requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      });
+      return () => cancelAnimationFrame(frameId);
+    }
   }, [activeTab]);
 
   // Form states
