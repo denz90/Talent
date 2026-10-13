@@ -14,7 +14,7 @@ const TestimonialCard = ({ quote, author, role, avatar }) => {
       </p>
       <div className="flex items-center gap-4">
         {avatar ? (
-          <img src={avatar} alt={author} className="w-10 h-10 rounded-full object-cover grayscale" />
+          <img src={avatar} alt={author} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover grayscale" />
         ) : (
           <div className="w-10 h-10 rounded-full bg-site-primary/60 flex items-center justify-center font-bold text-site-text text-xs border border-site-primary/10">
             {author[0]}

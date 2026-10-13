@@ -399,6 +399,8 @@ if (view === 'dashboard') {
                   src="/Firefly_GeminiFlash (1).png"
                   className="w-full h-full object-cover"
                   alt="Hero Background"
+                  fetchPriority="high"
+                  decoding="async"
                 />
                 {/*<div className="absolute inset-0 bg-site-primary/60 mix-blend-multiply"></div>
                 <div className="absolute inset-0 bg-site-bg/60 mix-blend-multiply"></div>*/}

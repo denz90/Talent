@@ -12,6 +12,8 @@ const CourseCard = ({ title, description, duration, rating, image }) => {
         <img
           src={image}
           alt={title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute top-4 right-4 bg-site-bg/90 dark:bg-site-primary/90 backdrop-blur px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 shadow-sm">

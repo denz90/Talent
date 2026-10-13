@@ -70,11 +70,12 @@
   --shadow-color: #D0B084;
 }
 
-[data-theme="gray"] {
+[data-theme="purple2"] {
   --color-bg: #ffffff;
   --color-text: #000000;
   --color-primary: #755091;
   --color-accent: #9fbdff;
+  --color-text2:#ffffff;
 
   /* Gradient variables */
   --gradient-from: #755091;
@@ -87,6 +88,7 @@
   --color-text: #2D2D2D;
   --color-primary: #424242;
   --color-accent: #696969;
+  --color-text2:#2D2D2D;
 
   /* gradient variables */
   --gradient-from: #424242;

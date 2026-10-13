@@ -50,7 +50,7 @@ const BlogPage = ({ onBack }) => {
         {/* Featured Post */}
         <div className="bg-site-bg rounded-3xl overflow-hidden shadow-xl border border-site-accent flex flex-col lg:flex-row mb-16">
           <div className="lg:w-1/2 h-64 lg:h-auto relative">
-            <img src={posts[0].image} alt={posts[0].title} className="w-full h-full object-cover" />
+            <img src={posts[0].image} alt={posts[0].title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             <div className="absolute top-6 left-6 bg-brand-primary text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
               {posts[0].category}
             </div>
@@ -77,7 +77,7 @@ const BlogPage = ({ onBack }) => {
           {posts.slice(1).map((post, idx) => (
             <div key={idx} className="bg-site-bg rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-site-accent transition-all flex flex-col">
               <div className="h-48 relative">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute top-4 left-4 bg-site-bg/90 backdrop-blur text-brand-dark text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                   {post.category}
                 </div>
