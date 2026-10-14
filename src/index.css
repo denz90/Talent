@@ -9,6 +9,7 @@
 
   --color-site-bg: var(--color-bg);
   --color-site-text: var(--color-text);
+  --color-site-text2: var(--color-text2, var(--color-text));
   --color-site-primary: var(--color-primary);
   --color-site-accent: var(--color-accent);
   
@@ -23,6 +24,7 @@
 :root, [data-theme="default"] {
   --color-bg: #171717;
   --color-text: #FFFFFF;
+  --color-text2: #FFFFFF;
   --color-primary: #350557;
   --color-accent: #121722;
   --color-dark: #000000;

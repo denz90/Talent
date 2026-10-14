@@ -16,7 +16,7 @@ const TestimonialCard = ({ quote, author, role, avatar }) => {
         {avatar ? (
           <img src={avatar} alt={author} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover grayscale" />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-site-primary/60 flex items-center justify-center font-bold text-site-text text-xs border border-site-primary/10">
+          <div className="w-10 h-10 rounded-full bg-site-primary/60 flex items-center justify-center font-bold text-site-text2 text-xs border border-site-primary/10">
             {author[0]}
           </div>
         )}

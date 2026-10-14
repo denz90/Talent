@@ -26,7 +26,7 @@ const LearningPathCard = ({ icon: Icon, title, description, features, popular, d
 
       <button 
         onClick={onClick}
-        className={`w-full py-4 rounded-sm font-bold text-sm transition-all border uppercase tracking-wider ${dark ? 'bg-site-bg text-site-text hover:bg-site-primary/80' : 'bg-site-primary border-slate-300 text-site-text hover:bg-site-primary/80'}`}
+        className={`w-full py-4 rounded-sm font-bold text-sm transition-all border uppercase tracking-wider ${dark ? 'bg-site-bg text-site-text2 hover:bg-site-primary/80' : 'bg-site-primary border-slate-300 text-site-text2 hover:bg-site-primary/80'}`}
       >
         Start Path
       </button>

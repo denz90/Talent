@@ -233,7 +233,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
               <button onClick={onLogin} className="text-[13px] font-bold text-site-text/80 hover:text-site-text transition-colors cursor-pointer">
                 Sign In
               </button>
-              <button onClick={onSignup} className="bg-site-primary text-site-text px-6 py-2.5 rounded-sm text-[13px] font-bold hover:bg-site-primary/80 transition-all uppercase tracking-tight cursor-pointer">
+              <button onClick={onSignup} className="bg-site-primary text-site-text2 px-6 py-2.5 rounded-sm text-[13px] font-bold hover:bg-site-primary/80 transition-all uppercase tracking-tight cursor-pointer">
                 Get Started
               </button>
             </>

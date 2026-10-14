@@ -41,28 +41,28 @@ const Footer = ({ onNavigate }) => {
           {/* Column 1: Branding & Intro (Takes up more space) */}
           <div className="col-span-2">
             {/* Replace with an actual <img /> logo in production */}
-            <h3 className="text-2xl font-bold text-site-text mb-4 tracking-tight">
-              HawkmanLabs.
+            <h3 className="text-2xl font-bold text-site-text2 mb-4 tracking-tight">
+              Talent Oasis.
             </h3>
-            <p className="text-[14px] text-site-text mb-6 max-w-xs leading-relaxed">
+            <p className="text-[14px] text-site-text2 mb-6 max-w-xs leading-relaxed">
               Empowering global learners with cutting-edge courses, interactive tools, and industry-leading resources.
             </p>
 
             {/* Social Icons */}
             <div className="flex flex-wrap gap-4 mt-6 sm:mt-10">
-            <a href="https://www.facebook.com/profile.php?id=61580819033887" aria-label="Facebook" className="text-site-text hover:text-white/70 transition-colors">
+            <a href="https://www.facebook.com/profile.php?id=61580819033887" aria-label="Facebook" className="text-site-text2 hover:opacity-70 transition-opacity">
               <FacebookIcon />
             </a>
-            <a href="https://x.com/talentoasis_?s=20" aria-label="X (Twitter)" className="text-site-text hover:text-white/70 transition-colors">
+            <a href="https://x.com/talentoasis_?s=20" aria-label="X (Twitter)" className="text-site-text2 hover:opacity-70 transition-opacity">
               <TwitterIcon />
             </a>
-            <a href="https://www.instagram.com/talentoasis_official/?hl=en" aria-label="Instagram" className="text-site-text hover:text-white/70 transition-colors">
+            <a href="https://www.instagram.com/talentoasis_official/?hl=en" aria-label="Instagram" className="text-site-text2 hover:opacity-70 transition-opacity">
               <InstagramIcon />
             </a>
-            <a href="https://www.linkedin.com/company/talentoasisofficial/posts/?feedView=all" aria-label="LinkedIn" className="text-site-text hover:text-white/70 transition-colors">
+            <a href="https://www.linkedin.com/company/talentoasisofficial/posts/?feedView=all" aria-label="LinkedIn" className="text-site-text2 hover:opacity-70 transition-opacity">
               <LinkedInIcon />
             </a>
-            <a href="https://www.tiktok.com/@talentoasis_official?_r=1&_t=ZS-95ssDuHSG9g" aria-label="TikTok" className='text-site-text hover:text-white/70 transition-colors'>
+            <a href="https://www.tiktok.com/@talentoasis_official?_r=1&_t=ZS-95ssDuHSG9g" aria-label="TikTok" className="text-site-text2 hover:opacity-70 transition-opacity">
               <TikTokIcon />
             </a>
             </div>
@@ -70,57 +70,57 @@ const Footer = ({ onNavigate }) => {
 
           {/* Column 2: Platform */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Platform</h4>
-            <ul className="space-y-4 text-[14px] font-medium text-site-text">
-              <li><a href="#" className="hover:text-site-text transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">For Educators</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Enterprise</a></li>
+            <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Platform</h4>
+            <ul className="space-y-4 text-[14px] font-medium text-site-text2">
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Features</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Pricing</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">For Educators</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Enterprise</a></li>
             </ul>
           </div>
 
           {/* Column 3: Learning */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Learning</h4>
-            <ul className="space-y-4 text-[14px] font-medium text-site-text">
-              <li><a href="#" className="hover:text-site-text transition-colors">Course Catalog</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Certifications</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Student Stories</a></li>
-              <li><a href="#" className="hover:text-site-text transition-colors">Community Forum</a></li>
+            <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Learning</h4>
+            <ul className="space-y-4 text-[14px] font-medium text-site-text2">
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Course Catalog</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Certifications</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Student Stories</a></li>
+              <li><a href="#" className="hover:opacity-75 transition-opacity">Community Forum</a></li>
             </ul>
           </div>
 
           {/* Column 4: Resources */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Resources</h4>
-            <ul className="space-y-4 text-[14px] font-medium text-site-text">
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('help_center'); }} className="hover:text-white transition-colors">Help Center</button></li>
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('api_docs'); }} className="hover:text-white transition-colors">API Documentation</button></li>
+            <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Resources</h4>
+            <ul className="space-y-4 text-[14px] font-medium text-site-text2">
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('help_center'); }} className="hover:opacity-75 transition-opacity">Help Center</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('api_docs'); }} className="hover:opacity-75 transition-opacity">API Documentation</button></li>
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('system_status'); }} className="hover:text-white transition-colors">System Status</button></li>
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('blog'); }} className="hover:text-white transition-colors">Blog</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('blog'); }} className="hover:opacity-75 transition-opacity">Blog</button></li>
             </ul>
           </div>
 
           {/* Column 5: Company */}
           <div>
-            <h4 className="font-bold text-site-text mb-6 uppercase tracking-widest text-[15px]">Company</h4>
-            <ul className="space-y-4 text-[14px] font-medium text-site-text">
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('about_us'); }} className="hover:text-white transition-colors">About Us</button></li>
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('careers'); }} className="hover:text-white transition-colors">Careers</button></li>
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('contact'); }} className="hover:text-white transition-colors">Contact</button></li>
-              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('partners'); }} className="hover:text-white transition-colors">Partners</button></li>
+            <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Company</h4>
+            <ul className="space-y-4 text-[14px] font-medium text-site-text2">
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('about_us'); }} className="hover:opacity-75 transition-opacity">About Us</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('careers'); }} className="hover:opacity-75 transition-opacity">Careers</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('contact'); }} className="hover:opacity-75 transition-opacity">Contact</button></li>
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('partners'); }} className="hover:opacity-75 transition-opacity">Partners</button></li>
             </ul>
           </div>
 
         </div>
 
         {/* Bottom Section: Legal & Copyright */}
-        <div className="pt-8 border-t border-site-text/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-site-text">
+        <div className="pt-8 border-t border-site-text2/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[13px] text-site-text2">
           <p>&copy; {new Date().getFullYear()} HawkmanLabs Inc. All rights reserved.</p>
           <div className="flex space-x-6 font-medium">
-            <a href="#" className="hover:text-site-text transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-site-text transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-site-text transition-colors">Cookie Settings</a>
+            <a href="#" className="hover:opacity-75 transition-opacity">Privacy Policy</a>
+            <a href="#" className="hover:opacity-75 transition-opacity">Terms of Service</a>
+            <a href="#" className="hover:opacity-75 transition-opacity">Cookie Settings</a>
           </div>
         </div>
       </div>
