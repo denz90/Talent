@@ -39,6 +39,7 @@
   --color-text: #131C25;
   --color-primary: #2075A7;
   --color-accent: #E8DFC4;
+  --color-text2:#131C25;
 
   /* Gradient variables */
   --gradient-from: #2075A7;
@@ -51,6 +52,7 @@
   --color-text: #876434;
   --color-primary: #AC7F42;
   --color-accent: #D0B084;
+  --color-text2:#ffffff;
 
   /*Gradient variables */
   --gradient-from: #AC7F42;
@@ -63,6 +65,7 @@
   --color-text: #000000;
   --color-primary: #AC7F42;
   --color-accent: #D0B084;
+  --color-text2:#ffffff;
 
   /* Gradient variables */
   --gradient-from: #AC7F42;
@@ -101,6 +104,7 @@
   --color-text: #335765;
   --color-primary: #74A8A4; 
   --color-accent: #B6D9E0;
+  --color-text2:#335765;
 
   /* Gradient variables */
   --gradient-from: #74A8A4;
@@ -113,6 +117,7 @@
   --color-text: #2A365C; 
   --color-primary: #A6B1D8;
   --color-accent: #E2E4F8;
+  --color-text2:#2A365C;
 
   /* Gradient variables */
   --gradient-from: #A6B1D8;

@@ -32,7 +32,7 @@ const TikTokIcon = () => (
 
 const Footer = ({ onNavigate }) => {
   return (
-  <footer className="px-4 sm:px-8 lg:px-24 py-8 sm:py-10 lg:py-16 bg-site-primary text-site-text">
+  <footer className="px-4 sm:px-8 lg:px-24 py-8 sm:py-10 lg:py-16 bg-site-primary text-site-text2">
       <div className="max-w-7xl mx-auto">
         
         {/* Top Section: Grid Layout */}
