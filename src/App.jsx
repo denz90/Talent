@@ -11,7 +11,8 @@ import {
   MessageCircle,
   BookOpen,
   Search,
-  Sparkles
+  Sparkles,
+  Play
 } from 'lucide-react';
 
 // Lazy load non-home views to code-split and drastically reduce critical path bundle size
@@ -93,6 +94,7 @@ const App = () => {
   const [registeredEmail, setRegisteredEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
   const [companyTab, setCompanyTab] = useState('about_us');
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   // Auto-Login: Check for token when the app loads
   useEffect(() => {
@@ -245,16 +247,17 @@ const App = () => {
   };
 
   const handleNavClick = (sectionId) => {
+    const targetId = sectionId === 'courses' ? 'paths' : (sectionId ? sectionId.toLowerCase() : '');
     if (view !== 'home') {
       setView('home');
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
+        const element = document.getElementById(targetId) || document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
     } else {
-      const element = document.getElementById(sectionId);
+      const element = document.getElementById(targetId) || document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -437,7 +440,8 @@ const App = () => {
                     className="w-full h-full object-cover"
                     alt="Hero Background"
                     fetchPriority="high"
-                    decoding="async"
+                    loading="eager"
+                    decoding="sync"
                     width="1600"
                     height="1195"
                   />
@@ -480,18 +484,18 @@ const App = () => {
                   </button>
 
                   <button 
-                    onClick={() => handleNavClick('courses')}
+                    onClick={() => handleNavClick('paths')}
                     className="text-white font-bold py-3 sm:py-4 px-8 sm:px-12 bg-white/10 hover:bg-white/20 border border-white/30 transition-all cursor-pointer backdrop-blur-sm rounded-sm active:scale-95 text-sm sm:text-base"
                   >
-                    Browse Courses
+                    Browse Paths
                   </button>
                 </div>
 
               </div>
             </section>
 
-           {/* 🎥 Video Section - Production Ready */}
-          <section className="py-10 sm:py-16 md:py-24 bg-site-bg/50">
+           {/* 🎥 Video Section - High Performance Click-to-Play (Zero payload until clicked) */}
+          <section className="py-10 sm:py-16 md:py-24 bg-site-bg/50 content-auto">
             <div className="max-w-5xl mx-auto px-4 sm:px-6">
               <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold text-site-text mb-3">
@@ -505,20 +509,42 @@ const App = () => {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
                 {/* 16:9 Aspect Ratio Container */}
                 <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                  <video
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    muted
-                    loop
-                    playsInline  // Important for mobile
-                  >
-
-
-                    {/* Multiple formats for better browser support */}
-                    <source src={overviewVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  {isVideoPlaying ? (
+                    <video
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                      controls
+                      autoPlay
+                      playsInline
+                    >
+                      <source src={overviewVideo} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <div 
+                      onClick={() => setIsVideoPlaying(true)}
+                      className="absolute top-0 left-0 w-full h-full cursor-pointer group flex items-center justify-center select-none"
+                      role="button"
+                      aria-label="Play overview video"
+                      tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsVideoPlaying(true); }}
+                    >
+                      <img
+                        src="/video-poster.jpg"
+                        alt="Overview Video Preview"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors flex flex-col items-center justify-center gap-3">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-site-primary/90 text-white flex items-center justify-center shadow-2xl transform group-hover:scale-110 group-active:scale-95 transition-all">
+                          <Play className="w-8 h-8 fill-white ml-1 text-white" />
+                        </div>
+                        <span className="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-sm border border-white/20">
+                          Watch Platform Overview (2 min)
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -526,17 +552,17 @@ const App = () => {
 
 
             {/* Popular AI Tools */}
-            <section id="tools" className="py-12 sm:py-20 md:py-32">
+            <section id="tools" className="py-12 sm:py-20 md:py-32 content-auto">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-10 sm:mb-16 md:mb-20">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Popular AI Tools You'll Master</h2>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Popular Tools You'll Learn</h2>
                   <p className="font-medium text-site-text/80">Get hands-on experience with industry-leading AI platforms</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                   <ToolCard
                     icon={MessageCircle}
                     title="ChatGPT"
-                    description="Master prompt engineering and advanced conversations"
+                    description="Learn prompt engineering and advanced conversations"
                     onClick={() => setCurrentTool('chatgpt')}
                   />
                   <ToolCard
@@ -562,7 +588,7 @@ const App = () => {
             </section>
 
             {/* Learning Paths */}
-            <section id="courses" className="py-12 sm:py-20 md:py-32 bg-site-primary/20">
+            <section id="paths" className="py-12 sm:py-20 md:py-32 bg-site-primary/20 content-auto">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-10 sm:mb-16 md:mb-20">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
@@ -600,7 +626,7 @@ const App = () => {
                   <LearningPathCard
                     icon={Trophy}
                     title="Advanced"
-                    description="Master AI integration and build production-ready solutions."
+                    description="Learn AI integration and build production-ready solutions."
                     features={[
                       "API Integration",
                       "Custom AI Solutions",
@@ -617,7 +643,7 @@ const App = () => {
             </section>
 
             {/* Testimonials */}
-            <section id="testimonials" className="py-12 sm:py-20 md:py-32">
+            <section id="testimonials" className="py-12 sm:py-20 md:py-32 content-auto">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-10 sm:mb-16 md:mb-20">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>

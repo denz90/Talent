@@ -42,7 +42,7 @@ const PathSelectionPage = ({ onBack, onSelectPath, level }) => {
   const paths = [
     {
       title: 'AI for Educators',
-      description: 'Master AI tools and techniques to revolutionize your teaching and classroom strategies',
+      description: 'Learn AI tools and techniques to revolutionize your teaching and classroom strategies',
       icon: Pencil,
       color: '#a855f7' // Purple
     },

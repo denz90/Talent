@@ -321,7 +321,7 @@ const SunoDay7 = ({ onNext }) => {
               </div>
               
                 <div className="bg-yellow-400/10 border border-yellow-400/20 rounded-2xl p-6 text-center">
-                  <p className="text-site-text font-medium italic">"Compose your lessons with the melody of innovation. Master Suno to orchestrate a truly modern classroom! 🎵"</p>
+                  <p className="text-site-text font-medium italic">"Compose your lessons with the melody of innovation. Learn Suno to orchestrate a truly modern classroom! 🎵"</p>
                 </div>
             </div>
           )}

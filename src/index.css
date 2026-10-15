@@ -41,11 +41,11 @@
   --color-text: #131C25;
   --color-primary: #2075A7;
   --color-accent: #E8DFC4;
-  --color-text2:#131C25;
+  --color-text2:#ffffff;
 
   /* Gradient variables */
-  --gradient-from: #2075A7;
-  --gradient-to: #E8DFC4;
+  --gradient-from: #ffffff;
+  --gradient-to: #ffffff;
   --shadow-color: #6b6a6a;
 }
 
@@ -102,15 +102,15 @@
 }
 
 [data-theme="coastal"] {
-  --color-bg: #ccdde1; 
+  --color-bg: #ffffff; 
   --color-text: #335765;
   --color-primary: #74A8A4; 
   --color-accent: #B6D9E0;
-  --color-text2:#335765;
+  --color-text2:#ffffff;
 
   /* Gradient variables */
-  --gradient-from: #74A8A4;
-  --gradient-to: #B6D6E0;
+  --gradient-from: #ffffff;
+  --gradient-to: #ffffff;
   --shadow-color: rgba(51, 87, 101, 0.2);
 }
 
@@ -122,8 +122,8 @@
   --color-text2:#2A365C;
 
   /* Gradient variables */
-  --gradient-from: #A6B1D8;
-  --gradient-to: #E2E4F8;
+  --gradient-from: #ffffff;
+  --gradient-to: #ffffff;
   --shadow-color: rgba(42, 54, 92, 0.1);
 } 
 
@@ -232,6 +232,12 @@ body {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Offscreen content rendering optimization for mobile Core Web Vitals */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
 
 /* ═══════════════════════════════════════════════

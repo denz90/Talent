@@ -17,7 +17,7 @@ const COURSES = [
   {
     id: 1,
     title: 'AI for Educators',
-    subtitle: 'Master AI tools for teaching & classroom strategies',
+    subtitle: 'Learn AI tools for teaching & classroom strategies',
     icon: Pencil,
     color: '#a855f7',
     tag: 'Education',

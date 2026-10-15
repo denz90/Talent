@@ -284,7 +284,7 @@ const LabsterDay20 = ({ onNext }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {[
                     { title: 'Safe Experiments', desc: 'Conduct experiments involving radiation, high voltage, or toxic chemicals without risk.' },
-                    { title: 'Personalized Pace', desc: 'Students can re-run simulations as many times as needed to master concepts.' },
+                    { title: 'Personalized Pace', desc: 'Students can re-run simulations as many times as needed to learn concepts.' },
                     { title: 'Data-Rich Insights', desc: 'Real-time dashboards show exactly where students get stuck during an experiment.' },
                     { title: 'Engagement Boost', desc: 'Immersive storytelling and reward systems keep students motivated.' }
                   ].map((item, i) => (

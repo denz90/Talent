@@ -81,7 +81,7 @@ const GenericDayContent = ({ day, courseTitle, onNext, onComplete }) => {
               {day.title}
             </h1>
             <p className="text-lg text-white/80 max-w-xl font-medium">
-              Mastering the next generation of AI tools for your profession.
+              Learning the next generation of AI tools for your profession.
             </p>
           </div>
         </div>

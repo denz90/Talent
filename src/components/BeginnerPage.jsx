@@ -80,7 +80,7 @@ const COURSE_SECTIONS = [
   {
     id: 'intro',
     title: '1. What is a Prompt?',
-    subtitle: 'Your guide to mastering AI communication',
+    subtitle: 'Your guide to learning AI communication',
     type: 'intro'
   },
   {
@@ -98,7 +98,7 @@ const COURSE_SECTIONS = [
   {
     id: 'skills',
     title: '4. The 6 Prompt Types',
-    subtitle: 'You must master',
+    subtitle: 'You must learn',
     type: 'skills-list'
   },
   {
