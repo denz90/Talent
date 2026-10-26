@@ -35,15 +35,7 @@ import {
   Activity
 } from 'lucide-react';
 import BeginnerSidebar from './BeginnerSidebar';
-import GeminiDay5 from './GeminiDay5';
-import ReadAlongDay18 from './ReadAlongDay18';
-import ScribbleDiffusionDay16 from './ScribbleDiffusionDay16';
-import EduaideDay2 from './EduaideDay2';
-import DiffitDay4 from './DiffitDay4';
-import SunoDay7 from './SunoDay7';
-import Lumen5Day21 from './Lumen5Day21';
-import QuizSystem from './QuizSystem';
-import { CHALLENGE_QUIZZES } from '../data/ChallengeQuizzes';
+
 
 // Course Data Model
 const COURSE_SECTIONS = [
@@ -124,48 +116,6 @@ const COURSE_SECTIONS = [
     title: '8. Ethical Limitations & Mistakes',
     subtitle: 'Essential considerations for AI users',
     type: 'ethics'
-  },
-  {
-    id: 'eduaide',
-    title: 'Eduaide AI Challenge',
-    subtitle: 'AI-Powered Lesson Planning',
-    type: 'eduaide'
-  },
-  {
-    id: 'diffit',
-    title: 'Diffit Challenge',
-    subtitle: 'Differentiate Any Text',
-    type: 'diffit'
-  },
-  {
-    id: 'gemini',
-    title: 'Google Gemini Challenge',
-    subtitle: 'Your AI Assistant',
-    type: 'gemini'
-  },
-  {
-    id: 'suno',
-    title: 'Suno AI Challenge',
-    subtitle: 'Create AI Music',
-    type: 'suno'
-  },
-  {
-    id: 'scribble',
-    title: 'Scribble Diffusion Challenge',
-    subtitle: 'Turn Sketches into Art',
-    type: 'scribble'
-  },
-  {
-    id: 'readalong',
-    title: 'Read Along AI Challenge',
-    subtitle: 'AI Reading Assistant',
-    type: 'readalong'
-  },
-  {
-    id: 'lumen5',
-    title: 'Lumen5 Challenge',
-    subtitle: 'AI Video Creation',
-    type: 'lumen5'
   }
 ];
 
@@ -191,15 +141,12 @@ const BeginnerPage = ({ onBack }) => {
   // ✅ ALL hooks FIRST - in the same order every time
   const [activeSection, setActiveSection] = useState('ai-welcome');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [showQuiz, setShowQuiz] = useState(false);
 
   // ✅ Compute derived values AFTER hooks
   const isIntroActive = ['ai-welcome', 'ai-foundation', 'ai-types', 'ai-industries', 'ai-everyday'].includes(activeSection);
   const isPromptingActive = ['intro', 'basics', 'craft', 'skills', 'iterative', 'advanced', 'work', 'ethics'].includes(activeSection);
-  const isChallengeActive = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'].includes(activeSection);
   
   const currentSection = COURSE_SECTIONS.find(s => s.id === activeSection);
-  const challengeOrder = ['eduaide', 'diffit', 'gemini', 'suno', 'scribble', 'readalong', 'lumen5'];
 
   // ✅ Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -210,36 +157,6 @@ const BeginnerPage = ({ onBack }) => {
     }
     return () => { document.body.style.overflow = 'unset'; }
   }, [isMobileMenuOpen]);
-
-  // ✅ Handle quiz pass - moves to next challenge
-  const handleQuizPass = () => {
-    setShowQuiz(false);
-    const currentIndex = challengeOrder.indexOf(activeSection);
-    if (currentIndex !== -1 && currentIndex < challengeOrder.length - 1) {
-      setActiveSection(challengeOrder[currentIndex + 1]);
-      window.scrollTo(0, 0);
-    }
-  };
-
-  // ✅ Handle quiz back
-  const handleQuizBack = () => {
-    setShowQuiz(false);
-  };
-
-  // ✅ NOW we can conditionally render after all hooks are declared
-  if (showQuiz && isChallengeActive) {
-    return (
-      <div className="w-full min-h-screen bg-site-bg">
-        <QuizSystem 
-          dayTitle={currentSection?.title || 'Challenge'}
-          quizData={CHALLENGE_QUIZZES[activeSection]}
-          onPass={handleQuizPass}
-          onBack={handleQuizBack}
-          isDarkMode={false}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-site-bg">
@@ -311,7 +228,7 @@ const BeginnerPage = ({ onBack }) => {
               <div className="p-1.5 rounded-full group-hover:bg-site-accent transition-colors">
                 <ArrowLeft className="w-4 h-4" />
               </div>
-              Back to Learning Paths
+              Back to Home
             </button>
             <BeginnerSidebar activeSection={activeSection} onSelectSection={setActiveSection} />
           </div>
@@ -320,7 +237,7 @@ const BeginnerPage = ({ onBack }) => {
           <main className={`flex-1 min-w-0 space-y-12 md:space-y-16`}>
 
             {/* Hero / Back Button – back button hidden on desktop (lives in sidebar column) */}
-            <div className={`flex flex-col gap-4 md:gap-6 ${isChallengeActive ? 'hidden' : ''}`}>
+            <div className="flex flex-col gap-4 md:gap-6">
               <button
                 onClick={onBack}
                 className="lg:hidden group flex items-center gap-2 text-site-text/80 hover:text-site-text transition-colors font-medium w-fit text-sm md:text-base"
@@ -328,7 +245,7 @@ const BeginnerPage = ({ onBack }) => {
                 <div className="p-2 rounded-full group-hover:bg-site-accent transition-colors">
                   <ArrowLeft className="w-4 h-4" />
                 </div>
-                Back to Learning Paths
+                Back to Home
               </button>
               <div>
                 <h1 className="text-3xl md:text-5xl font-bold text-site-text mb-3 md:mb-4 tracking-tight">
@@ -344,8 +261,8 @@ const BeginnerPage = ({ onBack }) => {
 
             {/* Sections */}
             {COURSE_SECTIONS.filter(s => s.id === activeSection).map((section) => (
-              <section key={section.id} id={section.id} className={`animate-in fade-in slide-in-from-bottom-4 duration-500 ${isChallengeActive ? 'rounded-3xl overflow-hidden border border-site-accent shadow-sm' : ''}`}>
-                {!isChallengeActive && <SectionHeader title={section.title} subtitle={section.subtitle} />}
+              <section key={section.id} id={section.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <SectionHeader title={section.title} subtitle={section.subtitle} />
 
                 {section.type === 'ai-welcome' && (
                   <div className="space-y-8 md:space-y-12">
@@ -1016,13 +933,7 @@ const BeginnerPage = ({ onBack }) => {
                   </div>
                 )}
 
-                {section.type === 'eduaide' && <EduaideDay2 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'diffit' && <DiffitDay4 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'gemini' && <GeminiDay5 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'suno' && <SunoDay7 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'scribble' && <ScribbleDiffusionDay16 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'readalong' && <ReadAlongDay18 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
-                {section.type === 'lumen5' && <Lumen5Day21 onNext={() => { setShowQuiz(true); window.scrollTo(0, 0); }} />}
+
               </section>
             ))}
 

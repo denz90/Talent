@@ -30,6 +30,7 @@ const ApiDocsPage = lazy(() => import('./components/ApiDocsPage'));
 const SystemStatusPage = lazy(() => import('./components/SystemStatusPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const CompanyPage = lazy(() => import('./components/CompanyPage'));
+const FAQPage = lazy(() => import('./components/FAQPage'));
 
 const PageLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -247,6 +248,10 @@ const App = () => {
   };
 
   const handleNavClick = (sectionId) => {
+    if (sectionId === 'faq') {
+      setView('faq');
+      return;
+    }
     const targetId = sectionId === 'courses' ? 'paths' : (sectionId ? sectionId.toLowerCase() : '');
     if (view !== 'home') {
       setView('home');
@@ -275,7 +280,7 @@ const App = () => {
           onNavigateTool={(toolId) => setCurrentTool(toolId)}
           onNavigateCourse={(course) => { setActiveCourse(course); setView('learning_page'); }}
           onNavigatePath={(level) => { 
-            if (level === 'beginner') { setSelectedLevel('Beginner'); setView('path_selection'); } 
+            if (level?.toLowerCase() === 'beginner') { setView('beginner'); } 
             else { setSelectedLevel(level); setView('path_selection'); }
           }}
         />
@@ -342,10 +347,6 @@ const App = () => {
     return null; 
   }
 
-  if (view === 'beginner' && !currentUser) {
-    setView('login');
-    return null;
-  }
 
   if (view === 'learning_page' && activeCourse) {
     if (!currentUser) {
@@ -399,17 +400,13 @@ const App = () => {
             level={selectedLevel}
             onBack={() => setView('home')}
             onSelectPath={(course) => {
-              if (selectedLevel === 'Beginner') {
-                setView('beginner');
-              } else {
-                setActiveCourse(course);
-                setView('learning_page');
-              }
+              setActiveCourse(course);
+              setView('learning_page');
             }}
           />
         ) : view === 'beginner' ? (
           <BeginnerPage 
-            onBack={() => setView('path_selection')} 
+            onBack={() => setView('home')} 
           />
         ) : view === 'help_center' ? (
           <HelpCenterPage onBack={() => setView('home')} />
@@ -421,31 +418,27 @@ const App = () => {
           <BlogPage onBack={() => setView('home')} />
         ) : view === 'company' ? (
           <CompanyPage onBack={() => setView('home')} initialTab={companyTab} />
+        ) : view === 'faq' ? (
+          <FAQPage 
+            onBack={() => setView('home')} 
+            onNavigate={(targetView) => setView(targetView)} 
+          />
         ) : (
           <>
             {/* Hero Section */}
             <section className="relative min-h-[520px] sm:min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden">
               {/* Background Image with Overlay */}
               <div className="absolute inset-0 z-0">
-                <picture>
-                  <source
-                    type="image/avif"
-                    srcSet="/hero-bg-mobile.avif 960w, /hero-bg-desktop.avif 1600w"
-                    sizes="100vw"
-                  />
-                  <img
-                    src="/hero-bg-desktop.jpg"
-                    srcSet="/hero-bg-mobile.jpg 960w, /hero-bg-desktop.jpg 1600w"
-                    sizes="100vw"
-                    className="w-full h-full object-cover"
-                    alt="Hero Background"
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="sync"
-                    width="1600"
-                    height="1195"
-                  />
-                </picture>
+                <img
+                  src="/Golden-Hour Classroom Study Session.png"
+                  className="w-full h-full object-cover"
+                  alt="Hero Background"
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
+                  width="1672"
+                  height="941"
+                />
                 {/* Dark overlay for mobile text readability */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60 md:from-black/30 md:via-black/20 md:to-black/40"></div>
               </div>
@@ -491,6 +484,49 @@ const App = () => {
                   </button>
                 </div>
 
+              </div>
+            </section>
+
+            {/* 📊 Sourced AI Statistics */}
+            <section className="py-14 sm:py-20 md:py-24 bg-gradient-to-b from-site-primary/30 via-site-bg to-site-bg content-auto">
+              <div className="max-w-6xl mx-auto px-4 sm:px-6">
+                <div className="text-center mb-10 sm:mb-14">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 tracking-tight text-site-text">
+                    The AI Skills Gap Is Real
+                  </h2>
+                  <p className="text-sm sm:text-base font-medium text-site-text/70 max-w-2xl mx-auto">
+                    The workforce is adopting AI fast — but training hasn't kept up. Here's what the data says.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-7 mb-8 max-w-4xl mx-auto">
+                  {/* Stat 1 */}
+                  <div className="relative group rounded-2xl border border-site-primary/20 bg-site-primary/5 backdrop-blur-sm p-7 sm:p-9 text-center transition-all duration-300 hover:border-site-primary/40 hover:shadow-lg hover:shadow-site-primary/10 hover:-translate-y-1">
+                    <div className="flex items-baseline justify-center gap-1 mb-1">
+                      <span className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-site-primary leading-none">86%</span>
+                    </div>
+                    <p className="text-sm sm:text-base font-semibold text-site-text mt-2 mb-2">
+                      of professionals use AI at work
+                    </p>
+                    <p className="text-xs sm:text-sm text-site-text/50 leading-relaxed">
+                      …but only <span className="font-bold text-site-primary">24%</span> feel properly equipped to use it effectively
+                    </p>
+                  </div>
+
+                  {/* Stat 2 */}
+                  <div className="relative group rounded-2xl border border-site-primary/20 bg-site-primary/5 backdrop-blur-sm p-7 sm:p-9 text-center transition-all duration-300 hover:border-site-primary/40 hover:shadow-lg hover:shadow-site-primary/10 hover:-translate-y-1">
+                    <div className="flex items-baseline justify-center gap-1 mb-1">
+                      <span className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-site-primary leading-none">67%</span>
+                    </div>
+                    <p className="text-sm sm:text-base font-semibold text-site-text mt-2 mb-2">
+                      say 2 hours a week or less
+                    </p>
+                    <p className="text-xs sm:text-sm text-site-text/50 leading-relaxed">
+                      …would meaningfully improve their AI skills and workplace confidence
+                    </p>
+                  </div>
+
+                </div>
               </div>
             </section>
 
@@ -602,10 +638,7 @@ const App = () => {
                     features={[
                       "Basic Prompting Techniques",
                     ]}
-                    onClick={() => {
-                      setSelectedLevel('Beginner');
-                      setView('path_selection');
-                    }}
+                    onClick={() => setView('beginner')}
                   />
                   <LearningPathCard
                     icon={Zap}

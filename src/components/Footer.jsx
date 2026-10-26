@@ -94,6 +94,7 @@ const Footer = ({ onNavigate }) => {
           <div>
             <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Resources</h4>
             <ul className="space-y-4 text-[14px] font-medium text-site-text2">
+              <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('faq'); }} className="hover:opacity-75 transition-opacity">FAQ</button></li>
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('help_center'); }} className="hover:opacity-75 transition-opacity">Help Center</button></li>
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('api_docs'); }} className="hover:opacity-75 transition-opacity">API Documentation</button></li>
               <li><button onClick={(e) => { e.preventDefault(); onNavigate && onNavigate('system_status'); }} className="hover:text-white transition-colors">System Status</button></li>

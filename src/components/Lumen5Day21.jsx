@@ -12,7 +12,7 @@ import {
   Zap
 } from 'lucide-react';
 
-const Lumen5Day21 = ({ onNext }) => {
+const Lumen5Day21 = ({ onNext, dayNumber = 21 }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -23,7 +23,7 @@ const Lumen5Day21 = ({ onNext }) => {
   ];
 
   return (
-    <div className="w-full bg-site-primary text-site-text">
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
@@ -35,7 +35,7 @@ const Lumen5Day21 = ({ onNext }) => {
 
           <div className="text-center space-y-6 pt-8">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight text-center">
-              Day 21: Lumen5 Challenge
+              Day {dayNumber}: Lumen5 Challenge
             </h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 text-center">
               Transform Lessons into Engaging Video Content
@@ -313,12 +313,23 @@ const Lumen5Day21 = ({ onNext }) => {
               "Lumen5 turns passive content into active learning experiences."
             </h2>
             <p className="text-site-text font-medium">Share your video with #AIVideoChallenge!</p>
-            <button 
-              onClick={onNext}
-              className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+              <button 
+                onClick={onNext}
+                className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 group"
+              >
+                Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <a
+              href="https://lumen5.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-10 py-5 text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
             >
-              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <ExternalLink size={20} />
+              Click to use Lumen5
+            </a>
+            </div>
           </div>
         </div>
 

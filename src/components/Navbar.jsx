@@ -71,6 +71,7 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
   const navItems = [
     { id: 'tools', label: 'Tools' },
     { id: 'paths', label: 'Paths' },
+    { id: 'faq', label: 'FAQ' },
     { id: 'testimonials', label: 'Testimonials' },
     { id: 'community', label: 'Community' },
   ];

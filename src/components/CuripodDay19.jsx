@@ -10,7 +10,8 @@ import {
   Target,
   TrendingUp,
   Trophy,
-  Zap
+  Zap,
+  ExternalLink,
 } from 'lucide-react';
 
 const CuripodDay19 = ({ onNext }) => {
@@ -327,12 +328,23 @@ const CuripodDay19 = ({ onNext }) => {
               "Curipod turns whispers into 'WHAT?!' moments."
             </h2>
             <p className="text-site-text font-medium">Share your debate Word Cloud with #AICuripodChallenge!</p>
-            <button 
-              onClick={onNext}
-              className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+              <button 
+                onClick={onNext}
+                className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 group"
+              >
+                Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <a
+              href="https://curipod.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-10 py-5 text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
             >
-              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <ExternalLink size={20} />
+              Click to use Curipod
+            </a>
+            </div>
           </div>
         </div>
 

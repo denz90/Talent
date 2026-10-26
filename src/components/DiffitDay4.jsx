@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  ExternalLink,
   BookMarked,
   CheckCircle2,
   ChevronRight,
@@ -19,7 +20,7 @@ import {
   Zap,
 } from 'lucide-react';
 
-const DiffitDay4 = ({ onNext }) => {
+const DiffitDay4 = ({ onNext, dayNumber = 4, nextDayNumber = 5 }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -30,7 +31,7 @@ const DiffitDay4 = ({ onNext }) => {
   ];
 
   return (
-    <div className="w-full bg-site-primary text-site-text">
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text">
       <div className="max-w-4xl mx-auto px-8 py-10 space-y-12 pb-32">
         
         {/* Header Hero */}
@@ -42,7 +43,7 @@ const DiffitDay4 = ({ onNext }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Diffit Challenge</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Day {dayNumber}: Diffit Challenge</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             Instant AI Reading Level Differentiation
           </p>
@@ -416,19 +417,28 @@ const DiffitDay4 = ({ onNext }) => {
             <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
           </div>
           
-          <div className="relative z-10">
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={onNext}
-              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3  group"
             >
               Start Your Challenge
               <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <a
+              href="https://web.diffit.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-10 py-5 text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
+            >
+              <ExternalLink size={20} />
+              Click to use Diffit
+            </a>
           </div>
         </div>
 
         <p className="text-center text-site-text/60 text-sm pb-10">
-          Next Up: Day 5 – Continue your AI education journey
+          Next Up: Day {nextDayNumber} – Continue your AI education journey
         </p>
 
       </div>

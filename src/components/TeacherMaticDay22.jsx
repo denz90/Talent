@@ -11,7 +11,8 @@ import {
   Target,
   TrendingUp,
   Trophy,
-  Zap
+  Zap,
+  ExternalLink,
 } from 'lucide-react';
 
 const TeacherMaticDay22 = ({ onNext }) => {
@@ -341,12 +342,23 @@ const TeacherMaticDay22 = ({ onNext }) => {
               "TeacherMatic turns planning stress into 'click-and-teach' simplicity."
             </h2>
             <p className="text-site-text font-medium">Share your results with #AIEdChallenge!</p>
-            <button 
-              onClick={onNext}
-              className="mt-4 bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+              <button 
+                onClick={onNext}
+                className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 group"
+              >
+                Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+              <a
+              href="https://teachermatic.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-10 py-5 text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
             >
-              Start Your Challenge <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+              <ExternalLink size={20} />
+              Click to use TeacherMatic
+            </a>
+            </div>
           </div>
         </div>
 

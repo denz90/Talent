@@ -52,19 +52,8 @@ const BeginnerSidebar = ({ activeSection, onSelectSection, className = "w-72 hid
     { id: 'ethics', label: 'Ethics & Limitations', icon: ShieldAlert },
   ];
 
-  const challenges = [
-    { id: 'eduaide', label: 'Eduaide AI', icon: Sparkles },
-    { id: 'diffit', label: 'Diffit', icon: Sparkles },
-    { id: 'gemini', label: 'Google Gemini', icon: Sparkles },
-    { id: 'suno', label: 'Suno AI', icon: Sparkles },
-    { id: 'scribble', label: 'Scribble Diffusion', icon: Sparkles },
-    { id: 'readalong', label: 'Read Along AI', icon: Sparkles },
-    { id: 'lumen5', label: 'Lumen5', icon: Sparkles },
-  ];
-
   const [isIntroOpen, setIsIntroOpen] = useState(true);
   const [isPromptingOpen, setIsPromptingOpen] = useState(true);
-  const [isChallengesOpen, setIsChallengesOpen] = useState(true);
 
   return (
     <aside className={className}>
@@ -162,54 +151,6 @@ const BeginnerSidebar = ({ activeSection, onSelectSection, className = "w-72 hid
         </AnimatePresence>
       </div>
 
-      {/* Challenges Section */}
-      <div className="bg-site-bg rounded-[24px] border border-site-accent overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-        <button
-          onClick={() => setIsChallengesOpen(!isChallengesOpen)}
-          className={`w-full flex items-center justify-between p-5 transition-colors group ${isChallengesOpen ? 'bg-site-bg/50' : 'hover:bg-site-bg'}`}
-        >
-          <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-xl transition-colors ${isChallengesOpen ? 'bg-gradient-to-br from-site-primary to-site-accent text-site-text shadow-lg shadow-brand-primary/20' : 'bg-brand-secondary text-brand-primary'}`}>
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <span className="font-bold text-site-text tracking-tight">7 Days Challenge</span>
-          </div>
-          <motion.div
-            animate={{ rotate: isChallengesOpen ? 0 : -90 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <ChevronDown className={`w-4 h-4 ${isChallengesOpen ? 'text-site-primary' : 'text-slate-400 opacity-50'}`} />
-          </motion.div>
-        </button>
-
-
-        <AnimatePresence initial={false}>
-          {isChallengesOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <nav className="p-3 pt-0 space-y-1.5 pb-5">
-                <div className="h-px bg-slate-100 mx-2 mb-4 opacity-50" />
-                {challenges.map((challenge) => (
-                  <SidebarItem
-                    key={challenge.id}
-                    id={challenge.id}
-                    label={challenge.label}
-                    icon={challenge.icon}
-                    onClick={() => onSelectSection(challenge.id)}
-                    active={activeSection === challenge.id}
-                  />
-                ))}
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
       <div className="mt-auto p-6 rounded-2xl bg-gradient-to-br from-site-primary to-site-accent text-site-text relative overflow-hidden group">
         <div className="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 bg-site-bg/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
         <button className="w-full py-2 bg-site-bg text-site-primary rounded-lg text-xs font-bold hover:bg-site-bg transition-colors relative z-10">
@@ -221,4 +162,3 @@ const BeginnerSidebar = ({ activeSection, onSelectSection, className = "w-72 hid
 };
 
 export default BeginnerSidebar;
-

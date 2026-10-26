@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  ExternalLink,
   Sparkles,
   Clock,
   Mic,
@@ -32,7 +33,7 @@ import {
   FileText
 } from 'lucide-react';
 
-const ReadAlongDay18 = ({ onNext }) => {
+const ReadAlongDay18 = ({ onNext, dayNumber = 18, nextDayNumber = 19 }) => {
   const [activeTab, setActiveTab] = useState('overview');
 
   const tabs = [
@@ -43,7 +44,7 @@ const ReadAlongDay18 = ({ onNext }) => {
   ];
 
   return (
-    <div className="w-full bg-site-primary text-site-text font-sans">
+    <div className="w-full h-full overflow-y-auto bg-site-primary text-site-text font-sans">
       <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-10 space-y-8 sm:space-y-12 pb-24 sm:pb-32">
         
         {/* Header Hero */}
@@ -53,7 +54,7 @@ const ReadAlongDay18 = ({ onNext }) => {
               <Sparkles className="text-[#2e0052]" size={28} />
             </div>
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight px-2">Day 18: Read Along Challenge</h1>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight px-2">Day {dayNumber}: Read Along Challenge</h1>
           <p className="text-base sm:text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 px-2">
             Boost Literacy with AI-Powered Reading Support
           </p>
@@ -488,14 +489,23 @@ const ReadAlongDay18 = ({ onNext }) => {
             <p className="text-sm sm:text-base text-site-text font-medium">Share your experiment results with #AIReadAlongChallenge!</p>
           </div>
           
-          <div className="relative z-10">
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={onNext}
-              className="bg-site-bg text-site-primary px-6 sm:px-10 py-3.5 sm:py-5 rounded-2xl font-black text-base sm:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 mx-auto group w-full sm:w-auto"
+              className="bg-site-bg text-site-primary px-6 sm:px-10 py-3.5 sm:py-5 rounded-2xl font-black text-base sm:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3  group w-full sm:w-auto"
             >
               Start Your Quiz
               <ChevronRight size={22} className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <a
+              href="https://readalong.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-6 sm:px-10 py-3.5 sm:py-5 text-base sm:text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
+            >
+              <ExternalLink size={20} />
+              Click to use Read Along
+            </a>
           </div>
         </div>
 

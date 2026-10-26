@@ -14,7 +14,7 @@ import {
   TrendingUp,
   Trophy,
   Zap,
-} from 'lucide-react';
+  ExternalLink,} from 'lucide-react';
 
 const GrokDay6 = ({ onNext }) => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -401,14 +401,23 @@ const GrokDay6 = ({ onNext }) => {
             <p className="text-site-text font-medium">Complete the challenge and advance your AI skills!</p>
           </div>
           
-          <div className="relative z-10">
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={onNext}
-              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 mx-auto group"
+              className="bg-site-bg text-site-primary px-10 py-5 rounded-2xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center gap-3 group"
             >
               Start Your Challenge
               <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <a
+              href="https://grok.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-site-bg text-site-primary px-10 py-5 text-lg rounded-2xl font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 flex items-center justify-center gap-3 group"
+            >
+              <ExternalLink size={20} />
+              Click to use Grok
+            </a>
           </div>
         </div>
 
