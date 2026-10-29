@@ -4,6 +4,7 @@ import ToolCard from './components/ToolCard';
 import LearningPathCard from './components/LearningPathCard';
 import TestimonialCard from './components/TestimonialCard';
 import Footer from './components/Footer';
+import FirstVisitModal from './components/FirstVisitModal';
 import {
   Zap,
   Compass,
@@ -374,6 +375,13 @@ const App = () => {
 
   return (
     <div className="min-h-screen font-sans transition-colors duration-300">
+      <FirstVisitModal 
+        onChoiceConfirmed={(choice) => {
+          if (choice?.level) {
+            setSelectedLevel(choice.level);
+          }
+        }}
+      />
       <Navbar
         currentUser={currentUser}   
         onLogout={() => {           
