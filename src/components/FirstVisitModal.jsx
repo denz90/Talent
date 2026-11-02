@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Loader2, CheckCircle2, AlertCircle, X } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 export const POPUP_STORAGE_KEY = 'site_popup_choice_v1';
-export const POPUP_DISMISSED_KEY = 'site_popup_dismissed_session';
 
 export default function FirstVisitModal({ onChoiceConfirmed }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCheckingStorage, setIsCheckingStorage] = useState(true);
+  const [isCheckingDb, setIsCheckingDb] = useState(true);
 
   // Form State
   const [name, setName] = useState('');
@@ -21,41 +21,63 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
 
   const confirmBtnRef = useRef(null);
 
-  // 1. Check localStorage & sessionStorage on initial load
+  // Check if user data is already captured in the backend database.
+  // If the stored email is already registered, hide the modal.
+  // Otherwise, always show it.
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    try {
-      const stored = localStorage.getItem(POPUP_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed && (parsed.track || parsed.level)) {
-          setIsOpen(false);
-          setIsCheckingStorage(false);
+    const checkDatabase = async () => {
+      try {
+        const stored = localStorage.getItem(POPUP_STORAGE_KEY);
+        if (!stored) {
+          setIsOpen(true);
+          setIsCheckingDb(false);
           return;
         }
-      }
 
-      const dismissed = sessionStorage.getItem(POPUP_DISMISSED_KEY);
-      if (dismissed === 'true') {
-        setIsOpen(false);
-        setIsCheckingStorage(false);
-        return;
-      }
+        const parsed = JSON.parse(stored);
+        const storedEmail = parsed?.email;
 
-      setIsOpen(true);
-    } catch (e) {
-      setIsOpen(true);
-    } finally {
-      setIsCheckingStorage(false);
-    }
+        if (!storedEmail) {
+          setIsOpen(true);
+          setIsCheckingDb(false);
+          return;
+        }
+
+        // Verify the email exists in the DB by attempting registration.
+        // A non-200 (e.g. "Email already registered") confirms data is captured.
+        const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: parsed.name || 'check',
+            email: storedEmail,
+            password: `check-${Date.now()}`,
+          }),
+        });
+
+        if (!res.ok) {
+          // Email is already registered → data IS captured → hide modal
+          setIsOpen(false);
+        } else {
+          // Unexpectedly succeeded (email was NOT in DB) → show modal
+          localStorage.removeItem(POPUP_STORAGE_KEY);
+          setIsOpen(true);
+        }
+      } catch {
+        // Network error → show modal to be safe
+        setIsOpen(true);
+      } finally {
+        setIsCheckingDb(false);
+      }
+    };
+
+    checkDatabase();
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
-    try {
-      sessionStorage.setItem(POPUP_DISMISSED_KEY, 'true');
-    } catch (e) {}
   };
 
   const handleSubmit = async (e) => {
@@ -86,8 +108,27 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
     setIsSubmitting(true);
 
     try {
-      // Simulate submission
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // Register user in the backend database
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: name.trim(),
+          email: email.trim(),
+          password: email.trim(), // default password — user can reset later
+        }),
+      });
+
+      const data = await response.json();
+
+      // Treat "already registered" as success (data IS captured)
+      const alreadyRegistered =
+        !response.ok &&
+        (data.detail || '').toLowerCase().includes('already');
+
+      if (!response.ok && !alreadyRegistered) {
+        throw new Error(data.detail || 'Registration failed. Please try again.');
+      }
 
       const payload = {
         name: name.trim(),
@@ -98,7 +139,7 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
         version: 1,
       };
 
-      // Persist in localStorage
+      // Cache in localStorage so next visit can verify quickly
       localStorage.setItem(POPUP_STORAGE_KEY, JSON.stringify(payload));
 
       setIsSuccess(true);
@@ -112,14 +153,14 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
         setIsOpen(false);
       }, 700);
     } catch (err) {
-      setErrorMessage('An error occurred. Please try again.');
+      setErrorMessage(err.message || 'An error occurred. Please try again.');
       setIsSuccess(false);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isCheckingStorage || !isOpen) {
+  if (isCheckingDb || !isOpen) {
     return null;
   }
 
@@ -287,4 +328,3 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
     </aside>
   );
 }
-
