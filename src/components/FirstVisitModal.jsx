@@ -22,10 +22,17 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
   const confirmBtnRef = useRef(null);
 
   // Check if user data is already captured in the backend database.
-  // If the stored email is already registered, hide the modal.
+  // If the stored email is already registered (or user is logged in), hide the modal.
   // Otherwise, always show it.
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    // If user is already logged in, their data is definitely in the DB
+    if (localStorage.getItem('hawkman_token')) {
+      setIsOpen(false);
+      setIsCheckingDb(false);
+      return;
+    }
 
     const checkDatabase = async () => {
       try {
@@ -46,22 +53,29 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
         }
 
         // Verify the email exists in the DB by attempting registration.
-        // A non-200 (e.g. "Email already registered") confirms data is captured.
+        // A non-200 with "already" confirms data is captured.
         const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            username: parsed.name || 'check',
+            username: parsed.name || 'Visitor',
             email: storedEmail,
-            password: `check-${Date.now()}`,
+            password: 'VerifyPassword123!#',
           }),
         });
 
-        if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        const detailStr = typeof data.detail === 'string'
+          ? data.detail
+          : Array.isArray(data.detail)
+            ? data.detail.map((d) => d?.msg || '').join(' ')
+            : '';
+
+        if (!res.ok && detailStr.toLowerCase().includes('already')) {
           // Email is already registered → data IS captured → hide modal
           setIsOpen(false);
         } else {
-          // Unexpectedly succeeded (email was NOT in DB) → show modal
+          // Email was NOT in DB or unrecognized error → show modal
           localStorage.removeItem(POPUP_STORAGE_KEY);
           setIsOpen(true);
         }
@@ -108,26 +122,34 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
     setIsSubmitting(true);
 
     try {
-      // Register user in the backend database
+      // Register user in the backend database.
+      // Backend requires password with: >=8 chars, 1 uppercase, 1 number, 1 special char.
       const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: name.trim(),
           email: email.trim(),
-          password: email.trim(), // default password — user can reset later
+          password: 'TalentUser2026!#',
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
-      // Treat "already registered" as success (data IS captured)
+      // Safely extract detail whether it's a string, an array of validation errors, or missing
+      const detailStr = typeof data.detail === 'string'
+        ? data.detail
+        : Array.isArray(data.detail)
+          ? data.detail.map((d) => d?.msg || '').join('; ')
+          : '';
+
+      // Treat "already registered" as success (data IS already captured in the database)
       const alreadyRegistered =
         !response.ok &&
-        (data.detail || '').toLowerCase().includes('already');
+        detailStr.toLowerCase().includes('already');
 
       if (!response.ok && !alreadyRegistered) {
-        throw new Error(data.detail || 'Registration failed. Please try again.');
+        throw new Error(detailStr || 'Registration failed. Please try again.');
       }
 
       const payload = {
