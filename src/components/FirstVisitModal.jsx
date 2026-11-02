@@ -128,9 +128,9 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
       role="dialog"
       aria-modal="false"
       aria-labelledby="small-popup-title"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] w-[calc(100%-2rem)] max-w-[360px] animate-in slide-in-from-bottom-8 fade-in duration-300"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] w-[calc(100%-2rem)] max-w-[420px] animate-in slide-in-from-bottom-8 fade-in duration-300"
     >
-      <div className="relative bg-site-bg text-site-text border border-site-accent rounded-2xl shadow-2xl p-4 sm:p-5 backdrop-blur-md bg-opacity-95">
+      <div className="relative bg-site-bg text-site-text border border-site-accent rounded-2xl shadow-2xl p-5 sm:p-6 backdrop-blur-md bg-opacity-95">
         {/* Close Button */}
         <button
           type="button"
@@ -142,11 +142,11 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
         </button>
 
         {/* Header */}
-        <div className="pr-7 mb-3">
+        <div className="pr-7 mb-4">
           <h2 id="small-popup-title" className="text-sm sm:text-base font-bold text-site-text tracking-tight">
             Welcome to Talent Oasis
           </h2>
-          <p className="text-xs text-site-text/70 mt-0.5">
+          <p className="text-xs text-site-text/70 mt-1">
             Quick setup for your learning preferences.
           </p>
         </div>
@@ -174,10 +174,10 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
         )}
 
         {/* Compact Simple Form */}
-        <form onSubmit={handleSubmit} className="space-y-2.5 text-left">
+        <form onSubmit={handleSubmit} className="space-y-3.5 text-left">
           {/* Full Name */}
           <div>
-            <label htmlFor="user-name" className="block text-[11px] font-semibold text-site-text/80 mb-0.5">
+            <label htmlFor="user-name" className="block text-[11px] font-semibold text-site-text/80 mb-1">
               Full Name <span className="text-rose-500">*</span>
             </label>
             <input
@@ -189,13 +189,13 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
                 if (errorMessage) setErrorMessage('');
               }}
               placeholder="e.g. Ama Mensah"
-              className="w-full px-3 py-2 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text placeholder-site-text/40 focus:outline-none focus:border-site-primary transition-colors"
+              className="w-full px-3 py-2.5 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text placeholder-site-text/40 focus:outline-none focus:border-site-primary transition-colors"
             />
           </div>
 
           {/* Email Address */}
           <div>
-            <label htmlFor="user-email" className="block text-[11px] font-semibold text-site-text/80 mb-0.5">
+            <label htmlFor="user-email" className="block text-[11px] font-semibold text-site-text/80 mb-1">
               Email Address <span className="text-rose-500">*</span>
             </label>
             <input
@@ -207,14 +207,14 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
                 if (errorMessage) setErrorMessage('');
               }}
               placeholder="e.g. ama@organization.com"
-              className="w-full px-3 py-2 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text placeholder-site-text/40 focus:outline-none focus:border-site-primary transition-colors"
+              className="w-full px-3 py-2.5 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text placeholder-site-text/40 focus:outline-none focus:border-site-primary transition-colors"
             />
           </div>
 
           {/* Track & Level (2 columns) */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label htmlFor="user-track" className="block text-[11px] font-semibold text-site-text/80 mb-0.5">
+              <label htmlFor="user-track" className="block text-[11px] font-semibold text-site-text/80 mb-1">
                 Track <span className="text-rose-500">*</span>
               </label>
               <select
@@ -224,7 +224,7 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
                   setTrack(e.target.value);
                   if (errorMessage) setErrorMessage('');
                 }}
-                className="w-full px-2 py-2 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text focus:outline-none focus:border-site-primary transition-colors cursor-pointer truncate"
+                className="w-full px-2 py-2.5 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text focus:outline-none focus:border-site-primary transition-colors cursor-pointer truncate"
               >
                 <option value="" className="bg-site-bg text-site-text">Track...</option>
                 <option value="AI for Educators" className="bg-site-bg text-site-text">Educators</option>
@@ -235,7 +235,7 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
             </div>
 
             <div>
-              <label htmlFor="user-level" className="block text-[11px] font-semibold text-site-text/80 mb-0.5">
+              <label htmlFor="user-level" className="block text-[11px] font-semibold text-site-text/80 mb-1">
                 Level <span className="text-rose-500">*</span>
               </label>
               <select
@@ -245,7 +245,7 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
                   setLevel(e.target.value);
                   if (errorMessage) setErrorMessage('');
                 }}
-                className="w-full px-2 py-2 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text focus:outline-none focus:border-site-primary transition-colors cursor-pointer truncate"
+                className="w-full px-2 py-2.5 bg-site-bg border border-site-accent rounded-lg text-xs text-site-text focus:outline-none focus:border-site-primary transition-colors cursor-pointer truncate"
               >
                 <option value="" className="bg-site-bg text-site-text">Level...</option>
                 <option value="Beginner" className="bg-site-bg text-site-text">Beginner</option>
@@ -256,12 +256,12 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
           </div>
 
           {/* Submit Button */}
-          <div className="pt-1">
+          <div className="pt-2">
             <button
               ref={confirmBtnRef}
               type="submit"
               disabled={isSubmitting || isSuccess}
-              className={`w-full py-2.5 px-3 rounded-lg font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+              className={`w-full py-3 px-3 rounded-lg font-bold text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
                 isSubmitting || isSuccess
                   ? 'bg-site-accent text-site-text/50 cursor-not-allowed'
                   : 'bg-site-primary text-site-bg hover:opacity-90 active:scale-98'
