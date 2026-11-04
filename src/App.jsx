@@ -4,7 +4,7 @@ import ToolCard from './components/ToolCard';
 import LearningPathCard from './components/LearningPathCard';
 import TestimonialCard from './components/TestimonialCard';
 import Footer from './components/Footer';
-import FirstVisitModal from './components/FirstVisitModal';
+import FirstVisitModal, { POPUP_STORAGE_KEY } from './components/FirstVisitModal';
 import {
   Zap,
   Compass,
@@ -362,6 +362,7 @@ const App = () => {
           onBack={() => setView('path_selection')}
           onLogout={() => {
             localStorage.removeItem('hawkman_token');
+            localStorage.removeItem(POPUP_STORAGE_KEY);
             setCurrentUser(null);
             setView('login');
           }}
@@ -376,6 +377,7 @@ const App = () => {
   return (
     <div className="min-h-screen font-sans transition-colors duration-300">
       <FirstVisitModal 
+        currentUser={currentUser}
         onChoiceConfirmed={(choice) => {
           if (choice?.level) {
             setSelectedLevel(choice.level);
@@ -386,6 +388,7 @@ const App = () => {
         currentUser={currentUser}   
         onLogout={() => {           
           localStorage.removeItem('hawkman_token');
+          localStorage.removeItem(POPUP_STORAGE_KEY);
           setCurrentUser(null);
           setView('home');
         }}
@@ -438,7 +441,7 @@ const App = () => {
               {/* Background Image with Overlay */}
               <div className="absolute inset-0 z-0">
                 <img
-                  src="/Golden-Hour Classroom Study Session.png"
+                  src="/AI Student’s Bright Study Desk.png"
                   className="w-full h-full object-cover"
                   alt="Hero Background"
                   fetchPriority="high"

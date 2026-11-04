@@ -4,9 +4,8 @@ import { API_BASE_URL } from '../config';
 
 export const POPUP_STORAGE_KEY = 'site_popup_choice_v1';
 
-export default function FirstVisitModal({ onChoiceConfirmed }) {
+export default function FirstVisitModal({ currentUser, onChoiceConfirmed }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCheckingDb, setIsCheckingDb] = useState(true);
 
   // Form State
   const [name, setName] = useState('');
@@ -21,74 +20,15 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
 
   const confirmBtnRef = useRef(null);
 
-  // Check if user data is already captured in the backend database.
-  // If the stored email is already registered (or user is logged in), hide the modal.
-  // Otherwise, always show it.
+  // Whenever you visit the site:
+  // - If you are logged in (your data is captured and authenticated) -> hide modal.
+  // - If you are NOT logged in -> ALWAYS pop up!
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // If user is already logged in, their data is definitely in the DB
-    if (localStorage.getItem('hawkman_token')) {
-      setIsOpen(false);
-      setIsCheckingDb(false);
-      return;
-    }
-
-    const checkDatabase = async () => {
-      try {
-        const stored = localStorage.getItem(POPUP_STORAGE_KEY);
-        if (!stored) {
-          setIsOpen(true);
-          setIsCheckingDb(false);
-          return;
-        }
-
-        const parsed = JSON.parse(stored);
-        const storedEmail = parsed?.email;
-
-        if (!storedEmail) {
-          setIsOpen(true);
-          setIsCheckingDb(false);
-          return;
-        }
-
-        // Verify the email exists in the DB by attempting registration.
-        // A non-200 with "already" confirms data is captured.
-        const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: parsed.name || 'Visitor',
-            email: storedEmail,
-            password: 'VerifyPassword123!#',
-          }),
-        });
-
-        const data = await res.json().catch(() => ({}));
-        const detailStr = typeof data.detail === 'string'
-          ? data.detail
-          : Array.isArray(data.detail)
-            ? data.detail.map((d) => d?.msg || '').join(' ')
-            : '';
-
-        if (!res.ok && detailStr.toLowerCase().includes('already')) {
-          // Email is already registered → data IS captured → hide modal
-          setIsOpen(false);
-        } else {
-          // Email was NOT in DB or unrecognized error → show modal
-          localStorage.removeItem(POPUP_STORAGE_KEY);
-          setIsOpen(true);
-        }
-      } catch {
-        // Network error → show modal to be safe
-        setIsOpen(true);
-      } finally {
-        setIsCheckingDb(false);
-      }
-    };
-
-    checkDatabase();
-  }, []);
+    const isLoggedIn = Boolean(currentUser || localStorage.getItem('hawkman_token'));
+    setIsOpen(!isLoggedIn);
+  }, [currentUser]);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -182,7 +122,7 @@ export default function FirstVisitModal({ onChoiceConfirmed }) {
     }
   };
 
-  if (isCheckingDb || !isOpen) {
+  if (!isOpen) {
     return null;
   }
 
