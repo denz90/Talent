@@ -639,24 +639,27 @@ const App = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-10 sm:mb-16 md:mb-20">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Choose Your Learning Path</h2>
-                  <p className="text-sm sm:text-base font-medium text-site-text/80">Structured courses designed for your skill level and goals</p>
+                  <p className="text-sm sm:text-base font-medium text-site-text/80">Three paths.One pace: twenty minute a day</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 items-stretch">
                   <LearningPathCard
                     icon={Compass}
                     title="Beginner"
-                    description="Start your AI journey from scratch. No prior experience needed."
+                    description="Start from zero. No experience needed."
                     features={[
-                      "Basic Prompting Techniques",
+                      "Basic prompting with CRAFT",
+                      "Everyday tools, One at a time",
+                      "Twenty-minute lession",
+                      "Your first finish project",
                     ]}
                     onClick={() => setView('beginner')}
                   />
                   <LearningPathCard
                     icon={Zap}
                     title="Intermediate"
-                    description="Level up your skills with advanced techniques and workflows."
+                    description="Go further with Chained prompts and workflows."
                     features={[
-                      "Advanced Prompting",
+                      "Chained, Multi-step prompts",
                       "Multi-Tool Workflows",
                       "Automation Basics",
                       "Real-World Projects"
@@ -670,12 +673,12 @@ const App = () => {
                   <LearningPathCard
                     icon={Trophy}
                     title="Advanced"
-                    description="Learn AI integration and build production-ready solutions."
+                    description="Build system that saves you hours."
                     features={[
-                      "API Integration",
-                      "Custom AI Solutions",
-                      "Enterprise Workflows",
-                      "AI Strategy"
+                      "Repeatable custom workflows",
+                      "AI iniside your daily tools",
+                      "Team-ready processes",
+                      "A profolio project"
                     ]}
                     onClick={() => {
                       setSelectedLevel('Advanced');
@@ -690,23 +693,22 @@ const App = () => {
             <section id="testimonials" className="py-12 sm:py-20 md:py-32 content-auto">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
                 <div className="mb-10 sm:mb-16 md:mb-20">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">Loved by Learners Worldwide</h2>
-                  <p className="text-sm sm:text-base font-medium text-site-text/80">Join thousands who've transformed their careers with AI</p>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-5 tracking-tight text-site-text">What learners say</h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-10">
                   <TestimonialCard
                     quote="This platform completely changed how I approach my design work. The Midjourney course alone saved me hours every week."
-                    author="Sarah Chen"
+                    author="Obrempong"
                     role="UI Designer"
                   />
                   <TestimonialCard
                     quote="The hands-on projects are incredible. I went from zero AI knowledge to building automated workflows for my business."
-                    author="Marcus Johnson"
+                    author="Mavis Dorfe"
                     role="Entrepreneur"
                   />
                   <TestimonialCard
                     quote="Best investment in my career. The GitHub Copilot course doubled my coding productivity within a month."
-                    author="Emily Rodriguez"
+                    author="Daniel Possible"
                     role="Software Engineer"
                   />
                 </div>

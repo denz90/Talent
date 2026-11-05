@@ -45,7 +45,7 @@ const Footer = ({ onNavigate }) => {
               Talent Oasis.
             </h3>
             <p className="text-[14px] text-site-text2 mb-6 max-w-xs leading-relaxed">
-              Empowering global learners with cutting-edge courses, interactive tools, and industry-leading resources.
+              A Straight path through AI. A Twenty minute a night. One clear step at a time.
             </p>
 
             {/* Social Icons */}
