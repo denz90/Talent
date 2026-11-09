@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, LayoutDashboard, LogOut, Menu, X, ChevronDown } from 'lucide-react';
+import { Sparkles, LayoutDashboard, LogOut, Menu, X, ChevronDown, Users, FileText } from 'lucide-react';
 
 // 1. Centralize Themes so you never hardcode a swatch block in JSX again
 const THEME_OPTIONS = [
@@ -10,7 +10,7 @@ const THEME_OPTIONS = [
   { id: 'beige', label: 'beige', swatch: '#876434' }
 ];
 
-const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard }) => {
+const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentUser, onDashboard, onOptIn, onAdminLeads }) => {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('site-theme') || 'timeless';
@@ -107,6 +107,11 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
               key={item.id}
               href={`#${item.id}`}
               onClick={(e) => {
+                if (item.id === 'opt_in' && onOptIn) {
+                  e.preventDefault();
+                  onOptIn();
+                  return;
+                }
                 if (onNavClick) {
                   e.preventDefault();
                   onNavClick(item.id);
@@ -218,6 +223,17 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                     <button
                       onClick={() => {
                         setIsDropdownOpen(false);
+                        if (onAdminLeads) onAdminLeads();
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-bold text-site-text hover:bg-site-accent transition-all cursor-pointer text-left"
+                    >
+                      <Users className="w-4 h-4 text-site-text/70" />
+                      <span>Admin Leads</span>
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        setIsDropdownOpen(false);
                         onLogout();
                       }}
                       className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-[13px] font-bold text-rose-500 hover:bg-rose-500/10 transition-all cursor-pointer text-left"
@@ -274,6 +290,11 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                   href={`#${item.id}`}
                   onClick={(e) => {
                     setIsMobileMenuOpen(false);
+                    if (item.id === 'opt_in' && onOptIn) {
+                      e.preventDefault();
+                      onOptIn();
+                      return;
+                    }
                     if (onNavClick) {
                       e.preventDefault();
                       onNavClick(item.id);
@@ -348,6 +369,17 @@ const Navbar = ({ onSignup, onLogin, onLogout, onLogoClick, onNavClick, currentU
                     Sign Out
                   </button>
                 </div>
+
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    if (onAdminLeads) onAdminLeads();
+                  }}
+                  className="w-full bg-site-bg border border-site-accent py-2.5 rounded-xl text-xs font-bold text-site-text hover:bg-site-accent/20 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs mt-1"
+                >
+                  <Users className="w-4 h-4 text-site-primary" />
+                  Admin Leads Dashboard
+                </button>
               </>
             ) : (
               <div className="grid grid-cols-2 gap-3">

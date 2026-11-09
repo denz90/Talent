@@ -4,6 +4,7 @@ import {
   BookOpen, 
   Brain, 
   Trophy,
+  Users,
   Settings,
   LogOut,
   ChevronLeft,
@@ -37,6 +38,7 @@ const DashboardSidebar = ({
     { id: 'courses', label: 'My Courses', icon: BookOpen },
     { id: 'tools', label: 'AI Tools', icon: Brain },
     { id: 'achievements', label: 'Achievements', icon: Trophy },
+    { id: 'leads', label: 'Captured Leads', icon: Users },
   ];
 
   return (

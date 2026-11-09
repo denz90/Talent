@@ -35,7 +35,7 @@ const Lumen5Day21 = ({ onNext, dayNumber = 21 }) => {
 
           <div className="text-center space-y-6 pt-8">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight text-center">
-              Day {dayNumber}: Lumen5 Challenge
+              Lumen5 AI
             </h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 text-center">
               Transform Lessons into Engaging Video Content

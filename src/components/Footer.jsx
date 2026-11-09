@@ -71,8 +71,7 @@ const Footer = ({ onNavigate }) => {
           {/* Column 2: Platform */}
           <div>
             <h4 className="font-bold text-site-text2 mb-6 uppercase tracking-widest text-[15px]">Platform</h4>
-            <ul className="space-y-4 text-[14px] font-medium text-site-text2">
-              <li><a href="#" className="hover:opacity-75 transition-opacity">Features</a></li>
+            <ul className="space-y-4 text-[14px] font-medium text-site-text2">              <li><a href="#" className="hover:opacity-75 transition-opacity">Features</a></li>
               <li><a href="#" className="hover:opacity-75 transition-opacity">Pricing</a></li>
               <li><a href="#" className="hover:opacity-75 transition-opacity">For Educators</a></li>
               <li><a href="#" className="hover:opacity-75 transition-opacity">Enterprise</a></li>

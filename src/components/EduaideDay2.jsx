@@ -40,7 +40,7 @@ const EduaideDay2 = ({ onNext, dayNumber = 2, nextDayNumber = 3 }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Day {dayNumber}: Eduaide.AI Challenge</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight"> Eduaide.AI Challenge</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             AI-Powered Lesson Planning &amp; Resource Generation
           </p>

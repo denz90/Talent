@@ -43,7 +43,7 @@ const DiffitDay4 = ({ onNext, dayNumber = 4, nextDayNumber = 5 }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Day {dayNumber}: Diffit Challenge</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Diffit Challenge</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             Instant AI Reading Level Differentiation
           </p>

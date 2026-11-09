@@ -54,7 +54,7 @@ const ReadAlongDay18 = ({ onNext, dayNumber = 18, nextDayNumber = 19 }) => {
               <Sparkles className="text-[#2e0052]" size={28} />
             </div>
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight px-2">Day {dayNumber}: Read Along Challenge</h1>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tight px-2">Read Along AI</h1>
           <p className="text-base sm:text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90 px-2">
             Boost Literacy with AI-Powered Reading Support
           </p>

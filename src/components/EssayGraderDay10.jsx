@@ -40,7 +40,7 @@ const EssayGraderDay10 = ({ onNext }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">What is EssayGrader.ai?</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">EssayGrader AI</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             A tool to instantly Grade and provide Instant AI-Powered Feedback
           </p>

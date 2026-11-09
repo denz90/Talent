@@ -47,7 +47,7 @@ const ParlayDay17 = ({ onNext }) => {
               <Sparkles className="text-[#2e0052]" size={32} />
             </div>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight">Day 17: Parlay Challenge</h1>
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight">Parlay AI</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             Facilitate Meaningful Student Discussions with AI-Powered RoundTables
           </p>

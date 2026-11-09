@@ -40,7 +40,7 @@ const QuizizzDay11 = ({ onNext }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Quizizz (AI Mode) Challenge</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Quizizz AI</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             Practice, Practice with AI-powered Quiz and assessments
           </p>

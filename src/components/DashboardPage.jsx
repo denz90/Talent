@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
+import AdminLeadsDashboard from './AdminLeadsDashboard';
 import { API_BASE_URL } from '../config.js';
 import {
   Flame, Trophy, Play, Clock, BookOpen, CheckCircle2,
@@ -235,8 +236,7 @@ const DashboardPage = ({
   onProfileSettings, 
   onBack,
   onNavigateTool,
-  onNavigatePath,
-  onNavigateCourse
+  onNavigatePath
 }) => {
   const displayName = currentUser?.username || currentUser?.name || currentUser?.email?.split('@')[0] || 'Learner';
 
@@ -503,6 +503,16 @@ const DashboardPage = ({
                 ))}
               </div>
             )}
+          </div>
+        );
+
+      case 'leads':
+        return (
+          <div className="rounded-3xl border p-6 flex flex-col bg-white dark:bg-transparent" style={{ borderColor: 'var(--color-accent)' }}>
+            <AdminLeadsDashboard
+              onLoginClick={onLogout}
+              onBack={() => setActiveNav('overview')}
+            />
           </div>
         );
 

@@ -32,6 +32,8 @@ const SystemStatusPage = lazy(() => import('./components/SystemStatusPage'));
 const BlogPage = lazy(() => import('./components/BlogPage'));
 const CompanyPage = lazy(() => import('./components/CompanyPage'));
 const FAQPage = lazy(() => import('./components/FAQPage'));
+const OptInPage = lazy(() => import('./components/OptInPage'));
+const AdminLeadsDashboard = lazy(() => import('./components/AdminLeadsDashboard'));
 
 const PageLoadingFallback = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -88,7 +90,7 @@ const App = () => {
     try {
       const saved = localStorage.getItem('talent_oasis_active_course');
       return saved ? JSON.parse(saved) : null;
-    } catch (e) {
+    } catch {
       return null;
     }
   });
@@ -253,6 +255,14 @@ const App = () => {
       setView('faq');
       return;
     }
+    if (sectionId === 'opt_in') {
+      setView('opt_in');
+      return;
+    }
+    if (sectionId === 'admin_leads') {
+      setView('admin_leads');
+      return;
+    }
     const targetId = sectionId === 'courses' ? 'paths' : (sectionId ? sectionId.toLowerCase() : '');
     if (view !== 'home') {
       setView('home');
@@ -339,6 +349,86 @@ const App = () => {
           }}
         />
       </Suspense>
+    );
+  }
+
+  if (view === 'opt_in') {
+    return (
+      <div className="min-h-screen font-sans transition-colors duration-300">
+        <Navbar
+          currentUser={currentUser}
+          onLogout={() => {
+            localStorage.removeItem('hawkman_token');
+            localStorage.removeItem(POPUP_STORAGE_KEY);
+            setCurrentUser(null);
+            setView('home');
+          }}
+          onSignup={() => setView('signup')}
+          onLogin={() => setView('login')}
+          onLogoClick={() => setView('home')}
+          onNavClick={handleNavClick}
+          onDashboard={() => setView('dashboard')}
+          onOptIn={() => setView('opt_in')}
+          onAdminLeads={() => setView('admin_leads')}
+        />
+        <Suspense fallback={<PageLoadingFallback />}>
+          <OptInPage
+            onBack={() => setView('home')}
+            onNavigateHome={() => setView('home')}
+            onNavigateCourses={() => {
+              setView('home');
+              setTimeout(() => handleNavClick('paths'), 100);
+            }}
+          />
+        </Suspense>
+        <Footer onNavigate={(targetView) => {
+          if (['about_us', 'careers', 'contact', 'partners'].includes(targetView)) {
+            setCompanyTab(targetView);
+            setView('company');
+          } else {
+            setView(targetView);
+          }
+        }} />
+      </div>
+    );
+  }
+
+  if (view === 'admin_leads') {
+    return (
+      <div className="min-h-screen font-sans transition-colors duration-300">
+        <Navbar
+          currentUser={currentUser}
+          onLogout={() => {
+            localStorage.removeItem('hawkman_token');
+            localStorage.removeItem(POPUP_STORAGE_KEY);
+            setCurrentUser(null);
+            setView('home');
+          }}
+          onSignup={() => setView('signup')}
+          onLogin={() => setView('login')}
+          onLogoClick={() => setView('home')}
+          onNavClick={handleNavClick}
+          onDashboard={() => setView('dashboard')}
+          onOptIn={() => setView('opt_in')}
+          onAdminLeads={() => setView('admin_leads')}
+        />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <Suspense fallback={<PageLoadingFallback />}>
+            <AdminLeadsDashboard
+              onLoginClick={() => setView('login')}
+              onBack={() => setView('home')}
+            />
+          </Suspense>
+        </main>
+        <Footer onNavigate={(targetView) => {
+          if (['about_us', 'careers', 'contact', 'partners'].includes(targetView)) {
+            setCompanyTab(targetView);
+            setView('company');
+          } else {
+            setView(targetView);
+          }
+        }} />
+      </div>
     );
   }
 

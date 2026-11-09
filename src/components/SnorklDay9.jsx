@@ -39,7 +39,7 @@ const SnorklDay9 = ({ onNext }) => {
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight">What is Snorkl?</h1>
+          <h1 className="text-5xl md:text-6xl font-black tracking-tight">Snorkl AI</h1>
           <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
             Create Engaging Video Lessons &amp; Personalized Content with AI
           </p>

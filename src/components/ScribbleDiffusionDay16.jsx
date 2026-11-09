@@ -50,7 +50,7 @@ const ScribbleDiffusionDay16 = ({ onNext, dayNumber = 16, nextDayNumber = 17 }) 
                 <Sparkles className="text-[#2e0052]" size={32} />
               </div>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight">Day {dayNumber}: Scribble Diffusion Challenge</h1>
+            <h1 className="text-5xl md:text-6xl font-black tracking-tight">Scribble Diffusion AI</h1>
             <p className="text-xl text-site-text font-medium max-w-2xl mx-auto opacity-90">
               Turn Rough Sketches into Refined AI Art for Visual Learning
             </p>
