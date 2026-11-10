@@ -531,7 +531,7 @@ const App = () => {
               {/* Background Image with Overlay */}
               <div className="absolute inset-0 z-0">
                 <img
-                  src="/AI Student’s Bright Study Desk.png"
+                  src="/girl image.png"
                   className="w-full h-full object-cover"
                   alt="Hero Background"
                   fetchPriority="high"
